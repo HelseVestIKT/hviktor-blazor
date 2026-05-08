@@ -1,0 +1,30 @@
+﻿@page "/component/compliance/list/nested"
+
+<main data-testid="compliance-container">
+    <section aria-label="Nested unordered list" data-testid="nested-unordered">
+        <List.Unordered>
+            <List.Item>Parent item 1</List.Item>
+            <List.Item>Parent item 2</List.Item>
+            <List.Item>Parent item 3</List.Item>
+        </List.Unordered>
+    </section>
+
+    <section aria-label="Nested ordered list" data-testid="nested-ordered">
+        <List.Ordered>
+            <List.Item>Step 1</List.Item>
+            <List.Item>Step 2</List.Item>
+            <List.Item>Step 3</List.Item>
+        </List.Ordered>
+    </section>
+
+    <section aria-label="Multiple lists together" data-testid="nested-mixed">
+        <List.Ordered>
+            <List.Item>First ordered item</List.Item>
+            <List.Item>Second ordered item</List.Item>
+        </List.Ordered>
+        <List.Unordered>
+            <List.Item>First unordered item</List.Item>
+            <List.Item>Second unordered item</List.Item>
+        </List.Unordered>
+    </section>
+</main>

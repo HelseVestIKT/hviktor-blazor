@@ -1,0 +1,13 @@
+﻿@page "/component/compliance/tag/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tag
+
+<main data-testid="compliance-container">
+    <section aria-label="Default variant tag">
+        <Tag data-testid="default" variant="@Variant.Default">Default Tag</Tag>
+    </section>
+
+    <section aria-label="Outline variant tag">
+        <Tag data-testid="outline" variant="@Variant.Outline">Outline Tag</Tag>
+    </section>
+</main>

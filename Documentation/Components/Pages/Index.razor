@@ -1,0 +1,46 @@
+﻿@page "/"
+@page "/components"
+
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Card
+@using Hviktor.Components.Link
+@using Hviktor.Components.Typography
+
+<PageTitle>@Localizer.GetValue("PageTitle")</PageTitle>
+
+<div class="landing-page">
+    <div class="landing-page__header">
+        <Heading level="1">@Localizer.GetValue("PageHeading")</Heading>
+        <Paragraph class="mt-2">
+            @Localizer.GetValue("PageDescription")
+        </Paragraph>
+    </div>
+
+    @foreach (var group in Registry.Groups)
+    {
+        <Heading level="2" size="@Size.Medium" class="my-4">@group.Title</Heading>
+        <div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));">
+            @foreach (var component in group.Items)
+            {
+                var srcTitle = component.Title.Replace(" ", string.Empty);
+                <NavigationLink href="@($"/components/{component.Slug}/overview")" asChild>
+                    <Card variant="tinted" color="info" class="h-full!">
+                        <Card.Block>
+                            @if (component.Title == "Logo")
+                            {
+                                srcTitle = "DocsLogo";
+                            }
+
+                            <img src="@($"assets/img/{srcTitle}.svg")"
+                                 alt="@srcTitle" aria-hidden="true" class="card-image"/>
+                        </Card.Block>
+                        <Card.Block>
+                            <div data-size="lg">@component.Title</div>
+                        </Card.Block>
+                    </Card>
+                </NavigationLink>
+            }
+        </div>
+    }
+</div>
+

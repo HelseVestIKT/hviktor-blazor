@@ -1,0 +1,12 @@
+﻿@page "/component/compliance/textfield/error"
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <section aria-label="Textfield with error">
+        <Textfield Id="textfield-error" Label="Email" Error="Please enter a valid email address" data-testid="with-error" />
+    </section>
+
+    <section aria-label="Textfield with error and description">
+        <Textfield Id="textfield-error-desc" Label="Password" Description="At least 8 characters" Error="Password is too short" data-testid="with-error-description" />
+    </section>
+</main>

@@ -1,0 +1,30 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<div class="flex flex-col gap-2">
+    <Paragraph data-variant="short" class="font-semibold">@Localizer.GetValue("Input_DateTimeTitle")</Paragraph>
+    <div class="flex gap-4 flex-wrap items-end">
+        <Field>
+            <Label>Date</Label>
+            <Input type="@InputType.Date"/>
+        </Field>
+        <Field>
+            <Label>Time</Label>
+            <Input type="@InputType.Time"/>
+        </Field>
+        <Field>
+            <Label>DateTime-Local</Label>
+            <Input type="@InputType.DateTimeLocal"/>
+        </Field>
+        <Field>
+            <Label>Month</Label>
+            <Input type="@InputType.Month"/>
+        </Field>
+        <Field>
+            <Label>Week</Label>
+            <Input type="@InputType.Week"/>
+        </Field>
+    </div>
+</div>

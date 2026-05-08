@@ -1,0 +1,7 @@
+﻿@namespace Breadcrumbs
+@using Hviktor.Components.Link
+@inherits Hviktor.Models.NestedComponentBase<Hviktor.Components.Breadcrumbs.Breadcrumbs>
+
+<NavigationLink Match="NavLinkMatch.All" @attributes="@(ComputeAttributes())">
+    @ChildContent
+</NavigationLink>

@@ -1,0 +1,25 @@
+﻿name: Unit Tests
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: unit-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    uses: ./.github/workflows/unit-tests-reusable.yml
+    with:
+      collect-coverage: true
+
+  sonarqube:
+    name: SonarQube Analysis
+    needs: [ unit-tests ]
+    if: always() && !cancelled()
+    uses: ./.github/workflows/sonarqube-reusable.yml
+    with:
+      include-coverage: ${{ needs.unit-tests.result == 'success' }}
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

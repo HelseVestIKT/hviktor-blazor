@@ -1,0 +1,20 @@
+﻿@page "/component/compliance/chip/size"
+@using Hviktor.Abstractions.Enums.Attributes
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra small size">
+        <Chip.Button Size="@Size.ExtraSmall" data-testid="xs">Extra Small</Chip.Button>
+    </section>
+
+    <section aria-label="Small size">
+        <Chip.Button Size="@Size.Small" data-testid="sm">Small</Chip.Button>
+    </section>
+
+    <section aria-label="Medium size">
+        <Chip.Button Size="@Size.Medium" data-testid="md">Medium</Chip.Button>
+    </section>
+
+    <section aria-label="Large size">
+        <Chip.Button Size="@Size.Large" data-testid="lg">Large</Chip.Button>
+    </section>
+</main>

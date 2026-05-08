@@ -1,0 +1,96 @@
+@function get-value($value) {
+  @return calc(#{var(--spacing)} * #{$value});
+}
+
+@function get-attribute-direction-shortname($direction) {
+  $direction-shortname: $direction;
+
+  @if $direction == global {
+    $direction-shortname: "";
+  } @else if $direction == top {
+    $direction-shortname: t;
+  } @else if $direction == right {
+    $direction-shortname: r;
+  } @else if $direction == bottom {
+    $direction-shortname: b;
+  } @else if $direction == left {
+    $direction-shortname: l;
+  } @else if $direction == x {
+    $direction-shortname: x;
+  } @else if $direction == y {
+    $direction-shortname: y;
+  }
+
+  @return $direction-shortname;
+}
+
+@function get-attribute-type-shortname($type) {
+  $type-shortname: $type;
+
+  @if $type == margin {
+    $type-shortname: m;
+  } @else if $type == padding {
+    $type-shortname: p;
+  }
+
+  @return $type-shortname;
+}
+
+@function get-classname($type, $direction, $value) {
+  $type-shortname: get-attribute-type-shortname($type);
+  $direction-shortname: get-attribute-direction-shortname($direction);
+  @return #{$type-shortname}#{$direction-shortname}-#{$value};
+}
+
+@mixin generate-spacing-utilities-all($type, $direction, $value) {
+  $x: left, right;
+  $y: top, bottom;
+
+  @if ($direction == global) {
+    #{$type}: get-value($value);
+  } @else if $direction == x {
+    @each $dir in $x {
+      #{$type}-#{$dir}: get-value($value);
+    }
+  } @else if $direction == y {
+    @each $dir in $y {
+      #{$type}-#{$dir}: get-value($value);
+    }
+  } @else {
+    #{$type}-#{$direction}: get-value($value);
+  }
+}
+
+@mixin generate-spacing-utilities() {
+  $types: margin, padding, gap;
+  $directions: global, top, right, bottom, left, x, y;
+
+  // Create margin & padding utilities based on the --spacing variable
+  @for $i from 0 through 8 {
+    $value: $i * 2;
+    @each $type in $types {
+      @each $direction in $directions {
+        .#{get-classname($type, $direction, $value)} {
+          @include generate-spacing-utilities-all($type, $direction, $value);
+        }
+      }
+    }
+  }
+}
+
+@mixin generate-spacing-utility(
+  $type,
+  $directions: global,
+  $from: 0,
+  $to: 8,
+  $increment: 2
+) {
+  @for $i from $from through $to {
+    $value: $i * $increment;
+    @each $direction in $directions {
+      .#{get-classname($type, $direction, $value)} {
+        @include generate-spacing-utilities-all($type, $direction, $value);
+      }
+    }
+  }
+}

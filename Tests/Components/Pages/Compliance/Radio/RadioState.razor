@@ -1,0 +1,46 @@
+﻿@page "/component/compliance/radio/state"
+@using Hviktor.Components.Radio
+@using Hviktor.Components.Fieldset
+
+<main data-testid="compliance-container">
+    <section aria-label="Disabled radio" data-testid="state-disabled">
+        <Fieldset>
+            <Fieldset.Legend>Disabled options</Fieldset.Legend>
+            <Radio Name="disabled-group" Value="enabled" Label="Enabled option"/>
+            <Radio Name="disabled-group" Value="disabled" Label="Disabled option" disabled/>
+        </Fieldset>
+    </section>
+
+    <section aria-label="Readonly radio" data-testid="state-readonly">
+        <Fieldset>
+            <Fieldset.Legend>Readonly options</Fieldset.Legend>
+            <Radio Name="readonly-group" Value="normal" Label="Normal option"/>
+            <Radio Name="readonly-group" Value="readonly" Label="Readonly option" readonly checked/>
+        </Fieldset>
+    </section>
+
+    <section aria-label="Pre-selected radio" data-testid="state-checked">
+        <Fieldset>
+            <Fieldset.Legend>Pre-selected option</Fieldset.Legend>
+            <Radio Name="preselected" Value="first" Label="First option"/>
+            <Radio Name="preselected" Value="second" Label="Second option (pre-selected)" checked/>
+            <Radio Name="preselected" Value="third" Label="Third option"/>
+        </Fieldset>
+    </section>
+
+    <section aria-label="Required radio" data-testid="state-required">
+        <Fieldset>
+            <Fieldset.Legend>Required selection</Fieldset.Legend>
+            <Radio Name="required-group" Value="opt1" Label="Option A" required/>
+            <Radio Name="required-group" Value="opt2" Label="Option B" required/>
+        </Fieldset>
+    </section>
+
+    <section aria-label="Error state radio" data-testid="state-error">
+        <Fieldset>
+            <Fieldset.Legend>Selection with error</Fieldset.Legend>
+            <Radio Name="error-group" Value="err1" Label="Invalid option" aria-invalid="true"/>
+            <Radio Name="error-group" Value="err2" Label="Another option"/>
+        </Fieldset>
+    </section>
+</main>

@@ -1,0 +1,61 @@
+﻿@page "/component/compliance/pagination/accessibility"
+@using Hviktor.Components.Pagination
+
+<main data-testid="compliance-container">
+    @* Pagination with proper aria-label on nav element *@
+    <section aria-label="Pagination with aria-label" data-testid="aria-label">
+        <Pagination aria-label="Sidenavigering for søkeresultater">
+            <Pagination.Button aria-label="Gå til forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button>1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button aria-current="page">2</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button>3</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button aria-label="Gå til neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+
+    @* Pagination with aria-current on active page *@
+    <section aria-label="Pagination with aria-current" data-testid="aria-current">
+        <Pagination>
+            <Pagination.Button aria-label="Forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button>1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button aria-current="page">2</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button>3</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button aria-label="Neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+
+    @* Pagination for keyboard navigation testing *@
+    <section aria-label="Pagination for keyboard navigation" data-testid="keyboard-navigation">
+        <Pagination>
+            <Pagination.Button aria-label="Forrige side" data-testid="prev-btn">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button data-testid="page-1">1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button aria-current="page" data-testid="page-2">2</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button data-testid="page-3">3</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button aria-label="Neste side" data-testid="next-btn">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+</main>

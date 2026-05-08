@@ -1,0 +1,15 @@
+﻿@using Hviktor.Components.Icon
+@using Hviktor.Components.ToggleGroup
+@using Hviktor.Icons.Types
+
+<ToggleGroup data-toggle-group="Textalignment" defaultValue="option-1">
+    <ToggleGroup.Item value="option-1" data-tooltip="Left aligned">
+        <Icon Definition="@IconSet.AlignLeft" aria-hidden="true"/>
+    </ToggleGroup.Item>
+    <ToggleGroup.Item value="option-2" data-tooltip="Center aligned">
+        <Icon Definition="@IconSet.AlignCenter" aria-hidden="true"/>
+    </ToggleGroup.Item>
+    <ToggleGroup.Item value="option-3" data-tooltip="Right aligned">
+        <Icon Definition="@IconSet.AlignRight" aria-hidden="true"/>
+    </ToggleGroup.Item>
+</ToggleGroup>

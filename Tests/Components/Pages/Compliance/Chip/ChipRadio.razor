@@ -1,0 +1,22 @@
+﻿@page "/component/compliance/chip/radio"
+
+<main data-testid="compliance-container">
+    <fieldset>
+        <legend>Radio chip group</legend>
+
+        <section aria-label="Chip Radio unchecked">
+            <Chip.Radio Name="radio-group" Value="option1" data-testid="radio-unchecked">Unchecked Radio</Chip.Radio>
+        </section>
+
+        <section aria-label="Chip Radio checked">
+            <Chip.Radio Name="radio-group" Value="option2" checked="true" data-testid="radio-checked">Checked Radio
+            </Chip.Radio>
+        </section>
+
+        <section aria-label="Chip Radio default checked">
+            <Chip.Radio Name="radio-group-2" Value="option3" DefaultChecked="true" data-testid="radio-default-checked">
+                Default Checked
+            </Chip.Radio>
+        </section>
+    </fieldset>
+</main>

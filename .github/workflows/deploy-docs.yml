@@ -1,0 +1,159 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  pull_request:
+    types: [ closed ]
+    branches: [ main ]
+    paths: [ 'Directory.Packages.props', 'Documentation/Documentation.csproj' ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  BASE_PATH: ""
+  DOTNET_VERSION: '10.0.x'
+  NODE_VERSION: '24'
+  NUGET_USER: ${{ github.actor }}
+  NUGET_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'docs/v'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      # Cache .NET workloads
+      - name: Cache .NET workloads
+        id: cache-workloads
+        uses: actions/cache@v5
+        with:
+          path: |
+            /usr/share/dotnet/metadata
+            /usr/share/dotnet/packs
+            /usr/share/dotnet/library-packs
+            /usr/share/dotnet/sdk-manifests
+          key: dotnet-workloads-${{ runner.os }}-${{ hashFiles('global.json', 'Documentation/Documentation.csproj') }}
+
+      - name: Install .NET workloads
+        if: steps.cache-workloads.outputs.cache-hit != 'true'
+        run: sudo dotnet workload install wasm-tools
+
+      # Cache NuGet packages
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('Directory.Packages.props', '**/*.csproj', '**/packages.lock.json') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      # Hviktor assets
+
+      - name: Install Hviktor pnpm dependencies
+        working-directory: Hviktor
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Hviktor assets
+        working-directory: Hviktor
+        run: pnpm build:prod
+
+      # Documentation assets
+
+      - name: Install Documentation pnpm dependencies
+        working-directory: Documentation
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Documentation assets
+        working-directory: Documentation
+        run: pnpm build:prod
+
+      # Publish
+
+      - name: Publish Documentation
+        run: dotnet publish Documentation/Documentation.csproj -c Release -o output
+
+      - name: Verify XML docs in NuGet cache
+        run: |
+          echo "=== Hviktor XML docs in NuGet cache ==="
+          find ~/.nuget/packages/hviktor* -name '*.xml' 2>/dev/null || echo "No XML docs found in NuGet cache"
+          echo "=== Embedded resources in Documentation.dll ==="
+          dotnet tool install -g dotnet-ildasm 2>/dev/null || true
+          strings output/wwwroot/_framework/Documentation.wasm 2>/dev/null | grep -i "HviktorXmlDocs" || echo "No HviktorXmlDocs resources found in assembly"
+
+      # Remove any compressed framework files and strip integrity hashes.
+      - name: Fix Blazor framework for static hosting
+        run: |
+          find output/wwwroot/_framework -name '*.br' -o -name '*.gz' | xargs rm -f
+          if [ -f output/wwwroot/_framework/blazor.boot.json ]; then
+            sed -i 's/"integrity":"[^"]*"/"integrity":""/g' output/wwwroot/_framework/blazor.boot.json
+          fi
+
+      - name: Verify publish output
+        run: |
+          echo "=== output/ root ==="
+          ls -la output/ || true
+          echo "=== output/wwwroot/ ==="
+          ls -la output/wwwroot/ || true
+          echo "=== output/wwwroot/_framework/ (first 10) ==="
+          ls output/wwwroot/_framework/ | head -10 || true
+          echo "=== output/wwwroot/_content/ ==="
+          ls -la output/wwwroot/_content/ || true
+          echo "=== output/wwwroot/styles/ ==="
+          ls -la output/wwwroot/styles/ || true
+          echo "=== index.html base href ==="
+          grep 'base href' output/wwwroot/index.html || true
+
+      # For sub-path deployment (e.g. username.github.io/repo-name), set
+      # BASE_PATH to the repo name. Leave empty for root/custom domain.
+      - name: Update base href
+        if: env.BASE_PATH != ''
+        run: |
+          sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/index.html
+          grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/index.html || (echo "ERROR: base href rewrite failed" && exit 1)
+          sed -i 's|var segmentCount = 0;|var segmentCount = 1;|g' output/wwwroot/404.html
+
+      # .nojekyll prevents GitHub Pages from ignoring _framework/ and _content/ directories
+      - name: Add .nojekyll
+        run: touch output/wwwroot/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: output/wwwroot
+
+  deploy:
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

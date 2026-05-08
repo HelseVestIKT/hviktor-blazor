@@ -1,0 +1,61 @@
+name: 🧹 Chore Report
+description: Create a chore report when you need to make changes that don't affect behavior
+title: "[Chore]: "
+labels: [ "chore" ]
+projects: [ "HelseVestIKT/47" ]
+type: Task
+
+body:
+  # INTRO:
+  - type: markdown
+    attributes:
+      value: |
+        A chore is a task that improves the codebase without changing functionality (refactoring, documentation, dependency updates, etc.)
+
+        Before creating a new issue:chore please verify that it hasn't already been documented by someone else.
+
+        ```
+        You can check open issues and filter by 'chore' in the issues tab on GitHub.
+        Example: `is:issue is:open label:chore`
+        ```
+
+  # DESCRIPTION:
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Describe the change
+      description: Describe the current limitation or issue this change would solve
+      placeholder: Currently, users cannot...
+    validations:
+      required: true
+
+  # ALTERNATIVE:
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 🔄 Alternative
+      description: A clear and concise description of any alternative solutions or features you've considered
+      placeholder: ...
+    validations:
+      required: false
+
+  # DESIRED BEHAVIOR:
+  - type: textarea
+    id: desired-behavior
+    attributes:
+      label: ✅ Proposed Solution
+      description: Describe how the change should work and what it should accomplish
+      placeholder: The system should allow users to...
+    validations:
+      required: false
+
+  # ADDITIONAL INFORMATION:
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: ℹ️ Additional information
+      description: Add any screenshots to help explain your change or other useful information
+      placeholder: |
+        - Technical details
+        - Implementation considerations
+        - Related documentation

@@ -1,0 +1,167 @@
+﻿@page "/"
+@using System.Reflection
+@using System.Text.RegularExpressions
+@using Hviktor.Components.Card
+@using Hviktor.Components.Link
+@using Hviktor.Components.Typography
+
+<PageTitle>Test Pages</PageTitle>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+    <Heading level="1">Hviktor Test Pages</Heading>
+    <p>Navigate to pages for component testing and compliance verification.</p>
+
+    @foreach (var category in PagesByCategory)
+    {
+        <section style="margin-top: 2rem;">
+            <Heading level="2">@category.Key</Heading>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                @foreach (var site in category.Value.OrderBy(p => p.Name))
+                {
+                    <NavigationLink href="@site.Route" asChild>
+                        <Card>
+                            <Card.Block>
+                                <Heading level="3">@site.Name</Heading>
+                            </Card.Block>
+                            <Card.Block>
+                                <Paragraph class="wrap-anywhere">@site.Route</Paragraph>
+                            </Card.Block>
+                        </Card>
+                    </NavigationLink>
+                }
+            </div>
+        </section>
+    }
+
+    <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eee; text-align: center; color: #666;">
+        <p>Found @TotalPages pages in @PagesByCategory.Count categories</p>
+    </footer>
+</main>
+
+@code {
+    private Dictionary<string, List<PageInfo>> PagesByCategory { get; set; } = new();
+    private int TotalPages => PagesByCategory.Values.Sum(p => p.Count);
+
+    protected override void OnInitialized()
+    {
+        var pages = GetAllPages();
+        PagesByCategory = pages
+            .GroupBy(p => p.Category)
+            .OrderBy(g => GetCategoryOrder(g.Key))
+            .ThenBy(g => g.Key)
+            .ToDictionary(g => g.Key, g => g.ToList());
+    }
+
+    private static int GetCategoryOrder(string category) => category switch
+    {
+        "Home" => 0,
+        "Composition" => 1,
+        "Compliance" => 2,
+        "Sanity" => 3,
+        _ => 99
+    };
+
+    private static List<PageInfo> GetAllPages()
+    {
+        var pages = new List<PageInfo>();
+        var assembly = Assembly.GetExecutingAssembly();
+
+        var componentTypes = assembly.GetTypes()
+            .Where(t => t.IsSubclassOf(typeof(ComponentBase)) || typeof(IComponent).IsAssignableFrom(t))
+            .Where(t => !t.IsAbstract);
+
+        foreach (var type in componentTypes)
+        {
+            var routeAttributes = type.GetCustomAttributes<RouteAttribute>();
+            foreach (var routeAttr in routeAttributes)
+            {
+                var route = routeAttr.Template;
+                if (string.IsNullOrEmpty(route) || route == "/")
+                {
+                    continue;
+                }
+
+                var pageInfo = new PageInfo
+                {
+                    Route = route,
+                    Name = GetPageName(type, route),
+                    Category = GetCategory(route),
+                    TypeName = type.FullName ?? type.Name
+                };
+                pages.Add(pageInfo);
+            }
+        }
+
+        return pages;
+    }
+
+    private static string GetPageName(Type type, string route)
+    {
+        var typeName = type.Name;
+        if (typeName.EndsWith("Page")) typeName = typeName[..^4];
+        if (typeName is "Index" or "Home")
+        {
+            var segments = route.Split('/', StringSplitOptions.RemoveEmptyEntries);
+            if (segments.Length > 0)
+            {
+                typeName = string.Join(" › ", segments.Select(s => ToTitleCase(s)));
+            }
+        }
+
+        return ToTitleCase(typeName);
+    }
+
+    private static string GetCategory(string route)
+    {
+        var segments = route.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        if (segments.Length == 0)
+        {
+            return "Home";
+        }
+
+        // Check for known categories
+        if (route.Contains("/compliance/", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Compliance";
+        }
+
+        if (route.Contains("/composition/", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Composition";
+        }
+
+        if (route.Contains("/sanity/", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Sanity";
+        }
+
+        if (route.Contains("/critical/", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Critical";
+        }
+
+        return ToTitleCase(segments[0]);
+    }
+
+    private static string ToTitleCase(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return input;
+        }
+
+        var result = input.Replace("-", " ").Replace("_", " ");
+        result = Regex.Replace(result, "([a-z])([A-Z])", "$1 $2", RegexOptions.NonBacktracking);
+        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(result.ToLower());
+    }
+
+    private sealed record PageInfo
+    {
+        public required string Route { get; init; }
+        public required string Name { get; init; }
+        public required string Category { get; init; }
+        public required string TypeName { get; init; }
+    }
+
+}

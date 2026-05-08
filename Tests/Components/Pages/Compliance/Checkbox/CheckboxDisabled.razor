@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/checkbox/disabled"
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Disabled unchecked checkbox">
+        <Checkbox Id="checkbox-disabled-unchecked" 
+                  disabled
+                  Label="Disabled unchecked checkbox"
+                  Description="This checkbox is disabled and unchecked"
+                  data-testid="disabled-unchecked"/>
+    </section>
+
+    <section aria-label="Disabled checked checkbox">
+        <Checkbox Id="checkbox-disabled-checked" 
+                  disabled
+                  Checked="true"
+                  Label="Disabled checked checkbox"
+                  Description="This checkbox is disabled and checked"
+                  data-testid="disabled-checked"/>
+    </section>
+</main>

@@ -1,0 +1,62 @@
+@using Hviktor.Components.Code
+
+@code {
+    private const string Src = """
+                               -- Create a table for patients
+                               CREATE TABLE Patients (
+                                   PatientId INT PRIMARY KEY IDENTITY(1, 1),
+                                   FirstName NVARCHAR(100) NOT NULL,
+                                   LastName NVARCHAR(100) NOT NULL,
+                                   BirthDate DATE,
+                                   IsActive BOOLEAN DEFAULT true,
+                                   Score DECIMAL(5, 2)
+                               );
+
+                               /* Insert sample data into the Patients table */
+                               INSERT INTO Patients (FirstName, LastName, BirthDate, IsActive, Score)
+                               VALUES ('Ola', 'Nordmann', '1985-03-15', true, 92.5),
+                                      ('Kari', 'Hansen', '1990-07-22', true, 87.3);
+
+                               -- Query with joins, aggregation, and window functions
+                               SELECT
+                                   p.FirstName,
+                                   p.LastName,
+                                   d.DepartmentName,
+                                   COUNT(*) AS VisitCount,
+                                   AVG(v.Duration) AS AvgDuration,
+                                   ROW_NUMBER() OVER (PARTITION BY d.DepartmentName ORDER BY p.LastName ASC) AS RowNum
+                               FROM Patients p
+                               INNER JOIN Visits v ON p.PatientId = v.PatientId
+                               LEFT JOIN Departments d ON v.DepartmentId = d.DepartmentId
+                               WHERE p.IsActive = true
+                                 AND v.VisitDate BETWEEN '2024-01-01' AND '2024-12-31'
+                                 AND d.DepartmentName LIKE '%Surgery%'
+                               GROUP BY p.FirstName, p.LastName, d.DepartmentName
+                               HAVING COUNT(*) >= 3
+                               ORDER BY AvgDuration DESC
+                               LIMIT 10 OFFSET 0;
+
+                               -- Stored procedure with variables and control flow
+                               CREATE PROCEDURE UpdatePatientScore
+                                   @PatientId INT,
+                                   @NewScore DECIMAL(5, 2)
+                               AS
+                               BEGIN
+                                   DECLARE @OldScore DECIMAL(5, 2);
+
+                                   SELECT @OldScore = Score FROM Patients WHERE PatientId = @PatientId;
+
+                                   IF @OldScore IS NOT NULL
+                                   BEGIN
+                                       UPDATE Patients SET Score = @NewScore WHERE PatientId = @PatientId;
+                                       COMMIT TRANSACTION;
+                                   END
+                                   ELSE
+                                   BEGIN
+                                       ROLLBACK TRANSACTION;
+                                   END
+                               END;
+                               """;
+}
+
+<CodeBlock Language="sql" Code="@Src" class="w-full"/>

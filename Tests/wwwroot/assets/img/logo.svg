@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 22 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g transform="matrix(1, 0, 0, 1, -1.5, 8.5)">
+        <circle cx="4" cy="0" r="2.5" fill="#b89ed9"/>
+        <circle cx="11" cy="0" r="3" fill="#6433b7"/>
+        <circle cx="19.5" cy="0" r="4" fill="#421980"/>
+    </g>
+</svg>
+

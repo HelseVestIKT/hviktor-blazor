@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+
+    <!-- Page -->
+    <data name="PageTitle" xml:space="preserve">
+    <value>Dokumentasjon</value>
+  </data>
+    <data name="PageHeading" xml:space="preserve">
+    <value>Hviktor komponentbibliotek</value>
+  </data>
+    <data name="PageDescription" xml:space="preserve">
+    <value>Denne siden viser alle tilgjengelige komponenter i Hviktor-biblioteket med eksempler og kodeeksempler.</value>
+  </data>
+
+    <!-- Alert -->
+    <data name="Alert_DefaultInfo" xml:space="preserve">
+    <value>Dette er et standard informasjonsvarsel.</value>
+  </data>
+    <data name="Alert_Success" xml:space="preserve">
+    <value>Dette er et suksessvarsel.</value>
+  </data>
+    <data name="Alert_Warning" xml:space="preserve">
+    <value>Dette er et advarselsvarsel.</value>
+  </data>
+    <data name="Alert_Danger" xml:space="preserve">
+    <value>Dette er et farevarsel.</value>
+  </data>
+
+    <!-- Checkbox -->
+    <data name="Checkbox_DefaultLabel" xml:space="preserve">
+    <value>Standard avkrysningsboks</value>
+  </data>
+    <data name="Checkbox_ControlledLabel" xml:space="preserve">
+    <value>Kontrollert avkrysningsboks</value>
+  </data>
+    <data name="Checkbox_Checked" xml:space="preserve">
+    <value>Avkrysset</value>
+  </data>
+    <data name="Checkbox_IndeterminateTitle" xml:space="preserve">
+    <value>Ubestemt avkrysningsboks (velg alle/noen/ingen)</value>
+  </data>
+    <data name="Checkbox_SelectAll" xml:space="preserve">
+    <value>Velg alle</value>
+  </data>
+    <data name="Checkbox_Option1" xml:space="preserve">
+    <value>Alternativ 1</value>
+  </data>
+    <data name="Checkbox_Option2" xml:space="preserve">
+    <value>Alternativ 2</value>
+  </data>
+    <data name="Checkbox_Option3" xml:space="preserve">
+    <value>Alternativ 3</value>
+  </data>
+    <data name="Checkbox_ReadOnlyUncheckedLabel" xml:space="preserve">
+    <value>Skrivebeskyttet (ikke avkrysset)</value>
+  </data>
+    <data name="Checkbox_ReadOnlyUncheckedDescription" xml:space="preserve">
+    <value>Denne avkrysningsboksen er skrivebeskyttet og ikke avkrysset</value>
+  </data>
+    <data name="Checkbox_ReadOnlyCheckedLabel" xml:space="preserve">
+    <value>Skrivebeskyttet (avkrysset)</value>
+  </data>
+    <data name="Checkbox_ReadOnlyCheckedDescription" xml:space="preserve">
+    <value>Denne avkrysningsboksen er skrivebeskyttet og avkrysset</value>
+  </data>
+    <data name="Checkbox_DisabledUncheckedLabel" xml:space="preserve">
+    <value>Deaktivert (ikke avkrysset)</value>
+  </data>
+    <data name="Checkbox_DisabledUncheckedDescription" xml:space="preserve">
+    <value>Denne avkrysningsboksen er deaktivert og ikke avkrysset</value>
+  </data>
+    <data name="Checkbox_DisabledCheckedLabel" xml:space="preserve">
+    <value>Deaktivert (avkrysset)</value>
+  </data>
+    <data name="Checkbox_DisabledCheckedDescription" xml:space="preserve">
+    <value>Denne avkrysningsboksen er deaktivert og avkrysset</value>
+  </data>
+
+    <!-- Chip.Removable -->
+    <data name="ChipRemovable_Tag" xml:space="preserve">
+    <value>Etikett</value>
+  </data>
+    <data name="ChipRemovable_ActiveFilters" xml:space="preserve">
+    <value>Aktive filtre:</value>
+  </data>
+    <data name="ChipRemovable_NoFilters" xml:space="preserve">
+    <value>Ingen aktive filtre</value>
+  </data>
+    <data name="ChipRemovable_Reset" xml:space="preserve">
+    <value>Tilbakestill</value>
+  </data>
+
+    <!-- Dialog -->
+    <data name="Dialog_OpenButton" xml:space="preserve">
+    <value>Åpne dialog</value>
+  </data>
+    <data name="Dialog_ExampleTitle" xml:space="preserve">
+    <value>Dialogtittel</value>
+  </data>
+    <data name="Dialog_ExampleContent" xml:space="preserve">
+    <value>Dette er en dialog. Klikk utenfor eller på lukkeknappen for å lukke.</value>
+  </data>
+    <data name="Dialog_Confirm" xml:space="preserve">
+    <value>Bekreft</value>
+  </data>
+    <data name="Dialog_Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+
+    <!-- Dropdown -->
+    <data name="Dropdown_OpenButton" xml:space="preserve">
+    <value>Åpne nedtrekksmeny</value>
+  </data>
+    <data name="Dropdown_Controlled" xml:space="preserve">
+    <value>Kontrollert</value>
+  </data>
+    <data name="Dropdown_CloseMe" xml:space="preserve">
+    <value>Lukk meg</value>
+  </data>
+    <data name="Dropdown_Action" xml:space="preserve">
+    <value>Handling</value>
+  </data>
+    <data name="Dropdown_Columns" xml:space="preserve">
+    <value>Velg kolonner</value>
+  </data>
+    <data name="Dropdown_ColumnsSelected" xml:space="preserve">
+    <value>{0} av {1} valgt</value>
+  </data>
+    <data name="Dropdown_Column_Name" xml:space="preserve">
+    <value>Namn</value>
+  </data>
+    <data name="Dropdown_Column_Email" xml:space="preserve">
+    <value>E-post</value>
+  </data>
+    <data name="Dropdown_Column_Role" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+    <data name="Dropdown_Column_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+    <data name="Dropdown_Column_Department" xml:space="preserve">
+    <value>Avdeling</value>
+  </data>
+
+    <!-- Input -->
+    <data name="Input_TypesTitle" xml:space="preserve">
+    <value>Inputtyper</value>
+  </data>
+    <data name="Input_DateTimeTitle" xml:space="preserve">
+    <value>Dato og tid</value>
+  </data>
+    <data name="Input_OtherTypesTitle" xml:space="preserve">
+    <value>Andre typer</value>
+  </data>
+    <data name="Input_StatesTitle" xml:space="preserve">
+    <value>Tilstander</value>
+  </data>
+    <data name="Input_RoleTitle" xml:space="preserve">
+    <value>Rolle (ARIA)</value>
+  </data>
+    <data name="Input_Default" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+    <data name="Input_DefaultPlaceholder" xml:space="preserve">
+    <value>Skriv her...</value>
+  </data>
+    <data name="Input_Disabled" xml:space="preserve">
+    <value>Deaktivert</value>
+  </data>
+    <data name="Input_DisabledPlaceholder" xml:space="preserve">
+    <value>Ikke tilgjengelig</value>
+  </data>
+    <data name="Input_ReadOnly" xml:space="preserve">
+    <value>Skrivebeskyttet</value>
+  </data>
+    <data name="Input_ReadOnlyValue" xml:space="preserve">
+    <value>Denne verdien kan ikke endres</value>
+  </data>
+    <data name="Input_SearchPlaceholder" xml:space="preserve">
+    <value>Søk...</value>
+  </data>
+    <data name="Input_SwitchLabel" xml:space="preserve">
+    <value>Aktiver funksjon</value>
+  </data>
+
+    <!-- Typography -->
+    <data name="Typography_HeadingLevel" xml:space="preserve">
+    <value>Overskriftsnivå</value>
+  </data>
+    <data name="Typography_Paragraph" xml:space="preserve">
+    <value>Dette er et avsnitt med litt tekstinnhold.</value>
+  </data>
+    <data name="Typography_Label" xml:space="preserve">
+    <value>Dette er en etikett</value>
+  </data>
+</root>

@@ -1,0 +1,30 @@
+﻿@using Hviktor.Components.Avatar
+@using Hviktor.Components.AvatarStack
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+<AvatarStack overlap="30">
+    <Avatar aria-label="">
+        <img src="assets/img/cats/cat1.webp" alt=""/>
+    </Avatar>
+    <Avatar aria-label="">
+        <Icon Definition="@IconSet.Briefcase"/>
+    </Avatar>
+    <Avatar aria-label="" initials="sm"/>
+    <Avatar
+        color="neutral"
+        aria-label=""
+        style="--dsc-avatar-font-size: 1.1rem">
+        +14
+    </Avatar>
+</AvatarStack>
+<AvatarStack suffix="+14">
+    <Avatar aria-label="">
+        <img src="assets/img/cats/cat1.webp" alt=""/>
+    </Avatar>
+    <Avatar aria-label="">
+        <Icon Definition="@IconSet.Briefcase"/>
+    </Avatar>
+    <Avatar aria-label="" initials="sm"/>
+    <Avatar aria-label="" initials="on"/>
+</AvatarStack>

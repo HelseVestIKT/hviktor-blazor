@@ -1,0 +1,70 @@
+﻿@page "/component/compliance/dropdown/items"
+@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Dropdown with multiple items" data-testid="items-multiple">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Actions Menu</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.Heading>File Actions</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>New</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Open</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Save</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Save As</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown with single item" data-testid="items-single">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Single Action</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Only Option</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown with grouped items" data-testid="items-grouped">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Grouped Actions</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.Heading>Edit</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Cut</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Copy</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Paste</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+                <Dropdown.Heading>View</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Zoom In</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Zoom Out</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+</main>

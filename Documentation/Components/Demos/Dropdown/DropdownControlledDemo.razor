@@ -1,0 +1,29 @@
+﻿@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+@code {
+    private bool open;
+    private void SetOpen(bool value) => open = value;
+}
+
+<Dropdown.TriggerContext>
+    <Dropdown.Trigger @onclick="@(() => SetOpen(!open))">
+        Dropdown
+        <Icon Definition="@(open ? IconSet.ChevronDown : IconSet.ChevronUp)" aria-hidden="true"/>
+    </Dropdown.Trigger>
+    <Dropdown open="@open" onClose="@(() => SetOpen(false))">
+        <Dropdown.List>
+            <Dropdown.Item>
+                <Dropdown.Button @onclick="@(() => SetOpen(false))">
+                    Click me to close
+                </Dropdown.Button>
+            </Dropdown.Item>
+            <Dropdown.Item>
+                <Dropdown.Button @onclick="@(() => SetOpen(false))">
+                    I close too
+                </Dropdown.Button>
+            </Dropdown.Item>
+        </Dropdown.List>
+    </Dropdown>
+</Dropdown.TriggerContext>

@@ -1,0 +1,136 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Link
+@using Hviktor.Components.Typography
+@using Hviktor.Icons.Types
+
+<header id="header" class="sticky top-0 flex items-center justify-between px-8 py-4">
+    <NavigationLink asChild href="/" style="text-decoration: none;">
+        <div class="flex items-center gap-4">
+            <Icon id="header-icon" Definition="@IconSet.FileCode" size="lg" aria-hidden="true"/>
+            <Heading level="2">Hviktor Tests</Heading>
+        </div>
+    </NavigationLink>
+    <style>
+        #header {
+            z-index: 99;
+            background: var(--ds-color-accent-background-tinted);
+        }
+
+        #header-icon {
+            background: var(--ds-color-accent-background-default);
+            border-radius: 0.375rem;
+            padding: 0.25rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--ds-color-accent-text-default);
+        }
+
+        .header-menu-bar-toggle,
+        .header-menu-bar-toggle--hidden {
+            display: none;
+        }
+
+        #header-menu-button-toggle-menu > li > a {
+            text-decoration: none;
+        }
+
+        #header-menu-button-toggle-menu > li > a:hover {
+            text-decoration: underline var(--ds-color-neutral-border-default) 2px;
+        }
+
+        #header-menu-button-toggle-menu > li > a:visited {
+            color: var(--ds-color-neutral-text-default);
+        }
+
+        @@media (max-width: 1100px) {
+            .header-menu-bar {
+                gap: 0.5rem;
+            }
+
+            .header-menu-bar:has(#header-menu-button-toggle-menu.open) #header-close {
+                display: inline-flex;
+            }
+
+            .header-menu-bar:has(#header-menu-button-toggle-menu.open) #header-bars {
+                display: none;
+            }
+
+            .header-menu-bar:not(:has(#header-menu-button-toggle-menu.open)) #header-close {
+                display: none;
+            }
+
+            .header-menu-bar:not(:has(#header-menu-button-toggle-menu.open)) #header-bars {
+                display: inline-flex;
+            }
+
+            #header-menu-button-toggle-menu {
+                display: none;
+                position: absolute;
+                top: 6rem;
+                left: 0;
+                width: 100%;
+                border-top: 1px solid var(--ds-color-neutral-border-default);
+                background-color: var(--ds-color-neutral-background-default);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: var(--spacing-2);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            #header-menu-button-toggle-menu.open {
+                display: flex;
+            }
+
+            #header-menu-button-toggle-menu > li {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+
+            #header-menu-button-toggle-menu > li > a {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+
+        }
+    </style>
+    <nav class="header-menu-bar flex items-center justify-between gap-4">
+        <button class="header-menu-bar-toggle ds-button"
+                onclick="document.getElementById('header-menu-button-toggle-menu').classList.add('open')"
+                id="header-bars" aria-label="Åpne meny"
+                data-icon="" data-variant="tertiary" data-color="neutral">
+            <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg" focusable="false" role="img">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2.75 6a.75.75 0 0 1 .75-.75h17a.75.75 0 0 1 0 1.5h-17A.75.75 0 0 1 2.75 6Zm0 6a.75.75 0 0 1 .75-.75h17a.75.75 0 0 1 0 1.5h-17a.75.75 0 0 1-.75-.75Zm.75 5.25a.75.75 0 0 0 0 1.5h17a.75.75 0 0 0 0-1.5h-17Z"
+                      fill="currentColor"></path>
+            </svg>
+        </button>
+        <button class="header-menu-bar-toggle ds-button header-menu-bar-toggle--hidden"
+                onclick="document.getElementById('header-menu-button-toggle-menu').classList.remove('open')"
+                id="header-close"
+                aria-label="Lukk meny" data-icon="" data-variant="tertiary" data-color="neutral">
+            <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg" focusable="false" role="img">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M6.53 5.47a.75.75 0 0 0-1.06 1.06L10.94 12l-5.47 5.47a.75.75 0 1 0 1.06 1.06L12 13.06l5.47 5.47a.75.75 0 1 0 1.06-1.06L13.06 12l5.47-5.47a.75.75 0 0 0-1.06-1.06L12 10.94 6.53 5.47Z"
+                      fill="currentColor"></path>
+            </svg>
+        </button>
+
+        <Button @onclick="@(async () => await ToggleColorScheme())" icon
+                color="@Color.Neutral"
+                Variant="@Variant.Tertiary"
+                aria-label="Skift mellom lys og mørk modus">
+            <Icon Definition="@GetIcon()"/>
+        </Button>
+    </nav>
+
+</header>

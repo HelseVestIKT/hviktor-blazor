@@ -1,0 +1,16 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Models.Icons
+
+@* /* Backdrop is only displayed when dialog is opened with dialog.showModal() */ *@
+<dialog @ref="ElementRef" @attributes="@(ComputeAttributes())">
+    @if (IsClosable)
+    {
+        <Button icon variant="@Variant.Tertiary"
+                aria-label="@(GetCloseButtonAriaLabel())"
+                color="@Color.Neutral"
+                data-command="close" @onclick="@CloseAsync" autofocus>
+            <Icon Definition="InternalIconSet.XMark"/>
+        </Button>
+    }
+    @ChildContent
+</dialog>

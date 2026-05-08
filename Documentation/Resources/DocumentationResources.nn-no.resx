@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+
+    <!-- Page -->
+    <data name="PageTitle" xml:space="preserve">
+        <value>Dokumentasjon</value>
+    </data>
+    <data name="PageHeading" xml:space="preserve">
+        <value>Hviktor komponentbibliotek</value>
+    </data>
+    <data name="PageDescription" xml:space="preserve">
+        <value>Denne sida viser alle tilgjengelege komponentar i Hviktor-biblioteket med eksempel og kodeeksempel.</value>
+    </data>
+
+    <!-- Alert -->
+    <data name="Alert_DefaultInfo" xml:space="preserve">
+        <value>Dette er eit standard informasjonsvarsel.</value>
+    </data>
+    <data name="Alert_Success" xml:space="preserve">
+        <value>Dette er eit suksessvarsel.</value>
+    </data>
+    <data name="Alert_Warning" xml:space="preserve">
+        <value>Dette er eit åtvaringsvarsel.</value>
+    </data>
+    <data name="Alert_Danger" xml:space="preserve">
+        <value>Dette er eit farevarsel.</value>
+    </data>
+
+    <!-- Avatar -->
+    <data name="Avatar_Title" xml:space="preserve">
+        <value>Avatar</value>
+    </data>
+    <data name="Avatar_Description" xml:space="preserve">
+        <value>Avatarar representerer brukarar eller einingar med bilete eller initialar.</value>
+    </data>
+
+    <!-- Badge -->
+    <data name="Badge_Title" xml:space="preserve">
+        <value>Merke</value>
+    </data>
+    <data name="Badge_Description" xml:space="preserve">
+        <value>Merke viser tal eller statusindikatorar.</value>
+    </data>
+
+    <!-- Button -->
+    <data name="Button_Title" xml:space="preserve">
+        <value>Knapp</value>
+    </data>
+    <data name="Button_Description" xml:space="preserve">
+        <value>Knappar utløyser handlingar og kan stilast med ulike variantar, fargar og storleikar.</value>
+    </data>
+    <data name="Button_Primary" xml:space="preserve">
+        <value>Primær</value>
+    </data>
+    <data name="Button_Secondary" xml:space="preserve">
+        <value>Sekundær</value>
+    </data>
+    <data name="Button_Tertiary" xml:space="preserve">
+        <value>Tertiær</value>
+    </data>
+    <data name="Button_WithIcon" xml:space="preserve">
+        <value>Med ikon</value>
+    </data>
+    <data name="Button_Disabled" xml:space="preserve">
+        <value>Deaktivert</value>
+    </data>
+    <data name="Button_Small" xml:space="preserve">
+        <value>Liten</value>
+    </data>
+    <data name="Button_Medium" xml:space="preserve">
+        <value>Medium</value>
+    </data>
+    <data name="Button_Large" xml:space="preserve">
+        <value>Stor</value>
+    </data>
+
+    <!-- Card -->
+    <data name="Card_Title" xml:space="preserve">
+        <value>Kort</value>
+    </data>
+    <data name="Card_Description" xml:space="preserve">
+        <value>Kort vert brukt til å gruppere relatert innhald og handlingar.</value>
+    </data>
+    <data name="Card_ExampleTitle" xml:space="preserve">
+        <value>Korttittel</value>
+    </data>
+    <data name="Card_ExampleContent" xml:space="preserve">
+        <value>Dette er innhald inne i ein kortkomponent.</value>
+    </data>
+
+    <!-- Checkbox -->
+    <data name="Checkbox_Title" xml:space="preserve">
+        <value>Avkryssingsboks</value>
+    </data>
+    <data name="Checkbox_Description" xml:space="preserve">
+        <value>Avkryssingsboksar let brukarar velje eitt eller fleire alternativ.</value>
+    </data>
+    <data name="Checkbox_DefaultLabel" xml:space="preserve">
+        <value>Standard avkryssingsboks</value>
+    </data>
+    <data name="Checkbox_ControlledLabel" xml:space="preserve">
+        <value>Kontrollert avkryssingsboks</value>
+    </data>
+    <data name="Checkbox_Checked" xml:space="preserve">
+        <value>Avkryssa</value>
+    </data>
+    <data name="Checkbox_IndeterminateTitle" xml:space="preserve">
+        <value>Ubestemt avkryssingsboks (vel alle/nokre/ingen)</value>
+    </data>
+    <data name="Checkbox_SelectAll" xml:space="preserve">
+        <value>Vel alle</value>
+    </data>
+    <data name="Checkbox_Option1" xml:space="preserve">
+        <value>Alternativ 1</value>
+    </data>
+    <data name="Checkbox_Option2" xml:space="preserve">
+        <value>Alternativ 2</value>
+    </data>
+    <data name="Checkbox_Option3" xml:space="preserve">
+        <value>Alternativ 3</value>
+    </data>
+    <data name="Checkbox_ReadOnlyTitle" xml:space="preserve">
+        <value>Skriveverna avkryssingsboks</value>
+    </data>
+    <data name="Checkbox_ReadOnlyDescription" xml:space="preserve">
+        <value>Bruk ReadOnly-attributtet for å vise ei avkryssingsboks som brukaren kan sjå, men ikkje endre. Verdien kan framleis sendast med skjemaet.</value>
+    </data>
+    <data name="Checkbox_ReadOnlyUncheckedLabel" xml:space="preserve">
+        <value>Skriveverna (ikkje avkryssa)</value>
+    </data>
+    <data name="Checkbox_ReadOnlyUncheckedDescription" xml:space="preserve">
+        <value>Denne avkryssingsboksen er skriveverna og ikkje avkryssa</value>
+    </data>
+    <data name="Checkbox_ReadOnlyCheckedLabel" xml:space="preserve">
+        <value>Skriveverna (avkryssa)</value>
+    </data>
+    <data name="Checkbox_ReadOnlyCheckedDescription" xml:space="preserve">
+        <value>Denne avkryssingsboksen er skriveverna og avkryssa</value>
+    </data>
+    <data name="Checkbox_DisabledTitle" xml:space="preserve">
+        <value>Deaktivert avkryssingsboks</value>
+    </data>
+    <data name="Checkbox_DisabledDescription" xml:space="preserve">
+        <value>Bruk disabled-attributtet for å gjere ei avkryssingsboks heilt utilgjengeleg. Deaktiverte avkryssingsboksar kan ikkje fokuserast eller interagerast med.</value>
+    </data>
+    <data name="Checkbox_DisabledUncheckedLabel" xml:space="preserve">
+        <value>Deaktivert (ikkje avkryssa)</value>
+    </data>
+    <data name="Checkbox_DisabledUncheckedDescription" xml:space="preserve">
+        <value>Denne avkryssingsboksen er deaktivert og ikkje avkryssa</value>
+    </data>
+    <data name="Checkbox_DisabledCheckedLabel" xml:space="preserve">
+        <value>Deaktivert (avkryssa)</value>
+    </data>
+    <data name="Checkbox_DisabledCheckedDescription" xml:space="preserve">
+        <value>Denne avkryssingsboksen er deaktivert og avkryssa</value>
+    </data>
+
+    <!-- Chip -->
+    <data name="Chip_Title" xml:space="preserve">
+        <value>Chip</value>
+    </data>
+    <data name="Chip_Description" xml:space="preserve">
+        <value>Chips representerer val, filter eller handlingar i kompakt form.</value>
+    </data>
+    <data name="Chip_RadioChip" xml:space="preserve">
+        <value>Radio-chip</value>
+    </data>
+    <data name="Chip_CheckboxChip" xml:space="preserve">
+        <value>Avkryssings-chip</value>
+    </data>
+    <data name="Chip_RemovableChip" xml:space="preserve">
+        <value>Fjernbar chip</value>
+    </data>
+
+    <!-- Chip.Button -->
+    <data name="ChipButton_Title" xml:space="preserve">
+        <value>Chip.Button</value>
+    </data>
+    <data name="ChipButton_Description" xml:space="preserve">
+        <value>Ein enkel knapp-chip for handlingar. Brukast når brukaren skal utføre ei handling ved klikk.</value>
+    </data>
+    <data name="ChipButton_Basic" xml:space="preserve">
+        <value>Grunnleggjande</value>
+    </data>
+    <data name="ChipButton_Action" xml:space="preserve">
+        <value>Handling</value>
+    </data>
+    <data name="ChipButton_Filter" xml:space="preserve">
+        <value>Filter</value>
+    </data>
+    <data name="ChipButton_Category" xml:space="preserve">
+        <value>Kategori</value>
+    </data>
+    <data name="ChipButton_ClickCount" xml:space="preserve">
+        <value>Tal på klikk:</value>
+    </data>
+    <data name="ChipButton_ClickMe" xml:space="preserve">
+        <value>Klikk meg</value>
+    </data>
+
+    <!-- Chip.Checkbox -->
+    <data name="ChipCheckbox_Title" xml:space="preserve">
+        <value>Chip.Checkbox</value>
+    </data>
+    <data name="ChipCheckbox_Description" xml:space="preserve">
+        <value>Chip med avkryssingsfunksjonalitet. Brukaren kan velje fleire chips samtidig.</value>
+    </data>
+    <data name="ChipCheckbox_Option" xml:space="preserve">
+        <value>Val</value>
+    </data>
+    <data name="ChipCheckbox_SelectMultiple" xml:space="preserve">
+        <value>Vel fleire</value>
+    </data>
+    <data name="ChipCheckbox_Monday" xml:space="preserve">
+        <value>Måndag</value>
+    </data>
+    <data name="ChipCheckbox_Tuesday" xml:space="preserve">
+        <value>Tysdag</value>
+    </data>
+    <data name="ChipCheckbox_Wednesday" xml:space="preserve">
+        <value>Onsdag</value>
+    </data>
+    <data name="ChipCheckbox_Thursday" xml:space="preserve">
+        <value>Torsdag</value>
+    </data>
+    <data name="ChipCheckbox_Friday" xml:space="preserve">
+        <value>Fredag</value>
+    </data>
+    <data name="ChipCheckbox_SelectedDays" xml:space="preserve">
+        <value>Valde dagar:</value>
+    </data>
+    <data name="ChipCheckbox_NoneSelected" xml:space="preserve">
+        <value>Ingen vald</value>
+    </data>
+
+    <!-- Chip.Removable -->
+    <data name="ChipRemovable_Title" xml:space="preserve">
+        <value>Chip.Removable</value>
+    </data>
+    <data name="ChipRemovable_Description" xml:space="preserve">
+        <value>Chip som kan fjernast av brukaren. Viser ein fjern-knapp og kan brukast til valde filter eller etikettar.</value>
+    </data>
+    <data name="ChipRemovable_Tag" xml:space="preserve">
+        <value>Etikett</value>
+    </data>
+    <data name="ChipRemovable_SelectedFilter" xml:space="preserve">
+        <value>Vald filter</value>
+    </data>
+    <data name="ChipRemovable_ActiveFilters" xml:space="preserve">
+        <value>Aktive filter:</value>
+    </data>
+    <data name="ChipRemovable_Oslo" xml:space="preserve">
+        <value>Oslo</value>
+    </data>
+    <data name="ChipRemovable_Bergen" xml:space="preserve">
+        <value>Bergen</value>
+    </data>
+    <data name="ChipRemovable_Trondheim" xml:space="preserve">
+        <value>Trondheim</value>
+    </data>
+    <data name="ChipRemovable_Reset" xml:space="preserve">
+        <value>Tilbakestill</value>
+    </data>
+    <data name="ChipRemovable_NoFilters" xml:space="preserve">
+        <value>Ingen aktive filter</value>
+    </data>
+
+    <!-- Details -->
+    <data name="Details_Title" xml:space="preserve">
+        <value>Detaljar</value>
+    </data>
+    <data name="Details_Description" xml:space="preserve">
+        <value>Detaljar er ein samanklapbar komponent for å vise/skjule innhald.</value>
+    </data>
+    <data name="Details_ClickToExpand" xml:space="preserve">
+        <value>Klikk for å utvide</value>
+    </data>
+    <data name="Details_HiddenContent" xml:space="preserve">
+        <value>Dette innhaldet er skjult som standard og vert vist når du klikkar på samandraget.</value>
+    </data>
+
+    <!-- Dialog -->
+    <data name="Dialog_Title" xml:space="preserve">
+        <value>Dialog</value>
+    </data>
+    <data name="Dialog_Description" xml:space="preserve">
+        <value>Dialogar viser modalt innhald som krev brukaren si merksemd.</value>
+    </data>
+    <data name="Dialog_OpenButton" xml:space="preserve">
+        <value>Opne dialog</value>
+    </data>
+    <data name="Dialog_ExampleTitle" xml:space="preserve">
+        <value>Dialogtittel</value>
+    </data>
+    <data name="Dialog_ExampleContent" xml:space="preserve">
+        <value>Dette er ein dialog. Klikk utanfor eller på lukkeknappen for å lukke.</value>
+    </data>
+    <data name="Dialog_Confirm" xml:space="preserve">
+        <value>Stadfest</value>
+    </data>
+    <data name="Dialog_Cancel" xml:space="preserve">
+        <value>Avbryt</value>
+    </data>
+
+    <!-- Divider -->
+    <data name="Divider_Title" xml:space="preserve">
+        <value>Skiljelinje</value>
+    </data>
+    <data name="Divider_Description" xml:space="preserve">
+        <value>Skiljelinjer separerer innhald i ulike seksjonar.</value>
+    </data>
+    <data name="Divider_ContentAbove" xml:space="preserve">
+        <value>Innhald over</value>
+    </data>
+    <data name="Divider_ContentBelow" xml:space="preserve">
+        <value>Innhald under</value>
+    </data>
+
+    <!-- Dropdown -->
+    <data name="Dropdown_Title" xml:space="preserve">
+        <value>Nedtrekksmeny</value>
+    </data>
+    <data name="Dropdown_Description" xml:space="preserve">
+        <value>Nedtrekksmenyer viser ei liste med handlingar eller alternativ.</value>
+    </data>
+    <data name="Dropdown_OpenButton" xml:space="preserve">
+        <value>Opne nedtrekksmeny</value>
+    </data>
+    <data name="Dropdown_Controlled" xml:space="preserve">
+        <value>Kontrollert</value>
+    </data>
+    <data name="Dropdown_CloseMe" xml:space="preserve">
+        <value>Lukk meg</value>
+    </data>
+    <data name="Dropdown_Action" xml:space="preserve">
+        <value>Handling</value>
+    </data>
+    <data name="Dropdown_Columns" xml:space="preserve">
+        <value>Vel kolonnar</value>
+    </data>
+    <data name="Dropdown_ColumnsSelected" xml:space="preserve">
+        <value>{0} av {1} valt</value>
+    </data>
+    <data name="Dropdown_Column_Name" xml:space="preserve">
+        <value>Namn</value>
+    </data>
+    <data name="Dropdown_Column_Email" xml:space="preserve">
+        <value>E-post</value>
+    </data>
+    <data name="Dropdown_Column_Role" xml:space="preserve">
+        <value>Rolle</value>
+    </data>
+    <data name="Dropdown_Column_Status" xml:space="preserve">
+        <value>Status</value>
+    </data>
+    <data name="Dropdown_Column_Department" xml:space="preserve">
+        <value>Avdeling</value>
+    </data>
+
+    <!-- Error Summary -->
+    <data name="ErrorSummary_Title" xml:space="preserve">
+        <value>Feiloppsummering</value>
+    </data>
+    <data name="ErrorSummary_Description" xml:space="preserve">
+        <value>Feiloppsummeringar viser ei liste over skjemavalideringsfeil.</value>
+    </data>
+    <data name="ErrorSummary_Heading" xml:space="preserve">
+        <value>Ver venleg å rette følgjande feil:</value>
+    </data>
+    <data name="ErrorSummary_EmailRequired" xml:space="preserve">
+        <value>E-post er påkravd</value>
+    </data>
+    <data name="ErrorSummary_PasswordMinLength" xml:space="preserve">
+        <value>Passord må vere minst 8 teikn</value>
+    </data>
+
+    <!-- Field Description -->
+    <data name="FieldDescription_Title" xml:space="preserve">
+        <value>Feltskildring</value>
+    </data>
+    <data name="FieldDescription_Description" xml:space="preserve">
+        <value>Feltskildringar gjev brukaren meir informasjon om kva som er forventa i eit felt.</value>
+    </data>
+    <data name="FieldDescription_InputDescription" xml:space="preserve">
+        <value>Skriv inn det fulle namnet ditt slik det står i passet.</value>
+    </data>
+    <data name="FieldDescription_ValidationEmpty" xml:space="preserve">
+        <value>Namnet kan ikkje vere tomt, og må innehalde minst fornamn og etternamn.</value>
+    </data>
+    <data name="FieldDescription_ValidationMinParts" xml:space="preserve">
+        <value>Namnet må innehalde minst fornamn og etternamn.</value>
+    </data>
+
+    <!-- Field Counter -->
+    <data name="FieldCounter_Title" xml:space="preserve">
+        <value>Antal teikn</value>
+    </data>
+    <data name="FieldCounter_Description" xml:space="preserve">
+        <value>Bruk Field.Counter til å informere om kor mange teikn brukarane kan skrive i feltet.</value>
+    </data>
+    <data name="FieldCounter_Label" xml:space="preserve">
+        <value>Legg til ei skildring</value>
+    </data>
+
+    <!-- Icon -->
+    <data name="Icon_Title" xml:space="preserve">
+        <value>Ikon</value>
+    </data>
+    <data name="Icon_Description" xml:space="preserve">
+        <value>Ikon gjev visuelle hint og betrar brukarvennlegheita.</value>
+    </data>
+
+    <!-- Input -->
+    <data name="Input_Title" xml:space="preserve">
+        <value>Input</value>
+    </data>
+    <data name="Input_Description" xml:space="preserve">
+        <value>Inputfelt vert nytta til å samle inn data frå brukaren.</value>
+    </data>
+    <data name="Input_TypesTitle" xml:space="preserve">
+        <value>Inputtypar</value>
+    </data>
+    <data name="Input_DateTimeTitle" xml:space="preserve">
+        <value>Dato og tid</value>
+    </data>
+    <data name="Input_OtherTypesTitle" xml:space="preserve">
+        <value>Andre typar</value>
+    </data>
+    <data name="Input_SizeTitle" xml:space="preserve">
+        <value>Storleik (tal på teikn)</value>
+    </data>
+    <data name="Input_StatesTitle" xml:space="preserve">
+        <value>Tilstandar</value>
+    </data>
+    <data name="Input_RoleTitle" xml:space="preserve">
+        <value>Rolle (ARIA)</value>
+    </data>
+    <data name="Input_Default" xml:space="preserve">
+        <value>Standard</value>
+    </data>
+    <data name="Input_DefaultPlaceholder" xml:space="preserve">
+        <value>Skriv her...</value>
+    </data>
+    <data name="Input_Disabled" xml:space="preserve">
+        <value>Deaktivert</value>
+    </data>
+    <data name="Input_DisabledPlaceholder" xml:space="preserve">
+        <value>Ikkje tilgjengeleg</value>
+    </data>
+    <data name="Input_ReadOnly" xml:space="preserve">
+        <value>Skriveverna</value>
+    </data>
+    <data name="Input_ReadOnlyValue" xml:space="preserve">
+        <value>Denne verdien kan ikkje endrast</value>
+    </data>
+    <data name="Input_SearchPlaceholder" xml:space="preserve">
+        <value>Søk...</value>
+    </data>
+    <data name="Input_SwitchLabel" xml:space="preserve">
+        <value>Aktiver funksjon</value>
+    </data>
+
+    <!-- Popover -->
+    <data name="Popover_Title" xml:space="preserve">
+        <value>Popover</value>
+    </data>
+    <data name="Popover_Description" xml:space="preserve">
+        <value>Popoverar viser tilleggsinnhald utløyst av brukarinteraksjon.</value>
+    </data>
+    <data name="Popover_ClickMe" xml:space="preserve">
+        <value>Klikk meg</value>
+    </data>
+    <data name="Popover_Content" xml:space="preserve">
+        <value>Dette er popover-innhald.</value>
+    </data>
+    <data name="Popover_DeleteConfirmation" xml:space="preserve">
+        <value>Er du sikker på at du vil slette?</value>
+    </data>
+    <data name="Popover_Delete" xml:space="preserve">
+        <value>Slett</value>
+    </data>
+
+    <!-- Pagination -->
+    <data name="Pagination_Title" xml:space="preserve">
+        <value>Paginering</value>
+    </data>
+    <data name="Pagination_Description" xml:space="preserve">
+        <value>Paginering vert brukt til å navigere gjennom store datamengder delt opp i sider.</value>
+    </data>
+    <data name="Pagination_CurrentPage" xml:space="preserve">
+        <value>Gjeldande side</value>
+    </data>
+    <data name="Pagination_TableHeader_Id" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="Pagination_TableHeader_Name" xml:space="preserve">
+        <value>Namn</value>
+    </data>
+    <data name="Pagination_TableHeader_Email" xml:space="preserve">
+        <value>E-post</value>
+    </data>
+    <data name="Pagination_TableHeader_Department" xml:space="preserve">
+        <value>Avdeling</value>
+    </data>
+    <data name="Pagination_ShowingItems" xml:space="preserve">
+        <value>Viser {0}-{1} av {2} element</value>
+    </data>
+    <data name="Pagination_Previous" xml:space="preserve">
+        <value>Førre</value>
+    </data>
+    <data name="Pagination_Next" xml:space="preserve">
+        <value>Neste</value>
+    </data>
+    <data name="Pagination_PreviousPage" xml:space="preserve">
+        <value>Førre side</value>
+    </data>
+    <data name="Pagination_NextPage" xml:space="preserve">
+        <value>Neste side</value>
+    </data>
+    <data name="Pagination_Page" xml:space="preserve">
+        <value>Side</value>
+    </data>
+
+    <!-- Radio -->
+    <data name="Radio_Title" xml:space="preserve">
+        <value>Radioknapp</value>
+    </data>
+    <data name="Radio_Description" xml:space="preserve">
+        <value>Radioknappar let brukarar velje eitt alternativ frå ei gruppe.</value>
+    </data>
+    <data name="Radio_Legend" xml:space="preserve">
+        <value>Vel favorittfargen din</value>
+    </data>
+    <data name="Radio_Red" xml:space="preserve">
+        <value>Raud</value>
+    </data>
+    <data name="Radio_Green" xml:space="preserve">
+        <value>Grøn</value>
+    </data>
+    <data name="Radio_Blue" xml:space="preserve">
+        <value>Blå</value>
+    </data>
+
+    <!-- Search -->
+    <data name="Search_Title" xml:space="preserve">
+        <value>Søk</value>
+    </data>
+    <data name="Search_Description" xml:space="preserve">
+        <value>Søkekomponentar gjev inndatafelt med søkefunksjonalitet.</value>
+    </data>
+    <data name="Search_Placeholder" xml:space="preserve">
+        <value>Søk...</value>
+    </data>
+    <data name="Search_SubmittedValue" xml:space="preserve">
+        <value>Du søkte etter</value>
+    </data>
+    <data name="Search_BasicUsageTitle" xml:space="preserve">
+        <value>Grunnleggjande bruk</value>
+    </data>
+    <data name="Search_BasicUsageDescription" xml:space="preserve">
+        <value>Enkel søkefunksjon med tømmeknapp.</value>
+    </data>
+    <data name="Search_FormsTitle" xml:space="preserve">
+        <value>Skjema</value>
+    </data>
+    <data name="Search_FormsDescription" xml:space="preserve">
+        <value>Grunnleggjande skjemasøk med tømme- og søkeknapp.</value>
+    </data>
+
+    <!-- Select -->
+    <data name="Select_Title" xml:space="preserve">
+        <value>Vel</value>
+    </data>
+    <data name="Select_Description" xml:space="preserve">
+        <value>Vel-komponentar gjev nedtrekksvalgfunksjonalitet.</value>
+    </data>
+    <data name="Select_Label" xml:space="preserve">
+        <value>Vel eit alternativ</value>
+    </data>
+    <data name="Select_Placeholder" xml:space="preserve">
+        <value>Vel eit alternativ...</value>
+    </data>
+    <data name="Select_Option" xml:space="preserve">
+        <value>Alternativ</value>
+    </data>
+
+    <!-- Skeleton -->
+    <data name="Skeleton_Title" xml:space="preserve">
+        <value>Skjelett</value>
+    </data>
+    <data name="Skeleton_Description" xml:space="preserve">
+        <value>Skjelett vert brukt som lasteplasshaldarar for å indikere at innhald vert lasta.</value>
+    </data>
+
+    <!-- Spinner -->
+    <data name="Spinner_Title" xml:space="preserve">
+        <value>Spinner</value>
+    </data>
+    <data name="Spinner_Description" xml:space="preserve">
+        <value>Spinnarar indikerer aktive lasteprosessar.</value>
+    </data>
+    <data name="Spinner_Loading" xml:space="preserve">
+        <value>Lastar</value>
+    </data>
+
+    <!-- Switch -->
+    <data name="Switch_Title" xml:space="preserve">
+        <value>Brytar</value>
+    </data>
+    <data name="Switch_Description" xml:space="preserve">
+        <value>Brytarar vekslar mellom to tilstandar, som på/av.</value>
+    </data>
+    <data name="Switch_EnableNotifications" xml:space="preserve">
+        <value>Aktiver varsel</value>
+    </data>
+    <data name="Switch_DarkMode" xml:space="preserve">
+        <value>Mørk modus</value>
+    </data>
+
+    <!-- Suggestion -->
+    <data name="Suggestion_Title" xml:space="preserve">
+        <value>Forslag</value>
+    </data>
+    <data name="Suggestion_Description" xml:space="preserve">
+        <value>Forslag gjev autofullføring/komboboks med asynkrone søkemoglegheiter.</value>
+    </data>
+    <data name="Suggestion_SearchLabel" xml:space="preserve">
+        <value>Søk etter ein by</value>
+    </data>
+    <data name="Suggestion_Placeholder" xml:space="preserve">
+        <value>Skriv for å søke...</value>
+    </data>
+    <data name="Suggestion_Loading" xml:space="preserve">
+        <value>Lastar...</value>
+    </data>
+    <data name="Suggestion_NoResults" xml:space="preserve">
+        <value>Ingen resultat funne</value>
+    </data>
+    <data name="Suggestion_Selected" xml:space="preserve">
+        <value>Vald</value>
+    </data>
+    <data name="Suggestion_BasicUsageTitle" xml:space="preserve">
+        <value>Grunnleggjande bruk</value>
+    </data>
+    <data name="Suggestion_BasicUsageDescription" xml:space="preserve">
+        <value>Grunnleggjande forslag med søk, lastetilstandar og valbasert tilbakekalling.</value>
+    </data>
+    <data name="Suggestion_DefaultSelectedEditableTitle" xml:space="preserve">
+        <value>DefaultSelected (Redigerbar)</value>
+    </data>
+    <data name="Suggestion_DefaultSelectedEditableDescription" xml:space="preserve">
+        <value>Førehandsutfyll forslaget med ein standardverdi. Brukaren kan framleis endre valet.</value>
+    </data>
+    <data name="Suggestion_TwoWayBindingEditableTitle" xml:space="preserve">
+        <value>Tovegs binding (Redigerbar)</value>
+    </data>
+    <data name="Suggestion_TwoWayBindingEditableDescription" xml:space="preserve">
+        <value>Bruk Selected og OnSelectedChange for full tovegs bindingskontroll.</value>
+    </data>
+    <data name="Suggestion_DefaultSelectedReadOnlyTitle" xml:space="preserve">
+        <value>DefaultSelected + ReadOnly</value>
+    </data>
+    <data name="Suggestion_DefaultSelectedReadOnlyDescription" xml:space="preserve">
+        <value>Vis ein førehandsvald verdi i skriveverna modus. Brukaren kan ikkje endre valet.</value>
+    </data>
+    <data name="Suggestion_TwoWayBindingReadOnlyTitle" xml:space="preserve">
+        <value>Tovegs binding + ReadOnly</value>
+    </data>
+    <data name="Suggestion_TwoWayBindingReadOnlyDescription" xml:space="preserve">
+        <value>Bruk Selected med ReadOnly når du treng å vise ein bunden verdi som kan endrast programmatisk, men ikkje av brukaren.</value>
+    </data>
+    <data name="Suggestion_VirtualizedTitle" xml:space="preserve">
+        <value>Virtualisert liste (1000 element)</value>
+    </data>
+    <data name="Suggestion_VirtualizedDescription" xml:space="preserve">
+        <value>Demonstrerer Suggestion med ei virtualisert liste på 1000 element og debounce-søk. Berre elementa som er synlege i lista vert rendra til ei kvar tid, noko som held ytinga høg uavhengig av datasettets storleik.</value>
+    </data>
+    <data name="Suggestion_Virtualized_SearchLabel" xml:space="preserve">
+        <value>Søk i 1000 element</value>
+    </data>
+    <data name="Suggestion_Virtualized_ResultCount" xml:space="preserve">
+        <value>Viser {0} av {1} element</value>
+    </data>
+
+    <!-- Tabs -->
+    <data name="Tabs_Title" xml:space="preserve">
+        <value>Faner</value>
+    </data>
+    <data name="Tabs_Description" xml:space="preserve">
+        <value>Faner organiserer innhald i separate visningar.</value>
+    </data>
+    <data name="Tabs_Tab" xml:space="preserve">
+        <value>Fane</value>
+    </data>
+    <data name="Tabs_ContentFor" xml:space="preserve">
+        <value>Innhald for</value>
+    </data>
+
+    <!-- Tag -->
+    <data name="Tag_Title" xml:space="preserve">
+        <value>Etikett</value>
+    </data>
+    <data name="Tag_Description" xml:space="preserve">
+        <value>Etikettar vert brukt til å kategorisere eller merke element.</value>
+    </data>
+    <data name="Tag_Default" xml:space="preserve">
+        <value>Standard</value>
+    </data>
+
+    <!-- Textarea -->
+    <data name="Textarea_Title" xml:space="preserve">
+        <value>Tekstområde</value>
+    </data>
+    <data name="Textarea_Description" xml:space="preserve">
+        <value>Tekstområde tillèt fleirlinjes tekstinput.</value>
+    </data>
+    <data name="Textarea_Label" xml:space="preserve">
+        <value>Di melding</value>
+    </data>
+    <data name="Textarea_Placeholder" xml:space="preserve">
+        <value>Skriv inn meldinga di...</value>
+    </data>
+
+    <!-- Textfield -->
+    <data name="Textfield_Title" xml:space="preserve">
+        <value>Tekstfelt</value>
+    </data>
+    <data name="Textfield_Description" xml:space="preserve">
+        <value>Tekstfelt er enkeltlinjes tekstinput med ulike konfigurasjonar.</value>
+    </data>
+    <data name="Textfield_Username" xml:space="preserve">
+        <value>Brukarnamn</value>
+    </data>
+    <data name="Textfield_Password" xml:space="preserve">
+        <value>Passord</value>
+    </data>
+    <data name="Textfield_Amount" xml:space="preserve">
+        <value>Beløp</value>
+    </data>
+    <data name="Textfield_PerMonth" xml:space="preserve">
+        <value>per månad</value>
+    </data>
+
+    <!-- Toggle Group -->
+    <data name="ToggleGroup_Title" xml:space="preserve">
+        <value>Vekslegruppe</value>
+    </data>
+    <data name="ToggleGroup_Description" xml:space="preserve">
+        <value>Vekslegrupper tillèt val frå eit sett med relaterte alternativ.</value>
+    </data>
+    <data name="ToggleGroup_Inbox" xml:space="preserve">
+        <value>Innboks</value>
+    </data>
+    <data name="ToggleGroup_Drafts" xml:space="preserve">
+        <value>Utkast</value>
+    </data>
+    <data name="ToggleGroup_Sent" xml:space="preserve">
+        <value>Sendt</value>
+    </data>
+    <data name="ToggleGroup_Selected" xml:space="preserve">
+        <value>Vald</value>
+    </data>
+
+    <!-- Tooltip -->
+    <data name="Tooltip_Title" xml:space="preserve">
+        <value>Verktøytips</value>
+    </data>
+    <data name="Tooltip_Description" xml:space="preserve">
+        <value>Verktøytips viser hjelpsom informasjon ved peiking.</value>
+    </data>
+    <data name="Tooltip_HoverMe" xml:space="preserve">
+        <value>Hald over meg</value>
+    </data>
+    <data name="Tooltip_Help" xml:space="preserve">
+        <value>Hjelp</value>
+    </data>
+    <data name="Tooltip_Example" xml:space="preserve">
+        <value>Dette er eit verktøytips</value>
+    </data>
+    <data name="Tooltip_AnotherExample" xml:space="preserve">
+        <value>Eit anna verktøytips eksempel</value>
+    </data>
+
+    <!-- Typography -->
+    <data name="Typography_Title" xml:space="preserve">
+        <value>Typografi</value>
+    </data>
+    <data name="Typography_Description" xml:space="preserve">
+        <value>Typografikomponentar for overskrifter, avsnitt og tekstformatering.</value>
+    </data>
+    <data name="Typography_HeadingLevel" xml:space="preserve">
+        <value>Overskriftsnivå</value>
+    </data>
+    <data name="Typography_Paragraph" xml:space="preserve">
+        <value>Dette er eit avsnitt med litt tekstinnhald.</value>
+    </data>
+    <data name="Typography_Label" xml:space="preserve">
+        <value>Dette er ein etikett</value>
+    </data>
+</root>
+

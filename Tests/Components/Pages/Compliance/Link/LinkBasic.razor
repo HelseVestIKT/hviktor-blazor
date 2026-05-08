@@ -1,0 +1,19 @@
+﻿@page "/component/compliance/link/basic"
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic link" data-testid="basic">
+        <NavigationLink href="/home">Home</NavigationLink>
+    </section>
+
+    <section aria-label="Link with text content" data-testid="text-content">
+        <NavigationLink href="/about">Learn more about our services</NavigationLink>
+    </section>
+
+    <section aria-label="Link in paragraph" data-testid="inline-link">
+        <p>Visit our
+            <NavigationLink Href="/contact">contact page</NavigationLink>
+            for more information.
+        </p>
+    </section>
+</main>

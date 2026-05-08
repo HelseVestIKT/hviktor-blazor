@@ -1,0 +1,29 @@
+﻿@page "/component/compliance/field/basic"
+@using Hviktor.Components.Field
+@using Hviktor.Components.Textfield
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic field with textfield" data-testid="basic-textfield">
+        <Field>
+            <Label for="basic-input">Name</Label>
+            <Textfield Id="basic-input" />
+        </Field>
+    </section>
+
+    <section aria-label="Field with description" data-testid="field-with-description">
+        <Field>
+            <Label for="description-input">Email</Label>
+            <Field.Description>Enter your email address</Field.Description>
+            <Textfield Id="description-input" />
+        </Field>
+    </section>
+
+    <section aria-label="Field with label and description" data-testid="field-complete">
+        <Field>
+            <Label for="complete-input">Username</Label>
+            <Field.Description>Choose a unique username</Field.Description>
+            <Textfield Id="complete-input" />
+        </Field>
+    </section>
+</main>

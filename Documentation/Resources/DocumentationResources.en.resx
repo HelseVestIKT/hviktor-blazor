@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+
+    <!-- Page -->
+    <data name="PageTitle" xml:space="preserve">
+        <value>Documentation</value>
+    </data>
+    <data name="PageHeading" xml:space="preserve">
+        <value>Hviktor Component Library</value>
+    </data>
+    <data name="PageDescription" xml:space="preserve">
+        <value>This page showcases all available components in the Hviktor library with live examples and code snippets.</value>
+    </data>
+
+    <!-- Alert -->
+    <data name="Alert_DefaultInfo" xml:space="preserve">
+        <value>This is a default info alert.</value>
+    </data>
+    <data name="Alert_Success" xml:space="preserve">
+        <value>This is a success alert.</value>
+    </data>
+    <data name="Alert_Warning" xml:space="preserve">
+        <value>This is a warning alert.</value>
+    </data>
+    <data name="Alert_Danger" xml:space="preserve">
+        <value>This is a danger alert.</value>
+    </data>
+
+    <!-- Checkbox -->
+    <data name="Checkbox_DefaultLabel" xml:space="preserve">
+        <value>Default checkbox</value>
+    </data>
+    <data name="Checkbox_ControlledLabel" xml:space="preserve">
+        <value>Controlled checkbox</value>
+    </data>
+    <data name="Checkbox_Checked" xml:space="preserve">
+        <value>Checked</value>
+    </data>
+    <data name="Checkbox_IndeterminateTitle" xml:space="preserve">
+        <value>Indeterminate checkbox (select all/some/none)</value>
+    </data>
+    <data name="Checkbox_SelectAll" xml:space="preserve">
+        <value>Select all</value>
+    </data>
+    <data name="Checkbox_Option1" xml:space="preserve">
+        <value>Option 1</value>
+    </data>
+    <data name="Checkbox_Option2" xml:space="preserve">
+        <value>Option 2</value>
+    </data>
+    <data name="Checkbox_Option3" xml:space="preserve">
+        <value>Option 3</value>
+    </data>
+    <data name="Checkbox_ReadOnlyUncheckedLabel" xml:space="preserve">
+        <value>ReadOnly (unchecked)</value>
+    </data>
+    <data name="Checkbox_ReadOnlyUncheckedDescription" xml:space="preserve">
+        <value>This checkbox is read-only and unchecked</value>
+    </data>
+    <data name="Checkbox_ReadOnlyCheckedLabel" xml:space="preserve">
+        <value>ReadOnly (checked)</value>
+    </data>
+    <data name="Checkbox_ReadOnlyCheckedDescription" xml:space="preserve">
+        <value>This checkbox is read-only and checked</value>
+    </data>
+    <data name="Checkbox_DisabledUncheckedLabel" xml:space="preserve">
+        <value>Disabled (unchecked)</value>
+    </data>
+    <data name="Checkbox_DisabledUncheckedDescription" xml:space="preserve">
+        <value>This checkbox is disabled and unchecked</value>
+    </data>
+    <data name="Checkbox_DisabledCheckedLabel" xml:space="preserve">
+        <value>Disabled (checked)</value>
+    </data>
+    <data name="Checkbox_DisabledCheckedDescription" xml:space="preserve">
+        <value>This checkbox is disabled and checked</value>
+    </data>
+
+    <!-- Chip.Removable -->
+    <data name="ChipRemovable_Tag" xml:space="preserve">
+        <value>Tag</value>
+    </data>
+    <data name="ChipRemovable_ActiveFilters" xml:space="preserve">
+        <value>Active filters:</value>
+    </data>
+    <data name="ChipRemovable_NoFilters" xml:space="preserve">
+        <value>No active filters</value>
+    </data>
+    <data name="ChipRemovable_Reset" xml:space="preserve">
+        <value>Reset</value>
+    </data>
+
+    <!-- Dialog -->
+    <data name="Dialog_OpenButton" xml:space="preserve">
+        <value>Open Dialog</value>
+    </data>
+    <data name="Dialog_ExampleTitle" xml:space="preserve">
+        <value>Dialog Title</value>
+    </data>
+    <data name="Dialog_ExampleContent" xml:space="preserve">
+        <value>This is a dialog. Click outside or the close button to dismiss.</value>
+    </data>
+    <data name="Dialog_Confirm" xml:space="preserve">
+        <value>Confirm</value>
+    </data>
+    <data name="Dialog_Cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+
+    <!-- Dropdown -->
+    <data name="Dropdown_OpenButton" xml:space="preserve">
+        <value>Open Dropdown</value>
+    </data>
+    <data name="Dropdown_Controlled" xml:space="preserve">
+        <value>Controlled</value>
+    </data>
+    <data name="Dropdown_CloseMe" xml:space="preserve">
+        <value>Close me</value>
+    </data>
+    <data name="Dropdown_Action" xml:space="preserve">
+        <value>Action</value>
+    </data>
+    <data name="Dropdown_Columns" xml:space="preserve">
+        <value>Choose columns</value>
+    </data>
+    <data name="Dropdown_ColumnsSelected" xml:space="preserve">
+        <value>{0} of {1} selected</value>
+    </data>
+    <data name="Dropdown_Column_Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Dropdown_Column_Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="Dropdown_Column_Role" xml:space="preserve">
+        <value>Role</value>
+    </data>
+    <data name="Dropdown_Column_Status" xml:space="preserve">
+        <value>Status</value>
+    </data>
+    <data name="Dropdown_Column_Department" xml:space="preserve">
+        <value>Department</value>
+    </data>
+
+    <!-- Input -->
+    <data name="Input_TypesTitle" xml:space="preserve">
+        <value>Input Types</value>
+    </data>
+    <data name="Input_DateTimeTitle" xml:space="preserve">
+        <value>Date and Time</value>
+    </data>
+    <data name="Input_OtherTypesTitle" xml:space="preserve">
+        <value>Other Types</value>
+    </data>
+    <data name="Input_StatesTitle" xml:space="preserve">
+        <value>States</value>
+    </data>
+    <data name="Input_RoleTitle" xml:space="preserve">
+        <value>Role (ARIA)</value>
+    </data>
+    <data name="Input_Default" xml:space="preserve">
+        <value>Default</value>
+    </data>
+    <data name="Input_DefaultPlaceholder" xml:space="preserve">
+        <value>Type here...</value>
+    </data>
+    <data name="Input_Disabled" xml:space="preserve">
+        <value>Disabled</value>
+    </data>
+    <data name="Input_DisabledPlaceholder" xml:space="preserve">
+        <value>Not available</value>
+    </data>
+    <data name="Input_ReadOnly" xml:space="preserve">
+        <value>Read-only</value>
+    </data>
+    <data name="Input_ReadOnlyValue" xml:space="preserve">
+        <value>This value cannot be changed</value>
+    </data>
+    <data name="Input_SearchPlaceholder" xml:space="preserve">
+        <value>Search...</value>
+    </data>
+    <data name="Input_SwitchLabel" xml:space="preserve">
+        <value>Enable feature</value>
+    </data>
+
+    <!-- Typography -->
+    <data name="Typography_HeadingLevel" xml:space="preserve">
+        <value>Heading Level</value>
+    </data>
+    <data name="Typography_Paragraph" xml:space="preserve">
+        <value>This is a paragraph with some text content.</value>
+    </data>
+    <data name="Typography_Label" xml:space="preserve">
+        <value>This is a label</value>
+    </data>
+</root>
+

@@ -1,0 +1,33 @@
+@using Hviktor.Components.Code
+
+@code {
+
+    private const string Src = """
+                               [
+                                   {
+                                     "name": "Adeel Solangi",
+                                     "language": "Sindhi",
+                                     "id": "V59OF92YF627HFY0",
+                                     "bio": "Donec lobortis eleifend condimentum. Cras dictum dolor lacinia lectus vehicula rutrum. Maecenas quis nisi nunc. Nam tristique feugiat est vitae mollis. Maecenas quis nisi nunc.",
+                                     "version": 6.1
+                                   },
+                                   {
+                                     "name": "Motsumi Basiang",
+                                     "language": "Setswana",
+                                     "id": "MUELSFQENUOHGBZ3",
+                                     "bio": "Cras dictum dolor lacinia lectus vehicula rutrum. Ut maximus, libero nec facilisis fringilla, ex sem sollicitudin leo, non congue tortor ligula in eros. Donec congue sapien vel euismod interdum.",
+                                     "version": 5.23
+                                   },
+                                   {
+                                     "name": "Zamokuhle Zulu",
+                                     "language": "isiZulu",
+                                     "id": "XU7BX2F8M5PVZ1EF",
+                                     "bio": "Etiam congue dignissim volutpat. Phasellus tincidunt sollicitudin posuere. Phasellus tincidunt sollicitudin posuere. Nam tristique feugiat est vitae mollis.",
+                                     "version": 8.39
+                                   }
+                               ]
+                               """;
+
+}
+
+<CodeBlock LineNumbers="true" Language="json" Code="@Src" class="w-full"/>

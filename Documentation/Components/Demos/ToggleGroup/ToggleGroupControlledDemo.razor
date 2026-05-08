@@ -1,0 +1,38 @@
+﻿@using Hviktor.Components.Button
+@using Hviktor.Components.Divider
+@using Hviktor.Components.Icon
+@using Hviktor.Components.ToggleGroup
+@using Hviktor.Components.Typography
+@using Hviktor.Icons.Types
+
+@code {
+    private string value = "drafts";
+
+    private void SetValue(string newValue) => value = newValue;
+}
+
+<div class="flex flex-col gap-4">
+    <ToggleGroup data-toggle-group="Filter" @bind-value="@value">
+        <ToggleGroup.Item value="inbox">
+            <Icon Definition="@IconSet.EnvelopeClosed" aria-hidden="true"/>
+            Inbox
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="drafts">
+            <Icon Definition="@IconSet.DocPencil" aria-hidden="true"/>
+            Drafts
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="archive">
+            <Icon Definition="@IconSet.Archive" aria-hidden="true"/>
+            Archive
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="sent">
+            <Icon Definition="@IconSet.Paperplane" aria-hidden="true"/>
+            Sent
+        </ToggleGroup.Item>
+    </ToggleGroup>
+    <Divider/>
+    <Paragraph>You have selected: @value</Paragraph>
+    <Button data-size="sm" @onclick="@(() => SetValue("archive"))">
+        Select Archive
+    </Button>
+</div>

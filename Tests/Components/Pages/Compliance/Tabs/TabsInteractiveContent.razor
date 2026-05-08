@@ -1,0 +1,26 @@
+﻿@page "/component/compliance/tabs/interactive-content"
+@using Hviktor.Components.Tabs
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Tabs with interactive content in panels">
+        <Tabs data-testid="interactive-tabs" DefaultValue="form">
+            <Tabs.List>
+                <Tabs.Tab Value="form" data-testid="form-tab">Form</Tabs.Tab>
+                <Tabs.Tab Value="empty" data-testid="empty-tab">Empty Panel</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panel Value="form" data-testid="form-panel">
+                <form>
+                    <label for="name-input">Name:</label>
+                    <input type="text" id="name-input" data-testid="name-input" />
+                    <Button type="submit" data-testid="submit-button">Submit</Button>
+                </form>
+            </Tabs.Panel>
+            <Tabs.Panel Value="empty" data-testid="empty-panel">
+                <p>This panel has no focusable elements, so the panel itself should receive focus.</p>
+            </Tabs.Panel>
+        </Tabs>
+    </section>
+</main>

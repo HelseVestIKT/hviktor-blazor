@@ -1,0 +1,35 @@
+﻿@page "/component/compliance/errorsummary/links"
+@using Hviktor.Components.ErrorSummary
+
+<main data-testid="compliance-container">
+    <section aria-label="Error summary with multiple links" data-testid="multiple-links">
+        <ErrorSummary>
+            <ErrorSummary.Heading>Form validation errors</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#username">Username is required</ErrorSummary.Link>
+                </ErrorSummary.Item>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#email">Email format is invalid</ErrorSummary.Link>
+                </ErrorSummary.Item>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#phone">Phone number must contain only digits</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    </section>
+
+    <section aria-label="Error summary with descriptive links" data-testid="descriptive-links">
+        <ErrorSummary>
+            <ErrorSummary.Heading>Please correct the following errors</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#dob">Date of birth must be in the format DD/MM/YYYY</ErrorSummary.Link>
+                </ErrorSummary.Item>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#postcode">Enter a valid postal code</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    </section>
+</main>

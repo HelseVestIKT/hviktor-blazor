@@ -1,0 +1,26 @@
+﻿@namespace Tests.Components.Shared
+
+<section id="@TestId"
+         class="component-section"
+         data-testid="@TestId"
+         data-test-name="@TestName"
+         data-test-category="@Category"
+         data-test-status="@Status">
+    <header class="component-section__header">
+        <h3 class="component-section__title">@TestName</h3>
+        @if (!string.IsNullOrEmpty(Description))
+        {
+            <p class="component-section__description">@Description</p>
+        }
+    </header>
+    <div class="component-section__content" data-testid="@TestId-content">
+        @ChildContent
+    </div>
+    @if (ExpectedBehavior is not null)
+    {
+        <aside class="component-section__expected" data-testid="@TestId-expected">
+            <strong>Expected:</strong>
+            @ExpectedBehavior
+        </aside>
+    }
+</section>

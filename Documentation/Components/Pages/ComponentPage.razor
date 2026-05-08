@@ -1,0 +1,489 @@
+﻿@page "/components/{Slug}"
+@page "/components/{Slug}/{Tab}"
+
+@using Documentation.Components.Layout
+@using Documentation.Components.Services
+@using Hviktor.Components.Card
+@using Hviktor.Components.Code
+@using Hviktor.Components.Divider
+@using Hviktor.Components.ErrorSummary
+@using Hviktor.Components.Tabs
+@using Hviktor.Components.Typography
+@using Hviktor.Abstractions.Enums
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Alert
+@using Hviktor.Components.Button
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Link
+@using Hviktor.Components.Markdown
+@using Hviktor.Components.Tag
+@using Hviktor.Icons.Types
+
+<PageTitle>@(ComponentInfo?.Title ?? Slug) - Hviktor</PageTitle>
+
+@if (ComponentInfo is null)
+{
+    <div class="p-8">
+        <Heading level="1" size="@Size.Large">Component not found</Heading>
+        <Paragraph class="mt-2">Component <strong>@Slug</strong> does not exist in the documentation.</Paragraph>
+        <HyperLink Href="/" class="mt-4">
+            <Icon Definition="@IconSet.ArrowLeft"/>
+            Back to home page
+        </HyperLink>
+    </div>
+}
+else
+{
+    <div class="component-page__wrapper" @key="Slug">
+        <div class="component-page__content">
+            <div class="component-page__header">
+                <div class="flex items-center justify-between mb-2">
+                    <Heading level="1" id="@Slugify(ComponentInfo.Title)"
+                             size="@Size.Large">@ComponentInfo.Title</Heading>
+                    @if (ComponentInfo.LastUpdated != default)
+                    {
+                        <Tag color="@Color.Neutral" size="@Size.Small" class="flex items-center gap-1">
+                            <Icon Definition="@IconSet.CalendarFill"/>
+                            <code>Last updated: @ComponentInfo.LastUpdated.ToShortDateString()</code>
+                        </Tag>
+                    }
+                </div>
+
+                <Markdown class="mt-2 mb-4" Value="@ComponentInfo.Description"/>
+
+                @if (!string.IsNullOrEmpty(ComponentInfo.DesignsystemetLink))
+                {
+                    <Paragraph class="mb-4">
+                        <HyperLink href="@ComponentInfo.DesignsystemetLink" target="@LinkTarget.NewTab">
+                            Read more about @ComponentInfo.Title on designsystemet.no ↗
+                        </HyperLink>
+                    </Paragraph>
+                }
+
+                @if (ComponentInfo.IsDeprecated)
+                {
+                    <Alert color="@Color.Danger" class="mb-4">
+                        <Paragraph>
+                            This component is marked as <strong>deprecated</strong> and will be removed in a future
+                            version.
+                        </Paragraph>
+                    </Alert>
+                }
+
+                @if (ComponentInfo.IsExperimental)
+                {
+                    <Alert color="@Color.Warning" class="mb-4">
+                        <Paragraph>
+                            This component is marked as <strong>experimental</strong>. It is under active development
+                            and may change
+                            or be removed without notice.
+                        </Paragraph>
+                    </Alert>
+                }
+            </div>
+
+            <Divider class="my-6"/>
+
+            <Tabs defaultValue="@Overview" value="@Tab" class="component-page__tabs">
+                <Tabs.List>
+                    <Tabs.Tab value="@Overview" @onclick="@(() => NavigateTo(Overview))">Overview</Tabs.Tab>
+                    <Tabs.Tab value="@Code" @onclick="@(() => NavigateTo(Code))">Code</Tabs.Tab>
+                    @if (ComponentInfo.AccessibilityLink is not null)
+                    {
+                        <Tabs.Tab value="@Accessibility" @onclick="@(() => NavigateTo(Accessibility))">
+                            Accessibility
+                        </Tabs.Tab>
+                    }
+                </Tabs.List>
+
+                <Tabs.Panel value="@Overview">
+                    <div class="component-page__tab-content">
+
+                        @* Primary demo *@
+                        @if (ComponentInfo.Demos.Count > 0)
+                        {
+                            var primaryDemo = ComponentInfo.Demos[0];
+                            @RenderDemoCard((primaryDemo, "overview-0"))
+                            <span class="flex justify-start gap-2">
+                                @RenderDemoToggle(primaryDemo)
+                            </span>
+                        }
+                        else if (SubComponents.Count == 0)
+                        {
+                            <Card class="p-6">
+                                <Paragraph>Ingen demo tilgjengelig for denne komponenten ennå.</Paragraph>
+                            </Card>
+                        }
+
+                        @* XML documentation sections: use, avoid, guidelines, remarks *@
+                        @if (!string.IsNullOrEmpty(ComponentInfo.Documentation?.Use))
+                        {
+                            <Heading level="3" id="use" class="mt-4 mb-3!" size="@Size.ExtraSmall">Use</Heading>
+                            <div class="mb-6">@((MarkupString)(ComponentInfo.Documentation.UseHtml ?? ""))</div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(ComponentInfo.Documentation?.Avoid))
+                        {
+                            <Heading level="3" id="avoid" class="mt-4 mb-3!" size="@Size.ExtraSmall">Avoid</Heading>
+                            <div class="mb-6">@((MarkupString)(ComponentInfo.Documentation.AvoidHtml ?? ""))</div>
+                        }
+
+                        @* Sub-component sections *@
+                        @if (SubComponents.Count > 0)
+                        {
+                            <Divider class="my-6"/>
+                            @foreach (var sub in SubComponents)
+                            {
+                                var slugTitle = Slugify(sub.Title);
+                                <Divider class="my-8"/>
+                                <Heading level="3" id="@slugTitle" class="mb-2" size="@Size.Small">@sub.Title</Heading>
+                                @if (!string.IsNullOrEmpty(sub.XmlDocSummary))
+                                {
+                                    <Markdown class="mb-4" Value="@sub.XmlDocSummary"/>
+                                }
+
+                                @if (sub.Demos.Count > 0)
+                                {
+                                    var subPrimaryDemo = sub.Demos[0];
+                                    @RenderDemoCard((subPrimaryDemo, "code-0"))
+                                    <span class="flex justify-start gap-2">
+                                        @RenderDemoToggle(subPrimaryDemo)
+                                    </span>
+                                }
+
+                                @RenderDocSections((sub.Documentation, slugTitle, 4))
+                            }
+                        }
+
+                        @if (ComponentInfo.Demos.Count > 1)
+                        {
+                            <Divider class="my-6"/>
+                            <Heading id="examples" level="2" class="mb-4" size="@Size.Medium">Examples</Heading>
+                        }
+
+                        @* Additional demos beyond the primary one *@
+                        @foreach (var demo in ComponentInfo.Demos.Skip(1))
+                        {
+                            <section id="@demo.SectionId" class="mb-6">
+                                <Heading level="3" class="mt-4 mb-2"
+                                         size="@Size.Small">@GetDemoTitle(demo)</Heading>
+                                @if (demo.IsAiGenerated)
+                                {
+                                    <ContentIsAiGeneratedAlert/>
+                                }
+                                @if (demo.IsNotSupported)
+                                {
+                                    <AttributeIsNotSupportedAlert/>
+                                }
+                                @if (!string.IsNullOrEmpty(demo.Description))
+                                {
+                                    <Markdown Value="@demo.Description" class="mb-4"/>
+                                }
+
+                                @RenderDemoCard((demo, $"overview-{demo.SectionId}"))
+                                <span class="flex justify-start gap-2">
+                                    @RenderDemoToggle(demo)
+                                </span>
+                            </section>
+                        }
+
+                        @if (!string.IsNullOrEmpty(ComponentInfo.Documentation?.Guidelines))
+                        {
+                            <Divider class="my-6"/>
+                            <Heading level="3" size="@Size.Small" id="guidelines" class="mt-4 mb-3!">
+                                Guidelines
+                            </Heading>
+                            <div class="mb-6">@((MarkupString)(ComponentInfo.Documentation.GuidelinesHtml ?? ""))</div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(ComponentInfo.Documentation?.Remarks))
+                        {
+                            <Divider class="my-6"/>
+                            <Heading level="3" size="@Size.Small" id="remarks" class="mt-4 mb-3!">Remarks</Heading>
+                            <div class="mb-6">@((MarkupString)(ComponentInfo.Documentation.RemarksHtml ?? ""))</div>
+                        }
+
+                    </div>
+                </Tabs.Panel>
+
+                <Tabs.Panel value="@Code">
+                    <div class="component-page__tab-content">
+                        @if (ComponentInfo.Demos.Count > 0)
+                        {
+                            var demo = ComponentInfo.Demos[0];
+                            <section id="@($"code-{demo.SectionId}")" class="component-page__code-section">
+                                @if (demo.IsAiGenerated)
+                                {
+                                    <ContentIsAiGeneratedAlert/>
+                                }
+                                @if (demo.IsNotSupported)
+                                {
+                                    <AttributeIsNotSupportedAlert/>
+                                }
+                                @if (!string.IsNullOrEmpty(demo.Description))
+                                {
+                                    <Markdown Value="@demo.Description"
+                                              class="mb-4"/>
+                                }
+
+                                @RenderDemoCard((demo, $"code-{demo.SectionId}"))
+                                @RenderCodeToggle(demo)
+                            </section>
+                        }
+
+                        @* Parameters table (merged reflected + implicit) *@
+                        @if (BuildParametersHtml(Parameters, ComponentInfo.Documentation?.Parameters) is { } paramsHtml)
+                        {
+                            <Divider class="my-6"/>
+                            <span id="code-parameters"></span>
+                            @((MarkupString)paramsHtml)
+                        }
+
+                        @if (BuildMethodsHtml(Methods) is { } methodsHtml)
+                        {
+                            <Divider class="my-6"/>
+                            <span id="code-methods"></span>
+                            @((MarkupString)methodsHtml)
+                        }
+
+                        @* Sub-component sections *@
+                        @if (SubComponents.Count > 0)
+                        {
+                            <Divider class="my-6"/>
+                            @foreach (var sub in SubComponents)
+                            {
+                                <Heading level="2" id="@($"code-{Slugify(sub.Title)}")" class="mb-2"
+                                         size="@Size.Medium">
+                                    @sub.Title
+                                </Heading>
+                                @if (!string.IsNullOrEmpty(sub.XmlDocSummary))
+                                {
+                                    <Markdown class="mb-4" Value="@sub.XmlDocSummary"/>
+                                }
+
+                                @foreach (var demo in sub.Demos)
+                                {
+                                    <section id="@($"code-{demo.SectionId}")" class="component-page__code-section">
+                                        <Heading level="3" size="@Size.Small" class="mb-2">
+                                            @GetDemoTitle(demo)
+                                        </Heading>
+                                        @if (demo.IsAiGenerated)
+                                        {
+                                            <ContentIsAiGeneratedAlert/>
+                                        }
+                                        @if (demo.IsNotSupported)
+                                        {
+                                            <AttributeIsNotSupportedAlert/>
+                                        }
+                                        @if (!string.IsNullOrEmpty(demo.Description))
+                                        {
+                                            <Markdown Value="@demo.Description" class="mb-4"/>
+                                        }
+
+                                        @RenderDemoCard((demo, $"code-{demo.SectionId}"))
+                                        @RenderCodeToggle(demo)
+                                    </section>
+
+                                    <Divider class="my-6"/>
+                                }
+
+                                @if (BuildParametersHtml(sub.Parameters, sub.Documentation?.Parameters) is { } subParamsHtml)
+                                {
+                                    <span id="@($"code-{Slugify(sub.Title)}-parameters")"></span>
+                                    @((MarkupString)subParamsHtml)
+                                }
+
+                                @if (BuildMethodsHtml(sub.Methods) is { } subMethodsHtml)
+                                {
+                                    <span id="@($"code-{Slugify(sub.Title)}-methods")"></span>
+                                    @((MarkupString)subMethodsHtml)
+                                }
+                            }
+                        }
+
+                        @if (ComponentInfo.Demos.Count > 1)
+                        {
+                            <Divider class="my-6"/>
+                            <Heading id="code-examples" level="2" class="mb-4" size="@Size.Medium">Examples</Heading>
+                            @foreach (var demo in ComponentInfo.Demos.Skip(1))
+                            {
+                                <section id="@($"code-{demo.SectionId}")" class="component-page__code-section">
+                                    <Heading level="3" class="mt-4 mb-2" size="@Size.Small">
+                                        @GetDemoTitle(demo)
+                                    </Heading>
+                                    @if (demo.IsAiGenerated)
+                                    {
+                                        <ContentIsAiGeneratedAlert/>
+                                    }
+                                    @if (demo.IsNotSupported)
+                                    {
+                                        <AttributeIsNotSupportedAlert/>
+                                    }
+                                    @if (!string.IsNullOrEmpty(demo.Description))
+                                    {
+                                        <Markdown Value="@demo.Description"
+                                                  class="mb-4"/>
+                                    }
+
+                                    @RenderDemoCard((demo, $"code-{demo.SectionId}"))
+                                    @RenderCodeToggle(demo)
+                                </section>
+
+                                <Divider class="my-6"/>
+                            }
+                        }
+
+                        @if (ComponentInfo.Demos.Count == 0 && SubComponents.Count == 0)
+                        {
+                            <Divider class="my-6"/>
+                            <Card class="p-6">
+                                <Paragraph>
+                                    No examples available for this component yet.
+                                </Paragraph>
+                            </Card>
+                        }
+                    </div>
+                </Tabs.Panel>
+
+                <Tabs.Panel value="@Accessibility">
+                    <div class="component-page__tab-content">
+                        @if (ComponentInfo.AccessibilityLink is { } a11yLink)
+                        {
+                            <Card class="p-6 mb-6">
+                                <Paragraph>
+                                    All Hviktor components are built with <strong>WCAG 2.1 AA</strong> as a minimum
+                                    standard.
+                                    Always use meaningful labels and ensure sufficient color contrast.
+                                </Paragraph>
+                            </Card>
+
+                            <Card class="p-6">
+                                <Heading level="3" class="mb-2" size="@Size.Medium">Designsystemet documentation
+                                </Heading>
+                                <Paragraph>
+                                    For detailed accessibility guidelines for <strong>@ComponentInfo.Title</strong>,
+                                    refer to the official
+                                    Designsystemet documentation.
+                                </Paragraph>
+                                <Paragraph class="mt-4">
+                                    <HyperLink href="@a11yLink" target="@LinkTarget.NewTab">
+                                        Read about accessibility for @ComponentInfo.Title on designsystemet.no ↗
+                                    </HyperLink>
+                                </Paragraph>
+                            </Card>
+                        }
+                        else
+                        {
+                            <Card class="p-6">
+                                <Paragraph>
+                                    No accessibility guidelines available for this component yet.
+                                </Paragraph>
+                                <Paragraph class="mt-4">
+                                    <NavigationLink href="@($"/components/{Slug}/overview")" target="@LinkTarget.Self">
+                                        Back to overview
+                                    </NavigationLink>
+                                </Paragraph>
+                            </Card>
+                        }
+                    </div>
+                </Tabs.Panel>
+            </Tabs>
+        </div>
+
+        @if (OutlineEntries.Count > 0)
+        {
+            <OnThisPage Entries="@OutlineEntries"/>
+        }
+    </div>
+}
+
+@code {
+
+    private RenderFragment<(DemoInfo Demo, string KeySuffix)> RenderDemoCard => ctx =>
+        @<Card class="component-page__demo-card"
+               data-color-scheme="@GetDemoColorScheme(ctx.Demo)">
+            <div class="@GetCssDemoContainerDisplayClass(ctx.Demo.Display)">
+                <DynamicComponent @key="@(ctx.Demo.DemoType.Name + "-" + ctx.KeySuffix)"
+                                  Type="@ctx.Demo.DemoType"/>
+            </div>
+        </Card>;
+
+    private RenderFragment<DemoInfo> RenderDemoToggle => demo =>
+        @<Chip.Button @onclick="@(() => ToggleDemoColorScheme(demo))">
+            <Icon Definition="@GetDemoColorSchemeIcon(demo)"
+                  aria-hidden="true"/>
+            @GetDemoToggleAriaLabel(demo)
+        </Chip.Button>;
+
+    private RenderFragment<DemoInfo> RenderCodeToggle => demo =>
+        @<text>
+             @if (GetDemoSource(demo) is { } src)
+             {
+                 var expanded = IsCodeVisible(demo);
+                 <span class="flex justify-between gap-2">
+                     @RenderDemoToggle(demo)
+                     <Chip.Button @onclick="@(() => ToggleCode(demo))">
+                         <Icon Definition="@(expanded ? IconSet.ChevronDown : IconSet.ChevronUp)"
+                               aria-hidden="true"/>
+                         @(expanded ? "Hide" : "Show") code
+                     </Chip.Button>
+                 </span>
+                 @if (expanded)
+                 {
+                     <CodeBlock Language="razor" Code="@src" class="my-4!"/>
+                 }
+             }
+             else
+             {
+                 <ErrorSummary>
+                     <ErrorSummary.Heading>
+                         Could not find source for @demo.DemoType.Name
+                     </ErrorSummary.Heading>
+                     <ErrorSummary.List>
+                         <ErrorSummary.Item>
+                             Control that the demo file exists and is included as an
+                             EmbeddedResource.
+                         </ErrorSummary.Item>
+                     </ErrorSummary.List>
+                 </ErrorSummary>
+             }
+    </text>;
+
+    private RenderFragment<(ClassDocumentation? Docs, string SlugPrefix, int HeadingLevel)> RenderDocSections => ctx =>
+        @<text>
+             @if (!string.IsNullOrEmpty(ctx.Docs?.Use))
+             {
+                 <Heading level="@ctx.HeadingLevel" id="@($"{ctx.SlugPrefix}-use")" class="mt-4 mb-3!"
+                          size="@Size.ExtraSmall">
+                     Use
+                 </Heading>
+                 <div class="mb-4">@((MarkupString)(ctx.Docs!.UseHtml ?? ""))</div>
+             }
+             @if (!string.IsNullOrEmpty(ctx.Docs?.Avoid))
+             {
+                 <Heading level="@ctx.HeadingLevel" id="@($"{ctx.SlugPrefix}-avoid")" class="mt-4 mb-3!"
+                          size="@Size.ExtraSmall">
+                     Avoid
+                 </Heading>
+                 <div class="mb-4">@((MarkupString)(ctx.Docs!.AvoidHtml ?? ""))</div>
+             }
+             @if (!string.IsNullOrEmpty(ctx.Docs?.Guidelines))
+             {
+                 <Heading level="@ctx.HeadingLevel" id="@($"{ctx.SlugPrefix}-guidelines")" class="mt-4 mb-3!"
+                          size="@Size.ExtraSmall">
+                     Guidelines
+                 </Heading>
+                 <div class="mb-4">@((MarkupString)(ctx.Docs!.GuidelinesHtml ?? ""))</div>
+             }
+             @if (!string.IsNullOrEmpty(ctx.Docs?.Remarks))
+             {
+                 <Heading level="@ctx.HeadingLevel" id="@($"{ctx.SlugPrefix}-remarks")" class="mt-4 mb-3!"
+                          size="@Size.ExtraSmall">
+                     Remarks
+                 </Heading>
+                 <div class="mb-4">@((MarkupString)(ctx.Docs!.RemarksHtml ?? ""))</div>
+             }
+    </text>;
+
+}
+

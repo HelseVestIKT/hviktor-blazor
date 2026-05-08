@@ -1,0 +1,29 @@
+@using Hviktor.Components.Code
+
+@code {
+    private const string Src = """
+                               <?xml version="1.0" encoding="utf-8"?>
+                               <!-- Configuration for the component library -->
+                               <Project Sdk="Microsoft.NET.Sdk.Razor">
+                                   <PropertyGroup>
+                                       <TargetFramework>net10.0</TargetFramework>
+                                       <Nullable>enable</Nullable>
+                                       <ImplicitUsings>enable</ImplicitUsings>
+                                       <GenerateDocumentationFile>true</GenerateDocumentationFile>
+                                   </PropertyGroup>
+
+                                   <ItemGroup>
+                                       <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
+                                   </ItemGroup>
+
+                                   <!-- Static web assets for bundled CSS and JS -->
+                                   <ItemGroup>
+                                       <Content Include="wwwroot/**" Pack="true" />
+                                   </ItemGroup>
+
+                                   <![CDATA[This section is treated as raw character data]]>
+                               </Project>
+                               """;
+}
+
+<CodeBlock Language="xml" Code="@Src" class="w-full"/>

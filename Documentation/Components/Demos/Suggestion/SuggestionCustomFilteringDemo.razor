@@ -1,0 +1,133 @@
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Suggestion
+@using Hviktor.Icons.Types
+
+@code {
+
+    private readonly List<string> norwegianCities =
+    [
+        "Alta",
+        "Arendal",
+        "Askim",
+        "Bardufoss",
+        "Bergen",
+        "Bodø",
+        ..AdditionalNorwegianCities
+    ];
+
+    private string selection = "Bergen";
+
+    private const int MaxVisibleOptions = 50;
+
+    private string searchTerm = string.Empty;
+    private int totalMatchCount;
+    private CancellationTokenSource? debounceTokenSource;
+
+    private IReadOnlyList<string> filteredValues = [];
+
+    protected override void OnParametersSet()
+    {
+        // Initialize filtered values on first render / parameter change
+        ApplyFilter(searchTerm);
+    }
+
+    private async Task HandleSelectionChangeAsync(string[] selectedDisplayValues)
+    {
+        if (selectedDisplayValues.Length == 0)
+        {
+            selection = string.Empty;
+            await InvokeAsync(StateHasChanged);
+            return;
+        }
+
+        var displayValue = selectedDisplayValues[0];
+        var index = norwegianCities.IndexOf(displayValue);
+        if (index < 0)
+        {
+            return;
+        }
+
+        selection = norwegianCities[index];
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleSearchClear()
+    {
+        searchTerm = string.Empty;
+        ApplyFilter(searchTerm);
+        StateHasChanged();
+    }
+
+    private async Task HandleSearchInputAsync(ChangeEventArgs e)
+    {
+        var input = e.Value?.ToString() ?? string.Empty;
+
+        // Debounce: cancel any previous pending filter
+        if (debounceTokenSource is not null)
+        {
+            await debounceTokenSource.CancelAsync();
+            debounceTokenSource.Dispose();
+        }
+
+        debounceTokenSource = new CancellationTokenSource();
+        var token = debounceTokenSource.Token;
+
+        try
+        {
+            await Task.Delay(150, token);
+        }
+        catch (TaskCanceledException)
+        {
+            return;
+        }
+
+        searchTerm = input;
+        ApplyFilter(searchTerm);
+        StateHasChanged();
+    }
+
+    private void ApplyFilter(string term)
+    {
+        if (string.IsNullOrWhiteSpace(term))
+        {
+            totalMatchCount = norwegianCities.Count;
+            filteredValues = norwegianCities.Take(MaxVisibleOptions).ToList();
+            return;
+        }
+
+        var matches = norwegianCities
+            .Where(v => v.Contains(term, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        totalMatchCount = matches.Count;
+        filteredValues = matches.Take(MaxVisibleOptions).ToList();
+    }
+
+}
+
+<Suggestion filter="false"
+            selected="@selection"
+            onSelectedChange="@(EventCallback.Factory.Create<string[]>(this, HandleSelectionChangeAsync))">
+    <Suggestion.Input @oninput="@HandleSearchInputAsync"/>
+    <Suggestion.Clear @onclick="@HandleSearchClear"/>
+    <Suggestion.List class="max-h-96! overflow-y-auto!">
+        @if (totalMatchCount > 2)
+        {
+            <div class="px-8 py-1 text-subtle text-sm bg-(--dsc-suggestion-border-color)">
+                Viser @filteredValues.Count av @norwegianCities.Count resultater
+            </div>
+        }
+        <Suggestion.Empty>
+            <span class="flex items-center gap-2">
+                <Icon Definition="@IconSet.QuestionmarkCircle" Height="32" Width="32"/>
+                Ingen treff
+            </span>
+        </Suggestion.Empty>
+        @foreach (var value in filteredValues)
+        {
+            <Suggestion.Option @key="@value" label="@value" value="@value">
+                @value
+            </Suggestion.Option>
+        }
+    </Suggestion.List>
+</Suggestion>

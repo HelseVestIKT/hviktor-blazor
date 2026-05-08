@@ -1,0 +1,10 @@
+﻿<a @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        @ChildContent
+    }
+    else
+    {
+        @("Skip to main content")
+    }
+</a>

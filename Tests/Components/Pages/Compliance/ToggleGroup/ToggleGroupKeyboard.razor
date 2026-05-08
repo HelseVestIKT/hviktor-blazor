@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/togglegroup/keyboard"
+@using Hviktor.Components.ToggleGroup
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <Paragraph aria-hidden="true">
+        This page contains hidden focus-start and focus-end elements for keyboard navigation testing.
+    </Paragraph>
+    <section aria-label="Toggle group for keyboard navigation testing">
+        <ToggleGroup data-testid="keyboard-group" DefaultValue="home">
+            <ToggleGroup.Item value="home" data-testid="home-item">Home</ToggleGroup.Item>
+            <ToggleGroup.Item value="profile" data-testid="profile-item">Profile</ToggleGroup.Item>
+            <ToggleGroup.Item value="settings" data-testid="settings-item">Settings</ToggleGroup.Item>
+            <ToggleGroup.Item value="help" data-testid="help-item">Help</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+
+    <button data-testid="focus-end" style="position: absolute; left: -9999px;">Focus End</button>
+</main>

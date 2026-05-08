@@ -1,0 +1,34 @@
+﻿@page "/component/compliance/field/counter"
+@using Hviktor.Components.Field
+@using Hviktor.Components.Textarea
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Field with character counter" data-testid="counter-basic">
+        <Field>
+            <Label for="counter-input">Message</Label>
+            <Textarea Id="counter-input" data-testid="counter-textarea"></Textarea>
+            <Field.Counter Limit="100" />
+        </Field>
+    </section>
+
+    <section aria-label="Field with custom counter labels" data-testid="counter-custom-labels">
+        <Field>
+            <Label for="custom-counter-input">Bio</Label>
+            <Textarea Id="custom-counter-input" data-testid="custom-counter-textarea"></Textarea>
+            <Field.Counter 
+                Limit="200" 
+                Under="{0} characters remaining"
+                Over="{0} characters over limit"
+                Hint="Maximum {0} characters allowed." />
+        </Field>
+    </section>
+
+    <section aria-label="Field with small limit" data-testid="counter-small-limit">
+        <Field>
+            <Label for="small-limit-input">Code</Label>
+            <Textarea Id="small-limit-input" data-testid="small-limit-textarea"></Textarea>
+            <Field.Counter Limit="10" />
+        </Field>
+    </section>
+</main>

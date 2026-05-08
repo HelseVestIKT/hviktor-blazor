@@ -1,0 +1,29 @@
+﻿@page "/component/compliance/tabs/keyboard"
+@using Hviktor.Components.Tabs
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Tabs for keyboard navigation testing">
+        <Tabs data-testid="keyboard-tabs" DefaultValue="home">
+            <Tabs.List data-testid="keyboard-tablist">
+                <Tabs.Tab Value="home" data-testid="home-tab">Home</Tabs.Tab>
+                <Tabs.Tab Value="profile" data-testid="profile-tab">Profile</Tabs.Tab>
+                <Tabs.Tab Value="settings" data-testid="settings-tab">Settings</Tabs.Tab>
+                <Tabs.Tab Value="help" data-testid="help-tab">Help</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panel Value="home" data-testid="home-panel">
+                <p>Home content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="profile" data-testid="profile-panel">
+                <p>Profile content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="settings" data-testid="settings-panel">
+                <p>Settings content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="help" data-testid="help-panel">
+                <p>Help content</p>
+            </Tabs.Panel>
+        </Tabs>
+    </section>
+</main>

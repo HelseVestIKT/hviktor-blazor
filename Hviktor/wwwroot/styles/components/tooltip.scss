@@ -1,0 +1,59 @@
+.ds-tooltip-content {
+  display: block;
+  width: fit-content;
+}
+
+/*
+ * Tooltip popover: positioned in the top-layer via popover="manual"
+ * Arrow and safe-area use the same CSS custom properties as popovers.
+ */
+.ds-tooltip {
+  position: fixed;
+  inset: unset;
+  margin: 0;
+  background: var(--ds-color-neutral-text-default);
+  border-radius: var(--ds-border-radius-default);
+  box-sizing: border-box;
+  border: none;
+  color: var(--ds-color-neutral-background-default);
+  font: var(--ds-typography-paragraph-xs);
+  line-height: var(--ds-line-height-sm);
+  padding: var(--ds-size-1) var(--ds-size-2);
+  overflow: visible;
+  width: fit-content;
+  max-width: 30ch;
+  opacity: 0;
+  visibility: hidden;
+  transition-property: opacity, visibility;
+  transition-delay: 150ms;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+
+  &:popover-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Arrow pseudo-element, positioned via CSS custom properties set by JS
+  &::before {
+    content: "";
+    background: var(--ds-color-neutral-text-default);
+    box-sizing: border-box;
+    height: var(--ds-size-2);
+    width: var(--ds-size-2);
+    position: absolute;
+    left: var(--_ds-floating-arrow-x, 50%);
+    top: var(--_ds-floating-arrow-y, 100%);
+    translate: -50% -50%;
+    rotate: 45deg;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0s;
+    transition-delay: 0s;
+  }
+
+  @media (forced-colors: active) {
+    background: CanvasText;
+  }
+}

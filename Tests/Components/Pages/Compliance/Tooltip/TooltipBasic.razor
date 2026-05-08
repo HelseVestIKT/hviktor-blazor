@@ -1,0 +1,20 @@
+﻿@page "/component/compliance/tooltip/basic"
+@using Hviktor.Components.Tooltip
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Basic tooltip">
+        <Tooltip Content="This is a tooltip">
+            <button data-testid="basic-trigger">Hover me</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Tooltip with text trigger">
+        <Tooltip Content="Tooltip for text">
+            <span tabindex="0" data-testid="text-trigger-element">Focusable text</span>
+        </Tooltip>
+    </section>
+
+    <button data-testid="focus-end">Focus End</button>
+</main>

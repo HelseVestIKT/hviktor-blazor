@@ -1,0 +1,30 @@
+﻿@page "/component/compliance/link/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra extra small link" data-testid="size-extraextrasmall">
+        <HyperLink Href="/page" Size="@Size.ExtraExtraSmall">Extra Extra Small Link</HyperLink>
+    </section>
+
+    <section aria-label="Extra small link" data-testid="size-extrasmall">
+        <HyperLink Href="/page" Size="@Size.ExtraSmall">Extra Small Link</HyperLink>
+    </section>
+
+    <section aria-label="Small link" data-testid="size-small">
+        <HyperLink Href="/page" Size="@Size.Small">Small Link</HyperLink>
+    </section>
+    |
+
+    <section aria-label="Medium link" data-testid="size-medium">
+        <HyperLink Href="/page" Size="@Size.Medium">Medium Link</HyperLink>
+    </section>
+
+    <section aria-label="Large link" data-testid="size-large">
+        <HyperLink Href="/page" Size="@Size.Large">Large Link</HyperLink>
+    </section>
+
+    <section aria-label="Extra large link" data-testid="size-extralarge">
+        <HyperLink Href="/page" Size="@Size.ExtraLarge">Extra Large Link</HyperLink>
+    </section>
+</main>

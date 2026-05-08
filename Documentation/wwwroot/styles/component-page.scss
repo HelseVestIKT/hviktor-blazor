@@ -1,0 +1,116 @@
+﻿.component-page__wrapper {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+
+  .component-page__content {
+    flex: 1;
+    min-width: 0;
+    padding: calc(var(--spacing) * 8);
+    max-width: initial;
+
+    fieldset:has(.ds-avatar-stack) {
+      border-radius: 4px; // default: 2px;
+      display: block;
+      min-inline-size: min-content;
+      margin-inline: 2px;
+      border: 2px groove var(--ds-color-neutral-border-subtle); // default: 2px groove threedface;
+      border-image: initial;
+      padding-block: 0.35em 0.625em;
+      padding-inline: 0.75em;
+    }
+
+    [id] {
+      scroll-margin-top: calc(var(--navbar-height, 4rem) + 1rem);
+    }
+
+    .component-page__header {
+      margin-bottom: calc(var(--spacing) * 2);
+    }
+
+    .component-page__tabs {
+      margin-top: calc(var(--spacing) * 6);
+
+      .component-page__tab-content {
+        // padding-top: calc(var(--spacing) * 6);
+      }
+    }
+  }
+}
+
+.component-page__demo-card {
+  border: 1px solid var(--ds-color-neutral-border-subtle);
+  padding: calc(var(--spacing) * 6);
+  margin-bottom: calc(var(--spacing) * 4);
+  overflow: visible;
+}
+
+.component-page__demo-container,
+.component-page__demo-container__block,
+.component-page__demo-container__inline,
+.component-page__demo-container__inline-block,
+.component-page__demo-container__flex,
+.component-page__demo-container__flex-row,
+.component-page__demo-container__flex-col {
+  min-height: calc(var(--spacing) * 12);
+  width: 100%;
+}
+
+.component-page__demo-container,
+.component-page__demo-container__flex,
+.component-page__demo-container__flex-row,
+.component-page__demo-container__flex-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.component-page__demo-container,
+.component-page__demo-container__flex,
+.component-page__demo-container__flex-row {
+  flex-direction: row;
+  gap: calc(var(--spacing) * 2);
+}
+
+.component-page__demo-container__flex-row {
+  flex-wrap: wrap;
+}
+
+.component-page__demo-container__flex-col {
+  flex-direction: column;
+  gap: calc(var(--spacing) * 4);
+}
+
+.component-page__demo-container__inline,
+.component-page__demo-container__inline-block {
+  display: inline-block;
+}
+
+.component-page__demo-container__block {
+  display: block;
+}
+
+.component-page__demo-container__inline,
+.component-page__demo-container__inline-block,
+.component-page__demo-container__block {
+  > * {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+}
+
+.component-page__code-section {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+@media (max-width: 768px) {
+  .component-page__wrapper {
+    .component-page__content {
+      padding-inline: 0.25rem;
+      padding-block: 0.5rem;
+
+      .ds-tabs :is([role="tabpanel"]) {
+        padding: 0;
+      }
+    }
+  }
+}

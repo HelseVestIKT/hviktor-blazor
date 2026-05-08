@@ -1,0 +1,115 @@
+﻿@using Hviktor.Components.Pagination
+
+@code {
+    [Inject] private NavigationManager Navigation { get; set; } = null!;
+
+    private int currentPage = 2;
+    private readonly List<int> pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    private List<int> showPages = [];
+
+    protected override void OnInitialized() => OnChangedEvent();
+
+    private void GoToPage(int page)
+    {
+        if (page < 0 || page >= pages.Count) return;
+        currentPage = page;
+        OnChangedEvent();
+
+        Navigation.NavigateTo($"#page-{page + 1}");
+    }
+
+    private void OnChangedEvent() => showPages = GetPaginationIndices().ToList();
+
+    private IEnumerable<int> GetPaginationIndices()
+    {
+        var totalPages = pages.Count;
+
+        // Show current page and 1 page on each side
+        var start = Math.Max(0, currentPage - 1);
+        var end = Math.Min(totalPages - 1, currentPage + 1);
+
+        // Adjust if at the beginning to show more pages after
+        if (currentPage == 0)
+        {
+            end = Math.Min(totalPages - 1, 2);
+        }
+
+        // Adjust if at the end to show more pages before
+        else if (currentPage == totalPages - 1)
+        {
+            start = Math.Max(0, totalPages - 3);
+        }
+
+        // Show all pages in the middle
+        for (var i = start; i <= end; i++)
+        {
+            yield return i;
+        }
+    }
+}
+
+<Pagination aria-label="Pagination menu">
+    <Pagination.List>
+        <Pagination.Item>
+            <Pagination.Button asChild
+                               aria-label="Previous page"
+                               disabled="@(currentPage == 0)"
+                               @onclick="@(() => GoToPage(currentPage - 1))">
+                Previous
+            </Pagination.Button>
+        </Pagination.Item>
+
+        @if (!showPages.Contains(0))
+        {
+            <Pagination.Item>
+                <Pagination.Button asChild
+                                   aria-label="Page 1"
+                                   @onclick="@(() => GoToPage(0))">
+                    1
+                </Pagination.Button>
+            </Pagination.Item>
+        }
+
+        @if (showPages.Count > 0 && showPages[0] > 1)
+        {
+            <Pagination.Item/>
+        }
+
+        @foreach (var page in showPages)
+        {
+            <Pagination.Item>
+                <Pagination.Button asChild
+                                   aria-label="@($"Page {page + 1}")"
+                                   aria-current="@(page == currentPage ? "true" : null)"
+                                   @onclick="@(() => GoToPage(page))">
+                    @(page + 1)
+                </Pagination.Button>
+            </Pagination.Item>
+        }
+
+        @if (showPages.Count > 0 && showPages[^1] < pages.Count - 2)
+        {
+            <Pagination.Item/>
+        }
+
+        @if (!showPages.Contains(pages.Count - 1))
+        {
+            <Pagination.Item>
+                <Pagination.Button asChild
+                                   aria-label="@($"Page {pages.Count}")"
+                                   @onclick="@(() => GoToPage(pages.Count - 1))">
+                    @pages.Count
+                </Pagination.Button>
+            </Pagination.Item>
+        }
+
+        <Pagination.Item>
+            <Pagination.Button asChild
+                               aria-label="Next page"
+                               disabled="@(currentPage >= pages.Count - 1)"
+                               @onclick="@(() => GoToPage(currentPage + 1))">
+                Next
+            </Pagination.Button>
+        </Pagination.Item>
+    </Pagination.List>
+</Pagination>

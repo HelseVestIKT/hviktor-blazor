@@ -1,0 +1,110 @@
+﻿@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Table
+
+@code {
+
+    internal class TableData
+    {
+        internal int Id { get; init; }
+        internal string? Navn { get; init; }
+        internal string? Epost { get; init; }
+    }
+
+    private static readonly TableData[] TableDatas =
+    [
+        new() { Id = 1, Navn = "Lise Nordmann", Epost = "lise@nordmann.no" },
+        new() { Id = 2, Navn = "Kari Nordmann", Epost = "kari@nordmann.no" },
+        new() { Id = 3, Navn = "Ola Nordmann", Epost = "ola@nordmann.no" },
+        new() { Id = 4, Navn = "Per Nordmann", Epost = "per@nordmann.no" },
+    ];
+
+    // Replaces useCheckboxGroup({ value: ['2', '3'] }) - initially rows 2 and 3 are selected
+    private HashSet<int> selectedIds = [2, 3];
+
+    // Replaces getCheckboxProps(person.id) - checked state for a row
+    private bool IsRowChecked(int id) => selectedIds.Contains(id);
+
+    // Replaces getCheckboxProps(person.id) - onchange handler for a row
+    private void OnRowChanged(int id, ChangeEventArgs e)
+    {
+        if (e.Value is true)
+        {
+            selectedIds.Add(id);
+        }
+        else
+        {
+            selectedIds.Remove(id);
+        }
+    }
+
+    // Replaces getCheckboxProps({ allowIndeterminate: true, value: 'all' })
+    // null = indeterminate, true = all selected, false = none selected
+    private bool? SelectAllChecked
+    {
+        get
+        {
+            if (selectedIds.Count == 0)
+            {
+                return false;
+            }
+
+            if (selectedIds.Count == TableDatas.Length)
+            {
+                return true;
+            }
+
+            return null;
+        }
+    }
+
+    // onchange for the "select all" header checkbox
+    private void OnSelectAllChanged(ChangeEventArgs e)
+    {
+        if (e.Value is true)
+        {
+            selectedIds = [.. TableDatas.Select(p => p.Id)];
+        }
+        else
+        {
+            selectedIds.Clear();
+        }
+    }
+
+}
+
+<Table>
+    <colgroup>
+        @* ensure the first column only takes up the necessary space *@
+        <col style="width: 1px"/>
+        <col/>
+        <col/>
+    </colgroup>
+    <Table.Head>
+        <Table.Row>
+            <Table.HeaderCell>
+                <Checkbox aria-label="Select all"
+                          allowIndeterminate
+                          checked="@SelectAllChecked"
+                          @onchange="OnSelectAllChanged"/>
+            </Table.HeaderCell>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>E-mail</Table.HeaderCell>
+        </Table.Row>
+    </Table.Head>
+    <Table.Body>
+        @foreach (var person in TableDatas)
+        {
+            <Table.Row key="@person.Id">
+                <Table.Cell>
+                    <Checkbox aria-labelledby="@($"checkbox-{person.Id}-name")"
+                              checked="@IsRowChecked(person.Id)"
+                              @onchange="@((ChangeEventArgs e) => OnRowChanged(person.Id, e))"/>
+                </Table.Cell>
+                <Table.Cell id="@($"checkbox-{person.Id}-name")">
+                    @person.Navn
+                </Table.Cell>
+                <Table.Cell>@person.Epost</Table.Cell>
+            </Table.Row>
+        }
+    </Table.Body>
+</Table>

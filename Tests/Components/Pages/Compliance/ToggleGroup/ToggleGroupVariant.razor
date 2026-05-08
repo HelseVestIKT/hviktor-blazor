@@ -1,0 +1,19 @@
+﻿@page "/component/compliance/togglegroup/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.ToggleGroup
+
+<main data-testid="compliance-container">
+    <section aria-label="Primary variant toggle group">
+        <ToggleGroup data-testid="primary" variant="@Variant.Primary" DefaultValue="opt1">
+            <ToggleGroup.Item value="opt1" data-testid="primary-item1">Option 1</ToggleGroup.Item>
+            <ToggleGroup.Item value="opt2" data-testid="primary-item2">Option 2</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+
+    <section aria-label="Secondary variant toggle group">
+        <ToggleGroup data-testid="secondary" variant="@Variant.Secondary" DefaultValue="opt1">
+            <ToggleGroup.Item value="opt1" data-testid="secondary-item1">Option 1</ToggleGroup.Item>
+            <ToggleGroup.Item value="opt2" data-testid="secondary-item2">Option 2</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+</main>

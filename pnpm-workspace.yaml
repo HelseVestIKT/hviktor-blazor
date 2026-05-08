@@ -1,0 +1,7 @@
+packages:
+  - "Documentation"
+  - "Hviktor"
+  - "Hviktor.Icons"
+  - "Tests"
+allowBuilds:
+  '@parcel/watcher': true

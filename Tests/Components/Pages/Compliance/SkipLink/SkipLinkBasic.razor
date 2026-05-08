@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/skiplink/basic"
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    @* Basic skip link with default text *@
+    <section aria-label="Basic skip link" data-testid="basic">
+        <SkipLink Href="#main-content" data-testid="basic-skiplink"/>
+        <div id="main-content" tabindex="-1" data-testid="main-content">
+            <h1>Main Content</h1>
+            <p>This is the main content area that the skip link targets.</p>
+        </div>
+    </section>
+
+    @* Skip link with custom text *@
+    <section aria-label="Custom text skip link" data-testid="custom-text">
+        <SkipLink Href="#custom-target" Text="Hopp til hovedinnhold" data-testid="custom-text-skiplink"/>
+        <div id="custom-target" tabindex="-1" data-testid="custom-target">
+            <h2>Custom Target</h2>
+            <p>This content is targeted by the custom text skip link.</p>
+        </div>
+    </section>
+
+    @* Skip link with child content *@
+    <section aria-label="Child content skip link" data-testid="child-content">
+        <SkipLink Href="#child-target" data-testid="child-content-skiplink">
+            Gå direkte til innhaldet
+        </SkipLink>
+        <div id="child-target" tabindex="-1" data-testid="child-target">
+            <h2>Child Target</h2>
+            <p>This content is targeted by the skip link with child content.</p>
+        </div>
+    </section>
+</main>

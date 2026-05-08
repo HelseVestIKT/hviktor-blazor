@@ -1,0 +1,58 @@
+<Project>
+    <PropertyGroup>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <DebugType>portable</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <!-- Shared package metadata for all Hviktor.* projects -->
+    <PropertyGroup>
+        <Version>1.0.0</Version>
+        <Description>Blazor component library based on Designsystemet.no</Description>
+        <Authors>Cusatelli</Authors>
+        <Company>Helse Vest IKT</Company>
+        <PackageTags>blazor;dotnet;csharp;components;component-library;hviktor;designsystem;designsystemet;razor</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/HelseVestIKT/hviktor-blazor</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/HelseVestIKT/hviktor-blazor</PackageProjectUrl>
+        <PackageDocumentationUrl>https://github.com/HelseVestIKT/hviktor-blazor/wiki</PackageDocumentationUrl>
+        <PackageReleaseNotes>https://github.com/HelseVestIKT/hviktor-blazor/releases</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <!-- Exclude common non-.NET files from pack and output across all projects -->
+    <ItemGroup>
+        <!-- Build output -->
+        <None Include="bin\**" Pack="false"/>
+        <None Include="obj\**" Pack="false"/>
+
+        <!-- Files and directories -->
+        <None Include="node_modules\**" Pack="false"/>
+        <None Include="**\*.ts" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include="**\*.scss" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include=".git\**" Pack="false"/>
+        <None Include=".vs\**" Pack="false"/>
+        <None Include=".vscode\**" Pack="false"/>
+        <None Include="**\*.user" Pack="false"/>
+
+        <!-- JS tooling config files: remove from Content (Razor SDK auto-includes) and mark as None -->
+        <Content Remove="package.json"/>
+        <None Include="package.json" Pack="false" CopyToOutputDirectory="Never"/>
+        <Content Remove="tsconfig.json"/>
+        <None Include="tsconfig.json" Pack="false" CopyToOutputDirectory="Never"/>
+        <Content Remove="vite.config.js"/>
+        <None Include="vite.config.js" Pack="false" CopyToOutputDirectory="Never"/>
+        <Content Remove="postcss.config.mjs"/>
+        <None Include="postcss.config.mjs" Pack="false" CopyToOutputDirectory="Never"/>
+        <Content Remove="prettier.config.js"/>
+        <None Include="prettier.config.js" Pack="false" CopyToOutputDirectory="Never"/>
+
+        <!-- Exclude source files from wwwroot -->
+        <Content Remove="wwwroot\**\*.ts"/>
+        <Content Remove="wwwroot\**\*.scss"/>
+        <Content Remove="wwwroot\scripts\**"/>
+        <Content Remove="wwwroot\styles\**"/>
+        <Content Remove="wwwroot\assets\**"/>
+    </ItemGroup>
+</Project>

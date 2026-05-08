@@ -1,0 +1,37 @@
+﻿@page "/component/compliance/button/loading"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Loading true with default variant">
+        <Button loading="true" data-testid="true-default">true</Button>
+    </section>
+
+    <section aria-label="Loading false with default variant">
+        <Button loading="false" data-testid="false-default">false</Button>
+    </section>
+
+    <section aria-label="Loading true with Primary variant">
+        <Button loading="true" Variant="@Variant.Primary" data-testid="true-primary">true & Primary</Button>
+    </section>
+
+    <section aria-label="Loading false with Primary variant">
+        <Button loading="false" Variant="@Variant.Primary" data-testid="false-primary">false & Primary</Button>
+    </section>
+
+    <section aria-label="Loading true with Secondary variant">
+        <Button loading="true" Variant="@Variant.Secondary" data-testid="true-secondary">true & Secondary</Button>
+    </section>
+
+    <section aria-label="Loading false with Secondary variant">
+        <Button loading="false" Variant="@Variant.Secondary" data-testid="false-secondary">false & Secondary</Button>
+    </section>
+
+    <section aria-label="Loading true with Tertiary variant">
+        <Button loading="true" Variant="@Variant.Tertiary" data-testid="true-tertiary">true & Tertiary</Button>
+    </section>
+
+    <section aria-label="Loading false with Tertiary variant">
+        <Button loading="false" Variant="@Variant.Tertiary" data-testid="false-tertiary">false & Tertiary</Button>
+    </section>
+</main>

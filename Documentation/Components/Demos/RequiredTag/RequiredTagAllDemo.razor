@@ -1,0 +1,75 @@
+@using Hviktor.Components.Button
+@using Hviktor.Components.Card
+@using Hviktor.Components.Field
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Input
+@using Hviktor.Components.Radio
+@using Hviktor.Components.RequiredTag
+@using Hviktor.Components.Typography
+
+@code {
+    string? processingValue;
+    string? GetAriaInvalidProcessing() => string.IsNullOrEmpty(processingValue) ? "true" : null;
+
+    string? dischargeValue;
+    string? GetAriaInvalidDischarge() => string.IsNullOrEmpty(dischargeValue) ? "true" : null;
+}
+
+<Card class="block w-full">
+    <Card.Block class="py-4">
+        <Paragraph>Pasientreiser</Paragraph>
+    </Card.Block>
+    <Card.Block>
+        <div class="flex flex-col gap-6 justify-start items-start">
+            <div class="flex flex-col gap-2">
+                <Heading level="4">Hvilken dato var du til behandling?</Heading>
+                <RequiredTag required mode="all"/>
+            </div>
+
+            <Field>
+                <Label>Behandlingsdato</Label>
+                <Field.Description>dd.mm.åååå</Field.Description>
+                <Input type="date"
+                       aria-required="true"
+                       aria-invalid="@(GetAriaInvalidProcessing())"
+                       value="@processingValue"
+                       @onchange="@(e => processingValue = Convert.ToString(e.Value))"/>
+            </Field>
+
+            <Fieldset>
+                <Fieldset.Legend>Var du innlagt?</Fieldset.Legend>
+                <Radio label="Nei"
+                       value="false"
+                       name="admitted"/>
+                <Radio label="Ja"
+                       value="true"
+                       name="admitted"
+                       checked/>
+            </Fieldset>
+
+            <Field>
+                <Label>Dato for utskrivelse</Label>
+                <Field.Description>dd.mm.åååå</Field.Description>
+                <Input type="date"
+                       aria-required="true"
+                       aria-invalid="@(GetAriaInvalidDischarge())"
+                       value="@dischargeValue"
+                       @onchange="@(e => dischargeValue = Convert.ToString(e.Value))"/>
+            </Field>
+
+            <div class="flex gap-2 justify-center items-center mt-4">
+                <Button color="accent" variant="secondary">
+                    Forrige
+                </Button>
+                <Button color="accent" variant="primary">
+                    Neste
+                </Button>
+            </div>
+        </div>
+    </Card.Block>
+    <Card.Block class="py-4">
+        <Button color="neutral" variant="tertiary">
+            Avbryt
+        </Button>
+    </Card.Block>
+</Card>

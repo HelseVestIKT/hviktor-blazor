@@ -1,0 +1,24 @@
+﻿@page "/component/compliance/switch/label"
+@using Hviktor.Components.Switch
+
+<main data-testid="compliance-container">
+    <section aria-label="Switch with label">
+        <Switch Id="switch-with-label"
+                Label="Switch with visible label"
+                Description="This switch has a visible label"
+                data-testid="with-label"/>
+    </section>
+
+    <section aria-label="Switch with aria-label">
+        <Switch Id="switch-with-aria-label"
+                aria-label="Switch with aria-label"
+                data-testid="with-aria-label"/>
+    </section>
+
+    <section aria-label="Switch with aria-labelledby">
+        <span id="external-label">External label for switch</span>
+        <Switch Id="switch-with-aria-labelledby"
+                aria-labelledby="external-label"
+                data-testid="with-aria-labelledby"/>
+    </section>
+</main>

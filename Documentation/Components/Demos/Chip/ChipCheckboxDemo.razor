@@ -1,0 +1,67 @@
+﻿@using Hviktor.Components.Typography
+@using Hviktor.Security
+
+@code {
+    private readonly string checkboxGroupName = $"chip-checkbox-group-{Cryptography.GenerateId()}";
+    private readonly string weekdayGroupName = $"chip-checkbox-weekday-group-{Cryptography.GenerateId()}";
+
+    private readonly Dictionary<DayOfWeek, bool> weekdaysState = new()
+    {
+        { DayOfWeek.Monday, false },
+        { DayOfWeek.Tuesday, false },
+        { DayOfWeek.Wednesday, false },
+        { DayOfWeek.Thursday, false },
+        { DayOfWeek.Friday, false }
+    };
+
+    private string GetSelectedDays()
+    {
+        if (weekdaysState.Any(day => day.Value))
+        {
+            return string.Join(", ", weekdaysState.Where(day => day.Value).Select(day => day.Key.ToString()));
+        }
+
+        return "None";
+    }
+}
+
+<div class="flex flex-col gap-4">
+    <Heading level="4">Option</Heading>
+    <div class="flex gap-2 flex-wrap">
+        <Chip.Checkbox value="chip-checkbox-1" name="@checkboxGroupName">
+            Option 1
+        </Chip.Checkbox>
+        <Chip.Checkbox value="chip-checkbox-2" name="@checkboxGroupName" checked>
+            Option 2
+        </Chip.Checkbox>
+        <Chip.Checkbox value="chip-checkbox-3" name="@checkboxGroupName">
+            Option 3
+        </Chip.Checkbox>
+    </div>
+    <Heading level="4" class="mt-4">Multiple</Heading>
+    <div class="flex gap-2 flex-wrap">
+        <Chip.Checkbox value="chip-checkbox-weekday-1" name="@weekdayGroupName"
+                       @bind-checked="@(weekdaysState[DayOfWeek.Monday])">
+            Monday
+        </Chip.Checkbox>
+        <Chip.Checkbox value="chip-checkbox-weekday-2" name="@weekdayGroupName"
+                       @bind-checked="@(weekdaysState[DayOfWeek.Tuesday])">
+            Tuesday
+        </Chip.Checkbox>
+        <Chip.Checkbox value="chip-checkbox-weekday-3" name="@weekdayGroupName"
+                       @bind-checked="@(weekdaysState[DayOfWeek.Wednesday])">
+            Wednesday
+        </Chip.Checkbox>
+        <Chip.Checkbox value="chip-checkbox-weekday-4" name="@weekdayGroupName"
+                       @bind-checked="@(weekdaysState[DayOfWeek.Thursday])">
+            Thursday
+        </Chip.Checkbox>
+        <Chip.Checkbox value="chip-checkbox-weekday-5" name="@weekdayGroupName"
+                       @bind-checked="@(weekdaysState[DayOfWeek.Friday])">
+            Friday
+        </Chip.Checkbox>
+    </div>
+    <Paragraph>
+        Selected days&ensp;@GetSelectedDays()
+    </Paragraph>
+</div>

@@ -1,0 +1,65 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+<div class="flex gap-4 flex-wrap items-start">
+    <Dropdown.TriggerContext>
+        <Dropdown.Trigger>
+            @Localizer.GetValue("Dropdown_OpenButton")
+            <Icon Definition="@IconSet.ChevronDown" aria-hidden/>
+        </Dropdown.Trigger>
+        <Dropdown Placement="@Placement.BottomStart">
+            <Dropdown.List>
+                <Dropdown.Item>
+                    <Button variant="@Variant.Tertiary">@Localizer.GetValue("Dropdown_Action") 1</Button>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    <Button variant="@Variant.Tertiary">@Localizer.GetValue("Dropdown_Action") 2</Button>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    <Button variant="@Variant.Tertiary">@Localizer.GetValue("Dropdown_Action") 3</Button>
+                </Dropdown.Item>
+            </Dropdown.List>
+        </Dropdown>
+    </Dropdown.TriggerContext>
+
+    <Button @onclick="@(() => dropdownOpen = !dropdownOpen)" popovertarget="@dropdownId">
+        @Localizer.GetValue("Dropdown_Controlled")
+        <Icon Definition="@(dropdownOpen == true ? IconSet.ChevronUp : IconSet.ChevronDown)" aria-hidden/>
+    </Button>
+    <Dropdown id="@dropdownId" Open="@dropdownOpen" OnClose="@(() => dropdownOpen = false)">
+        <Dropdown.List>
+            <Dropdown.Item>
+                <Button variant="@Variant.Tertiary" @onclick="@(() => dropdownOpen = false)">
+                    @Localizer.GetValue("Dropdown_CloseMe")
+                </Button>
+            </Dropdown.Item>
+        </Dropdown.List>
+    </Dropdown>
+
+    <Dropdown.TriggerContext>
+        <Dropdown.Trigger variant="@Variant.Secondary">
+            <Icon Definition="@IconSet.Table" aria-hidden/>
+            @Localizer.GetValue("Dropdown_Columns")
+            <span aria-live="polite" class="text-xs opacity-70">
+                (@string.Format(Localizer.GetValue("Dropdown_ColumnsSelected"), SelectedColumnCount, Columns.Count))
+            </span>
+        </Dropdown.Trigger>
+        <Dropdown Placement="Placement.BottomStart">
+            <Dropdown.List>
+                @foreach ((var key, var isSelected) in Columns)
+                {
+                    var columnKey = key;
+                    <Dropdown.Item class="my-2">
+                        <Checkbox Id="@($"col-{columnKey}")"
+                                  Checked="@isSelected"
+                                  Label="@Localizer.GetValue($"Dropdown_Column_{columnKey}")"/>
+                    </Dropdown.Item>
+                }
+            </Dropdown.List>
+        </Dropdown>
+    </Dropdown.TriggerContext>
+</div>

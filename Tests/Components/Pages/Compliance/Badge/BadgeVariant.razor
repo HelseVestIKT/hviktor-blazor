@@ -1,0 +1,13 @@
+﻿@page "/component/compliance/badge/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Badge
+
+<main data-testid="compliance-container">
+    <section aria-label="Base variant">
+        <Badge Variant="@Variant.Base" Count="5" role="status" data-testid="base" aria-label="5 notifications"/>
+    </section>
+
+    <section aria-label="Tinted variant">
+        <Badge Variant="@Variant.Tinted" Count="3" role="status" data-testid="tinted" aria-label="3 notifications"/>
+    </section>
+</main>

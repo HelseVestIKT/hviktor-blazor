@@ -1,0 +1,38 @@
+﻿@using Hviktor.Components.Field
+@using Hviktor.Components.Suggestion
+@using Hviktor.Components.Typography
+
+@code {
+    private readonly List<string> DATA_PLACES =
+    [
+        "Sogndal",
+        "Oslo",
+        "Brønnøysund",
+        "Stavanger",
+        "Trondheim",
+        "Bergen",
+        "Lillestrøm",
+    ];
+}
+
+<div>
+
+    <Field>
+        <Label>Select destination</Label>
+        <Suggestion creatable multiple>
+            <Suggestion.Input/>
+            <Suggestion.Clear/>
+            <Suggestion.List>
+                <Suggestion.Empty>
+                    No results found, press enter to add
+                </Suggestion.Empty>
+                @foreach (var place in DATA_PLACES)
+                {
+                    <Suggestion.Option @key="@place">
+                        @place
+                    </Suggestion.Option>
+                }
+            </Suggestion.List>
+        </Suggestion>
+    </Field>
+</div>

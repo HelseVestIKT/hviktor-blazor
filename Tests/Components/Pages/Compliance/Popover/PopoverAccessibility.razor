@@ -1,0 +1,44 @@
+﻿@page "/component/compliance/popover/accessibility"
+@using Hviktor.Components.Popover
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    @* Popover with keyboard navigation testing *@
+    <section aria-label="Popover keyboard navigation" data-testid="keyboard-navigation">
+        <Popover.TriggerContext>
+            <Popover.Trigger data-testid="keyboard-trigger">Open with keyboard</Popover.Trigger>
+            <Popover data-testid="keyboard-popover">
+                <p>Press Escape to close this popover</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+
+    @* Multiple popovers for tab navigation *@
+    <section aria-label="Multiple popovers" data-testid="multiple-popovers">
+        <Popover.TriggerContext>
+            <Popover.Trigger data-testid="popover-trigger-1">First popover</Popover.Trigger>
+            <Popover data-testid="popover-1">
+                <p>First popover content</p>
+            </Popover>
+        </Popover.TriggerContext>
+        
+        <Popover.TriggerContext>
+            <Popover.Trigger data-testid="popover-trigger-2">Second popover</Popover.Trigger>
+            <Popover data-testid="popover-2">
+                <p>Second popover content</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+
+    @* Popover that can be opened programmatically for focus testing *@
+    <section aria-label="Focus management" data-testid="focus-management">
+        <Popover.TriggerContext>
+            <Popover.Trigger data-testid="focus-trigger">Open for focus test</Popover.Trigger>
+            <Popover data-testid="focus-popover">
+                <p>This popover tests focus management</p>
+                <button data-testid="popover-button">Focusable button inside</button>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+</main>

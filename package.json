@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.0.9",
+  "engines": {
+    "pnpm": ">=11.0.0",
+    "npm": "please-use-pnpm"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "build:dev": "pnpm -r build:dev",
+    "build:prod": "pnpm -r build:prod",
+    "pack --dry-run": "node test-pack.mjs",
+    "pack --dry-run --skip-build": "node test-pack.mjs --skip-build",
+    "format": "prettier --write \"**/*.{js,ts,mjs,scss,css,html,json,md}\""
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.0.0",
+    "@commitlint/config-conventional": "21.0.0",
+    "glob": "13.0.6",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.4",
+    "prettier": "3.8.3",
+    "prettier-plugin-tailwindcss": "0.8.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs}": "prettier --check",
+    "*.{css,scss,html}": "prettier --check",
+    "*.{json,md}": "prettier --check"
+  }
+}

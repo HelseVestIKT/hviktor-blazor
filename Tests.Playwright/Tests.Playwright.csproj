@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Tests.Playwright</RootNamespace>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <OutputType>Exe</OutputType>
+        <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest"/>
+        <Content Include="testconfig*.json" CopyToOutputDirectory="PreserveNewest"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Deque.AxeCore.Playwright"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="Microsoft.Playwright.Xunit.v3"/>
+        <PackageReference Include="xunit.v3.mtp-v2"/>
+
+        <!-- Test reports -->
+        <PackageReference Include="Microsoft.Testing.Extensions.TrxReport"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Tests\Tests.csproj"/>
+        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
+        <ProjectReference Include="..\Hviktor.Extensions\Hviktor.Extensions.csproj"/>
+    </ItemGroup>
+</Project>

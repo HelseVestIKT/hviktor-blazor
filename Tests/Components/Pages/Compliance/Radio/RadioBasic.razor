@@ -1,0 +1,26 @@
+﻿@page "/component/compliance/radio/basic"
+@using Hviktor.Components.Radio
+@using Hviktor.Components.Fieldset
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic radio group" data-testid="basic-group">
+        <Fieldset>
+            <Fieldset.Legend>Choose an option</Fieldset.Legend>
+            <Radio Name="basic" Value="option1" Label="Option 1" data-testid="radio-1"/>
+            <Radio Name="basic" Value="option2" Label="Option 2" data-testid="radio-2"/>
+            <Radio Name="basic" Value="option3" Label="Option 3" data-testid="radio-3"/>
+        </Fieldset>
+    </section>
+
+    <section aria-label="Radio with description" data-testid="with-description">
+        <Fieldset>
+            <Fieldset.Legend>Choose payment method</Fieldset.Legend>
+            <Radio Name="payment" Value="card" Label="Credit Card" Description="Pay with Visa or Mastercard"/>
+            <Radio Name="payment" Value="bank" Label="Bank Transfer" Description="Direct bank transfer"/>
+        </Fieldset>
+    </section>
+
+    <section aria-label="Single radio" data-testid="single-radio">
+        <Radio Name="single" Value="yes" Label="I agree to the terms"/>
+    </section>
+</main>

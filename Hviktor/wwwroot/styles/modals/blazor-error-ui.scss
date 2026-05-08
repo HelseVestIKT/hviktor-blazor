@@ -1,0 +1,21 @@
+@use "../mixins/modal-mixin" as error-modal;
+
+body:has(dialog#boot-error-ui[open]) {
+  overflow: hidden;
+}
+
+#blazor-error-ui {
+  display: none;
+}
+
+#boot-error-ui {
+  .boot-error-ui-failed {
+    @include error-modal.svg();
+
+    svg {
+      @include error-modal.animation();
+      @include error-modal.animation-svg();
+      @include error-modal.failure-animation-svg();
+    }
+  }
+}

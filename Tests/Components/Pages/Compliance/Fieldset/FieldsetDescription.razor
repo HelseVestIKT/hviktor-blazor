@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/fieldset/description"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Fieldset with default variant description" data-testid="description-default">
+        <Fieldset>
+            <Fieldset.Legend>Notification settings</Fieldset.Legend>
+            <Fieldset.Description Variant="@Variant.Default">Configure your notification preferences</Fieldset.Description>
+            <Checkbox Id="notify-email" Label="Email notifications" />
+            <Checkbox Id="notify-push" Label="Push notifications" />
+        </Fieldset>
+    </section>
+
+    <section aria-label="Fieldset with long variant description" data-testid="description-long">
+        <Fieldset>
+            <Fieldset.Legend>Privacy settings</Fieldset.Legend>
+            <Fieldset.Description Variant="@Variant.Long">This is a longer description that provides more context about what these privacy settings control and how they affect your experience on the platform.</Fieldset.Description>
+            <Checkbox Id="privacy-analytics" Label="Allow analytics" />
+            <Checkbox Id="privacy-marketing" Label="Allow marketing" />
+        </Fieldset>
+    </section>
+
+    <section aria-label="Fieldset with short variant description" data-testid="description-short">
+        <Fieldset>
+            <Fieldset.Legend>Quick options</Fieldset.Legend>
+            <Fieldset.Description Variant="@Variant.Short">Brief info</Fieldset.Description>
+            <Checkbox Id="quick-opt1" Label="Option 1" />
+            <Checkbox Id="quick-opt2" Label="Option 2" />
+        </Fieldset>
+    </section>
+</main>

@@ -1,0 +1,23 @@
+﻿@page "/component/compliance/card/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Card
+
+<main data-testid="compliance-container">
+    <section aria-label="Default variant">
+        <Card Variant="@Variant.Default" data-testid="default">
+            <Card.Block>
+                <h3>Default Card</h3>
+                <p>This is a card with default variant styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Tinted variant">
+        <Card Variant="@Variant.Tinted" data-testid="tinted">
+            <Card.Block>
+                <h3>Tinted Card</h3>
+                <p>This is a card with tinted variant styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+</main>

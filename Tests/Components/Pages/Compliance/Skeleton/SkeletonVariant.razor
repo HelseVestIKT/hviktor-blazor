@@ -1,0 +1,25 @@
+﻿@page "/component/compliance/skeleton/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Skeleton
+
+<main data-testid="compliance-container">
+    @* Rectangle variant (default) *@
+    <section aria-label="Rectangle variant" data-testid="rectangle">
+        <Skeleton variant="@Variant.Rectangle" Width="200" Height="100" data-testid="rectangle-skeleton"/>
+    </section>
+
+    @* Circle variant *@
+    <section aria-label="Circle variant" data-testid="circle">
+        <Skeleton variant="@Variant.Circle" Width="80" Height="80" data-testid="circle-skeleton"/>
+    </section>
+
+    @* Circle variant 2 *@
+    <section aria-label="Circle variant 2" data-testid="circle-text">
+        <Skeleton variant="circle" Width="80" Height="80" data-testid="circle-skeleton-2"/>
+    </section>
+
+    @* Text variant *@
+    <section aria-label="Text variant" data-testid="text">
+        <Skeleton variant="@Variant.Text" Width="20" data-testid="text-skeleton"/>
+    </section>
+</main>

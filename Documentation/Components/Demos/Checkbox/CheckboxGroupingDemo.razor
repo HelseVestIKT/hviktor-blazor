@@ -1,0 +1,62 @@
+﻿@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Fieldset
+
+@code {
+
+    private List<string> values = ["email"];
+
+    private void setValue(List<string> newValues)
+    {
+        values = newValues;
+    }
+
+}
+
+<Fieldset>
+    <Fieldset.Legend>How would you prefer us to contact you?</Fieldset.Legend>
+    <Fieldset.Description>
+        Select all the options that are relevant to you.
+    </Fieldset.Description>
+    <Checkbox label="E-mail" value="email" checked="@(values.Contains("email"))"
+              @onchange="@((ChangeEventArgs e) =>
+                         {
+                             if (e.Value is true)
+                             {
+                                 setValue([..values, "email"]);
+                             }
+                             else
+                             {
+                                 setValue(values.Where(v => v != "email").ToList());
+                             }
+                         })"/>
+    <Checkbox
+        label="Phone"
+        value="phone"
+        checked="@(values.Contains("phone"))"
+        @onchange="@((ChangeEventArgs e) =>
+                   {
+                       if (e.Value is true)
+                       {
+                           setValue([..values, "phone"]);
+                       }
+                       else
+                       {
+                           setValue(values.Where(v => v != "phone").ToList());
+                       }
+                   })"/>
+    <Checkbox
+        label="Text message"
+        value="text"
+        checked="@(values.Contains("text"))"
+        @onchange="@((ChangeEventArgs e) =>
+                   {
+                       if (e.Value is true)
+                       {
+                           setValue([..values, "text"]);
+                       }
+                       else
+                       {
+                           setValue(values.Where(v => v != "text").ToList());
+                       }
+                   })"/>
+</Fieldset>

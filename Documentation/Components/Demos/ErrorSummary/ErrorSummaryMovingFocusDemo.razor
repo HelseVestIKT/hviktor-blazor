@@ -1,0 +1,37 @@
+﻿@using Hviktor.Components.Button
+@using Hviktor.Components.ErrorSummary
+
+@code {
+    private bool show;
+
+    private void SetShow(bool b) => show = b;
+}
+
+<div class="grid gap-4">
+    <div class="grid place-items-center mb-4">
+        <Button @onclick="@(() => SetShow(!show))">
+            @(!show ? "Send inn skjema" : "Skjul")
+        </Button>
+    </div>
+
+    @if (show)
+    {
+        <ErrorSummary>
+            <ErrorSummary.Heading id="error-summary-heading">
+                To proceed, you must correct the following errors:
+            </ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link href='#first-name'>
+                        First name must be at least 2 characters
+                    </ErrorSummary.Link>
+                </ErrorSummary.Item>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link href='#phone'>
+                        Phone number can only contain digits
+                    </ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    }
+</div>

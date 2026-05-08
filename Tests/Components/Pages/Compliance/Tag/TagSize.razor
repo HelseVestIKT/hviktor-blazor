@@ -1,0 +1,17 @@
+﻿@page "/component/compliance/tag/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tag
+
+<main data-testid="compliance-container">
+    <section aria-label="Small size tag">
+        <Tag Size="@Size.Small" data-testid="sm">Small Tag</Tag>
+    </section>
+
+    <section aria-label="Medium size tag">
+        <Tag Size="@Size.Medium" data-testid="md">Medium Tag</Tag>
+    </section>
+
+    <section aria-label="Large size tag">
+        <Tag Size="@Size.Large" data-testid="lg">Large Tag</Tag>
+    </section>
+</main>

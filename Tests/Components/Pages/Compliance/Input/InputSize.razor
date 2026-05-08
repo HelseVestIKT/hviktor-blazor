@@ -1,0 +1,28 @@
+﻿@page "/component/compliance/input/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Input with size attribute" data-testid="size-small">
+        <Field>
+            <Label for="input-size-small">Small input (size 10)</Label>
+            <Input Id="input-size-small" type="@InputType.Text" size="10" placeholder="Small" />
+        </Field>
+    </section>
+
+    <section aria-label="Input with medium size" data-testid="size-medium">
+        <Field>
+            <Label for="input-size-medium">Medium input (size 20)</Label>
+            <Input Id="input-size-medium" type="@InputType.Text" size="20" placeholder="Medium size" />
+        </Field>
+    </section>
+
+    <section aria-label="Input with large size" data-testid="size-large">
+        <Field>
+            <Label for="input-size-large">Large input (size 40)</Label>
+            <Input Id="input-size-large" type="@InputType.Text" size="40" placeholder="Large size input field" />
+        </Field>
+    </section>
+</main>

@@ -1,0 +1,6 @@
+﻿@namespace List
+@inherits Hviktor.Models.NestedComponentBase<Hviktor.Models.List.ListBase>
+
+<li @attributes="@(ComputeAttributes())">
+    @ChildContent
+</li>

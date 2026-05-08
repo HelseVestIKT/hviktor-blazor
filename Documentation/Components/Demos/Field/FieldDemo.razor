@@ -1,0 +1,14 @@
+﻿@using Hviktor.Components.Field
+@using Hviktor.Components.Input
+@using Hviktor.Components.Typography
+
+<Field>
+    <Label>Etternavn</Label>
+    <Field.Description>
+        Etternavn kan ikke inneholde mellomrom
+    </Field.Description>
+    <Input defaultValue="Nordmann Svenske"/>
+    <Hviktor.Components.Typography.ValidationMessage>
+        Du kan ikke ha mellomrom i etternavnet ditt
+    </Hviktor.Components.Typography.ValidationMessage>
+</Field>

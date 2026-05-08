@@ -1,0 +1,12 @@
+@using Hviktor.Components.Code
+
+@code {
+    private const string Src = """
+                               #!/bin/bash
+                               # Assign a value to a variable
+                               value="World"
+                               echo "Hello, $value!"
+                               """;
+}
+
+<CodeBlock Language="bash" Code="@Src" class="w-full"/>

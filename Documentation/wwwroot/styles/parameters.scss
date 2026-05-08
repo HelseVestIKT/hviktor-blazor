@@ -1,0 +1,32 @@
+﻿.param-name {
+  font-family: var(--ds-font-family-monospace, monospace);
+  font-size: 0.8125rem;
+  background: var(--ds-color-accent-background-default);
+  color: var(--ds-color-accent-text-default);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+.param-type {
+  font-family: var(--ds-font-family-monospace, monospace);
+  font-size: 0.8125rem;
+  background: var(--ds-color-neutral-background-default);
+  color: var(--ds-color-neutral-text-default);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  //white-space: nowrap;
+}
+
+.param-value {
+  font-family: var(--ds-font-family-monospace, monospace);
+  font-size: 0.75rem;
+  background: var(--ds-color-success-background-default);
+  color: var(--ds-color-success-text-default);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  //white-space: nowrap;
+}
+
+.text-muted {
+  color: var(--ds-color-neutral-text-subtle);
+}

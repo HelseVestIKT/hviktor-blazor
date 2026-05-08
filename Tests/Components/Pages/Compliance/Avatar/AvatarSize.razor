@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/avatar/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Avatar
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra extra small size">
+        <Avatar Size="@Size.ExtraExtraSmall" Initials="XX" data-testid="2xs" aria-label="User avatar XX" />
+    </section>
+
+    <section aria-label="Extra small size">
+        <Avatar Size="@Size.ExtraSmall" Initials="XS" data-testid="xs" aria-label="User avatar XS" />
+    </section>
+
+    <section aria-label="Small size">
+        <Avatar Size="@Size.Small" Initials="SM" data-testid="sm" aria-label="User avatar SM" />
+    </section>
+
+    <section aria-label="Medium size">
+        <Avatar Size="@Size.Medium" Initials="MD" data-testid="md" aria-label="User avatar MD" />
+    </section>
+
+    <section aria-label="Large size">
+        <Avatar Size="@Size.Large" Initials="LG" data-testid="lg" aria-label="User avatar LG" />
+    </section>
+
+    <section aria-label="Extra large size">
+        <Avatar Size="@Size.ExtraLarge" Initials="XL" data-testid="xl" aria-label="User avatar XL" />
+    </section>
+
+    <section aria-label="Extra extra large size">
+        <Avatar Size="@Size.ExtraExtraLarge" Initials="2X" data-testid="2xl" aria-label="User avatar 2X" />
+    </section>
+</main>

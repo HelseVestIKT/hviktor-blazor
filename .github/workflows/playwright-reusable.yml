@@ -1,0 +1,109 @@
+﻿name: Playwright Tests (Reusable Workflow)
+
+on:
+  workflow_call:
+    inputs:
+      test-name:
+        description: 'Name for the test run (used in artifact naming)'
+        required: true
+        type: string
+      test-filter:
+        description: 'Test filter to apply (e.g., "Collection=Prerequisite", "Category=WCAG")'
+        required: true
+        type: string
+      browser:
+        description: 'Browser to use for tests (chromium, firefox, webkit)'
+        required: false
+        default: 'chromium'
+        type: string
+      channel:
+        description: 'Browser channel to use for tests (msedge, chrome, empty for default)'
+        required: false
+        default: ''
+        type: string
+      dotnet-version:
+        description: '.NET SDK version to use'
+        required: false
+        default: '10.0.x'
+        type: string
+      node-version:
+        description: 'Node.js version to use'
+        required: false
+        default: '24'
+        type: string
+      timeout-minutes:
+        description: 'Job timeout in minutes'
+        required: false
+        default: 60
+        type: number
+
+jobs:
+  test:
+    name: ${{ inputs.test-name }}
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set target framework
+        id: set-target-framework
+        run: |
+          MAJOR_VERSION=$(echo "${{ inputs.dotnet-version }}" | cut -d'.' -f1)
+          echo "target-framework=net${MAJOR_VERSION}.0" >> $GITHUB_OUTPUT
+          echo "Using target framework: net${MAJOR_VERSION}.0"
+
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'pnpm'
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Install pnpm dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: Hviktor
+
+      - name: Build frontend assets
+        run: node build.mjs --configuration Debug
+        working-directory: Hviktor
+
+      - name: Restore .NET dependencies
+        run: dotnet restore Tests.Playwright/Tests.Playwright.csproj
+
+      - name: Build test project
+        run: dotnet build Tests.Playwright/Tests.Playwright.csproj --configuration Debug --no-restore
+
+      - name: Install Playwright browsers
+        run: pwsh Tests.Playwright/bin/Debug/${{ steps.set-target-framework.outputs.target-framework }}/playwright.ps1 install --with-deps
+
+      - name: Build filter arguments
+        id: build-filter
+        run: |
+          filterArgs=$(bash ./.github/scripts/build-test-filter-args.sh "${{ inputs.test-filter }}")
+          echo "filter-args=$filterArgs" >> $GITHUB_OUTPUT
+
+      - name: Run ${{ inputs.test-name }}
+        run: dotnet test --project Tests.Playwright/Tests.Playwright.csproj --no-build --configuration Debug --report-xunit-trx --report-xunit-trx-filename "${{ inputs.test-name }}-results.trx" --results-directory ./TestResults -- ${{ steps.build-filter.outputs.filter-args }} --config-file Tests.Playwright/bin/Debug/${{ steps.set-target-framework.outputs.target-framework }}/testconfig.json
+
+      - name: Generate Test Summary
+        if: success() || failure()
+        run: bash ./.github/scripts/parse-test-results.sh ./TestResults
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v6
+        if: success() || failure()
+        with:
+          name: ${{ inputs.test-name }}-results
+          path: ./TestResults/
+          retention-days: 30

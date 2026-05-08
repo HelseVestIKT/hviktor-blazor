@@ -1,0 +1,7 @@
+﻿@namespace ErrorSummary
+@using Hviktor.Components.Link
+@inherits Hviktor.Models.NestedComponentBase<Hviktor.Components.ErrorSummary.ErrorSummary>
+
+<HyperLink @attributes="@(ComputeAttributes())">
+    @ChildContent
+</HyperLink>

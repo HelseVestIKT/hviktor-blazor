@@ -1,0 +1,24 @@
+﻿@using Hviktor.Components.Button
+@using Hviktor.Components.Popover
+@using Hviktor.Components.Typography
+
+@code {
+    private bool? open;
+
+    private void SetOpen(bool? value) => open = value;
+}
+
+<Popover.TriggerContext>
+    <Popover.Trigger @onclick="@(() => SetOpen(!open))">Delete</Popover.Trigger>
+    <Popover @bind-open="@open" onClose="@(() => SetOpen(false))" color="danger">
+        <Paragraph>Are you sure you want to delete this?</Paragraph>
+        <div class="flex gap-2 mt-2">
+            <Button @onclick="@(() => SetOpen(false))" size="sm" color="danger">
+                Delete
+            </Button>
+            <Button variant="tertiary" @onclick="@(() => SetOpen(false))" size="sm">
+                Cancel
+            </Button>
+        </div>
+    </Popover>
+</Popover.TriggerContext>

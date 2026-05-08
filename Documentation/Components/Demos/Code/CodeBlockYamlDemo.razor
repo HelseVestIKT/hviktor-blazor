@@ -1,0 +1,56 @@
+@using Hviktor.Components.Code
+
+@code {
+    private const string Src = """
+                               # CI/CD pipeline configuration
+                               name: Build and Test
+                               on:
+                                 push:
+                                   branches: [main, develop]
+                                 pull_request:
+                                   branches: [main]
+
+                               env:
+                                 DOTNET_VERSION: "10.0.x"
+                                 CI: true
+
+                               defaults: &build-defaults
+                                 timeout-minutes: 15
+                                 runs-on: ubuntu-latest
+
+                               jobs:
+                                 build:
+                                   <<: *build-defaults
+                                   steps:
+                                     - uses: actions/checkout@v4
+                                     - name: Setup .NET
+                                       uses: actions/setup-dotnet@v4
+                                       with:
+                                         dotnet-version: "10.0.x"
+                                     - name: Restore
+                                       run: dotnet restore
+                                     - name: Build
+                                       run: dotnet build --no-restore
+                                     - name: Test
+                                       run: dotnet test --no-build
+                                       env:
+                                         HEADLESS: true
+
+                                 deploy:
+                                   needs: build
+                                   if: github.ref == 'refs/heads/main'
+                                   environment: !custom production
+                                   concurrency:
+                                     group: deploy
+                                     cancel-in-progress: false
+                                   steps:
+                                     - name: Deploy
+                                       run: |
+                                         echo "Deploying to production"
+                                       timeout-minutes: 5
+                                       retries: 3
+                                       max-parallel: 0x2
+                               """;
+}
+
+<CodeBlock Language="yaml" Code="@Src" class="w-full"/>

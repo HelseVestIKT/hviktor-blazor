@@ -1,0 +1,36 @@
+﻿@using Hviktor.Abstractions.Interfaces.Localization
+@using Hviktor.Resources
+@using Microsoft.Extensions.Logging
+@using System.Text.Json
+
+@code {
+
+    [Inject] private ILogger<BlazorErrorUI> Logger { get; set; } = null!;
+    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+    [Inject] private IStringLocalizerService<Resources> Localize { get; set; } = null!;
+
+    /// <inheritdoc/>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await JsRuntime.InvokeVoidAsync("eval", $"globalThis.Hviktor.Localizer.BlazorModal = {
+                        JsonSerializer.Serialize(new
+                        {
+                            title = Localize.GetValue("Blazor.Modal.Error.Title"),
+                            description = Localize.GetValue("Blazor.Modal.Error.Description"),
+                            reload = Localize.GetValue("Blazor.Modal.Error.Reload"),
+                            backToSafety = Localize.GetValue("Blazor.Modal.Error.BackToSafety")
+                        })
+                    };");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("Error setting localization values in JS: {ExMessage}", ex.Message);
+            }
+        }
+}
+
+}

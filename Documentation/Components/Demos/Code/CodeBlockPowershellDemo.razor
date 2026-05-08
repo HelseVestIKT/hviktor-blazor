@@ -1,0 +1,53 @@
+@using Hviktor.Components.Code
+
+@code {
+
+    private static readonly string Src = string.Join("\n",
+        "<#",
+        ".SYNOPSIS",
+        "    Tests connectivity to a list of servers and reports status.",
+        ".DESCRIPTION",
+        "    Pings each server and outputs results with timestamps.",
+        "#>",
+        "",
+        "# Configuration",
+        """$Servers = @("google.com", "microsoft.com", "example.com")""",
+        "$MaxRetries = 3",
+        "$Timeout = 1000",
+        "",
+        "function Test-ServerConnectivity {",
+        "    param(",
+        "        [string]$ComputerName,",
+        "        [int]$Count = 1",
+        "    )",
+        "",
+        "    $Result = Test-Connection -ComputerName $ComputerName -Count $Count -Quiet",
+        "",
+        "    if ($Result) {",
+        "        Write-Output '$ComputerName is reachable.'",
+        "        return $true",
+        "    } else {",
+        "        Write-Warning '$ComputerName is not reachable.'",
+        "        return $false",
+        "    }",
+        "}",
+        "",
+        "# Process each server",
+        "foreach ($Server in $Servers) {",
+        "    $Attempt = 0",
+        "    do {",
+        "        $Attempt++",
+        "        $Success = Test-ServerConnectivity -ComputerName $Server -Count 2",
+        "    } until ($Success -or $Attempt -ge $MaxRetries)",
+        "",
+        "    if (-not $Success) {",
+        "        Write-Error 'Failed to reach $Server after $MaxRetries attempts.'",
+        "    }",
+        "}",
+        "",
+        "# Export results",
+        @"Get-Content -Path 'C:\logs\connectivity.log' | Select-Object -First 10");
+
+}
+
+<CodeBlock Language="powershell" Code="@Src" class="w-full"/>

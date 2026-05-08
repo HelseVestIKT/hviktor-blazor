@@ -1,0 +1,56 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Field
+@using Hviktor.Components.Textarea
+@using Hviktor.Components.Typography
+<Field>
+    @if (!string.IsNullOrWhiteSpace(internalLabel))
+    {
+        <Label weight="@Weight.Medium" for="@internalId">@internalLabel</Label>
+    }
+    @if (!string.IsNullOrWhiteSpace(internalDescription))
+    {
+        <Field.Description id="@($"{internalId}:description:1")">@internalDescription</Field.Description>
+    }
+    <Field.Affixes>
+        @if (!string.IsNullOrWhiteSpace(prefix))
+        {
+            <Field.Affix>@prefix</Field.Affix>
+        }
+        @if (isMultiline)
+        {
+            <Textarea @attributes="@(ComputeAttributes())"></Textarea>
+        }
+        else
+        {
+            <input @attributes="@(ComputeAttributes())"/>
+        }
+        @if (!string.IsNullOrWhiteSpace(suffix))
+        {
+            <Field.Affix>@suffix</Field.Affix>
+        }
+    </Field.Affixes>
+
+    @if (!string.IsNullOrWhiteSpace(error))
+    {
+        <ValidationMessage Id="@($"{internalId}:validation:1")">
+            @error
+        </ValidationMessage>
+    }
+    @if (counter is not null && internalValue is not null)
+    {
+        if (counter - internalValue.Length >= 0)
+        {
+            <Paragraph Id="@($"{internalId}:validation:2")" variant="@Variant.Default" class="ds-field-counter"
+                       data-field="validation">
+                @($"{counter - internalValue.Length} tegn igjen")
+            </Paragraph>
+        }
+        else
+        {
+            <Hviktor.Components.Typography.ValidationMessage Id="@($"{internalId}:validation:2")"
+                                                                class="ds-field-counter">
+                @($"{internalValue.Length - counter} tegn for mye")
+            </Hviktor.Components.Typography.ValidationMessage>
+        }
+    }
+</Field>

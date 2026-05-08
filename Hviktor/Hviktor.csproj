@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFrameworks>net10.0;net10.0-browser</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AddRazorSupportForMvc>false</AddRazorSupportForMvc>
+        <OptimizeCompilations>true</OptimizeCompilations>
+        <EnableDefaultContentItems>true</EnableDefaultContentItems>
+        <EnableDefaultEmbeddedStaticWebAssets>true</EnableDefaultEmbeddedStaticWebAssets>
+        <!-- Package Metadata -->
+        <PackageId>Hviktor</PackageId>
+        <PackageTags>blazor;dotnet;csharp;components;component-library;hviktor;designsystem;designsystemet;razor;ui;tailwindcss;accessibility;wcag</PackageTags>
+    </PropertyGroup>
+
+    <!--  Emit Compiler Generated Files for Debugging  -->
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    </PropertyGroup>
+
+    <!--  XML Documentation  -->
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Hviktor.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <!-- Embed XML docs as a resource so WASM consumers can read them -->
+    <Target Name="EmbedXmlDocumentation" AfterTargets="Build">
+        <ItemGroup>
+            <EmbeddedResource Include="$(OutputPath)$(AssemblyName).xml"
+                              LogicalName="$(AssemblyName).$(AssemblyName).xml"
+                              Condition="Exists('$(OutputPath)$(AssemblyName).xml')"/>
+        </ItemGroup>
+    </Target>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Tests.Unit"/>
+        <InternalsVisibleTo Include="Documentation"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="EPPlus"/>
+        <PackageReference Include="Microsoft.AspNetCore.Localization"/>
+        <PackageReference Include="Microsoft.Extensions.Localization"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PackageReference Include="Hviktor.Abstractions"/>
+        <PackageReference Include="Hviktor.Icons.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
+        <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\dist\"/>
+        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Resources.en.resx">
+            <DependentUpon>Resources.resx</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Resources.nn.resx">
+            <DependentUpon>Resources.resx</DependentUpon>
+        </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Resources\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-browser'">
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication"/>
+    </ItemGroup>
+    <ItemGroup>
+      <AdditionalFiles Include="Components\Skeleton\Skeleton.razor" />
+      <AdditionalFiles Include="Components\Spinner\Spinner.razor" />
+    </ItemGroup>
+</Project>

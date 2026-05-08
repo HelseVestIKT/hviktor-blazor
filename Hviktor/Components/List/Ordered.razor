@@ -1,0 +1,11 @@
+﻿@namespace List
+@inherits Hviktor.Models.List.ListBase
+
+<ol @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+</ol>

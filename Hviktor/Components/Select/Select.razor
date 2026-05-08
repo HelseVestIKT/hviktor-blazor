@@ -1,0 +1,8 @@
+﻿<select @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@(ComputeAttributes())">
+            @ChildContent
+        </CascadingValue>
+    }
+</select>

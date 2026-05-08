@@ -1,0 +1,34 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Divider
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Typography
+@using Hviktor.Icons.Types
+
+<div class="flex gap-4 items-center flex-wrap">
+    <Icon Definition="@IconSet.Plus"/>
+    <Icon Definition="@IconSet.Minus"/>
+    <Icon Definition="@IconSet.XMark"/>
+    <Icon Definition="@IconSet.Checkmark"/>
+    <Icon Definition="@IconSet.Eye"/>
+    <Icon Definition="@IconSet.EyeSlash"/>
+    <Icon Definition="@IconSet.MenuHamburger"/>
+    <Icon Definition="@IconSet.BugFill"/>
+</div>
+
+<Divider/>
+
+<Paragraph>Sizes with string value</Paragraph>
+<div class="flex gap-4 items-center flex-wrap">
+    <Icon Definition="@IconSet.Square" size="sm"/>
+    <Icon Definition="@IconSet.Square" size="md"/>
+    <Icon Definition="@IconSet.Square" size="lg"/>
+</div>
+
+<Divider/>
+
+<Paragraph>Sizes with enum value</Paragraph>
+<div class="flex gap-4 items-center flex-wrap">
+    <Icon Definition="@IconSet.SquareFill" size="@Size.Small"/>
+    <Icon Definition="@IconSet.SquareFill" size="@Size.Medium"/>
+    <Icon Definition="@IconSet.SquareFill" size="@Size.Large"/>
+</div>

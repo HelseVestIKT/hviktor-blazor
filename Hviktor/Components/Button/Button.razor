@@ -1,0 +1,8 @@
+﻿@using Hviktor.Components.Spinner
+<button @ref="ElementRef" @attributes="@(ComputeAttributes())">
+    @if (Loading)
+    {
+        <Spinner aria-labelledby="@LabelledById"/>
+    }
+    @ChildContent
+</button>

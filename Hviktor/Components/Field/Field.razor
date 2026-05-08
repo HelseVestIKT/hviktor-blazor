@@ -1,0 +1,10 @@
+﻿@inherits Hviktor.Models.CascadingComponentBase
+
+<div @ref="ElementRef" @attributes="@(ComputeAttributes())">
+    @if (ChildContent != null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+</div>

@@ -1,0 +1,26 @@
+﻿@page "/component/compliance/table/caption"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <section aria-label="Table with caption">
+        <Table Id="table-with-caption" data-testid="with-caption">
+            <caption>Employee Information Table</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Department</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>John Doe</Table.Cell>
+                    <Table.Cell>Engineering</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Jane Smith</Table.Cell>
+                    <Table.Cell>Marketing</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

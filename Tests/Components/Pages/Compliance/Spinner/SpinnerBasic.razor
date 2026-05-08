@@ -1,0 +1,19 @@
+﻿@page "/component/compliance/spinner/basic"
+@using Hviktor.Components.Spinner
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic spinner" data-testid="basic">
+        <Spinner aria-label="Loading" data-testid="basic-spinner"/>
+    </section>
+
+    <section aria-label="Custom aria-label spinner" data-testid="custom-label">
+        <Spinner aria-label="Laster inn data..." data-testid="custom-label-spinner"/>
+    </section>
+
+    <section aria-label="Spinner with text" data-testid="with-text">
+        <div role="status">
+            <Spinner aria-hidden="true" data-testid="hidden-spinner"/>
+            <span>Laster...</span>
+        </div>
+    </section>
+</main>

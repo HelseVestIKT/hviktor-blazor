@@ -1,0 +1,16 @@
+﻿@page "/component/compliance/textarea/basic"
+@using Hviktor.Components.Textarea
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Basic textarea">
+        <label for="textarea-basic">Description</label>
+        <Textarea Id="textarea-basic" data-testid="basic">Initial content</Textarea>
+    </section>
+
+    <section aria-label="Empty textarea">
+        <label for="textarea-empty">Comments</label>
+        <Textarea Id="textarea-empty" data-testid="empty" placeholder="Enter your comments..."></Textarea>
+    </section>
+</main>

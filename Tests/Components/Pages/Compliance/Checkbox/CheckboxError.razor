@@ -1,0 +1,56 @@
+﻿@page "/component/compliance/checkbox/error"
+@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Fieldset
+
+@code {
+
+    private bool? email;
+    private bool? phone;
+    private bool? sms;
+
+    private bool IsInvalid() => email != true && phone != true && sms != true;
+
+}
+
+<main data-testid="compliance-container">
+    <section aria-label="Checkbox group with error">
+        <Fieldset data-testid="with-error">
+            <Fieldset.Legend>How would you like us to contact you?</Fieldset.Legend>
+            <Fieldset.Description>Select all options that apply to you.</Fieldset.Description>
+            <Checkbox Id="checkbox-error-email"
+                      Label="Email"
+                      value="email"
+                      @bind-Checked="email"
+                      aria-invalid="@(IsInvalid() ? "true" : "")"/>
+            <Checkbox Id="checkbox-error-phone"
+                      Label="Phone"
+                      value="phone"
+                      @bind-Checked="phone"
+                      aria-invalid="@(IsInvalid() ? "true" : "")"/>
+            <Checkbox Id="checkbox-error-sms"
+                      Label="SMS"
+                      value="sms"
+                      @bind-Checked="sms"
+                      aria-invalid="@(IsInvalid() ? "true" : "")"/>
+            @if (IsInvalid())
+            {
+                <Hviktor.Components.Typography.ValidationMessage>You must select at least one option
+                </Hviktor.Components.Typography.ValidationMessage>
+            }
+        </Fieldset>
+    </section>
+
+    <section aria-label="Checkbox group without error">
+        <Fieldset data-testid="without-error">
+            <Fieldset.Legend>Newsletter preferences</Fieldset.Legend>
+            <Fieldset.Description>Select your preferred newsletters.</Fieldset.Description>
+            <Checkbox Id="checkbox-no-error-weekly"
+                      Label="Weekly digest"
+                      value="weekly"
+                      Checked="true"/>
+            <Checkbox Id="checkbox-no-error-monthly"
+                      Label="Monthly summary"
+                      value="monthly"/>
+        </Fieldset>
+    </section>
+</main>

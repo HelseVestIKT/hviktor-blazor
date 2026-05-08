@@ -1,0 +1,49 @@
+﻿@page "/component/compliance/dropdown/keyboard"
+@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Dropdown keyboard navigation test" data-testid="keyboard-navigation">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger data-testid="keyboard-trigger">Keyboard Test Menu</Dropdown.Trigger>
+            <Dropdown data-testid="keyboard-dropdown">
+                <Dropdown.Heading>Navigation</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button data-testid="keyboard-item-1">First Item</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button data-testid="keyboard-item-2">Second Item</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button data-testid="keyboard-item-3">Third Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Multiple dropdowns for tab navigation" data-testid="keyboard-multiple">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger data-testid="keyboard-trigger-1">First Dropdown</Dropdown.Trigger>
+            <Dropdown data-testid="keyboard-dropdown-1">
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button data-testid="keyboard-item-a">Item A</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+        
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger data-testid="keyboard-trigger-2">Second Dropdown</Dropdown.Trigger>
+            <Dropdown data-testid="keyboard-dropdown-2">
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button data-testid="keyboard-item-b">Item B</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+</main>

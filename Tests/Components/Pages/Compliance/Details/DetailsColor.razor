@@ -1,0 +1,68 @@
+﻿@page "/component/compliance/details/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Details
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent color">
+        <Details Color="@Color.Accent" data-testid="accent">
+            <Details.Summary>Accent Color</Details.Summary>
+            <Details.Content>Content with accent color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Neutral color">
+        <Details Color="@Color.Neutral" data-testid="neutral">
+            <Details.Summary>Neutral Color</Details.Summary>
+            <Details.Content>Content with neutral color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Brand1 color">
+        <Details Color="@Color.Brand1" data-testid="brand1">
+            <Details.Summary>Brand1 Color</Details.Summary>
+            <Details.Content>Content with brand1 color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Brand2 color">
+        <Details Color="@Color.Brand2" data-testid="brand2">
+            <Details.Summary>Brand2 Color</Details.Summary>
+            <Details.Content>Content with brand2 color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Brand3 color">
+        <Details Color="@Color.Brand3" data-testid="brand3">
+            <Details.Summary>Brand3 Color</Details.Summary>
+            <Details.Content>Content with brand3 color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Success color">
+        <Details Color="@Color.Success" data-testid="success">
+            <Details.Summary>Success Color</Details.Summary>
+            <Details.Content>Content with success color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Danger color">
+        <Details Color="@Color.Danger" data-testid="danger">
+            <Details.Summary>Danger Color</Details.Summary>
+            <Details.Content>Content with danger color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Info color">
+        <Details Color="@Color.Info" data-testid="info">
+            <Details.Summary>Info Color</Details.Summary>
+            <Details.Content>Content with info color.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Warning color">
+        <Details Color="@Color.Warning" data-testid="warning">
+            <Details.Summary>Warning Color</Details.Summary>
+            <Details.Content>Content with warning color.</Details.Content>
+        </Details>
+    </section>
+</main>

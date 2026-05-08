@@ -1,0 +1,34 @@
+﻿@page "/component/compliance/spinner/accessibility"
+@using Hviktor.Components.Spinner
+
+<main data-testid="compliance-container">
+    <section aria-label="Accessible spinner with aria-label" data-testid="aria-label">
+        <Spinner aria-label="Loading content, please wait" data-testid="labeled-spinner"/>
+    </section>
+
+    <section aria-label="Spinner hidden with text" data-testid="aria-hidden">
+        <div role="status" aria-label="Loading in progress">
+            <Spinner aria-hidden="true" data-testid="hidden-spinner"/>
+            <span data-testid="loading-text">Loading...</span>
+        </div>
+    </section>
+
+    <section aria-label="Spinner in status region" data-testid="status-region">
+        <div role="status" aria-live="polite">
+            <Spinner aria-label="Processing request" data-testid="status-spinner"/>
+        </div>
+    </section>
+
+    <section aria-label="Spinner with img role" data-testid="role-img">
+        <Spinner aria-label="Loading" data-testid="img-role-spinner"/>
+    </section>
+
+    <section aria-label="Multiple spinners" data-testid="multiple-spinners">
+        <div>
+            <Spinner aria-label="Loading user data" data-testid="spinner-1"/>
+        </div>
+        <div>
+            <Spinner aria-label="Loading settings" data-testid="spinner-2"/>
+        </div>
+    </section>
+</main>

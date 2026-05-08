@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AddRazorSupportForMvc>false</AddRazorSupportForMvc>
+        <OptimizeCompilations>true</OptimizeCompilations>
+        <!--  XML Documentation  -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- Package Metadata -->
+        <PackageId>Hviktor.Icons.Abstractions</PackageId>
+        <Description>Icon abstractions wrapping NAV Aksel icons for the Hviktor Blazor component library</Description>
+        <PackageTags>blazor;dotnet;csharp;icons;svg;hviktor;aksel;nav;abstractions</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Hviktor.Icons.Abstractions.xml</DocumentationFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    <!-- Embed XML docs as a resource so WASM consumers can read them -->
+    <Target Name="EmbedXmlDocumentation" AfterTargets="Build">
+        <ItemGroup>
+            <EmbeddedResource Include="$(OutputPath)$(AssemblyName).xml"
+                              LogicalName="$(AssemblyName).$(AssemblyName).xml"
+                              Condition="Exists('$(OutputPath)$(AssemblyName).xml')"/>
+        </ItemGroup>
+    </Target>
+
+</Project>

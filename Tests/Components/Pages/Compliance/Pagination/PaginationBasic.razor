@@ -1,0 +1,46 @@
+﻿@page "/component/compliance/pagination/basic"
+@using Hviktor.Components.Pagination
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic pagination" data-testid="basic">
+        <Pagination>
+            <Pagination.Button aria-label="Forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button>1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button aria-current="page">2</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button>3</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button aria-label="Neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+
+    <section aria-label="Pagination with many pages" data-testid="many-pages">
+        <Pagination>
+            <Pagination.Button aria-label="Forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button>1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button>2</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button aria-current="page">3</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button>4</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button>5</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button aria-label="Neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+</main>

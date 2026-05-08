@@ -1,0 +1,26 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<div class="flex flex-col gap-2">
+    <Paragraph data-variant="short" class="font-semibold">@Localizer.GetValue("Input_TypesTitle")</Paragraph>
+    <div class="flex gap-4 flex-wrap items-end">
+        <Field>
+            <Label>Text</Label>
+            <Input type="@InputType.Text" placeholder="Text input"/>
+        </Field>
+        <Field>
+            <Label>Email</Label>
+            <Input type="@InputType.Email" placeholder="email@example.com"/>
+        </Field>
+        <Field>
+            <Label>Password</Label>
+            <Input type="@InputType.Password" placeholder="********"/>
+        </Field>
+        <Field>
+            <Label>Number</Label>
+            <Input type="@InputType.Number" placeholder="123"/>
+        </Field>
+    </div>
+</div>

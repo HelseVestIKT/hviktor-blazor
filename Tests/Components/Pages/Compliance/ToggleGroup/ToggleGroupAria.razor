@@ -1,0 +1,11 @@
+﻿@page "/component/compliance/togglegroup/aria"
+@using Hviktor.Components.ToggleGroup
+
+<main data-testid="compliance-container">
+    <section aria-label="Toggle group with ARIA attributes">
+        <ToggleGroup data-testid="aria-group" DefaultValue="selected" Name="toggle-selection">
+            <ToggleGroup.Item value="selected" data-testid="selected-item">Selected</ToggleGroup.Item>
+            <ToggleGroup.Item value="unselected" data-testid="unselected-item">Unselected</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+</main>

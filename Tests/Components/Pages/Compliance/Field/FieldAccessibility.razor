@@ -1,0 +1,42 @@
+﻿@page "/component/compliance/field/accessibility"
+@using Hviktor.Components.Field
+@using Hviktor.Components.Textfield
+@using Hviktor.Components.Textarea
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Field provides proper aria connections between label, description, and input *@
+    <section aria-label="Field with aria connections" data-testid="aria-connections">
+        <Field>
+            <Label for="aria-input">Full Name</Label>
+            <Field.Description>Enter your first and last name</Field.Description>
+            <Textfield Id="aria-input" data-testid="aria-textfield" />
+        </Field>
+    </section>
+
+    @* Field with counter for screen reader accessibility *@
+    <section aria-label="Field with counter accessibility" data-testid="counter-accessibility">
+        <Field>
+            <Label for="sr-counter-input">Comment</Label>
+            <Field.Description>Share your thoughts</Field.Description>
+            <Textarea Id="sr-counter-input" data-testid="sr-counter-textarea"></Textarea>
+            <Field.Counter Limit="150" Hint="Maximum {0} characters allowed." />
+        </Field>
+    </section>
+
+    @* Multiple fields for tab navigation *@
+    <section aria-label="Multiple fields for navigation" data-testid="multiple-fields">
+        <Field>
+            <Label for="field1-input">First Field</Label>
+            <Textfield Id="field1-input" data-testid="field1" />
+        </Field>
+        <Field>
+            <Label for="field2-input">Second Field</Label>
+            <Textfield Id="field2-input" data-testid="field2" />
+        </Field>
+        <Field>
+            <Label for="field3-input">Third Field</Label>
+            <Textfield Id="field3-input" data-testid="field3" />
+        </Field>
+    </section>
+</main>

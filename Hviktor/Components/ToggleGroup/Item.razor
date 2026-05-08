@@ -1,0 +1,8 @@
+﻿@namespace ToggleGroup
+
+@inherits Hviktor.Models.AsyncNestedComponentBase<Hviktor.Components.ToggleGroup.ToggleGroup>
+
+<label @attributes="@(ComputeLabelAttributes())">
+    <input @attributes="@(ComputeAttributes())" @onchange="@OnChangeEventAsync"/>
+    @ChildContent
+</label>

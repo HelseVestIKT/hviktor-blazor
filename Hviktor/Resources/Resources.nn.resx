@@ -1,0 +1,90 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Blazor.Modal.Error.Close" xml:space="preserve">
+        <value>Lukk</value>
+    </data>
+    <data name="Blazor.Modal.Error.Title" xml:space="preserve">
+        <value>Det har oppstått ein uhandsama feil.</value>
+    </data>
+    <data name="Blazor.Modal.Error.Description" xml:space="preserve">
+        <value>Last sida på nytt eller gå til sikkerheit.</value>
+    </data>
+    <data name="Blazor.Modal.Error.Reload" xml:space="preserve">
+        <value>Last inn sida på nytt</value>
+    </data>
+    <data name="Blazor.Modal.Error.BackToSafety" xml:space="preserve">
+        <value>Ta meg til sikkerheit</value>
+    </data>
+    <data name="DotNet.Modal.Error.Title" xml:space="preserve">
+        <value>Ein feil oppstod under hot-reload prosjektbygging.</value>
+    </data>
+    <data name="DotNet.Modal.Error.Description" xml:space="preserve">
+        <value>Vennligst sjå IDEen for meir informasjon.</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Rejected" xml:space="preserve">
+        <value>Du har blitt kasta ut frå serveren.</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.FirstAttempt" xml:space="preserve">
+        <value>Kobler til serveren på nytt...</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.RepeatedAttempt" xml:space="preserve">
+        <value>Tilkobling mislyktes... prøver igjen om {0} sekunder.</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Success" xml:space="preserve">
+        <value>Tilkobling til serveren gjenoppretta.</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Failed" xml:space="preserve">
+        <value>Kunne ikkje kopla til serveren...</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Failed.TryAgain" xml:space="preserve">
+        <value>Prøv igjen</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Paused" xml:space="preserve">
+        <value>Økten har blitt pauset av serveren.</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Paused.Resume" xml:space="preserve">
+        <value>Gjenoppta</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.ResumeFailed" xml:space="preserve">
+        <value>Kunne ikkje fortsette økten.</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.ResumeFailed.Reload" xml:space="preserve">
+        <value>Last inn sida på nytt</value>
+    </data>
+    <data name="Blazor.Modal.Reconnect.Heading" xml:space="preserve">
+        <value>Tilkoplingsstatus</value>
+    </data>
+    <data name="Hviktor.Components.Suggestion.Clear" xml:space="preserve">
+        <value>Tøm val</value>
+    </data>
+    <data name="Hviktor.Components.Pagination.AriaLabel" xml:space="preserve">
+        <value>Paginering</value>
+    </data>
+    <data name="Hviktor.Components.CodeBlock.Copy.Button" xml:space="preserve">
+        <value>Kopier</value>
+    </data>
+    <data name="Hviktor.Components.CodeBlock.Copied.Button" xml:space="preserve">
+        <value>Kopiert</value>
+    </data>
+    <data name="Hviktor.Components.CodeBlock.CopiedAnnouncement" xml:space="preserve">
+        <value>Kode kopiert til utklippstavla</value>
+    </data>
+    <data name="Hviktor.Components.CodeBlock.AriaLabel" xml:space="preserve">
+        <value>Kopier kodeblokk</value>
+    </data>
+</root>

@@ -1,0 +1,38 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<div class="flex flex-col gap-2">
+    <Paragraph data-variant="short" class="font-semibold">@Localizer.GetValue("Input_OtherTypesTitle")</Paragraph>
+    <div class="flex gap-4 flex-wrap items-end">
+        <Field>
+            <Label>Tel</Label>
+            <Input type="@InputType.Tel" placeholder="+47 123 45 678"/>
+        </Field>
+        <Field>
+            <Label>URL</Label>
+            <Input type="@InputType.Url" placeholder="https://example.com"/>
+        </Field>
+        <Field>
+            <Label>Search</Label>
+            <Input type="@InputType.Search" placeholder="@Localizer.GetValue("Input_SearchPlaceholder")"/>
+        </Field>
+        <Field>
+            <Label>Color</Label>
+            <Input type="@InputType.Color" value="#3b82f6"/>
+        </Field>
+    </div>
+</div>
+
+<div class="flex flex-col gap-2">
+    <Paragraph data-variant="short" class="font-semibold">@Localizer.GetValue("Input_RoleTitle")</Paragraph>
+    <div class="flex gap-4 flex-wrap items-center">
+        <Field>
+            <div class="flex items-center gap-2">
+                <Input type="@InputType.Checkbox" role="switch" id="switch-demo"/>
+                <Label for="switch-demo">@Localizer.GetValue("Input_SwitchLabel")</Label>
+            </div>
+        </Field>
+    </div>
+</div>

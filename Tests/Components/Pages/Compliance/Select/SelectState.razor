@@ -1,0 +1,55 @@
+﻿@page "/component/compliance/select/state"
+@using Hviktor.Components.Select
+@using Hviktor.Components.Field
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* ReadOnly select - recommended over disabled *@
+    <section aria-label="ReadOnly select" data-testid="state-readonly">
+        <Field>
+            <Label for="readonly-select-id">Country (read-only)</Label>
+            <Select Id="readonly-select-id" readOnly="true" data-testid="readonly-select">
+                <Select.Option value="no">Norway</Select.Option>
+                <Select.Option value="se">Sweden</Select.Option>
+                <Select.Option value="dk">Denmark</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Width full (default) *@
+    <section aria-label="Full width select" data-testid="width-full">
+        <Field>
+            <Label for="width-full-select-id">Full width select</Label>
+            <Select Id="width-full-select-id" width="@Width.Full" data-testid="width-full-select">
+                <Select.Option value="">Select option</Select.Option>
+                <Select.Option value="opt1">Option 1</Select.Option>
+                <Select.Option value="opt2">Option 2</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Width auto *@
+    <section aria-label="Auto width select" data-testid="width-auto">
+        <Field>
+            <Label for="width-auto-select-id">Auto width select</Label>
+            <Select Id="width-auto-select-id" width="@Width.Auto" data-testid="width-auto-select">
+                <Select.Option value="">Select option</Select.Option>
+                <Select.Option value="opt1">Option 1</Select.Option>
+                <Select.Option value="opt2">Option 2</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Required select *@
+    <section aria-label="Required select" data-testid="state-required">
+        <Field>
+            <Label for="required-select-id">Required field</Label>
+            <Select Id="required-select-id" required data-testid="required-select">
+                <Select.Option value="">Please select</Select.Option>
+                <Select.Option value="yes">Yes</Select.Option>
+                <Select.Option value="no">No</Select.Option>
+            </Select>
+        </Field>
+    </section>
+</main>

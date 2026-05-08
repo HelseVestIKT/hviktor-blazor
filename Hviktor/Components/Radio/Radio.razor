@@ -1,0 +1,15 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<Field>
+    <input @attributes="@(ComputeAttributes())">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <Label Weight="@Weight.Regular" for="@Id">@Label</Label>
+    }
+    @if (!string.IsNullOrWhiteSpace(Description))
+    {
+        <Field.Description id="@DescriptionId">@Description</Field.Description>
+    }
+</Field>

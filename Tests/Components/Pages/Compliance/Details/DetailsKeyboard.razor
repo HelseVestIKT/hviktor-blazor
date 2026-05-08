@@ -1,0 +1,25 @@
+﻿@page "/component/compliance/details/keyboard"
+@using Hviktor.Components.Details
+
+<main data-testid="compliance-container">
+    <section aria-label="Details for keyboard navigation testing">
+        <Details data-testid="keyboard-navigation">
+            <Details.Summary>Keyboard Accessible Details</Details.Summary>
+            <Details.Content>
+                <p>This content can be expanded and collapsed using Space or Enter keys.</p>
+                <a href="#">Focusable link inside content</a>
+            </Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Multiple details for tab navigation">
+        <Details data-testid="keyboard-first">
+            <Details.Summary>First Details</Details.Summary>
+            <Details.Content>First content area.</Details.Content>
+        </Details>
+        <Details data-testid="keyboard-second">
+            <Details.Summary>Second Details</Details.Summary>
+            <Details.Content>Second content area.</Details.Content>
+        </Details>
+    </section>
+</main>

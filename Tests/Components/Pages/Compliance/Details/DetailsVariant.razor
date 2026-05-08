@@ -1,0 +1,20 @@
+﻿@page "/component/compliance/details/variant"
+@using Hviktor.Components.Details
+@using Hviktor.Abstractions.Enums.Attributes
+
+<main data-testid="compliance-container">
+    <section aria-label="Default variant">
+        <Details Variant="@Variant.Default" data-testid="default">
+            <Details.Summary>Default Variant</Details.Summary>
+            <Details.Content>Content with default variant styling.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Tinted variant">
+        <Details Variant="@Variant.Tinted" data-testid="tinted">
+            <Details.Summary>Tinted Variant</Details.Summary>
+            <Details.Content>Content with tinted variant styling.</Details.Content>
+        </Details>
+    </section>
+</main>
+

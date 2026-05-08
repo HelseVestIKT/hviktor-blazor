@@ -1,0 +1,74 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "Microsoft.AspNetCore.App.Internal.Assets": {
+        "type": "Direct",
+        "requested": "[10.0.7, )",
+        "resolved": "10.0.7",
+        "contentHash": "ao3i+ks0uOQ7FWacI1hqHkUczebmXrGkUB63Xhkc34QbSzG9nYBlDv9v5l6rtCrHMsDW+13kZlpJrSj1HXddqg=="
+      },
+      "EPPlus.Interfaces": {
+        "type": "Transitive",
+        "resolved": "8.4.0",
+        "contentHash": "QaEzDFG2vcQMPqUmoWv0vBTObtH8hffQmyDr2WkqRYF/nFSn2pkdBB4vudcd/EIv0N8M3P1fzzkPQgEWsFnUmA=="
+      },
+      "Microsoft.IO.RecyclableMemoryStream": {
+        "type": "Transitive",
+        "resolved": "3.0.1",
+        "contentHash": "s/s20YTVY9r9TPfTrN5g8zPF1YhwxyqO6PxUkrYTGI2B+OGPe9AdajWZrLhFqXIvqIW23fnUE4+ztrUWNU1+9g=="
+      },
+      "System.ComponentModel.Annotations": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg=="
+      },
+      "System.Security.Cryptography.Pkcs": {
+        "type": "Transitive",
+        "resolved": "10.0.7",
+        "contentHash": "dbdKfF3eA5l+CXiAbDxiCxdezoxeanbue1ck8m49ih1L9uZG6ry8Ul8On6vpragyMDJJP4rQHUY/SWgk66tCYA=="
+      },
+      "hviktor": {
+        "type": "Project",
+        "dependencies": {
+          "EPPlus": "[8.5.4, )",
+          "Hviktor.Abstractions": "[1.0.0, )",
+          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+        }
+      },
+      "hviktor.abstractions": {
+        "type": "Project",
+        "dependencies": {
+          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+        }
+      },
+      "hviktor.extensions": {
+        "type": "Project",
+        "dependencies": {
+          "Hviktor.Abstractions": "[1.0.0, )"
+        }
+      },
+      "hviktor.icons": {
+        "type": "Project",
+        "dependencies": {
+          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+        }
+      },
+      "hviktor.icons.abstractions": {
+        "type": "Project"
+      },
+      "EPPlus": {
+        "type": "CentralTransitive",
+        "requested": "[8.5.4, )",
+        "resolved": "8.5.4",
+        "contentHash": "dHIYNqU4MDbkZPNyCF76bcQPSbx7/WhgDZw5hmDgGzRB1wn9+q/TMy4LC5gw00DamlqiWRnw4AVUXMdV1mGtOg==",
+        "dependencies": {
+          "EPPlus.Interfaces": "8.4.0",
+          "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+          "System.ComponentModel.Annotations": "5.0.0",
+          "System.Security.Cryptography.Pkcs": "10.0.7"
+        }
+      }
+    }
+  }
+}

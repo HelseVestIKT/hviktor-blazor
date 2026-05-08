@@ -1,0 +1,25 @@
+﻿@page "/component/compliance/details/state"
+@using Hviktor.Components.Details
+
+<main data-testid="compliance-container">
+    <section aria-label="Details closed state">
+        <Details Open="@false" data-testid="details-closed">
+            <Details.Summary>Closed Details</Details.Summary>
+            <Details.Content>This content is initially hidden.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Details open state">
+        <Details Open="@true" data-testid="details-open">
+            <Details.Summary>Open Details</Details.Summary>
+            <Details.Content>This content is initially visible.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Details uncontrolled state">
+        <Details data-testid="details-uncontrolled">
+            <Details.Summary>Uncontrolled Details</Details.Summary>
+            <Details.Content>This details manages its own open state.</Details.Content>
+        </Details>
+    </section>
+</main>

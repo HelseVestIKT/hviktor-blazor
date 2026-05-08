@@ -1,0 +1,16 @@
+﻿@page "/component/compliance/chip/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+
+<main data-testid="compliance-container">
+    <section aria-label="Primary variant">
+        <Chip.Button Variant="@Variant.Primary" data-testid="primary">Primary</Chip.Button>
+    </section>
+
+    <section aria-label="Secondary variant">
+        <Chip.Button Variant="@Variant.Secondary" data-testid="secondary">Secondary</Chip.Button>
+    </section>
+
+    <section aria-label="Tertiary variant">
+        <Chip.Button Variant="@Variant.Tertiary" data-testid="tertiary">Tertiary</Chip.Button>
+    </section>
+</main>

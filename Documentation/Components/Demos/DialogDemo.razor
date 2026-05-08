@@ -1,0 +1,23 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Typography
+@using Hviktor.Icons.Types
+
+<Button @onclick="@(() => DialogRef.ShowModal())">
+    @Localizer.GetValue("Dialog_OpenButton")
+    <Icon Definition="@IconSet.ArrowRight"/>
+</Button>
+<Dialog @ref="@DialogRef" Id="@dialogId">
+    <Heading level="2">@Localizer.GetValue("Dialog_ExampleTitle")</Heading>
+    <Paragraph>@Localizer.GetValue("Dialog_ExampleContent")</Paragraph>
+    <div class="flex gap-2 mt-4">
+        <Button @onclick="@(() => DialogRef.Close())" variant="@Variant.Primary" color="@Color.Accent">
+            @Localizer.GetValue("Dialog_Confirm")
+        </Button>
+        <Button @onclick="@(() => DialogRef.Close())" variant="@Variant.Tertiary">
+            @Localizer.GetValue("Dialog_Cancel")
+        </Button>
+    </div>
+</Dialog>

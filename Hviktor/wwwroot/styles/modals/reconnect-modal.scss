@@ -1,0 +1,183 @@
+@use "../mixins/modal-mixin" as reconnect-modal;
+
+.components-reconnect-first-attempt-visible,
+.components-pause-visible,
+.components-resume-failed-visible,
+.components-reconnect-success,
+.components-reconnect-success-visible,
+.components-reconnect-retrying,
+.components-reconnect-repeated-attempt-visible,
+.components-rejoining-animation,
+.components-reconnect-rejected,
+.components-reconnect-rejected-visible,
+.components-reconnect-failed,
+.components-rejoining-success-animation,
+.components-rejoining-failed-animation,
+.components-reconnect-failed-visible {
+  display: none;
+}
+
+#components-reconnect-modal.components-reconnect-success,
+#components-reconnect-modal.components-reconnect-show,
+#components-reconnect-modal.components-reconnect-paused,
+#components-reconnect-modal.components-reconnect-resume-failed,
+#components-reconnect-modal.components-reconnect-retrying,
+#components-reconnect-modal.components-reconnect-rejected,
+#components-reconnect-modal.components-reconnect-failed {
+  display: block;
+}
+
+#components-reconnect-modal.components-reconnect-success .components-rejoining-success-animation,
+#components-reconnect-modal.components-reconnect-success .components-reconnect-success-visible,
+#components-reconnect-modal.components-reconnect-show .components-reconnect-first-attempt-visible,
+#components-reconnect-modal.components-reconnect-show .components-rejoining-animation,
+#components-reconnect-modal.components-reconnect-paused .components-pause-visible,
+#components-reconnect-modal.components-reconnect-resume-failed .components-resume-failed-visible,
+#components-reconnect-modal.components-reconnect-resume-failed .components-rejoining-failed-animation,
+#components-reconnect-modal.components-reconnect-retrying,
+#components-reconnect-modal.components-reconnect-retrying .components-reconnect-repeated-attempt-visible,
+#components-reconnect-modal.components-reconnect-retrying:has(.components-reconnect-repeated-attempt-visible) .components-rejoining-failed-animation,
+  // Override the default retry logic styles for the reconnect modal 
+#components-reconnect-modal.components-reconnect-retrying:has(.components-reconnect-first-attempt-visible):not(:has(.components-reconnect-repeated-attempt-visible)) .components-rejoining-animation,
+#components-reconnect-modal.components-reconnect-rejected,
+#components-reconnect-modal.components-reconnect-rejected .components-reconnect-rejected-visible,
+#components-reconnect-modal.components-reconnect-rejected .components-rejoining-failed-animation,
+#components-reconnect-modal.components-reconnect-failed,
+#components-reconnect-modal.components-reconnect-failed .components-reconnect-failed-visible,
+#components-reconnect-modal.components-reconnect-failed .components-rejoining-failed-animation {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-size-base);
+}
+
+body:has(dialog#components-reconnect-modal.components-reconnect-show),
+body:has(dialog#components-reconnect-modal.components-reconnect-paused),
+body:has(dialog#components-reconnect-modal.components-reconnect-resume-failed),
+body:has(dialog#components-reconnect-modal.components-reconnect-retrying),
+body:has(dialog#components-reconnect-modal.components-reconnect-rejected),
+body:has(dialog#components-reconnect-modal.components-reconnect-failed) {
+  overflow: hidden;
+}
+
+dialog#components-reconnect-modal {
+  // When the dialog has class "components-reconnect-show", it will be displayed.
+  &[open] {
+    display: block;
+    animation: components-reconnect-modal-fadeInOpacity 0.5s ease-in-out 0.3s;
+  }
+}
+
+.components-reconnect-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.components-rejoining-success-animation,
+.components-rejoining-failed-animation {
+  @include reconnect-modal.svg();
+}
+
+.components-rejoining-animation {
+  position: relative;
+  //width: 80px;
+  //height: 80px;
+}
+
+.components-rejoining-success-animation svg,
+.components-rejoining-failed-animation svg {
+  @include reconnect-modal.no-animation();
+}
+
+.components-rejoining-animation div {
+  @include reconnect-modal.animation();
+}
+
+.components-rejoining-animation div {
+  animation: components-rejoining-animation 1.5s cubic-bezier(0, 0.2, 0.8, 1)
+    infinite;
+}
+
+.components-rejoining-success-animation svg,
+.components-rejoining-failed-animation svg {
+  @include reconnect-modal.animation-svg();
+}
+
+.components-rejoining-success-animation svg {
+  color: var(--ds-color-success-base-default);
+  border-color: var(--ds-color-success-base-default);
+}
+
+.components-rejoining-failed-animation svg {
+  @include reconnect-modal.failure-no-animation-svg();
+}
+
+.components-rejoining-animation div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+@keyframes components-rejoining-animation {
+  0% {
+    top: 40px;
+    left: 40px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  4.9% {
+    top: 40px;
+    left: 40px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  5% {
+    top: 40px;
+    left: 40px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog#components-reconnect-modal {
+    &[open] {
+      animation: none;
+    }
+  }
+
+  .components-rejoining-animation div {
+    animation: none;
+  }
+
+  .components-rejoining-success-animation svg,
+  .components-rejoining-failed-animation svg {
+    animation: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -1,0 +1,23 @@
+﻿@page "/component/compliance/card/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Card
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent color">
+        <Card Color="@Color.Accent" data-testid="accent">
+            <Card.Block>
+                <h3>Accent Card</h3>
+                <p>This is a card with accent color styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Neutral color">
+        <Card Color="@Color.Neutral" data-testid="neutral">
+            <Card.Block>
+                <h3>Neutral Card</h3>
+                <p>This is a card with neutral color styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+</main>

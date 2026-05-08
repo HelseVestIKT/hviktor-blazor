@@ -1,0 +1,29 @@
+﻿@page "/component/compliance/spinner/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Spinner
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra extra small spinner" data-testid="size-extraextrasmall">
+        <Spinner size="@Size.ExtraExtraSmall" aria-label="Loading" data-testid="extraextrasmall-spinner"/>
+    </section>
+
+    <section aria-label="Extra small spinner" data-testid="size-extrasmall">
+        <Spinner size="@Size.ExtraSmall" aria-label="Loading" data-testid="extrasmall-spinner"/>
+    </section>
+
+    <section aria-label="Small spinner" data-testid="size-small">
+        <Spinner size="@Size.Small" aria-label="Loading" data-testid="small-spinner"/>
+    </section>
+
+    <section aria-label="Medium spinner" data-testid="size-medium">
+        <Spinner size="@Size.Medium" aria-label="Loading" data-testid="medium-spinner"/>
+    </section>
+
+    <section aria-label="Large spinner" data-testid="size-large">
+        <Spinner size="@Size.Large" aria-label="Loading" data-testid="large-spinner"/>
+    </section>
+
+    <section aria-label="Extra large spinner" data-testid="size-extralarge">
+        <Spinner size="@Size.ExtraLarge" aria-label="Loading" data-testid="extralarge-spinner"/>
+    </section>
+</main>

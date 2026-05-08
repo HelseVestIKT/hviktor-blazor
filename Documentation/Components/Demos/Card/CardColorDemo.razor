@@ -1,0 +1,22 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Card
+@using Hviktor.Components.Typography
+
+@code {
+    private readonly Color[] colors = [Color.Accent, Color.Brand1, Color.Brand2, Color.Brand3, Color.Neutral];
+    private readonly Variant[] variants = [Variant.Default, Variant.Tinted];
+}
+
+@foreach (var variant in variants)
+{
+    foreach (var color in colors)
+    {
+        <Card @key="@($"{variant}-{color}")" variant="@variant" color="@color">
+            <Card.Block>
+                <Paragraph>
+                    @variant: @color
+                </Paragraph>
+            </Card.Block>
+        </Card>
+    }
+}

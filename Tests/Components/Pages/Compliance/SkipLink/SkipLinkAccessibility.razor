@@ -1,0 +1,58 @@
+﻿@page "/component/compliance/skiplink/accessibility"
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    @* Skip link for keyboard navigation testing *@
+    <section aria-label="Keyboard navigation test" data-testid="keyboard-navigation">
+        <SkipLink Href="#keyboard-target" Text="Skip to content" data-testid="keyboard-skiplink"/>
+
+        <nav aria-label="Test navigation">
+            <a href="#link1" data-testid="nav-link-1">Navigation Link 1</a>
+            <a href="#link2" data-testid="nav-link-2">Navigation Link 2</a>
+            <a href="#link3" data-testid="nav-link-3">Navigation Link 3</a>
+        </nav>
+
+        <div id="keyboard-target" tabindex="-1" data-testid="keyboard-target">
+            <h1>Target Content</h1>
+            <p>Focus should move here when skip link is activated.</p>
+        </div>
+
+        <div id="link1" tabindex="-1" data-testid="link-1" class="min-h-96 bg-gray-100">Link 1</div>
+        <div id="link2" tabindex="-1" data-testid="link-2" class="min-h-96 bg-gray-200">Link 2</div>
+        <div id="link3" tabindex="-1" data-testid="link-3" class="min-h-96 bg-gray-300">Link 3</div>
+    </section>
+
+    @* Skip link visibility test - hidden until focused *@
+    <section aria-label="Visibility test" data-testid="visibility-test">
+        <SkipLink Href="#visibility-target" Text="Skip navigation" data-testid="visibility-skiplink"/>
+        <div id="visibility-target" tabindex="-1" data-testid="visibility-target">
+            <p>Target for visibility test.</p>
+        </div>
+    </section>
+
+    @* Skip link with proper focus management *@
+    <section aria-label="Focus management test" data-testid="focus-management">
+        <SkipLink Href="#focus-target" Text="Go to main content" data-testid="focus-skiplink"/>
+
+        <header>
+            <h1>Page Header</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="focus-target" tabindex="-1" data-testid="focus-target" role="region" aria-label="Main content area">
+            <h2>Main Content Area</h2>
+            <p>This is the main content that should receive focus.</p>
+            <button data-testid="first-interactive">First Interactive Element</button>
+        </div>
+
+        <div id="home" tabindex="-1" data-testid="home-link-1" class="min-h-96 bg-gray-100">Home 1</div>
+        <div id="about" tabindex="-1" data-testid="about-link-2" class="min-h-96 bg-gray-200">About 2</div>
+        <div id="contact" tabindex="-1" data-testid="contact-link-3" class="min-h-96 bg-gray-300">Contact 3</div>
+    </section>
+</main>

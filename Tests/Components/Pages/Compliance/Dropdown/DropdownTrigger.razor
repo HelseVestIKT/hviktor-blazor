@@ -1,0 +1,45 @@
+﻿@page "/component/compliance/dropdown/trigger"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Dropdown trigger primary variant" data-testid="trigger-primary">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger Variant="@Variant.Primary">Primary Trigger</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown trigger secondary variant" data-testid="trigger-secondary">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger Variant="@Variant.Secondary">Secondary Trigger</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown trigger tertiary variant" data-testid="trigger-tertiary">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger Variant="@Variant.Tertiary">Tertiary Trigger</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+</main>

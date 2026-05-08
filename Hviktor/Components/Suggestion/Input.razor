@@ -1,0 +1,11 @@
+﻿@namespace Suggestion
+@inherits Hviktor.Models.Suggestion.AsyncSuggestionChildBase
+
+@for (var i = 0; i < Values.Count; i++)
+{
+    var value = Values[i];
+    var position = i + 1;
+    <data class="ds-chip" data-removable="@(!ReadOnly)" value="@value" role="button" tabindex="-1"
+          aria-label="@(ReadOnly ? value : $"{value}, Press to remove, {position} of {Values.Count}")">@value</data>
+}
+<input @attributes="@(ComputeAttributes())"/>

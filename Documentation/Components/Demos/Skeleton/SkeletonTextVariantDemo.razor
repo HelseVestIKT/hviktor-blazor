@@ -1,0 +1,17 @@
+﻿@using Hviktor.Components.Skeleton
+@using Hviktor.Components.Typography
+
+<div class="flex-[1 1 200px]">
+    <Heading>A title</Heading>
+    <Paragraph data-size="sm">
+        Here is a paragraph that spans multiple lines
+    </Paragraph>
+</div>
+<div class="flex-[1 1 200px]">
+    <Heading>
+        <Skeleton variant="text">A title</Skeleton>
+    </Heading>
+    <Paragraph data-size="sm">
+        <Skeleton variant="text" width="40"/>
+    </Paragraph>
+</div>

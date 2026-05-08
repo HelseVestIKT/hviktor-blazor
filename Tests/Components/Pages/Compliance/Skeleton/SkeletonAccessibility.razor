@@ -1,0 +1,37 @@
+﻿@page "/component/compliance/skeleton/accessibility"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Skeleton
+
+<main data-testid="compliance-container">
+    @* Skeleton is hidden from accessibility tree *@
+    <section aria-label="Hidden from screen readers" data-testid="aria-hidden">
+        <Skeleton variant="@Variant.Rectangle" width="200" height="50" data-testid="hidden-skeleton"/>
+    </section>
+
+    @* Multiple skeletons for loading state *@
+    <section aria-label="Multiple loading skeletons" data-testid="multiple-skeletons">
+        <div role="status" aria-label="Loading content">
+            <Skeleton variant="text" width="30" data-testid="text-line-1"/>
+            <Skeleton variant="@Variant.Text" width="25" data-testid="text-line-2"/>
+            <Skeleton variant="@Variant.Text" width="28" data-testid="text-line-3"/>
+        </div>
+    </section>
+
+    @* Skeleton with surrounding accessible content *@
+    <section aria-label="Skeleton with context" data-testid="with-context">
+        <div>
+            <span>Loading user profile...</span>
+            <Skeleton variant="@Variant.Circle" width="64" height="64" data-testid="avatar-skeleton"/>
+            <Skeleton variant="@Variant.Text" width="15" data-testid="name-skeleton"/>
+        </div>
+    </section>
+
+    @* Card-like skeleton layout *@
+    <section aria-label="Card skeleton layout" data-testid="card-skeleton">
+        <div role="status" aria-label="Loading card">
+            <Skeleton variant="@Variant.Rectangle" width="300" height="150" data-testid="card-image"/>
+            <Skeleton variant="text" width="25" data-testid="card-title"/>
+            <Skeleton variant="@Variant.Text" width="40" data-testid="card-description"/>
+        </div>
+    </section>
+</main>

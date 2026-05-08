@@ -1,0 +1,27 @@
+@page "/component/compliance/avatar-stack/size"
+@using Hviktor.Components.Avatar
+@using Hviktor.Components.AvatarStack
+
+<main data-testid="compliance-container">
+    <section aria-label="Small size avatar stack">
+        <AvatarStack size="sm" aria-label="Small team members" data-testid="sm">
+            <Avatar aria-label="Member 1">M1</Avatar>
+            <Avatar aria-label="Member 2">M2</Avatar>
+        </AvatarStack>
+    </section>
+
+    <section aria-label="Medium size avatar stack">
+        <AvatarStack size="md" aria-label="Medium team members" data-testid="md">
+            <Avatar aria-label="Member 1">M1</Avatar>
+            <Avatar aria-label="Member 2">M2</Avatar>
+        </AvatarStack>
+    </section>
+
+    <section aria-label="Large size avatar stack">
+        <AvatarStack size="lg" aria-label="Large team members" data-testid="lg">
+            <Avatar aria-label="Member 1">M1</Avatar>
+            <Avatar aria-label="Member 2">M2</Avatar>
+        </AvatarStack>
+    </section>
+</main>
+

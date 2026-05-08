@@ -1,0 +1,28 @@
+﻿@page "/component/compliance/checkbox/state"
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Unchecked checkbox">
+        <Checkbox Id="checkbox-unchecked"
+                  Label="Unchecked checkbox"
+                  Description="This checkbox is unchecked"
+                  data-testid="unchecked"/>
+    </section>
+
+    <section aria-label="Checked checkbox">
+        <Checkbox Id="checkbox-checked"
+                  Checked="true"
+                  Label="Checked checkbox"
+                  Description="This checkbox is checked"
+                  data-testid="checked"/>
+    </section>
+
+    <section aria-label="Indeterminate checkbox">
+        <Checkbox Id="checkbox-indeterminate"
+                  allowIndeterminate
+                  Checked="@null"
+                  Label="Indeterminate checkbox"
+                  Description="This checkbox is in indeterminate state"
+                  data-testid="indeterminate"/>
+    </section>
+</main>

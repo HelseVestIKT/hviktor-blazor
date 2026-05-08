@@ -1,0 +1,17 @@
+﻿@page "/component/compliance/checkbox/description"
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Checkbox with description">
+        <Checkbox Id="checkbox-with-description" 
+                  Label="Checkbox with description"
+                  Description="This is a helpful description for the checkbox"
+                  data-testid="with-description"/>
+    </section>
+
+    <section aria-label="Checkbox without description">
+        <Checkbox Id="checkbox-without-description" 
+                  Label="Checkbox without description"
+                  data-testid="without-description"/>
+    </section>
+</main>

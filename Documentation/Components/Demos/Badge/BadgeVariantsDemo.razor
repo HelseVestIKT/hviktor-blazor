@@ -1,0 +1,22 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Abstractions.Models
+@using Hviktor.Components.Badge
+
+@code {
+    private readonly List<(EnumValue<Color>, EnumValue<Variant>)> variants =
+    [
+        ("neutral", ""),
+        ("neutral", "tinted"),
+        ("danger", ""),
+        ("danger", "tinted"),
+        ("info", ""),
+        ("info", "tinted"),
+        ("warning", ""),
+        ("warning", "tinted"),
+    ];
+}
+
+@foreach (var variant in variants)
+{
+    <Badge Count="15" MaxCount="9" color="@variant.Item1" variant="@variant.Item2"/>
+}

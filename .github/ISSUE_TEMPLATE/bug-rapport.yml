@@ -1,0 +1,117 @@
+name: 🐞 Bug Report
+description: Before creating a new issue:bug please verify that it's not already known
+title: "[Bug]: "
+labels: [ "bug" ]
+projects: [ "HelseVestIKT/47" ]
+type: Bug
+
+body:
+  # INTRO:
+  - type: markdown
+    attributes:
+      value: |
+        Before creating a new issue:bug please verify that it's not already known.
+
+        ```
+        You can check open issues and filter by 'bug' in the issues tab on GitHub.
+        Example: `is:issue is:open label:bug`
+        ```
+
+  # DESCRIPTION:
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Problem Statement
+      description: Describe the current limitation or issue this bug causes
+      placeholder: Currently, users cannot...
+    validations:
+      required: true
+
+  # CONDITIONS:
+  - type: textarea
+    id: conditions
+    attributes:
+      label: 🔬 Conditions under which the bug occurred
+      description: |
+        Add information about the system and applications used when the bug occurred.
+        Please fill out the example information below and add more information between the heading & this comment.
+      placeholder: ...
+    validations:
+      required: false
+
+  # STEPS:
+  - type: textarea
+    id: steps
+    attributes:
+      label: 👣 Steps to reproduce
+      description: Describe how we can reproduce the bug
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+        ...
+    validations:
+      required: true
+
+  # OPERATING SYSTEM:
+  - type: dropdown
+    id: os
+    attributes:
+      label: 💻 Operating System
+      description: Operating system where the bug occurs/occurred
+      multiple: true
+      default: 0
+      options:
+        - Windows 11
+        - Windows 10
+        - Linux
+        - Mac
+    validations:
+      required: true
+
+  # BROWSERS:
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: 🌐 Browser
+      description: Browsers where the bug occurs/occurred
+      multiple: true
+      default: 3
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+
+  # VERSION:
+  - type: input
+    id: version
+    attributes:
+      label: 🔢 Application version
+      description: |
+        Please use the format v`major`.`minor`.`patch`
+      placeholder: |
+        v1.0.0
+
+  # BUILD:
+  - type: input
+    id: build
+    attributes:
+      label: 🏗️ Application build
+      description: The build where the bug was discovered
+      placeholder: |
+        110
+
+  # LOGS:
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📜 Log output
+      description: Copy & paste relevant log output. This will be automatically formatted.
+      placeholder: |
+        System.NullReferenceException: Object reference not set to an instance of an object.
+          at System.Collections.Generic.List`1.Add(T item)
+          at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+          at System.Collections.Generic.List`1..ctor(Int32 capacity)
+          at System.Collections.Generic.List`1..ctor()
+      render: shell

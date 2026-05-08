@@ -1,0 +1,36 @@
+﻿@page "/component/compliance/dialog/closedby"
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+
+@code {
+    private Dialog noneDialogRef = null!;
+    private Dialog closerequestDialogRef = null!;
+    private Dialog anyDialogRef = null!;
+}
+
+<main data-testid="compliance-container">
+    <section aria-label="Dialog closedby none" data-testid="closedby-none">
+        <Dialog @ref="noneDialogRef" Closedby="none">
+            <h2>No Light Dismiss</h2>
+            <p>This dialog cannot be closed by clicking the backdrop or pressing Escape.</p>
+            <p>Only the close button works.</p>
+        </Dialog>
+        <Button @onclick="@(() => noneDialogRef.ShowModal())">Open No Dismiss Dialog</Button>
+    </section>
+
+    <section aria-label="Dialog closedby closerequest" data-testid="closedby-closerequest">
+        <Dialog @ref="closerequestDialogRef" Closedby="closerequest">
+            <h2>Close Request</h2>
+            <p>This dialog closes on Escape key press (default behavior).</p>
+        </Dialog>
+        <Button @onclick="@(() => closerequestDialogRef.ShowModal())">Open Close Request Dialog</Button>
+    </section>
+
+    <section aria-label="Dialog closedby any" data-testid="closedby-any">
+        <Dialog @ref="anyDialogRef" Closedby="any">
+            <h2>Light Dismiss</h2>
+            <p>This dialog can be closed by clicking the backdrop or pressing Escape.</p>
+        </Dialog>
+        <Button @onclick="@(() => anyDialogRef.ShowModal())">Open Light Dismiss Dialog</Button>
+    </section>
+</main>

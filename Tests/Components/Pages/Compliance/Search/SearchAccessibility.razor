@@ -1,0 +1,66 @@
+﻿@page "/component/compliance/search/accessibility"
+@using Hviktor.Components.Search
+@using Hviktor.Components.Field
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Typography
+@using Hviktor.Icons.Types
+
+<main data-testid="compliance-container">
+    @* Search with proper label for accessibility *@
+    <section aria-label="Accessible search with label" data-testid="with-label">
+        <Field>
+            <Label>Søk i dokumenter</Label>
+            <Search>
+                <Search.Input placeholder="Skriv søkeord..." data-testid="labeled-input"/>
+                <Search.Clear data-testid="labeled-clear"/>
+                <Search.Button data-testid="labeled-button">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    @* Search for keyboard navigation testing *@
+    <section aria-label="Keyboard navigation test" data-testid="keyboard-navigation">
+        <Field>
+            <Label>Keyboard test søk</Label>
+            <Search data-testid="keyboard-search">
+                <Search.Input placeholder="Søk..." data-testid="keyboard-input"/>
+                <Search.Clear data-testid="keyboard-clear"/>
+                <Search.Button data-testid="keyboard-button">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    @* Search with description *@
+    <section aria-label="Search with description" data-testid="with-description">
+        <Field>
+            <Label>Avansert søk</Label>
+            <Field.Description>Bruk * for wildcard-søk</Field.Description>
+            <Search>
+                <Search.Input placeholder="Søk..."/>
+                <Search.Clear/>
+                <Search.Button>Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    @* Multiple search fields for tab navigation *@
+    <section aria-label="Multiple search fields" data-testid="multiple-searches">
+        <Field>
+            <Label>Første søkefelt</Label>
+            <Search>
+                <Search.Input placeholder="Søk 1..." data-testid="search-1-input"/>
+                <Search.Clear data-testid="search-1-clear"/>
+                <Search.Button data-testid="search-1-button">Søk</Search.Button>
+            </Search>
+        </Field>
+
+        <Field>
+            <Label>Andre søkefelt</Label>
+            <Search>
+                <Search.Input placeholder="Søk 2..." data-testid="search-2-input"/>
+                <Search.Clear data-testid="search-2-clear"/>
+                <Search.Button data-testid="search-2-button">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+</main>

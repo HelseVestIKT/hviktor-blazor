@@ -1,0 +1,35 @@
+﻿@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<Field>
+    @BuildAndRenderCheckbox()
+    @if (Label is not null)
+    {
+        <Label id="@LabelId" data-field="label" data-weight="regular" for="@Id">
+            @Label
+        </Label>
+    }
+    @if (Description is not null)
+    {
+        <Field.Description id="@DescriptionId">@Description</Field.Description>
+    }
+</Field>
+
+@code {
+
+    private RenderFragment BuildAndRenderCheckbox() => builder =>
+    {
+        var seq = 0;
+        builder.OpenElement(seq++, "input");
+        // This is the same as "builder.AddMultipleAttributes(seq++, ComputeAttributes());" but it does not cause compiler "Warning CS0618".
+        foreach (var attribute in ComputeAttributes())
+        {
+            builder.AddAttribute(seq++, attribute.Key, attribute.Value);
+        }
+
+        builder.AddElementReferenceCapture(seq, elementRef => ElementRef = elementRef);
+        builder.CloseElement();
+    };
+
+}
+

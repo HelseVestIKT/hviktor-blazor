@@ -1,0 +1,46 @@
+﻿@page "/component/compliance/fieldset/accessibility"
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Field
+@using Hviktor.Components.Textfield
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Fieldset with proper legend for screen reader accessibility *@
+    <section aria-label="Fieldset accessibility test" data-testid="accessibility-legend">
+        <Fieldset>
+            <Fieldset.Legend>Account settings</Fieldset.Legend>
+            <Checkbox Id="acc-public" Label="Make profile public" />
+            <Checkbox Id="acc-search" Label="Allow search engines to index profile" />
+        </Fieldset>
+    </section>
+
+    @* Fieldset.Description is NOT connected to fieldset or inputs per design *@
+    <section aria-label="Fieldset description accessibility" data-testid="accessibility-description">
+        <Fieldset>
+            <Fieldset.Legend>Communication preferences</Fieldset.Legend>
+            <Fieldset.Description>
+                This description is navigable but not connected to the fieldset or inputs.
+                This prevents the same text being read for every field.
+            </Fieldset.Description>
+            <Checkbox Id="comm-promo" Label="Promotional emails" />
+            <Checkbox Id="comm-updates" Label="Product updates" />
+            <Checkbox Id="comm-security" Label="Security alerts" />
+        </Fieldset>
+    </section>
+
+    @* Nested fields within fieldset *@
+    <section aria-label="Fieldset with nested fields" data-testid="accessibility-nested">
+        <Fieldset>
+            <Fieldset.Legend>Personal information</Fieldset.Legend>
+            <Field>
+                <Label for="nested-firstname">First name</Label>
+                <Textfield Id="nested-firstname" />
+            </Field>
+            <Field>
+                <Label for="nested-lastname">Last name</Label>
+                <Textfield Id="nested-lastname" />
+            </Field>
+        </Fieldset>
+    </section>
+</main>

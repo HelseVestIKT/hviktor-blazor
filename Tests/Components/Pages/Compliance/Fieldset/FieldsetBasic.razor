@@ -1,0 +1,23 @@
+﻿@page "/component/compliance/fieldset/basic"
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic fieldset with legend" data-testid="basic">
+        <Fieldset>
+            <Fieldset.Legend>Contact preferences</Fieldset.Legend>
+            <Checkbox Id="email-pref" Label="Email" />
+            <Checkbox Id="sms-pref" Label="SMS" />
+            <Checkbox Id="phone-pref" Label="Phone" />
+        </Fieldset>
+    </section>
+
+    <section aria-label="Fieldset with description" data-testid="with-description">
+        <Fieldset>
+            <Fieldset.Legend>Newsletter subscription</Fieldset.Legend>
+            <Fieldset.Description>Choose which newsletters you want to receive</Fieldset.Description>
+            <Checkbox Id="news-daily" Label="Daily digest" />
+            <Checkbox Id="news-weekly" Label="Weekly summary" />
+        </Fieldset>
+    </section>
+</main>

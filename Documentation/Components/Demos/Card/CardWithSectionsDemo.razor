@@ -1,0 +1,34 @@
+﻿@using Hviktor.Components.Card
+@using Hviktor.Components.Typography
+
+<Card data-color="neutral" class="max-w-80">
+    <Card.Block>
+        <video controls preload="metadata" width="100%">
+            <source
+                src="/videos/designsystemet/designsystemet-info.mp4"
+                type="video/mp4"
+            />
+            <track
+                label="Norwegian"
+                kind="subtitles"
+                srcLang="nb"
+                src="/videos/designsystemet/designsystemet-info-no.vtt"
+                default
+            />
+            <track
+                label="English"
+                kind="subtitles"
+                srcLang="en"
+                src="/videos/designsystemet/designsystemet-info-en.vtt"
+            />
+            Your browser does not support the video tag.
+        </video>
+    </Card.Block>
+    <Card.Block>
+        <Heading>About Designsystemet</Heading>
+        <Paragraph>
+            The video above provides a brief introduction to what Designsystemet
+            is and how it can be used in the development of digital services.
+        </Paragraph>
+    </Card.Block>
+</Card>

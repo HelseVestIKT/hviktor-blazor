@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>Tests.Unit</RootNamespace>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <OutputType>Exe</OutputType>
+        <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+        <EnableMicrosoftCodeCoverage>true</EnableMicrosoftCodeCoverage>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest"/>
+        <Content Include="testconfig.json" CopyToOutputDirectory="PreserveNewest"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="bunit"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="xunit.v3.mtp-v2"/>
+        <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
+
+        <!-- Test reports -->
+        <PackageReference Include="Microsoft.Testing.Extensions.TrxReport"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Hviktor\Hviktor.csproj"/>
+        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
+        <ProjectReference Include="..\Hviktor.Extensions\Hviktor.Extensions.csproj"/>
+    </ItemGroup>
+</Project>

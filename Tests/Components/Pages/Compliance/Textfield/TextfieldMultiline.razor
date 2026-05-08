@@ -1,0 +1,20 @@
+﻿@page "/component/compliance/textfield/multiline"
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Multiline textfield">
+        <Textfield Id="textfield-multiline" Label="Description" MultiLine data-testid="multiline"/>
+    </section>
+
+    <section aria-label="Multiline textfield with description">
+        <Textfield Id="textfield-multiline-desc" Label="Comments" Description="Please provide detailed feedback"
+                   MultiLine data-testid="multiline-description"/>
+    </section>
+
+    <section aria-label="Multiline textfield with error">
+        <Textfield Id="textfield-multiline-error" Label="Notes" Error="This field is required" MultiLine
+                   data-testid="multiline-error"/>
+    </section>
+</main>

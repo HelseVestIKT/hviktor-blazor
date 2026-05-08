@@ -1,0 +1,39 @@
+﻿@page "/component/compliance/dialog/keyboard"
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+
+@code {
+    private Dialog keyboardDialogRef = null!;
+    private Dialog focusTrapDialogRef = null!;
+}
+
+<main data-testid="compliance-container">
+    <section aria-label="Dialog keyboard navigation test" data-testid="keyboard-navigation">
+        <Button data-testid="open-keyboard-dialog" @onclick="@(() => keyboardDialogRef.ShowModal())">
+            Open Keyboard Test
+            Dialog
+        </Button>
+        <Dialog @ref="keyboardDialogRef" data-testid="keyboard-dialog">
+            <h2>Keyboard Navigation Test</h2>
+            <p>Press Escape to close this dialog. Focus should return to the trigger button.</p>
+            <div>
+                <label for="test-input">Test Input:</label>
+                <input type="text" id="test-input" placeholder="Focus can move here"/>
+            </div>
+            <Button>Focusable Button</Button>
+        </Dialog>
+    </section>
+
+    <section aria-label="Dialog focus trap test" data-testid="focus-trap">
+        <Button data-testid="open-focus-trap-dialog" @onclick="@(() => focusTrapDialogRef.ShowModal())">
+            Open Focus Trap Dialog
+        </Button>
+        <Dialog @ref="focusTrapDialogRef" data-testid="focus-trap-dialog">
+            <h2>Focus Trap Test</h2>
+            <p>Tab navigation should be trapped within this modal dialog.</p>
+            <Button>First Button</Button>
+            <Button>Second Button</Button>
+            <Button>Third Button</Button>
+        </Dialog>
+    </section>
+</main>

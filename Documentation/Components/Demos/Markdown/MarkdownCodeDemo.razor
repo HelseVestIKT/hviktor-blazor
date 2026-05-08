@@ -1,0 +1,21 @@
+@using Hviktor.Components.Markdown
+
+@code {
+
+    private const string Text = """
+                                ## Blocks of code
+                                
+                                ```javascript
+                                let message = 'Hello world';
+                                alert(message);
+                                ```
+                                
+                                ## Inline code
+                                
+                                This web site is using `markdown`.
+                                
+                                """;
+
+}
+
+<Markdown Value="@Text"/>

@@ -1,0 +1,56 @@
+﻿@using Hviktor.Components.Button
+@using Hviktor.Components.Divider
+@using Hviktor.Components.Field
+@using Hviktor.Components.Suggestion
+@using Hviktor.Components.Typography
+
+@code {
+
+    private readonly List<string> DATA_PLACES =
+    [
+        "Sogndal",
+        "Oslo",
+        "Brønnøysund",
+        "Stavanger",
+        "Trondheim",
+        "Bergen",
+        "Lillestrøm",
+    ];
+
+    private string[] selected = [];
+    private void SetSelected(string[] items) => selected = items;
+}
+
+<div>
+
+    <Field>
+        <Label>Select destinations</Label>
+        <Suggestion multiple
+                    selected="@selected"
+                    onSelectedChange="@(EventCallback.Factory.Create<string[]>(this, SetSelected))">
+            <Suggestion.Input/>
+            <Suggestion.Clear/>
+            <Suggestion.List>
+                <Suggestion.Empty>
+                    No results found
+                </Suggestion.Empty>
+                @foreach (var place in DATA_PLACES)
+                {
+                    <Suggestion.Option @key="@place" label="@place" value="@place">
+                        @place
+                        <div>Municipality</div>
+                    </Suggestion.Option>
+                }
+            </Suggestion.List>
+        </Suggestion>
+    </Field>
+    <Divider class="mt-4"/>
+
+    <Paragraph class="m-2">
+        Selected destinations: @(string.Join(", ", selected))
+    </Paragraph>
+
+    <Button @onclick="@(() => SetSelected(["Sogndal", "Stavanger"]))">
+        Set destinations to Sogndal, Stavanger
+    </Button>
+</div>

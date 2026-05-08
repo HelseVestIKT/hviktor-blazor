@@ -1,0 +1,10 @@
+﻿@inherits Hviktor.Models.CascadingComponentBase
+
+<nav @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+</nav>

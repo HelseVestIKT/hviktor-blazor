@@ -1,0 +1,15 @@
+﻿@using Hviktor.Components.Field
+@using Hviktor.Components.Textarea
+@using Hviktor.Components.Typography
+
+<Field>
+    <Label htmlFor="my-textarea-readonly-en">Case description</Label>
+    <Field.Description>
+        This text has been added automatically based on information you have
+        already submitted, and cannot be edited.
+    </Field.Description>
+    <Textarea
+        id="my-textarea-readonly-en"
+        readOnly
+        value="I am applying for support because I need funding to carry out the project as planned."></Textarea>
+</Field>

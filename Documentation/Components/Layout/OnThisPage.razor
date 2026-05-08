@@ -1,0 +1,41 @@
+﻿@using Hviktor.Components.Divider
+@using Hviktor.Components.Icon
+@using Documentation.Components.Services
+
+@if (Entries.Count > 0)
+{
+    <aside class="on-this-page" aria-label="Navigation on this page">
+        <h2 class="ds-paragraph on-this-page__header" data-variant="default" data-size="sm">On this page</h2>
+
+        <ol class="on-this-page__list" role="list">
+            @foreach ((var id, var label, var nestLevel) in Entries)
+            {
+                var isActive = string.Equals(ActiveFragment, id, StringComparison.OrdinalIgnoreCase);
+                <li @key="id"
+                    class="@("on-this-page__item" + (nestLevel > 0 ? $" on-this-page__item--nested-{nestLevel}" : ""))">
+                    <a href="@($"{CurrentPathWithoutFragment}#{id}")"
+                       class="@("on-this-page__link ds-paragraph" + (isActive ? " active" : ""))"
+                       aria-current="@(isActive ? "true" : null)"
+                       @onclick="@(() => SetActive(id))">
+                        @label
+                    </a>
+                </li>
+            }
+        </ol>
+
+        <Divider class="my-2"/>
+
+        <div class="on-this-page__footer">
+            <p class="ds-paragraph" data-variant="default" data-size="sm">
+                Do you have any feedback for this component?
+            </p>
+            <a href="@($"https://github.com/HelseVestIKT/hviktor-blazor/issues/new?template=BLANK_ISSUE&title=Feedback%3A+{FeedbackTitle}")"
+               target="_blank" rel="noopener noreferrer"
+               class="ds-button" data-variant="secondary" data-size="sm">
+                <Icon Definition="@DocumentationIconSet.PencilWriting"/>
+                Feedback on GitHub
+            </a>
+        </div>
+    </aside>
+}
+

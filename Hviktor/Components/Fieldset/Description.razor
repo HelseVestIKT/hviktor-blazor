@@ -1,0 +1,8 @@
+﻿@* ReSharper disable once CheckNamespace *@
+@namespace Fieldset
+@using Hviktor.Components.Typography
+@inherits Hviktor.Models.NestedComponentBase<Hviktor.Components.Fieldset.Fieldset>
+
+<Paragraph @attributes="@(ComputeAttributes())">
+    @ChildContent
+</Paragraph>

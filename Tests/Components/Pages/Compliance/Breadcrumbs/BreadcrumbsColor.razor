@@ -1,0 +1,25 @@
+﻿@page "/component/compliance/breadcrumbs/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Breadcrumbs
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent color">
+        <Breadcrumbs Color="@Color.Accent" aria-label="Breadcrumb navigation" data-testid="accent">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item aria-current="page">Current Page</Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+
+    <section aria-label="Neutral color">
+        <Breadcrumbs Color="@Color.Neutral" aria-label="Breadcrumb navigation" data-testid="neutral">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item aria-current="page">Current Page</Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+</main>

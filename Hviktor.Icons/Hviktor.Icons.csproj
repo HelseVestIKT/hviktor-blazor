@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFrameworks>net10.0;net10.0-browser</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AddRazorSupportForMvc>false</AddRazorSupportForMvc>
+        <OptimizeCompilations>true</OptimizeCompilations>
+        <EnableDefaultContentItems>true</EnableDefaultContentItems>
+        <EnableDefaultEmbeddedStaticWebAssets>true</EnableDefaultEmbeddedStaticWebAssets>
+        <!--  XML Documentation  -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- Package Metadata -->
+        <PackageId>Hviktor.Icons</PackageId>
+        <Description>Icon constants wrapping NAV Aksel icons for the Hviktor Blazor component library</Description>
+        <PackageTags>blazor;dotnet;csharp;icons;svg;hviktor;aksel;nav;icon-library</PackageTags>
+        <RootNamespace>Hviktor.Icons</RootNamespace>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Hviktor.Icons.xml</DocumentationFile>
+    </PropertyGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PackageReference Include="Hviktor.Icons.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <!-- Projects -->
+        <None Include="**\*.Tests\**" Pack="false"/>
+        <None Include="**\*.Test\**" Pack="false"/>
+        <None Include="**\*.spec.*" Pack="false"/>
+        <!-- Additional files -->
+        <None Include="**\*.mjs" Pack="false"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    <!-- Embed XML docs as a resource so WASM consumers can read them -->
+    <Target Name="EmbedXmlDocumentation" AfterTargets="Build">
+        <ItemGroup>
+            <EmbeddedResource Include="$(OutputPath)$(AssemblyName).xml"
+                              LogicalName="$(AssemblyName).$(AssemblyName).xml"
+                              Condition="Exists('$(OutputPath)$(AssemblyName).xml')"/>
+        </ItemGroup>
+    </Target>
+
+</Project>

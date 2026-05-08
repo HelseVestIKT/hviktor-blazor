@@ -1,0 +1,60 @@
+﻿@page "/component/compliance/table/scope"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <section aria-label="Table with column scope headers">
+        <Table Id="table-col-scope" data-testid="col-scope">
+            <caption>Table with column scope headers</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Product</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Price</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Quantity</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Widget A</Table.Cell>
+                    <Table.Cell>$10.00</Table.Cell>
+                    <Table.Cell>100</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Widget B</Table.Cell>
+                    <Table.Cell>$15.00</Table.Cell>
+                    <Table.Cell>50</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with row scope headers">
+        <Table Id="table-row-scope" data-testid="row-scope">
+            <caption>Table with row scope headers</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Category</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Q1</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Q2</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Q3</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Q4</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.HeaderCell scope="row">Revenue</Table.HeaderCell>
+                    <Table.Cell>$100K</Table.Cell>
+                    <Table.Cell>$120K</Table.Cell>
+                    <Table.Cell>$115K</Table.Cell>
+                    <Table.Cell>$130K</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.HeaderCell scope="row">Expenses</Table.HeaderCell>
+                    <Table.Cell>$80K</Table.Cell>
+                    <Table.Cell>$85K</Table.Cell>
+                    <Table.Cell>$82K</Table.Cell>
+                    <Table.Cell>$90K</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

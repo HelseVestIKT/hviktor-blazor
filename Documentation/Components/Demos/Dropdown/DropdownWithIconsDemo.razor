@@ -1,0 +1,34 @@
+﻿@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+<Dropdown.TriggerContext>
+    <Dropdown.Trigger>Dropdown</Dropdown.Trigger>
+    <Dropdown>
+        <Dropdown.List>
+            <Dropdown.Item>
+                <Dropdown.Button asChild>
+                    <a
+                        href="https://github.com/digdir/designsystemet"
+                        target="_blank"
+                        rel="noreferrer">
+                        <Icon Definition="@IconSet.Link" aria-hidden="true"/>
+                        Github
+                    </a>
+                </Dropdown.Button>
+            </Dropdown.Item>
+            <Dropdown.Item>
+                <Dropdown.Button asChild>
+                    <a
+                        href="https://designsystemet.no"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <Icon Definition="@IconSet.Link" aria-hidden="true"/>
+                        Designsystemet.no
+                    </a>
+                </Dropdown.Button>
+            </Dropdown.Item>
+        </Dropdown.List>
+    </Dropdown>
+</Dropdown.TriggerContext>

@@ -1,0 +1,24 @@
+@use "../mixins/modal-mixin" as error-modal;
+
+body:has(dialog#dotnet-compile-error-ui[open]) {
+  overflow: hidden;
+}
+
+#dotnet-compile-error {
+  display: none !important;
+}
+
+#dotnet-compile-error-ui {
+  z-index: 1000000;
+
+  .dotnet-compile-error-ui-failed {
+    color: var(--ds-color-danger-base-default);
+    @include error-modal.svg();
+
+    svg {
+      @include error-modal.animation();
+      @include error-modal.animation-svg();
+      @include error-modal.failure-animation-svg();
+    }
+  }
+}

@@ -1,0 +1,70 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Tag
+@using Hviktor.Components.Typography
+@using Documentation.Components.Services
+
+<nav class="sidebar">
+    <ul class="sidebar__list" role="list">
+        @{
+            var isChangelog = ActiveSlug?.Equals("changelog", StringComparison.OrdinalIgnoreCase) == true;
+        }
+        <li class="sidebar__group">
+            <ul class="sidebar__group-list" role="list">
+                <li @class="sidebar__item">
+                    <a href="components/changelog"
+                       class="@("ds-link ds-paragraph sidebar__link ds-paragraph" + (isChangelog ? " active" : ""))"
+                       aria-current="@(isChangelog ? "page" : null)" data-discover="true"
+                       @onclick="@(() => SetActive("changelog"))">
+                        Changelog
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @foreach (var group in Registry.Groups)
+        {
+            <li @key="group.Title" class="sidebar__group">
+                <Paragraph class="sidebar__group-title" variant="default" data-weight="semibold">
+                    @group.Title
+                </Paragraph>
+                <ul class="sidebar__group-list" role="list">
+                    @foreach (var component in group.Items)
+                    {
+                        var slug = component.Slug;
+                        var href = $"/components/{slug}/{CurrentTab}";
+                        var isActive = ActiveSlug?.Equals(slug, StringComparison.OrdinalIgnoreCase) == true;
+                        <li @key="slug" class="sidebar__item">
+                            <a href="@href"
+                               class="@("ds-link ds-paragraph sidebar__link ds-paragraph" + (isActive ? " active" : ""))"
+                               aria-current="@(isActive ? "page" : null)" data-discover="true"
+                               @onclick="@(() => SetActive(slug))">
+                                @component.Title
+                                @if (component.IsDeprecated)
+                                {
+                                    <Tag color="danger" size="sm">Deprecated</Tag>
+                                }
+                                @if (component.IsExperimental)
+                                {
+                                    <Tag color="warning" size="sm">Experimental</Tag>
+                                }
+                                @if (component.IsValidated)
+                                {
+                                    <Tag color="success" size="sm">
+                                        <Icon Definition="@DocumentationIconSet.CheckmarkCircle" aria-hidden="true"/>
+                                    </Tag>
+                                }
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+
+    @if (!Registry.Groups.Any())
+    {
+        <Paragraph size="@Size.Small" class="sidebar__empty">
+            Ingen komponenter funnet.
+        </Paragraph>
+    }
+</nav>

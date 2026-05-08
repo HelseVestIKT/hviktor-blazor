@@ -1,0 +1,47 @@
+﻿@page "/component/compliance/select/basic"
+@using Hviktor.Components.Select
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Basic select with options *@
+    <section aria-label="Basic select" data-testid="basic">
+        <Field>
+            <Label for="basic-select-id">Choose a country</Label>
+            <Select Id="basic-select-id" data-testid="basic-select">
+                <Select.Option Value="">Select a country</Select.Option>
+                <Select.Option Value="no">Norway</Select.Option>
+                <Select.Option Value="se">Sweden</Select.Option>
+                <Select.Option Value="dk">Denmark</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Select with many options *@
+    <section aria-label="Select with many options" data-testid="many-options">
+        <Field>
+            <Label for="many-select-id">Choose a programming language</Label>
+            <Select Id="many-select-id" data-testid="many-select">
+                <Select.Option Value="">Select a language</Select.Option>
+                <Select.Option Value="csharp">C#</Select.Option>
+                <Select.Option Value="java">Java</Select.Option>
+                <Select.Option Value="javascript">JavaScript</Select.Option>
+                <Select.Option Value="python">Python</Select.Option>
+                <Select.Option Value="rust">Rust</Select.Option>
+                <Select.Option Value="go">Go</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Select with preselected value *@
+    <section aria-label="Select with default value" data-testid="preselected">
+        <Field>
+            <Label for="preselected-select-id">Choose a size</Label>
+            <Select Id="preselected-select-id" DefaultValue="medium" data-testid="preselected-select">
+                <Select.Option Value="small">Small</Select.Option>
+                <Select.Option Value="medium">Medium</Select.Option>
+                <Select.Option Value="large">Large</Select.Option>
+            </Select>
+        </Field>
+    </section>
+</main>

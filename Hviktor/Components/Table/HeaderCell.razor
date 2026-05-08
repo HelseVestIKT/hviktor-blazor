@@ -1,0 +1,14 @@
+﻿@namespace Table
+
+<th @attributes="@(ComputeAttributes())" data-initialSortValue="@InitialSortDirection">
+    @if (InitialSortDirection is not null)
+    {
+        <button type="button" @onclick="HandleSort">
+            @ChildContent
+        </button>
+    }
+    else
+    {
+        @ChildContent
+    }
+</th>

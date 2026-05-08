@@ -1,0 +1,53 @@
+﻿@page "/component/compliance/card/structure"
+@using Hviktor.Components.Card
+@using Hviktor.Components.Divider
+
+<main data-testid="compliance-container">
+    <section aria-label="Card with block">
+        <Card data-testid="with-block">
+            <Card.Block>
+                <p>This is a card with a block component for structured content.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Card with heading">
+        <Card data-testid="with-heading">
+            <Card.Block>
+                <h3>Card Heading</h3>
+                <p>This is a card with proper heading structure for accessibility.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Card with divider">
+        <Card data-testid="with-divider">
+            <Card.Block>
+                <h3>Section One</h3>
+                <p>Content in the first section of the card.</p>
+            </Card.Block>
+            <Divider/>
+            <Card.Block>
+                <h3>Section Two</h3>
+                <p>Content in the second section of the card.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Card with multiple blocks">
+        <Card data-testid="with-multiple-blocks">
+            <Card.Block>
+                <h3>First Block</h3>
+                <p>This is the first block in the card.</p>
+            </Card.Block>
+            <Card.Block>
+                <h3>Second Block</h3>
+                <p>This is the second block in the card.</p>
+            </Card.Block>
+            <Card.Block>
+                <h3>Third Block</h3>
+                <p>This is the third block in the card.</p>
+            </Card.Block>
+        </Card>
+    </section>
+</main>

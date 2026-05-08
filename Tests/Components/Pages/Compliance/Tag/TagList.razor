@@ -1,0 +1,16 @@
+﻿@page "/component/compliance/tag/list"
+@using Hviktor.Components.Tag
+
+<main data-testid="compliance-container">
+    <section aria-label="Tags in a list for accessibility">
+        <ul data-testid="tag-list" style="list-style: none; padding: 0; display: flex; gap: 0.5rem;">
+            <li><Tag data-testid="tag-item-1">Category 1</Tag></li>
+            <li><Tag data-testid="tag-item-2">Category 2</Tag></li>
+            <li><Tag data-testid="tag-item-3">Category 3</Tag></li>
+        </ul>
+    </section>
+
+    <section aria-label="Single tag without list">
+        <Tag data-testid="single-tag">Single Tag</Tag>
+    </section>
+</main>

@@ -1,0 +1,29 @@
+﻿@page "/component/compliance/tooltip/placement"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tooltip
+
+<main data-testid="compliance-container" style="padding: 100px;">
+    <section aria-label="Top placement tooltip">
+        <Tooltip Content="Top tooltip" Placement="Placement.Top">
+            <button data-testid="top-trigger">Top</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Right placement tooltip">
+        <Tooltip Content="Right tooltip" Placement="Placement.Right">
+            <button data-testid="right-trigger">Right</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Bottom placement tooltip">
+        <Tooltip Content="Bottom tooltip" Placement="Placement.Bottom">
+            <button data-testid="bottom-trigger">Bottom</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Left placement tooltip">
+        <Tooltip Content="Left tooltip" Placement="Placement.Left">
+            <button data-testid="left-trigger">Left</button>
+        </Tooltip>
+    </section>
+</main>

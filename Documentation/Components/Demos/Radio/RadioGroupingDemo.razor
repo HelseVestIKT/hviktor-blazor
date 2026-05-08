@@ -1,0 +1,28 @@
+﻿@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Radio
+
+<Fieldset>
+    <Fieldset.Legend>How would you like us to contact you?</Fieldset.Legend>
+    <Fieldset.Description>
+        Choose the method that works best for you. We use this only to send
+        important updates about your case.
+    </Fieldset.Description>
+    <Radio
+        label="Email"
+        description="We will use the email address you provided earlier (name@example.com)"
+        value="email"
+        name="contact"
+    />
+    <Radio
+        label="SMS"
+        description="We will use the phone number you provided earlier (99 99 99 99)"
+        value="sms"
+        name="contact"
+    />
+    <Radio
+        label="Letter"
+        description="Delivery may take 3-5 working days, depending on the postal service."
+        value="letter"
+        name="contact"
+    />
+</Fieldset>

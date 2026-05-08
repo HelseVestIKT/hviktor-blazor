@@ -1,0 +1,46 @@
+// Common styles for readonly inputs
+// this is necessary because some browsers (like Safari) or components like select or checkbox do not support the readonly attribute
+@mixin readonly() {
+  pointer-events: none;
+  cursor: default;
+}
+
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  @include readonly();
+
+  label {
+    @include readonly();
+  }
+}
+
+.ds-link[aria-current="page"] {
+  color: var(--dsc-link-color--active);
+}
+
+.ds-link:has(span):has(img, svg) {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/*
+    Fix for images and svgs inside links getting display: block instead
+    of intended display: inline from designsystemet-css
+ */
+.ds-link :is(img, svg) {
+  display: inline;
+}
+
+/*
+ * Restore list styling for ds-list elements.
+ * Tailwind's Preflight removes list-style by default, but Designsystemet expects it.
+ */
+ul.ds-list {
+  list-style: disc;
+}
+
+ol.ds-list {
+  list-style: decimal;
+}

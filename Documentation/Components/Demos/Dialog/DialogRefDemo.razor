@@ -1,0 +1,20 @@
+﻿@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+@using Hviktor.Components.Typography
+
+@code {
+    private Dialog DialogRef { get; set; } = null!;
+}
+
+<Button aria-haspopup="dialog" @onclick="@(() => DialogRef.ShowModal())">
+    Open Dialog with ref
+</Button>
+<Dialog @ref="@DialogRef" Id="dialog-ref-demo">
+    <Heading class="mb-2">
+        Dialog header
+    </Heading>
+    <Paragraph class="mb-2">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis
+        doloremque obcaecati assumenda odio ducimus sunt et.
+    </Paragraph>
+</Dialog>

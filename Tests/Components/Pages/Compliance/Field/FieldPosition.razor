@@ -1,0 +1,18 @@
+﻿@page "/component/compliance/field/position"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Field
+
+<main data-testid="compliance-container">
+    <section aria-label="Field with position start" data-testid="position-start">
+        <Field Position="@Position.Start">
+            <Checkbox Id="checkbox-start" Label="Accept terms" />
+        </Field>
+    </section>
+
+    <section aria-label="Field with position end" data-testid="position-end">
+        <Field Position="@Position.End">
+            <Checkbox Id="checkbox-end" Label="Subscribe to newsletter" />
+        </Field>
+    </section>
+</main>

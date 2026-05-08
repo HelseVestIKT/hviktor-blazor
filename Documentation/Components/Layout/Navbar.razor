@@ -1,0 +1,251 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Field
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Link
+@using Hviktor.Components.Logo
+@using Hviktor.Components.Search
+@using Hviktor.Components.Tooltip
+@using Hviktor.Components.Typography
+@using Documentation.Components.Services
+@using Hviktor.Components.Dialog
+@using Hviktor.Components.Input
+@using Hviktor.Components.Markdown
+@using Hviktor.Components.Spinner
+@using Hviktor.Components.Tag
+
+<Dialog @ref="searchDialogRef" id="search-components-dialog">
+    <div class="ds-dialog__block">
+        <Heading level="2" size="sm" class="mb-6">
+            What are you looking for?
+        </Heading>
+        <Search type="search" id="search-components">
+            <Input value="@SearchFilter" @oninput="@OnSearchInput"
+                   placeholder="Search components, guidelines, and more..."/>
+            <Search.Clear @onclick="@ClearSearch"/>
+        </Search>
+    </div>
+    <div class="ds-dialog__block search-dialog-content">
+        <div class="search-results-container">
+            @if (string.IsNullOrWhiteSpace(SearchFilter))
+            {
+                <Paragraph class="mb-3!" data-weight="medium">Try searching for...</Paragraph>
+                <div class="suggestions">
+                    <Chip.Button @onclick="@(() => SetSearchFilter("Button"))">
+                        Button
+                    </Chip.Button>
+                    <Chip.Button @onclick="@(() => SetSearchFilter("CodeBlock"))">
+                        CodeBlock
+                    </Chip.Button>
+                    <Chip.Button @onclick="@(() => SetSearchFilter("Icon"))">
+                        Icon
+                    </Chip.Button>
+                    <Chip.Button @onclick="@(() => SetSearchFilter("Tooltip"))">
+                        Tooltip
+                    </Chip.Button>
+                </div>
+            }
+            else if (isSearching)
+            {
+                <div class="flex items-center justify-center p-8">
+                    <Spinner aria-label="Searching..." size="@Size.Medium"/>
+                </div>
+            }
+            else if (!FilteredItems.Any())
+            {
+                <div class="no-results text-center p-8 text-(--ds-color-neutral-text-subtle)">
+                    No results found for "@SearchFilter"
+                </div>
+            }
+            else
+            {
+                <div class="search-results">
+                    <Heading level="2" size="sm" class="mb-6!">Search results</Heading>
+                    <section class="results flex flex-col gap-6">
+                        @foreach (var result in FilteredItems)
+                        {
+                            <div class="quick-results" style="--i: 0;">
+                                <div class="result-header flex items-center justify-between gap-2">
+                                    <Heading level="3">
+                                        <NavigationLink href="@result.Href"
+                                                        data-discover="true">
+                                            @result.Title
+                                        </NavigationLink>
+                                    </Heading>
+                                    <span class="result-tags flex items-center gap-2">
+                                        <Tag variant="default" size="sm" color="@Color.Info">
+                                            <Icon Definition="@DocumentationIconSet.Component" aria-hidden="true"/>
+                                            <span class="ml-2">Component</span>
+                                        </Tag>
+                                        @if (result.Component.IsExperimental)
+                                        {
+                                            <Tag variant="default" size="sm" color="@Color.Warning">
+                                                <Icon Definition="@DocumentationIconSet.ExclamationmarkTriangle"
+                                                      aria-hidden="true"/>
+                                                <span class="ml-2">Experimental</span>
+                                            </Tag>
+                                        }
+                                        @if (result.Component.IsDeprecated)
+                                        {
+                                            <Tag variant="default" size="sm" color="@Color.Danger">
+                                                <Icon Definition="@DocumentationIconSet.ExclamationmarkTriangle"
+                                                      aria-hidden="true"/>
+                                                <span class="ml-2">Deprecated</span>
+                                            </Tag>
+                                        }
+                                    </span>
+                                </div>
+                                <Paragraph size="sm" data-variant="default" class="mt-4!">
+                                    <Markdown Value="@result.Component.Description"/>
+                                </Paragraph>
+                                <Paragraph size="sm" data-variant="default"
+                                           class="mt-3! text-(--ds-color-neutral-text-subtle) wrap-anywhere">
+                                    @($"{Navigation.BaseUri.TrimEnd("/")}{result.Href}")
+                                </Paragraph>
+                            </div>
+                        }
+                    </section>
+                </div>
+            }
+        </div>
+    </div>
+</Dialog>
+
+<header class="navbar px-8 py-4">
+    <div class="navbar__container">
+        <div class="flex items-center gap-6">
+            <Logo company="@Company.HVIKTOR" size="@Size.Small" aria-hidden="true"/>
+            <Heading level="2" size="lg">Hviktor</Heading>
+        </div>
+
+        <nav class="navbar__menu-bar flex items-center justify-between gap-4">
+            <ol class="navbar__menu-list flex gap-7 items-center list-none!">
+                <li>
+                    <NavigationLink Match="@NavLinkMatch.Prefix" class="ds-paragraph header-link" size="md"
+                                    variant="default" href="components">
+                        Components
+                    </NavigationLink>
+                </li>
+                <li>
+                    <HyperLink class="ds-paragraph header-link" size="md"
+                               variant="default" href="https://designsystemet.no/en/patterns">
+                        Patterns
+                        <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+                    </HyperLink>
+                </li>
+                <li>
+                    <HyperLink class="ds-paragraph header-link" size="md"
+                               variant="default" href="https://designsystemet.no/en/best-practices">
+                        Best Practices
+                        <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+                    </HyperLink>
+                </li>
+                <li>
+                    <HyperLink class="ds-paragraph header-link" size="md"
+                               variant="default" href="https://designsystemet.no/en/blog">
+                        Blog
+                        <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+                    </HyperLink>
+                </li>
+                <li>
+                    <HyperLink class="ds-paragraph header-link" size="md"
+                               variant="default" href="https://theme.designsystemet.no/en">
+                        Theme Builder
+                        <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+                    </HyperLink>
+                </li>
+            </ol>
+
+            <div class="navbar__actions flex items-center gap-4">
+                <Field>
+                    <Button variant="secondary" color="neutral" id="search-components-button"
+                            @onclick="@searchDialogRef.ShowModal" aria-label="Search"
+                            aria-keyshortcuts="Control+K" aria-haspopup="dialog">
+                        <Icon Definition="@DocumentationIconSet.MagnifyingGlass" aria-hidden="true"/>
+                        <span class="navbar__action-label">Search</span>
+                    </Button>
+                </Field>
+
+                <Tooltip content="English" placement="@Placement.Bottom">
+                    <Button variant="@Variant.Tertiary" color="@Color.Neutral" disabled>
+                        <Icon Definition="@DocumentationIconSet.Language" aria-hidden="true"/>
+                        <span class="navbar__action-label">Language</span>
+                    </Button>
+                </Tooltip>
+
+                <Button @onclick="@(async () => await ToggleColorScheme())" icon
+                        color="@Color.Neutral"
+                        variant="@Variant.Tertiary"
+                        aria-label="Skift mellom lys og mørk modus">
+                    <Icon Definition="@GetIcon()"/>
+                </Button>
+            </div>
+
+            <Button class="navbar__menu-toggle ds-focus"
+                    type="button"
+                    icon
+                    variant="tertiary"
+                    color="neutral"
+                    popovertarget="hamburgerMenu"
+                    popovertargetaction="show"
+                    aria-label="Open menu">
+                <Icon Definition="@DocumentationIconSet.MenuHamburger" aria-hidden="true"/>
+            </Button>
+        </nav>
+    </div>
+</header>
+
+<div class="navbar__hamburger" id="hamburgerMenu" popover="auto">
+    <div class="navbar__hamburger-header">
+        <div class="flex items-center gap-6">
+            <Logo company="@Company.HVIKTOR" size="@Size.Small" aria-hidden="true"/>
+            <Heading level="2" size="lg">Hviktor</Heading>
+        </div>
+        <Button class="ds-focus"
+                type="button"
+                icon
+                variant="tertiary"
+                color="neutral"
+                popovertarget="hamburgerMenu"
+                popovertargetaction="hide"
+                aria-label="Close menu">
+            <Icon Definition="@DocumentationIconSet.XMark" aria-hidden="true"/>
+        </Button>
+    </div>
+    <ul class="navbar__hamburger-list">
+        <li>
+            <NavigationLink Match="@NavLinkMatch.All" class="ds-paragraph header-link" size="md"
+                            variant="default" href="/">
+                Components
+            </NavigationLink>
+        </li>
+        <li>
+            <HyperLink class="ds-paragraph header-link" size="md"
+                       variant="default" href="https://designsystemet.no/en/patterns">
+                Patterns
+                <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+            </HyperLink>
+        </li>
+        <li>
+            <HyperLink class="ds-paragraph header-link" size="md"
+                       variant="default" href="https://designsystemet.no/en/best-practices">
+                Best Practices
+                <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+            </HyperLink>
+        </li>
+        <li>
+            <HyperLink class="ds-paragraph header-link" size="md"
+                       variant="default" href="https://designsystemet.no/en/blog">
+                Blog
+                <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+            </HyperLink>
+        </li>
+        <li>
+            <HyperLink class="ds-paragraph header-link" size="md"
+                       variant="default" href="https://theme.designsystemet.no/en">
+                Theme Builder
+                <Icon Definition="@DocumentationIconSet.ArrowRight"/>
+            </HyperLink>
+        </li>
+    </ul>
+</div>

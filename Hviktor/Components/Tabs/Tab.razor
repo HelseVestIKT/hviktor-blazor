@@ -1,0 +1,6 @@
+﻿@namespace Tabs
+@inherits Hviktor.Models.NestedComponentBase<List>
+
+<button @onclick="@OnClickEvent" @attributes="@(ComputeAttributes())">
+    @ChildContent
+</button>

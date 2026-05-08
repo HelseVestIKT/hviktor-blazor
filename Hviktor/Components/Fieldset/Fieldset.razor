@@ -1,0 +1,8 @@
+﻿@namespace Hviktor.Components.Fieldset
+@inherits Hviktor.Models.CascadingComponentBase
+
+<fieldset @attributes="@(ComputeAttributes())">
+    <CascadingValue Value="@this">
+        @ChildContent
+    </CascadingValue>
+</fieldset>

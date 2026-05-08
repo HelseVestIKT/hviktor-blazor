@@ -1,0 +1,48 @@
+﻿@page "/component/compliance/input/accessibility"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Input with proper label association *@
+    <section aria-label="Input with label" data-testid="accessibility-label">
+        <Field>
+            <Label for="acc-input">Accessible input with label</Label>
+            <Input Id="acc-input" type="@InputType.Text"/>
+        </Field>
+    </section>
+
+    @* Input with description for additional context *@
+    <section aria-label="Input with description" data-testid="accessibility-description">
+        <Field>
+            <Label for="acc-desc-input">Username</Label>
+            <Field.Description>Choose a unique username between 3-20 characters</Field.Description>
+            <Input Id="acc-desc-input" type="@InputType.Text"/>
+        </Field>
+    </section>
+
+    @* Multiple inputs for tab navigation testing *@
+    <section aria-label="Multiple inputs for navigation" data-testid="accessibility-navigation">
+        <Field>
+            <Label for="nav-input-1">First name</Label>
+            <Input Id="nav-input-1" type="@InputType.Text" data-testid="nav-field-1"/>
+        </Field>
+        <Field>
+            <Label for="nav-input-2">Last name</Label>
+            <Input Id="nav-input-2" type="@InputType.Text" data-testid="nav-field-2"/>
+        </Field>
+        <Field>
+            <Label for="nav-input-3">Email</Label>
+            <Input Id="nav-input-3" type="@InputType.Email" data-testid="nav-field-3"/>
+        </Field>
+    </section>
+
+    @* Input with aria-invalid for error state *@
+    <section aria-label="Input with error state" data-testid="accessibility-error">
+        <Field>
+            <Label for="error-input">Email with error</Label>
+            <Input Id="error-input" type="@InputType.Email" aria-invalid="true" value="invalid-email"/>
+        </Field>
+    </section>
+</main>

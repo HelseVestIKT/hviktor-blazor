@@ -1,0 +1,87 @@
+﻿name: Update Icons
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays at 06:00 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-icons
+  cancel-in-progress: true
+
+jobs:
+  update-icons:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: Get latest @helsevestikt/hviktor-icons version
+        id: get-version
+        working-directory: Hviktor.Icons
+        run: |
+          VERSION=$(pnpm view @helsevestikt/hviktor-icons version)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Latest @helsevestikt/hviktor-icons version: $VERSION"
+
+      - name: Check if icons are already up to date
+        id: check-version
+        working-directory: Hviktor.Icons
+        run: |
+          LATEST="${{ steps.get-version.outputs.version }}"
+          if [ -f icons-meta.json ]; then
+            CURRENT=$(node -e "process.stdout.write(require('./icons-meta.json').version ?? '')")
+            echo "Current version: $CURRENT"
+            if [ "$CURRENT" = "$LATEST" ]; then
+              echo "Icons are already up to date ($LATEST). Skipping generation."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "Updating icons from $CURRENT to $LATEST"
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "No icons-meta.json found. Generating icons for the first time."
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies and update icons package
+        if: steps.check-version.outputs.skip != 'true'
+        working-directory: Hviktor.Icons
+        run: |
+          pnpm install
+          pnpm install @helsevestikt/hviktor-icons@${{ steps.get-version.outputs.version }}
+          node generate-iconset.mjs
+
+      - name: Create or update pull request
+        id: pr
+        if: steps.check-version.outputs.skip != 'true'
+        uses: HelseVestIKT/samlepunktet-actions/create-pr@v0.0.10
+        with:
+          delete-branch-on-failure: true
+          branch: automated/update-hviktor-icons
+          commit-message: "refactor: Update @helsevestikt/hviktor-icons to ${{ steps.get-version.outputs.version }}"
+          pr-body: |
+            ## Automated Icon Update
+
+            This PR updates `@helsevestikt/hviktor-icons` to version **${{ steps.get-version.outputs.version }}**.
+
+            **Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          reset-branch: true
+          labels: |
+            dependencies
+            automated
+          github-token: ${{ secrets.GITHUB_TOKEN }}

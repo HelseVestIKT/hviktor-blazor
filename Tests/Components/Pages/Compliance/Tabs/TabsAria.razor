@@ -1,0 +1,19 @@
+﻿@page "/component/compliance/tabs/aria"
+@using Hviktor.Components.Tabs
+
+<main data-testid="compliance-container">
+    <section aria-label="Tabs with proper ARIA attributes">
+        <Tabs data-testid="aria-tabs" DefaultValue="overview">
+            <Tabs.List data-testid="aria-tablist">
+                <Tabs.Tab Value="overview" data-testid="overview-tab">Overview</Tabs.Tab>
+                <Tabs.Tab Value="details" data-testid="details-tab">Details</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panel Value="overview" data-testid="overview-panel">
+                <p>Overview panel with accessible content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="details" data-testid="details-panel">
+                <p>Details panel with accessible content</p>
+            </Tabs.Panel>
+        </Tabs>
+    </section>
+</main>

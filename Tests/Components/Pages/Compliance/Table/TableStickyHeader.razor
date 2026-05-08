@@ -1,0 +1,48 @@
+﻿@page "/component/compliance/table/sticky-header"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <section aria-label="Table without sticky header">
+        <Table Id="table-no-sticky" data-testid="no-sticky-header">
+            <caption>Table without sticky header</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item 1</Table.Cell>
+                    <Table.Cell>Value 1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 2</Table.Cell>
+                    <Table.Cell>Value 2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with sticky header">
+        <Table Id="table-sticky" StickyHeader="true" data-testid="sticky-header">
+            <caption>Table with sticky header</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item 1</Table.Cell>
+                    <Table.Cell>Value 1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 2</Table.Cell>
+                    <Table.Cell>Value 2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

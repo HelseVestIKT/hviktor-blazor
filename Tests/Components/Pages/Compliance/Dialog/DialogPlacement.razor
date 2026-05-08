@@ -1,0 +1,54 @@
+﻿@page "/component/compliance/dialog/placement"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+
+@code {
+    private Dialog centerDialogRef = null!;
+    private Dialog leftDialogRef = null!;
+    private Dialog rightDialogRef = null!;
+    private Dialog topDialogRef = null!;
+    private Dialog bottomDialogRef = null!;
+}
+
+<main data-testid="compliance-container">
+    <section aria-label="Dialog center placement" data-testid="center">
+        <Dialog @ref="centerDialogRef" Placement="@Placement.Center">
+            <h2>Center Dialog</h2>
+            <p>This dialog is centered on the screen.</p>
+        </Dialog>
+        <Button @onclick="@(() => centerDialogRef.ShowModal())">Open Center Dialog</Button>
+    </section>
+
+    <section aria-label="Dialog left placement" data-testid="left">
+        <Dialog @ref="leftDialogRef" Placement="@Placement.Left">
+            <h2>Left Drawer</h2>
+            <p>This dialog appears from the left side.</p>
+        </Dialog>
+        <Button @onclick="@(() => leftDialogRef.ShowModal())">Open Left Drawer</Button>
+    </section>
+
+    <section aria-label="Dialog right placement" data-testid="right">
+        <Dialog @ref="rightDialogRef" Placement="@Placement.Right">
+            <h2>Right Drawer</h2>
+            <p>This dialog appears from the right side.</p>
+        </Dialog>
+        <Button @onclick="@(() => rightDialogRef.ShowModal())">Open Right Drawer</Button>
+    </section>
+
+    <section aria-label="Dialog top placement" data-testid="top">
+        <Dialog @ref="topDialogRef" Placement="@Placement.Top">
+            <h2>Top Drawer</h2>
+            <p>This dialog appears from the top.</p>
+        </Dialog>
+        <Button @onclick="@(() => topDialogRef.ShowModal())">Open Top Drawer</Button>
+    </section>
+
+    <section aria-label="Dialog bottom placement" data-testid="bottom">
+        <Dialog @ref="bottomDialogRef" Placement="@Placement.Bottom">
+            <h2>Bottom Drawer</h2>
+            <p>This dialog appears from the bottom.</p>
+        </Dialog>
+        <Button @onclick="@(() => bottomDialogRef.ShowModal())">Open Bottom Drawer</Button>
+    </section>
+</main>

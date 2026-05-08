@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2024",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ES2022", "ES2024", "ESNext", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "types": ["blazor__javascript-interop"],
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "typeRoots": ["./wwwroot/scripts/types", "./node_modules/@types"],
+    "paths": {
+      "aspnetcore/src/Components/Web.JS/src/BootErrors": [
+        "./wwwroot/dist/components/modals/BlazorModal"
+      ]
+    }
+  },
+  "include": ["**/*.ts", "./wwwroot/scripts/**/*.ts"],
+  "exclude": ["node_modules"]
+}

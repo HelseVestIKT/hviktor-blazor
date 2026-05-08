@@ -1,0 +1,16 @@
+﻿@page "/component/compliance/textfield/affixes"
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <section aria-label="Textfield with prefix">
+        <Textfield Id="textfield-prefix" Label="Website" Prefix="https://" data-testid="with-prefix"/>
+    </section>
+
+    <section aria-label="Textfield with suffix">
+        <Textfield Id="textfield-suffix" Label="Email" Suffix="@("@example.com")" data-testid="with-suffix"/>
+    </section>
+
+    <section aria-label="Textfield with prefix and suffix">
+        <Textfield Id="textfield-both" Label="Price" Prefix="$" Suffix=".00" data-testid="with-both"/>
+    </section>
+</main>

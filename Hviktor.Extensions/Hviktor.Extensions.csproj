@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <OptimizeCompilations>true</OptimizeCompilations>
+        <!--  XML Documentation  -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- Package Metadata -->
+        <PackageId>Hviktor.Extensions</PackageId>
+        <PackageTags>blazor;dotnet;csharp;components;component-library;hviktor;extensions;dependency-injection;services</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Hviktor.Extensions.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Tests.Unit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.JSInterop"/>
+        <PackageReference Include="Microsoft.AspNetCore.Localization"/>
+        <PackageReference Include="Microsoft.Extensions.Localization"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PackageReference Include="Hviktor.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    <!-- Embed XML docs as a resource so WASM consumers can read them -->
+    <Target Name="EmbedXmlDocumentation" AfterTargets="Build">
+        <ItemGroup>
+            <EmbeddedResource Include="$(OutputPath)$(AssemblyName).xml"
+                              LogicalName="$(AssemblyName).$(AssemblyName).xml"
+                              Condition="Exists('$(OutputPath)$(AssemblyName).xml')"/>
+        </ItemGroup>
+    </Target>
+
+</Project>

@@ -1,0 +1,7 @@
+﻿@namespace Chip
+@inherits Radio
+
+<label @attributes="@(ComputeAttributes())">
+    <input type="checkbox" @attributes="@(ComputeInputAttributes())"/>
+    @ChildContent
+</label>

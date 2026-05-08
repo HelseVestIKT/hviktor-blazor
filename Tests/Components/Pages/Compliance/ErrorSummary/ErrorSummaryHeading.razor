@@ -1,0 +1,37 @@
+﻿@page "/component/compliance/errorsummary/heading"
+@using Hviktor.Components.ErrorSummary
+
+<main data-testid="compliance-container">
+    <section aria-label="Error summary with heading level 2" data-testid="heading-level-2">
+        <ErrorSummary>
+            <ErrorSummary.Heading level="2">Level 2 Heading</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#error1">Error message</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    </section>
+
+    <section aria-label="Error summary with heading level 3" data-testid="heading-level-3">
+        <ErrorSummary>
+            <ErrorSummary.Heading level="3">Level 3 Heading</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#error2">Error message</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    </section>
+
+    <section aria-label="Error summary with heading level 4" data-testid="heading-level-4">
+        <ErrorSummary>
+            <ErrorSummary.Heading level="4">Level 4 Heading</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#error3">Error message</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    </section>
+</main>

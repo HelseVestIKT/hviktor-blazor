@@ -1,0 +1,37 @@
+﻿@page "/component/compliance/dropdown/basic"
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dropdown
+
+<main data-testid="compliance-container">
+    <section aria-label="Dropdown with context" data-testid="dropdown-with-context">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Open Menu</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.Heading>Actions</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Edit</Button>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <Button>Delete</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown without context" data-testid="dropdown-without-context">
+        <Button popovertarget="my-dropdown">Open Dropdown</Button>
+        <Dropdown Id="my-dropdown">
+            <Dropdown.Heading>Options</Dropdown.Heading>
+            <Dropdown.List>
+                <Dropdown.Item>
+                    <Button>Option 1</Button>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                    <Button>Option 2</Button>
+                </Dropdown.Item>
+            </Dropdown.List>
+        </Dropdown>
+    </section>
+</main>

@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/details/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Details
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra small size">
+        <Details Size="@Size.ExtraSmall" data-testid="xs">
+            <Details.Summary>Extra Small Details</Details.Summary>
+            <Details.Content>Content in extra small size.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Small size">
+        <Details Size="@Size.Small" data-testid="sm">
+            <Details.Summary>Small Details</Details.Summary>
+            <Details.Content>Content in small size.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Medium size">
+        <Details Size="@Size.Medium" data-testid="md">
+            <Details.Summary>Medium Details</Details.Summary>
+            <Details.Content>Content in medium size.</Details.Content>
+        </Details>
+    </section>
+
+    <section aria-label="Large size">
+        <Details Size="@Size.Large" data-testid="lg">
+            <Details.Summary>Large Details</Details.Summary>
+            <Details.Content>Content in large size.</Details.Content>
+        </Details>
+    </section>
+</main>

@@ -1,0 +1,40 @@
+﻿@page "/component/compliance/search/variants"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Search
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Primary variant search" data-testid="variant-primary">
+        <Field>
+            <Label>Primary søk</Label>
+            <Search>
+                <Search.Input placeholder="Søk..."/>
+                <Search.Clear/>
+                <Search.Button Variant="@Variant.Primary">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    <section aria-label="Secondary variant search" data-testid="variant-secondary">
+        <Field>
+            <Label>Secondary søk</Label>
+            <Search>
+                <Search.Input placeholder="Søk..."/>
+                <Search.Clear/>
+                <Search.Button Variant="@Variant.Secondary">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    <section aria-label="Tertiary variant search" data-testid="variant-tertiary">
+        <Field>
+            <Label>Tertiary søk</Label>
+            <Search>
+                <Search.Input placeholder="Søk..."/>
+                <Search.Clear/>
+                <Search.Button Variant="@Variant.Tertiary">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+</main>

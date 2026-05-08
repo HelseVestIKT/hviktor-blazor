@@ -1,0 +1,56 @@
+﻿@page "/component/compliance/table/zebra"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <section aria-label="Table without zebra striping">
+        <Table Id="table-no-zebra" data-testid="no-zebra">
+            <caption>Table without zebra striping</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item 1</Table.Cell>
+                    <Table.Cell>Value 1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 2</Table.Cell>
+                    <Table.Cell>Value 2</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 3</Table.Cell>
+                    <Table.Cell>Value 3</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with zebra striping">
+        <Table Id="table-zebra" Zebra="true" data-testid="zebra">
+            <caption>Table with zebra striping</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item 1</Table.Cell>
+                    <Table.Cell>Value 1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 2</Table.Cell>
+                    <Table.Cell>Value 2</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 3</Table.Cell>
+                    <Table.Cell>Value 3</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

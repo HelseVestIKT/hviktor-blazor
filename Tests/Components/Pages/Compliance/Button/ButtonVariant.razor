@@ -1,0 +1,17 @@
+﻿@page "/component/compliance/button/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Primary variant">
+        <Button Variant="@Variant.Primary" data-testid="primary">Primary</Button>
+    </section>
+
+    <section aria-label="Secondary variant">
+        <Button Variant="@Variant.Secondary" data-testid="secondary">Secondary</Button>
+    </section>
+
+    <section aria-label="Tertiary variant">
+        <Button Variant="@Variant.Tertiary" data-testid="tertiary">Tertiary</Button>
+    </section>
+</main>

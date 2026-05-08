@@ -1,0 +1,31 @@
+@use "mixins/blazor" as mixins;
+
+.blazor-error-ui,
+.components-reconnect-overlay {
+  @include mixins.blazor-ui();
+
+  &.components-reconnect-visible {
+    display: block;
+  }
+
+  p {
+    margin: 0;
+    text-align: center;
+  }
+
+  button {
+    @include mixins.blazor-ui-button();
+  }
+
+  .blazor-error-ui-dialog,
+  .components-reconnect-dialog {
+    @include mixins.blazor-ui-dialog();
+  }
+
+  .blazor-error-ui-animation,
+  .components-rejoining-animation {
+    display: block;
+    position: relative;
+    //@include mixins.blazor-ui-animation();
+  }
+}

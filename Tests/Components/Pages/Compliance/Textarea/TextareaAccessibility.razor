@@ -1,0 +1,24 @@
+﻿@page "/component/compliance/textarea/accessibility"
+@using Hviktor.Components.Textarea
+
+<main data-testid="compliance-container">
+    <section aria-label="Textarea with label">
+        <label for="textarea-labeled">Feedback</label>
+        <Textarea Id="textarea-labeled" data-testid="labeled">User feedback</Textarea>
+    </section>
+
+    <section aria-label="Textarea with aria-label">
+        <Textarea Id="textarea-aria" aria-label="Additional notes" data-testid="aria-labeled">Notes content</Textarea>
+    </section>
+
+    <section aria-label="Textarea with aria-describedby">
+        <label for="textarea-described">Message</label>
+        <Textarea Id="textarea-described" aria-describedby="textarea-description" data-testid="described">Message content</Textarea>
+        <p id="textarea-description">Please enter your message. Maximum 500 characters.</p>
+    </section>
+
+    <section aria-label="Textarea with maxlength">
+        <label for="textarea-maxlength">Limited text</label>
+        <Textarea Id="textarea-maxlength" maxlength="200" data-testid="maxlength"></Textarea>
+    </section>
+</main>

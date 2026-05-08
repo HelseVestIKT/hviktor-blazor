@@ -1,0 +1,103 @@
+﻿@using Hviktor.Abstractions.Interfaces.Localization
+@using Hviktor.Resources
+
+@inject IStringLocalizerService<Resources> Localize
+
+<dialog id="components-reconnect-modal" class="ds-dialog components-reconnect-hide" data-modal="true" data-nosnippet
+        closedby="none" closeButton="false"
+        role="alertdialog"
+        aria-labelledby="components-reconnect-heading"
+        aria-describedby="components-reconnect-status">
+    <div class="components-reconnect-container">
+        <h2 id="components-reconnect-heading" class="ds-heading sr-only">
+            @Localize.GetValue("Blazor.Modal.Reconnect.Heading")
+        </h2>
+        <div class="components-rejoining-animation" aria-hidden="true" style="position: relative;">
+            <svg class="ds-spinner" role="img" aria-hidden="true" viewBox="0 0 50 50">
+                <circle class="ds-spinner__background" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                <circle class="ds-spinner__circle" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+        </div>
+        <div class="components-rejoining-failed-animation" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M6.58936 2.84316C6.94808 2.63605 7.40677 2.75896 7.61388 3.11768L8.61388 4.84973C8.82098 5.20845 8.69808 5.66714 8.33936 5.87425C7.98064 6.08136 7.52195 5.95845 7.31484 5.59973L6.31484 3.86768C6.10773 3.50896 6.23064 3.05027 6.58936 2.84316ZM15.0858 5.07846C15.9644 4.19978 17.3891 4.19978 18.2677 5.07846L19.0251 5.83583C19.9038 6.71451 19.9038 8.13912 19.0251 9.0178L16.1464 11.8965C15.8535 12.1894 15.8535 12.6643 16.1464 12.9571C16.4393 13.25 16.9142 13.25 17.2071 12.9571L20.0858 10.0785C21.5502 8.614 21.5502 6.23963 20.0858 4.77517L19.3284 4.0178C17.8639 2.55334 15.4896 2.55334 14.0251 4.0178L11.1464 6.89648C10.8535 7.18938 10.8535 7.66425 11.1464 7.95714C11.4393 8.25004 11.9142 8.25004 12.2071 7.95714L15.0858 5.07846ZM7.6036 12.7071C7.89649 12.4142 7.89649 11.9393 7.6036 11.6464C7.3107 11.3536 6.83583 11.3536 6.54294 11.6464L4.16426 14.0251C2.69979 15.4896 2.69979 17.864 4.16426 19.3284L4.92163 20.0858C6.38609 21.5503 8.76044 21.5503 10.2249 20.0858L12.6037 17.7071C12.8966 17.4142 12.8966 16.9393 12.6037 16.6465C12.3108 16.3536 11.8359 16.3536 11.543 16.6464L9.16426 19.0252C8.28558 19.9038 6.86097 19.9038 5.98229 19.0251L5.22492 18.2678C4.34624 17.3891 4.34624 15.9645 5.22492 15.0858L7.6036 12.7071ZM2.84316 6.58964C3.05027 6.23092 3.50896 6.10801 3.86768 6.31512L5.59973 7.31512C5.95845 7.52222 6.08136 7.98092 5.87425 8.33964C5.66714 8.69836 5.20845 8.82126 4.84973 8.61416L3.11768 7.61416C2.75896 7.40705 2.63605 6.94836 2.84316 6.58964ZM18.5645 14.8005C18.2057 14.5934 17.747 14.7163 17.5399 15.075C17.3328 15.4337 17.4557 15.8924 17.8145 16.0995L19.5465 17.0995C19.9052 17.3066 20.3639 17.1837 20.571 16.825C20.7781 16.4663 20.6552 16.0076 20.2965 15.8005L18.5645 14.8005ZM16.0992 17.8147C15.8921 17.456 15.4334 17.3331 15.0747 17.5402C14.716 17.7473 14.5931 18.206 14.8002 18.5647L15.8002 20.2968C16.0073 20.6555 16.466 20.7784 16.8247 20.5713C17.1834 20.3642 17.3063 19.9055 17.0992 19.5468L16.0992 17.8147Z"
+                      fill="currentColor"/>
+            </svg>
+        </div>
+        <div class="components-rejoining-success-animation" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75ZM16.9536 9.27485C17.2434 8.93229 17.2007 8.41962 16.8582 8.12977C16.5156 7.83991 16.0029 7.88263 15.7131 8.22519L10.3251 14.5928L7.69952 11.9672C7.38222 11.6499 6.86778 11.6499 6.55048 11.9672C6.23317 12.2845 6.23317 12.7989 6.55048 13.1162L9.80048 16.3662C9.96114 16.5269 10.1817 16.6129 10.4088 16.6035C10.6358 16.594 10.8485 16.49 10.9953 16.3165L16.9536 9.27485Z"
+                      fill="currentColor"/>
+            </svg>
+        </div>
+        <div id="components-reconnect-status" aria-live="assertive" aria-atomic="true">
+            <div class="components-reconnect-first-attempt-visible">
+                <p class="ds-paragraph">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.FirstAttempt")
+                </p>
+            </div>
+            <div class="components-reconnect-success-visible">
+                <p class="ds-paragraph">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.Success")
+                </p>
+                <button id="components-reconnect-success-button" type="button" class="ds-button mt-2"
+                        data-variant="tertiary"
+                        data-color="accent"
+                        onclick="location.reload();">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.ResumeFailed.Reload")
+                </button>
+            </div>
+            <div class="components-reconnect-repeated-attempt-visible">
+                <p class="ds-paragraph">
+                    @(new MarkupString(Localize.GetValue("Blazor.Modal.Reconnect.RepeatedAttempt").Replace(
+                        "{0}",
+                        "<span id=\"components-seconds-to-next-attempt\"></span>"
+                    )))
+                </p>
+            </div>
+            <div class="components-reconnect-rejected-visible">
+                <p class="ds-paragraph">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.Rejected")
+                </p>
+                <p class="ds-paragraph">
+                    <button type="button" class="ds-button ds-button--as-link components-reconnect-rejected-link"
+                            data-variant="tertiary" data-color="accent"
+                            onclick="location.reload();">@Localize.GetValue("Blazor.Modal.Reconnect.ResumeFailed.Reload")</button>
+                </p>
+            </div>
+            <div class="components-reconnect-failed-visible">
+                <p class="ds-paragraph">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.Failed")
+                </p>
+                <button id="components-reconnect-button" type="button" class="ds-button mt-2" data-variant="tertiary"
+                        data-color="accent">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.Failed.TryAgain")
+                </button>
+            </div>
+            <div class="components-pause-visible">
+                <p class="ds-paragraph">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.Paused")
+                </p>
+                <button id="components-resume-button" type="button" class="ds-button mt-2" data-variant="tertiary"
+                        data-color="accent">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.Paused.Resume")
+                </button>
+            </div>
+            <div class="components-resume-failed-visible">
+                <p class="ds-paragraph">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.ResumeFailed")<br/>
+                </p>
+                <button id="components-resume-failed-button" type="button" class="ds-button mt-2"
+                        data-variant="tertiary"
+                        data-color="accent"
+                        onclick="location.reload();">
+                    @Localize.GetValue("Blazor.Modal.Reconnect.ResumeFailed.Reload")
+                </button>
+            </div>
+        </div>
+    </div>
+</dialog>

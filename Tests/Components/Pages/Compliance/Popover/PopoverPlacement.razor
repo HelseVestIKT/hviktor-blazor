@@ -1,0 +1,41 @@
+﻿@page "/component/compliance/popover/placement"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Popover
+
+<main data-testid="compliance-container">
+    <section aria-label="Popover placement top" data-testid="placement-top">
+        <Popover.TriggerContext>
+            <Popover.Trigger>Top placement</Popover.Trigger>
+            <Popover Placement="@Placement.Top">
+                <p>Content at top</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+
+    <section aria-label="Popover placement bottom" data-testid="placement-bottom">
+        <Popover.TriggerContext>
+            <Popover.Trigger>Bottom placement</Popover.Trigger>
+            <Popover Placement="@Placement.Bottom">
+                <p>Content at bottom</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+
+    <section aria-label="Popover placement left" data-testid="placement-left">
+        <Popover.TriggerContext>
+            <Popover.Trigger>Left placement</Popover.Trigger>
+            <Popover Placement="@Placement.Left">
+                <p>Content at left</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+
+    <section aria-label="Popover placement right" data-testid="placement-right">
+        <Popover.TriggerContext>
+            <Popover.Trigger>Right placement</Popover.Trigger>
+            <Popover Placement="@Placement.Right">
+                <p>Content at right</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+</main>

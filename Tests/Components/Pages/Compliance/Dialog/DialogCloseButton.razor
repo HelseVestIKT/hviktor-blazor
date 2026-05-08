@@ -1,0 +1,37 @@
+﻿@page "/component/compliance/dialog/closebutton"
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+
+@code {
+    private Dialog defaultCloseDialogRef = null!;
+    private Dialog customCloseDialogRef = null!;
+    private Dialog noCloseDialogRef = null!;
+}
+
+<main data-testid="compliance-container">
+    <section aria-label="Dialog with default close button" data-testid="closebutton-default">
+        <Dialog @ref="defaultCloseDialogRef">
+            <h2>Default Close Button</h2>
+            <p>This dialog has the default close button with standard aria-label.</p>
+        </Dialog>
+        <Button @onclick="@(() => defaultCloseDialogRef.ShowModal())">Open Default Close Dialog</Button>
+    </section>
+
+    <section aria-label="Dialog with custom close button label" data-testid="closebutton-custom">
+        <Dialog @ref="customCloseDialogRef" CloseButton="Lukk dette vinduet">
+            <h2>Custom Close Button</h2>
+            <p>This dialog has a custom close button aria-label.</p>
+        </Dialog>
+        <Button @onclick="@(() => customCloseDialogRef.ShowModal())">Open Custom Close Dialog</Button>
+    </section>
+
+    <section aria-label="Dialog without close button" data-testid="closebutton-hidden">
+        <Dialog @ref="noCloseDialogRef" CloseButton="false">
+            <h2>No Close Button</h2>
+            <p>This dialog has no visible close button.</p>
+            <p>Users must use other means to close this dialog.</p>
+            <Button @onclick="@(() => noCloseDialogRef.Close())">Close from content</Button>
+        </Dialog>
+        <Button @onclick="@(() => noCloseDialogRef.ShowModal())">Open No Close Button Dialog</Button>
+    </section>
+</main>

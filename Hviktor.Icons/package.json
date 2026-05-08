@@ -1,0 +1,13 @@
+﻿{
+  "name": "hviktor-icons",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Icon library for Hviktor — generates IconSet.cs and builds lazy-loaded icon chunks",
+  "scripts": {
+    "generate": "node generate-iconset.mjs"
+  },
+  "devDependencies": {
+    "@helsevestikt/hviktor-icons": "0.0.48"
+  }
+}

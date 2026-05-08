@@ -1,0 +1,45 @@
+﻿@inherits LayoutComponentBase
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Typography
+@using Documentation.Components.Services
+
+<div class="page">
+    <Navbar/>
+    <div class="page__component-layout">
+        <ComponentSidebar CurrentSlug="@CurrentSlug" CurrentTab="@CurrentTab"/>
+
+        <div class="sidebar-popover-toggle">
+            <Button variant="@Variant.Secondary"
+                    color="@Color.Neutral"
+                    popovertarget="sidebarDrawer"
+                    popovertargetaction="show"
+                    aria-label="Show sidebar">
+                Show sidebar
+                <Icon Definition="@DocumentationIconSet.Sidebar" aria-hidden="true"/>
+            </Button>
+        </div>
+
+        <div class="sidebar-drawer" id="sidebarDrawer" popover="auto">
+            <div class="sidebar-drawer__header">
+                <Heading level="3" size="sm">Components</Heading>
+                <Button icon
+                        variant="@Variant.Tertiary"
+                        color="@Color.Neutral"
+                        popovertarget="sidebarDrawer"
+                        popovertargetaction="hide"
+                        aria-label="Close sidebar">
+                    <Icon Definition="@DocumentationIconSet.XMark" aria-hidden="true"/>
+                </Button>
+            </div>
+            <div class="sidebar-drawer__content">
+                <ComponentSidebar CurrentSlug="@CurrentSlug" CurrentTab="@CurrentTab"/>
+            </div>
+        </div>
+
+        <main class="main-content">
+            @Body
+        </main>
+    </div>
+</div>

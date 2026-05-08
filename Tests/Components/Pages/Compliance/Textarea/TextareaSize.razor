@@ -1,0 +1,20 @@
+﻿@page "/component/compliance/textarea/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Textarea
+
+<main data-testid="compliance-container">
+    <section aria-label="Small size textarea">
+        <label for="textarea-sm">Small textarea</label>
+        <Textarea Id="textarea-sm" Size="@Size.Small" data-testid="sm">Small size content</Textarea>
+    </section>
+
+    <section aria-label="Medium size textarea">
+        <label for="textarea-md">Medium textarea</label>
+        <Textarea Id="textarea-md" Size="@Size.Medium" data-testid="md">Medium size content</Textarea>
+    </section>
+
+    <section aria-label="Large size textarea">
+        <label for="textarea-lg">Large textarea</label>
+        <Textarea Id="textarea-lg" Size="@Size.Large" data-testid="lg">Large size content</Textarea>
+    </section>
+</main>

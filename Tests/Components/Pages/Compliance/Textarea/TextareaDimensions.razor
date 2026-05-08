@@ -1,0 +1,19 @@
+﻿@page "/component/compliance/textarea/dimensions"
+@using Hviktor.Components.Textarea
+
+<main data-testid="compliance-container">
+    <section aria-label="Textarea with rows">
+        <label for="textarea-rows">Textarea with 5 rows</label>
+        <Textarea Id="textarea-rows" Rows="5" data-testid="with-rows">Content with custom rows</Textarea>
+    </section>
+
+    <section aria-label="Textarea with cols">
+        <label for="textarea-cols">Textarea with 40 cols</label>
+        <Textarea Id="textarea-cols" Cols="40" data-testid="with-cols">Content with custom cols</Textarea>
+    </section>
+
+    <section aria-label="Textarea with rows and cols">
+        <label for="textarea-both">Textarea with 4 rows and 50 cols</label>
+        <Textarea Id="textarea-both" Rows="4" Cols="50" data-testid="with-both">Content with both dimensions</Textarea>
+    </section>
+</main>

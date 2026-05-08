@@ -1,0 +1,57 @@
+# git-cliff ~ configuration file
+# https://git-cliff.org/docs/configuration
+
+[changelog]
+body = """
+{% if version %}\
+    ## [{{ version }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}\
+    ## [Unreleased]
+{% endif %}\
+{% for group, commits in commits | group_by(attribute="group") %}
+    ### {{ group | striptags | trim | upper_first }}
+    {% for commit in commits %}
+        - {% if commit.scope %}_({{ commit.scope }})_ {% endif %}\
+            {% if commit.breaking %}[**breaking**] {% endif %}\
+            {{ commit.message | upper_first }}\
+    {% endfor %}
+{% endfor %}
+
+"""
+
+trim = true
+render_always = false
+postprocessors = []
+
+[git]
+split_commits = true
+filter_commits = true
+conventional_commits = true
+filter_unconventional = true
+protect_breaking_commits = true
+tag_pattern = "v[0-9].*"
+
+commit_preprocessors = [
+    # Strip PR number suffixes e.g. (#123)
+    { pattern = '\s*\(#([0-9]+)\)$', replace = "" },
+    # Strip leading bullet markers from squash commit bodies
+    { pattern = '^[\s\*\->]+', replace = "" },
+]
+
+commit_parsers = [
+    # Skip merge commits
+    { message = "^Merge", skip = true },
+    # Breaking changes (feat! or fix! or BREAKING CHANGE in body)
+    { message = "^.*!:", group = "<!-- 0 --> Breaking Changes" },
+    { message = '(?i)BREAKING CHANGE', group = "<!-- 0 --> Breaking Changes" },
+    # Conventional Commit types
+    { message = "^feat", group = "<!-- 1 --> Features" },
+    { message = "^fix", group = "<!-- 2 --> Bug Fixes" },
+    { message = "^perf", group = "<!-- 3 --> Performance" },
+    { message = "^refactor", group = "<!-- 4 --> Refactor" },
+    # Skip non-user-facing types
+    { message = "^docs|^style|^test|^chore|^ci|^build", skip = true },
+    { message = "^revert", group = "<!-- 5 --> Reverts" },
+    # Skip everything else
+    { message = ".*", skip = true },
+]

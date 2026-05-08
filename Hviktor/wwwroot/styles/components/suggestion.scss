@@ -1,0 +1,105 @@
+/*
+ * Blazor <Virtualize> spacer fix for the suggestion listbox.
+ * <Virtualize> injects two sibling <div aria-hidden="true"> spacers directly inside the listbox
+ * to create virtual scroll space. This rule hides them without affecting option elements.
+ */
+[role="listbox"] > div[aria-hidden="true"]:not([role="option"]) {
+  display: none !important;
+}
+
+[role="listbox"] {
+  overflow-y: hidden;
+}
+
+/*
+ * Suggestion option styling for div[role="option"] elements.
+ * Mirrors the Designsystemet u-option styles which target custom elements.
+ */
+.ds-suggestion [role="listbox"] > [role="option"] {
+  border: none;
+  border-inline-start: 5px solid transparent;
+  border-radius: var(--dsc-suggestion-option-border-radius);
+  cursor: pointer;
+  outline: none;
+  padding: var(--dsc-suggestion-option-padding);
+  padding-inline-start: var(--dsc-suggestion-option-checkmark-size);
+  position: relative;
+}
+
+.ds-suggestion [role="listbox"] > [role="option"][selected]::before {
+  background: currentcolor;
+  content: "";
+  height: var(--dsc-suggestion-option-checkmark-size);
+  inset-inline-start: 0;
+  -webkit-mask: var(--dsc-suggestion-option-checkmark-url) center / contain
+    no-repeat;
+  mask: var(--dsc-suggestion-option-checkmark-url) center / contain no-repeat;
+  position: absolute;
+  width: var(--dsc-suggestion-option-checkmark-size);
+}
+
+.ds-suggestion [role="listbox"] > [role="option"]:focus-visible {
+  box-shadow: var(--_ds--focus, var(--dsc-focus-boxShadow-inset));
+  outline: var(--_ds--focus, var(--dsc-focus-outline));
+  outline-offset: calc(var(--_ds--focus, var(--ds-border-width-focus)) * -1);
+}
+
+/* Keyboard navigation highlight via data-active attribute */
+.ds-suggestion
+  [role="listbox"]
+  > [role="option"][data-active]:not([data-empty]) {
+  background: var(--dsc-suggestion-option-background--selected);
+  border-inline-start-color: var(--dsc-suggestion-option-border-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-suggestion [role="listbox"] > [role="option"]:not([data-empty]):hover {
+    background: var(--dsc-suggestion-option-background--selected);
+    border-inline-start-color: var(--dsc-suggestion-option-border-color);
+  }
+}
+
+/* Hidden options (filtered out) */
+.ds-suggestion [role="listbox"] > [role="option"][hidden] {
+  display: none;
+}
+
+/*
+ * Suggestion listbox positioning and styling.
+ * Mirrors the Designsystemet datalist styles.
+ */
+.ds-suggestion [role="listbox"] {
+  background: var(--dsc-suggestion-list-background);
+  border-color: var(--dsc-suggestion-border-color);
+  border-radius: var(--dsc-suggestion-list-border-radius);
+  border-style: var(--dsc-suggestion-border-style);
+  border-width: var(--dsc-suggestion-border-width);
+  box-shadow: var(--dsc-suggestion-list-box-shadow);
+  box-sizing: border-box;
+  color: var(--dsc-suggestion-list-color);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0;
+}
+
+.ds-suggestion [role="listbox"]:not([popover]) {
+  inset: 100% 0 auto 0;
+  margin-top: var(--dsc-suggestion-list-gap);
+  position: absolute;
+  z-index: 1600;
+}
+
+.ds-suggestion [role="listbox"]:empty {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-suggestion [role="listbox"] {
+    animation: none;
+  }
+}
+
+/* Hide the clear button when nothing is selected or typed */
+.ds-suggestion:has(input:placeholder-shown) del {
+  display: none;
+}

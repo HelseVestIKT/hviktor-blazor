@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/badge/overlap"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Badge
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+<main data-testid="compliance-container">
+    <section aria-label="Circle overlap">
+        <Badge.Position overlap="@Variant.Circle" data-testid="circle">
+            <Badge Count="1" role="status" aria-label="1 notification"/>
+            <Icon Definition="@IconSet.EnvelopeClosed"/>
+        </Badge.Position>
+    </section>
+
+    <section aria-label="Rectangle overlap">
+        <Badge.Position overlap="@Variant.Rectangle" data-testid="rectangle">
+            <Badge Count="2" role="status" aria-label="2 notifications"/>
+            <Icon Definition="@IconSet.EnvelopeClosed"/>
+        </Badge.Position>
+    </section>
+</main>

@@ -1,0 +1,47 @@
+using System.Text.RegularExpressions;
+
+namespace Hviktor.Components.Code.Highlighters;
+
+/// <summary>
+/// Syntax highlighting patterns for SQL code.
+/// </summary>
+internal static partial class SqlHighlighter
+{
+    /// <summary>Highlights SQL source code.</summary>
+    internal static string Highlight(string code) => HighlighterBase.ApplyPatterns(code, Patterns);
+
+    /// <summary>Regex pattern and CSS class pairs for SQL highlighting.</summary>
+    internal static readonly (Regex Pattern, string CssClass)[] Patterns =
+    [
+        (LineComment(), "comment"),
+        (SharedPatterns.MultiLineComment(), "comment"),
+        (StringLiteral(), "string"),
+        (SharedPatterns.NumberLiteral(), "number"),
+        (Variable(), "variable"),
+        (DataTypes(), "type"),
+        (BuiltInFunctions(), "function"),
+        (Operators(), "operator"),
+        (Keywords(), "keyword"),
+    ];
+
+    [GeneratedRegex(@"--.*$", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex LineComment();
+
+    [GeneratedRegex(@"'(?:''|[^'])*'", RegexOptions.Compiled)]
+    private static partial Regex StringLiteral();
+
+    [GeneratedRegex(@"[@:]\w+", RegexOptions.Compiled)]
+    private static partial Regex Variable();
+
+    [GeneratedRegex(@"\b(?:BIGINT|BINARY|BIT|BLOB|BOOLEAN|CHAR|CHARACTER|CLOB|DATE|DATETIME|DATETIME2|DATETIMEOFFSET|DECIMAL|DOUBLE|FLOAT|IMAGE|INT|INTEGER|INTERVAL|JSON|JSONB|LONG|MONEY|NCHAR|NTEXT|NUMBER|NUMERIC|NVARCHAR|RAW|REAL|ROWID|SERIAL|SMALLDATETIME|SMALLINT|SMALLMONEY|TEXT|TIME|TIMESTAMP|TIMESTAMPTZ|TIMETZ|TINYINT|UNIQUEIDENTIFIER|UUID|VARBINARY|VARCHAR|VARCHAR2|VARYING|XML)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled)]
+    private static partial Regex DataTypes();
+
+    [GeneratedRegex(@"\b(?:ABS|AVG|CAST|CEILING|CHARINDEX|COALESCE|CONCAT|CONVERT|COUNT|CURRENT_DATE|CURRENT_TIME|CURRENT_TIMESTAMP|CURRENT_USER|DATEADD|DATEDIFF|DATENAME|DATEPART|DAY|EXTRACT|FLOOR|FORMAT|GETDATE|GETUTCDATE|GREATEST|ISNULL|LAG|LEAD|LEAST|LEFT|LEN|LENGTH|LOWER|LTRIM|MAX|MIN|MONTH|NEWID|NOW|NTILE|NULLIF|NVL|OBJECT_ID|PATINDEX|POWER|RANK|REPLACE|REPLICATE|REVERSE|RIGHT|ROUND|ROW_NUMBER|RTRIM|SCOPE_IDENTITY|SESSION_USER|SPACE|STRING_AGG|STUFF|SUBSTRING|SUM|SYSTEM_USER|TRIM|TRY_CAST|TRY_CONVERT|UPPER|YEAR)(?=\s*\()", RegexOptions.IgnoreCase | RegexOptions.Compiled)]
+    private static partial Regex BuiltInFunctions();
+
+    [GeneratedRegex(@"<>|!=|>=|<=|::|\.\.|\|\||[+\-*/%=<>]", RegexOptions.Compiled)]
+    private static partial Regex Operators();
+
+    [GeneratedRegex(@"\b(?:ADD|ALL|ALTER|AND|ANY|APPLY|AS|ASC|AUTHORIZATION|BACKUP|BEGIN|BETWEEN|BREAK|BROWSE|BULK|BY|CASCADE|CASE|CHECK|CHECKPOINT|CLOSE|CLUSTERED|COALESCE|COLLATE|COLUMN|COMMIT|COMPUTE|CONSTRAINT|CONTAINS|CONTAINSTABLE|CONTINUE|CREATE|CROSS|CURRENT|CURSOR|DATABASE|DEALLOCATE|DECLARE|DEFAULT|DELETE|DENY|DESC|DISTINCT|DISTRIBUTED|DO|DROP|ELSE|ELSIF|END|ERRLVL|ESCAPE|EXCEPT|EXEC|EXECUTE|EXISTS|EXIT|EXTERNAL|FETCH|FILE|FILLFACTOR|FIRST|FOR|FOREIGN|FREETEXT|FREETEXTTABLE|FROM|FULL|FUNCTION|GO|GOTO|GRANT|GROUP|HAVING|HOLDLOCK|IDENTITY|IDENTITY_INSERT|IDENTITYCOL|IF|ILIKE|IN|INDEX|INNER|INSERT|INTERSECT|INTO|IS|JOIN|KEY|KILL|LAST|LEFT|LIKE|LIMIT|LINENO|LOAD|LOOP|MERGE|NATIONAL|NATURAL|NOCHECK|NONCLUSTERED|NOT|NOTNULL|NULL|NULLS|OF|OFF|OFFSET|OFFSETS|ON|OPEN|OPENDATASOURCE|OPENQUERY|OPENROWSET|OPENXML|OPTION|OR|ORDER|OUTER|OVER|PARTITION|PERCENT|PIVOT|PLAN|PRECISION|PRIMARY|PRINT|PROC|PROCEDURE|PUBLIC|RAISERROR|READ|READTEXT|RECONFIGURE|RECURSIVE|REFERENCES|REPLICATION|RESTORE|RESTRICT|RETURN|RETURNS|REVERT|REVOKE|RIGHT|ROLLBACK|ROWCOUNT|ROWGUIDCOL|ROWS|RULE|SAVE|SCHEMA|SELECT|SEQUENCE|SESSION|SET|SETUSER|SHUTDOWN|SOME|STATISTICS|TABLE|TABLESAMPLE|TEMP|TEMPORARY|TEXTSIZE|THEN|THROW|TO|TOP|TRAN|TRANSACTION|TRIGGER|TRUNCATE|TRY|UNION|UNIQUE|UNPIVOT|UPDATE|UPDATETEXT|USE|USER|USING|VALUES|VIEW|WAITFOR|WHEN|WHERE|WHILE|WINDOW|WITH|WITHIN|WRITETEXT)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled)]
+    private static partial Regex Keywords();
+}

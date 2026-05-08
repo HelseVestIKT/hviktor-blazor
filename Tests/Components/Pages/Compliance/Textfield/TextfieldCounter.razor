@@ -1,0 +1,17 @@
+﻿@page "/component/compliance/textfield/counter"
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <section aria-label="Textfield with counter under limit">
+        <Textfield Id="textfield-counter" Label="Bio" Counter="100" Value="Hello" data-testid="counter-under"/>
+    </section>
+
+    <section aria-label="Textfield with counter at limit">
+        <Textfield Id="textfield-counter-at" Label="Title" Counter="10" Value="0123456789" data-testid="counter-at"/>
+    </section>
+
+    <section aria-label="Textfield with counter over limit">
+        <Textfield Id="textfield-counter-over" Label="Comment" Counter="5" Value="Too long text"
+                   data-testid="counter-over"/>
+    </section>
+</main>

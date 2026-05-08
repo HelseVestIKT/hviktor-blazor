@@ -1,0 +1,75 @@
+﻿@using Hviktor.Components.Avatar
+@using Hviktor.Components.AvatarStack
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Tooltip
+@using Hviktor.Icons.Types
+
+
+<div class="flex flex-wrap gap-4">
+    <fieldset>
+        <legend>Link + Tooltip</legend>
+        <AvatarStack overlap="20" aria-label="contributors">
+            <Tooltip content="Ola Nordmann">
+                <Avatar aria-label="" asChild>
+                    <a href="#">
+                        <img src="assets/img/cats/cat1.webp" alt=""/>
+                    </a>
+                </Avatar>
+            </Tooltip>
+            <Tooltip content="Kari Nordmann">
+                <Avatar aria-label="" asChild>
+                    <a href="#">
+                        <img src="assets/img/cats/cat6.webp" alt=""/>
+                    </a>
+                </Avatar>
+            </Tooltip>
+            <Tooltip content="Person 2">
+                <Avatar aria-label="" asChild>
+                    <a href="#">
+                        <img src="assets/img/cats/cat1.webp" alt=""/>
+                    </a>
+                </Avatar>
+            </Tooltip>
+            <Tooltip content="Person 3">
+                <Avatar aria-label="" asChild>
+                    <a href="#">BR</a>
+                </Avatar>
+            </Tooltip>
+        </AvatarStack>
+    </fieldset>
+    <fieldset>
+        <legend>Link + Tooltip expandable</legend>
+        <AvatarStack
+            overlap="50"
+            expandable="fixed"
+            aria-label="contributors"
+        >
+            <Tooltip content="Ola Nordmann">
+                <Avatar aria-label="" asChild>
+                    <a href="#">
+                        <img src="assets/img/cats/cat6.webp" alt=""/>
+                    </a>
+                </Avatar>
+            </Tooltip>
+            <Tooltip content="Kari Nordmann">
+                <Avatar aria-label="" asChild>
+                    <a href="#">
+                        <img src="assets/img/cats/cat1.webp" alt=""/>
+                    </a>
+                </Avatar>
+            </Tooltip>
+            <Tooltip content="Person 2">
+                <Avatar aria-label="" asChild>
+                    <a href="#">
+                        <img src="assets/img/cats/cat6.webp" alt=""/>
+                    </a>
+                </Avatar>
+            </Tooltip>
+            <Tooltip content="Person 3">
+                <Avatar aria-label="" asChild>
+                    <a href="#">BR</a>
+                </Avatar>
+            </Tooltip>
+        </AvatarStack>
+    </fieldset>
+</div>

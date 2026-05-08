@@ -1,0 +1,42 @@
+@using Hviktor.Components.Code
+
+@code {
+    private const string Src = """
+                               {
+                                   "name": "Hviktor",
+                                   "version": "1.0.0",
+                                   "description": "Blazor component library for Helse Vest IKT",
+                                   "private": true,
+                                   "scripts": {
+                                        "build:dev": "vite build --mode development",
+                                        "build:prod": "vite build --mode production",
+                                       "prettier": "prettier --write ."
+                                   },
+                                   "devDependencies": {
+                                       "@digdir/designsystemet-css": "^1.0.0",
+                                       "sass": "^1.80.0",
+                                       "vite": "^6.0.0"
+                                   },
+                                   "browserslist": [
+                                       "last 2 versions",
+                                       "not dead"
+                                   ],
+                                   "engines": {
+                                       "node": ">=20.0.0"
+                                   },
+                                   "author": "Helse Vest IKT",
+                                   "license": "MIT",
+                                   "repository": {
+                                       "type": "git",
+                                       "url": "https://github.com/helsevestikt/hviktor"
+                                   },
+                                   "bugs": {
+                                       "url": "https://github.com/helsevestikt/hviktor/issues"
+                                   },
+                                   "keywords": ["blazor", "components", "designsystemet"],
+                                   "sideEffects": false
+                               }
+                               """;
+}
+
+<CodeBlock Language="json" Code="@Src" class="w-full"/>

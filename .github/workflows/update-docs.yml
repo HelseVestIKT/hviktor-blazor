@@ -1,0 +1,96 @@
+name: Update Documentation Version
+
+# Triggered by publish-packages.yml after all packages are published.
+# Creates a PR bumping Hviktor package versions in Documentation.csproj.
+# When merged, deploy-docs and generate-wiki run automatically.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version (e.g., 5.0.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    name: Bump Hviktor versions in Documentation
+    runs-on: ubuntu-latest
+    if: inputs.version != ''
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Read version
+        id: version
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          VERSION="${VERSION#v}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "::notice::Documentation version: $VERSION"
+
+      - name: Verify packages exist on NuGet registry
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NUGET_SOURCE="https://nuget.pkg.github.com/HelseVestIKT/index.json"
+          for PKG in Hviktor Hviktor.Extensions Hviktor.Icons; do
+            echo "Checking $PKG@$VERSION..."
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" -u "${{ github.actor }}:$GH_TOKEN" \
+              "$NUGET_SOURCE$PKG/$VERSION.json" 2>/dev/null || echo "000")
+            if [ "$STATUS" != "200" ]; then
+              # Fallback: try dotnet nuget search
+              dotnet nuget add source "$NUGET_SOURCE" --name check --username "${{ github.actor }}" --password "$GH_TOKEN" --store-password-in-clear-text 2>/dev/null || true
+              FOUND=$(dotnet package search "$PKG" --source check --exact-match --format json 2>/dev/null | grep -c "\"$VERSION\"" || echo "0")
+              if [ "$FOUND" = "0" ]; then
+                echo "::error::Package $PKG@$VERSION not found on registry"
+                exit 1
+              fi
+            fi
+            echo "::notice::$PKG@$VERSION verified"
+          done
+
+      - name: Read current version from Directory.Packages.props
+        id: current
+        run: |
+          CURRENT=$(grep -oP 'Include="Hviktor" Version="\K[^"]+' Directory.Packages.props)
+          echo "version=$CURRENT" >> $GITHUB_OUTPUT
+          echo "::notice::Current version: $CURRENT"
+
+      - name: Update Directory.Packages.props
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.version }}
+          CURRENT_VERSION: ${{ steps.current.outputs.version }}
+        run: |
+          if [ "$NEW_VERSION" = "$CURRENT_VERSION" ]; then
+            echo "::notice::Version already up to date ($NEW_VERSION), skipping."
+            echo "skip=true" >> $GITHUB_ENV
+            exit 0
+          fi
+          for PKG in Hviktor Hviktor.Abstractions Hviktor.Extensions Hviktor.Icons Hviktor.Icons.Abstractions; do
+            sed -i "s|<PackageVersion Include=\"$PKG\" Version=\"[^\"]*\"|<PackageVersion Include=\"$PKG\" Version=\"$NEW_VERSION\"|g" Directory.Packages.props
+          done
+          echo "::notice::Updated Directory.Packages.props from $CURRENT_VERSION to $NEW_VERSION"
+
+      - name: Create or update pull request
+        if: env.skip != 'true'
+        uses: HelseVestIKT/samlepunktet-actions/create-pr@v0.0.10
+        with:
+          delete-branch-on-failure: true
+          branch: docs/v${{ steps.version.outputs.version }}
+          commit-message: "chore(docs): bump Hviktor packages to ${{ steps.version.outputs.version }}"
+          pr-body: |
+            Bumps Hviktor package versions in `Directory.Packages.props` from `${{ steps.current.outputs.version }}` to `${{ steps.version.outputs.version }}`.
+
+            When merged, this will trigger documentation deployment and wiki generation.
+          paths: Directory.Packages.props
+          labels: |
+            documentation
+            automated
+          github-token: ${{ secrets.GITHUB_TOKEN }}

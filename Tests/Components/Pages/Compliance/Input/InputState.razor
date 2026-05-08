@@ -1,0 +1,31 @@
+﻿@page "/component/compliance/input/state"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Note: Avoid using disabled for accessibility - prefer readonly or hiding the field *@
+    <section aria-label="Disabled input (avoid using)" data-testid="state-disabled">
+        <Field>
+            <Label for="input-disabled">Disabled field</Label>
+            <Field.Description>Avoid using disabled state for accessibility</Field.Description>
+            <Input Id="input-disabled" type="@InputType.Text" disabled value="Disabled value"/>
+        </Field>
+    </section>
+
+    <section aria-label="Readonly input" data-testid="state-readonly">
+        <Field>
+            <Label for="input-readonly">Readonly field</Label>
+            <Field.Description>Use readonly instead of disabled when possible</Field.Description>
+            <Input Id="input-readonly" type="@InputType.Text" readonly value="Readonly value"/>
+        </Field>
+    </section>
+
+    <section aria-label="Required input" data-testid="state-required">
+        <Field>
+            <Label for="input-required">Required field</Label>
+            <Input Id="input-required" type="@InputType.Text" required placeholder="This field is required"/>
+        </Field>
+    </section>
+</main>

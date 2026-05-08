@@ -1,0 +1,126 @@
+﻿@page "/component/compliance/input/types"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Input
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Number input" data-testid="input-type-number">
+        <Field>
+            <Label for="input-number">Number</Label>
+            <Input Id="input-number" type="@InputType.Number"/>
+        </Field>
+    </section>
+
+    <section aria-label="Hidden input" data-testid="input-type-hidden">
+        <Field>
+            <Label for="input-hidden" class="ds-sr-only">Hidden field</Label>
+            <Input Id="input-hidden" type="@InputType.Hidden" value="hidden-value"/>
+        </Field>
+    </section>
+
+    <section aria-label="Color input" data-testid="input-type-color">
+        <Field>
+            <Label for="input-color">Color</Label>
+            <Input Id="input-color" type="@InputType.Color"/>
+        </Field>
+    </section>
+
+    <section aria-label="Checkbox input" data-testid="input-type-checkbox">
+        <Field>
+            <Label for="input-checkbox">Checkbox</Label>
+            <Input Id="input-checkbox" type="@InputType.Checkbox"/>
+        </Field>
+    </section>
+
+    <section aria-label="Date input" data-testid="input-type-date">
+        <Field>
+            <Label for="input-date">Date</Label>
+            <Input Id="input-date" type="@InputType.Date"/>
+        </Field>
+    </section>
+
+    <section aria-label="DateTime-Local input" data-testid="input-type-datetime-local">
+        <Field>
+            <Label for="input-datetime-local">DateTime Local</Label>
+            <Input Id="input-datetime-local" type="@InputType.DateTimeLocal"/>
+        </Field>
+    </section>
+
+    <section aria-label="Email input" data-testid="input-type-email">
+        <Field>
+            <Label for="input-email">Email</Label>
+            <Input Id="input-email" type="@InputType.Email"/>
+        </Field>
+    </section>
+
+    <section aria-label="File input" data-testid="input-type-file">
+        <Field>
+            <Label for="input-file">File</Label>
+            <Input Id="input-file" type="@InputType.File"/>
+        </Field>
+    </section>
+
+    <section aria-label="Month input" data-testid="input-type-month">
+        <Field>
+            <Label for="input-month">Month</Label>
+            <Input Id="input-month" type="@InputType.Month"/>
+        </Field>
+    </section>
+
+    <section aria-label="Password input" data-testid="input-type-password">
+        <Field>
+            <Label for="input-password">Password</Label>
+            <Input Id="input-password" type="@InputType.Password"/>
+        </Field>
+    </section>
+
+    <section aria-label="Radio input" data-testid="input-type-radio">
+        <Field>
+            <Label for="input-radio">Radio</Label>
+            <Input Id="input-radio" type="@InputType.Radio" name="radio-group"/>
+        </Field>
+    </section>
+
+    <section aria-label="Search input" data-testid="input-type-search">
+        <Field>
+            <Label for="input-search">Search</Label>
+            <Input Id="input-search" type="@InputType.Search"/>
+        </Field>
+    </section>
+
+    <section aria-label="Tel input" data-testid="input-type-tel">
+        <Field>
+            <Label for="input-tel">Telephone</Label>
+            <Input Id="input-tel" type="@InputType.Tel"/>
+        </Field>
+    </section>
+
+    <section aria-label="Text input" data-testid="input-type-text">
+        <Field>
+            <Label for="input-text">Text</Label>
+            <Input Id="input-text" type="@InputType.Text"/>
+        </Field>
+    </section>
+
+    <section aria-label="Time input" data-testid="input-type-time">
+        <Field>
+            <Label for="input-time">Time</Label>
+            <Input Id="input-time" type="@InputType.Time"/>
+        </Field>
+    </section>
+
+    <section aria-label="Url input" data-testid="input-type-url">
+        <Field>
+            <Label for="input-url">URL</Label>
+            <Input Id="input-url" type="@InputType.Url"/>
+        </Field>
+    </section>
+
+    <section aria-label="Week input" data-testid="input-type-week">
+        <Field>
+            <Label for="input-week">Week</Label>
+            <Input Id="input-week" type="@InputType.Week"/>
+        </Field>
+    </section>
+</main>

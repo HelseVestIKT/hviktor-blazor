@@ -1,0 +1,37 @@
+﻿@page "/component/compliance/textfield/types"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <section aria-label="Text type">
+        <Textfield Id="textfield-text" Label="Name" Type="@InputType.Text" data-testid="type-text"/>
+    </section>
+
+    <section aria-label="Email type">
+        <Textfield Id="textfield-email" Label="Email" Type="@InputType.Email" data-testid="type-email"/>
+    </section>
+
+    <section aria-label="Password type">
+        <Textfield Id="textfield-password" Label="Password" Type="@InputType.Password" data-testid="type-password"/>
+    </section>
+
+    <section aria-label="Number type">
+        <Textfield Id="textfield-number" Label="Age" Type="@InputType.Number" data-testid="type-number"/>
+    </section>
+
+    <section aria-label="Tel type">
+        <Textfield Id="textfield-tel" Label="Phone" Type="@InputType.Tel" data-testid="type-tel"/>
+    </section>
+
+    <section aria-label="URL type">
+        <Textfield Id="textfield-url" Label="Website" Type="@InputType.Url" data-testid="type-url"/>
+    </section>
+
+    <section aria-label="Search type">
+        <Textfield Id="textfield-search" Label="Search" Type="@InputType.Search" data-testid="type-search"/>
+    </section>
+
+    <section aria-label="Date type">
+        <Textfield Id="textfield-date" Label="Date" Type="@InputType.Date" data-testid="type-date"/>
+    </section>
+</main>

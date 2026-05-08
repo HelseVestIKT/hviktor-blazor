@@ -1,0 +1,22 @@
+﻿@page "/component/compliance/field/counter-behavior"
+@using Hviktor.Components.Field
+@using Hviktor.Components.Textarea
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Counter behavior test" data-testid="counter-behavior">
+        <Field>
+            <Label for="behavior-input">Message</Label>
+            <Textarea Id="behavior-input" data-testid="behavior-textarea"></Textarea>
+            <Field.Counter Limit="20" data-testid="behavior-counter" />
+        </Field>
+    </section>
+
+    <section aria-label="Counter with pre-filled value" data-testid="counter-prefilled">
+        <Field>
+            <Label for="prefilled-input">Pre-filled</Label>
+            <Textarea Id="prefilled-input" data-testid="prefilled-textarea">Hello World</Textarea>
+            <Field.Counter Limit="50" data-testid="prefilled-counter" />
+        </Field>
+    </section>
+</main>

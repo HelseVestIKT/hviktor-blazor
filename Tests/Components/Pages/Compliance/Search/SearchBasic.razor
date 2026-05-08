@@ -1,0 +1,38 @@
+﻿@page "/component/compliance/search/basic"
+@using Hviktor.Components.Search
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic search" data-testid="basic">
+        <Field>
+            <Label>Søk</Label>
+            <Search>
+                <Search.Input placeholder="Søk..." data-testid="basic-input"/>
+                <Search.Clear data-testid="basic-clear"/>
+                <Search.Button data-testid="basic-button">Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    <section aria-label="Search without clear button" data-testid="no-clear">
+        <Field>
+            <Label>Enkel søk</Label>
+            <Search>
+                <Search.Input placeholder="Skriv her..."/>
+                <Search.Button>Søk</Search.Button>
+            </Search>
+        </Field>
+    </section>
+
+    <section aria-label="Search with icon button" data-testid="icon-button">
+        <Field>
+            <Label>Søk med ikon</Label>
+            <Search>
+                <Search.Input placeholder="Søk..."/>
+                <Search.Clear/>
+                <Search.Button Icon="true">🔍</Search.Button>
+            </Search>
+        </Field>
+    </section>
+</main>

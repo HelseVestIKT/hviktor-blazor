@@ -1,0 +1,20 @@
+﻿{
+  // Private notes for MCP metadata generation.
+  // These are layered onto the public metadata and are NOT included in NuGet packages.
+  // Keys must match the component slug (e.g. "button", "dialog").
+  "components": {
+    "alert": {
+      "notes": "Icon is controlled via CSS based on data-color, not a parameter. The icon changes automatically when the color changes."
+    },
+    "dialog": {
+      "notes": "Uses the native <dialog> element with closedby attribute. The closedby attribute is a newer web platform feature.",
+      "knownIssues": [
+        "Safari < 17.5 does not support closedby attribute on <dialog>"
+      ],
+      "migrationNotes": "v5.0: Dialog now uses command/commandfor attributes instead of JS interop for opening."
+    },
+    "dropdown": {
+      "notes": "Uses the popover API. Falls back gracefully in browsers without popover support."
+    }
+  }
+}

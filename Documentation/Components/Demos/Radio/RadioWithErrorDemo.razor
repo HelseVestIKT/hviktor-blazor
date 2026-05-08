@@ -1,0 +1,26 @@
+﻿@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Radio
+
+<Fieldset>
+    <Fieldset.Legend>Which district do you live in?</Fieldset.Legend>
+    <Fieldset.Description>
+        Trondheim is divided into four districts
+    </Fieldset.Description>
+    <Radio label="Østbyen" value="ostbyen" name="city" aria-invalid="true"/>
+    <Radio
+        label="Lerkendal"
+        value="lerkendal"
+        name="city"
+        aria-invalid="true"
+    />
+    <Radio label="Heimdal" value="heimdal" name="city" aria-invalid="true"/>
+    <Radio
+        label="Midtbyen"
+        value="midtbyen"
+        name="city"
+        aria-invalid="true"
+    />
+    <Hviktor.Components.Typography.ValidationMessage data-color="danger">
+        You must choose a district before you can continue.
+    </Hviktor.Components.Typography.ValidationMessage>
+</Fieldset>

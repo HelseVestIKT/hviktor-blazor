@@ -1,0 +1,11 @@
+﻿@namespace Tabs
+@inherits Hviktor.Models.NestedComponentBase<Hviktor.Components.Tabs.Tabs>
+
+<div @ref="@ElementRef" @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+</div>

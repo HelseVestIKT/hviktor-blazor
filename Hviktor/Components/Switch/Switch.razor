@@ -1,0 +1,13 @@
+﻿@using Hviktor.Components.Field
+
+<Field position="@internalPosition">
+    <input class="ds-input" @attributes="@(ComputeAttributes())"/>
+    @if (label is not null)
+    {
+        <label class="ds-label" data-weight="regular" for="@forId">@label</label>
+    }
+    @if (description is not null)
+    {
+        <div data-field="description">@description</div>
+    }
+</Field>

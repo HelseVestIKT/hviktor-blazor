@@ -1,0 +1,16 @@
+@using Hviktor.Components.Code
+
+@code {
+    private const string Src = """
+                               @using Hviktor.Components.Button
+                               @using Hviktor.Components.Icon
+                               @using Hviktor.Icons.Types
+
+                               <Button variant="primary" color="accent">
+                                   <Icon Definition="@IconSet.Captions"/>
+                                   Label
+                               </Button>
+                               """;
+}
+
+<CodeBlock Language="razor" Code="@Src" class="w-full"/>

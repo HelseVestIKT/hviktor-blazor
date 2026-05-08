@@ -1,0 +1,48 @@
+﻿@page "/component/compliance/table/border"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <section aria-label="Table without border">
+        <Table Id="table-no-border" data-testid="no-border">
+            <caption>Table without border</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item 1</Table.Cell>
+                    <Table.Cell>Value 1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 2</Table.Cell>
+                    <Table.Cell>Value 2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with border">
+        <Table Id="table-border" Border="true" data-testid="border">
+            <caption>Table with rounded border</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item 1</Table.Cell>
+                    <Table.Cell>Value 1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item 2</Table.Cell>
+                    <Table.Cell>Value 2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

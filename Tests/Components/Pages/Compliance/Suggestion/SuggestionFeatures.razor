@@ -1,0 +1,53 @@
+﻿@page "/component/compliance/suggestion/features"
+@using Hviktor.Components.Suggestion
+
+<main data-testid="compliance-container">
+    @* Suggestion with filtering enabled (default) *@
+    <section aria-label="Filtered suggestion" data-testid="filter-enabled">
+        <Suggestion Filter="true" data-testid="filter-suggestion">
+            <Suggestion.Input aria-label="Search and filter" data-testid="filter-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="apple">Apple</Suggestion.Option>
+                <Suggestion.Option Value="apricot">Apricot</Suggestion.Option>
+                <Suggestion.Option Value="banana">Banana</Suggestion.Option>
+                <Suggestion.Option Value="blueberry">Blueberry</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with creatable *@
+    <section aria-label="Creatable suggestion" data-testid="creatable">
+        <Suggestion Creatable="true" data-testid="creatable-suggestion">
+            <Suggestion.Input aria-label="Select or create" data-testid="creatable-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="existing1">Existing Option 1</Suggestion.Option>
+                <Suggestion.Option Value="existing2">Existing Option 2</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with multiple selection *@
+    <section aria-label="Multiple selection suggestion" data-testid="multiple">
+        <Suggestion Multiple="true" data-testid="multiple-suggestion">
+            <Suggestion.Input aria-label="Select multiple items" data-testid="multiple-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="tag1">Tag 1</Suggestion.Option>
+                <Suggestion.Option Value="tag2">Tag 2</Suggestion.Option>
+                <Suggestion.Option Value="tag3">Tag 3</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with name for form submission *@
+    <section aria-label="Form suggestion" data-testid="form-name">
+        <form data-testid="suggestion-form">
+            <Suggestion Name="selectedItem" data-testid="named-suggestion">
+                <Suggestion.Input aria-label="Select for form" data-testid="named-input"/>
+                <Suggestion.List>
+                    <Suggestion.Option Value="option1">Option 1</Suggestion.Option>
+                    <Suggestion.Option Value="option2">Option 2</Suggestion.Option>
+                </Suggestion.List>
+            </Suggestion>
+        </form>
+    </section>
+</main>

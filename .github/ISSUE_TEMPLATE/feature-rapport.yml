@@ -1,0 +1,61 @@
+name: 🚩 Feature Report
+description: Create a feature report when you want to suggest a change
+title: "[Feature]: "
+labels: [ "feature", "enhancement" ]
+projects: [ "HelseVestIKT/47" ]
+type: Feature
+
+body:
+  # INTRO:
+  - type: markdown
+    attributes:
+      value: |
+        Create a feature report when you want to suggest a change.
+        Please fill out the example information below and add more information between the heading & this comment.
+
+        Before creating a new `issue:feature` please verify that it's not already known
+
+        ```
+        You can check open issues and filter by 'feature' in the issues tab on GitHub.
+        Example: `is:issue is:open label:feature`
+        ```
+
+  # DESCRIPTION:
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Problem Statement
+      description: Describe the current limitation or issue this feature would solve
+      placeholder: Currently, users cannot...
+    validations:
+      required: true
+
+  # ALTERNATIVE:
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 🔄 Alternative
+      description: |
+        A clear and concise description of any alternative solutions or features you've considered
+      placeholder: ...
+    validations:
+      required: false
+
+  # DESIRED BEHAVIOR:
+  - type: textarea
+    id: desired-behavior
+    attributes:
+      label: ✅ Proposed Solution
+      description: Describe how the new feature should work and what it should accomplish
+      placeholder: The system should allow users to...
+    validations:
+      required: false
+
+  # ADDITIONAL INFORMATION:
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: ℹ️ Additional information
+      description: |
+        Add any screenshots to help explain your request or other useful information
+      placeholder: ...

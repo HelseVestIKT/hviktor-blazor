@@ -1,0 +1,47 @@
+﻿name: Playwright Composition tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Browser to use for tests'
+        required: false
+        default: 'chromium'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+      channel:
+        description: 'Browser channel to use for tests'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - msedge
+          - chrome
+
+concurrency:
+  group: playwright-composition-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prerequisite:
+    name: Prerequisite tests
+    uses: ./.github/workflows/playwright-reusable.yml
+    with:
+      test-name: Prerequisite
+      test-filter: "Collection=Prerequisite"
+      browser: ${{ inputs.browser }}
+      channel: ${{ inputs.channel }}
+
+  composition-tests:
+    name: Composition tests
+    needs: [ prerequisite ]
+    uses: ./.github/workflows/playwright-reusable.yml
+    with:
+      test-name: composition
+      test-filter: "Collection=Composition"
+      browser: ${{ inputs.browser }}
+      channel: ${{ inputs.channel }}

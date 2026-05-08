@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/button/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra extra small size">
+        <Button Size="@Size.ExtraExtraSmall" data-testid="2xs">2xs</Button>
+    </section>
+
+    <section aria-label="Extra small size">
+        <Button Size="@Size.ExtraSmall" data-testid="xs">xs</Button>
+    </section>
+
+    <section aria-label="Small size">
+        <Button Size="@Size.Small" data-testid="sm">sm</Button>
+    </section>
+
+    <section aria-label="Medium size">
+        <Button Size="@Size.Medium" data-testid="md">md</Button>
+    </section>
+
+    <section aria-label="Large size">
+        <Button Size="@Size.Large" data-testid="lg">lg</Button>
+    </section>
+
+    <section aria-label="Extra large size">
+        <Button Size="@Size.ExtraLarge" data-testid="xl">xl</Button>
+    </section>
+
+    <section aria-label="Extra extra large size">
+        <Button Size="@Size.ExtraExtraLarge" data-testid="2xl">2xl</Button>
+    </section>
+</main>

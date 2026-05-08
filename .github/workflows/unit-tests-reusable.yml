@@ -1,0 +1,121 @@
+﻿name: Unit Tests (Reusable Workflow)
+
+on:
+  workflow_call:
+    inputs:
+      test-project:
+        description: 'Path to test project'
+        required: false
+        default: 'Tests.Unit/Tests.Unit.csproj'
+        type: string
+      dotnet-version:
+        description: '.NET SDK version to use'
+        required: false
+        default: '10.0.x'
+        type: string
+      configuration:
+        description: 'Build configuration'
+        required: false
+        default: 'Debug'
+        type: string
+      collect-coverage:
+        description: 'Collect code coverage'
+        required: false
+        default: true
+        type: boolean
+      timeout-minutes:
+        description: 'Job timeout in minutes'
+        required: false
+        default: 15
+        type: number
+    outputs:
+      coverage-artifact-name:
+        description: 'Name of the coverage artifact'
+        value: ${{ jobs.test.outputs.coverage-artifact-name }}
+      test-result:
+        description: 'Test result (success/failure)'
+        value: ${{ jobs.test.outputs.test-result }}
+
+jobs:
+  test:
+    name: Unit Tests
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    runs-on: ubuntu-latest
+    outputs:
+      coverage-artifact-name: ${{ steps.set-outputs.outputs.coverage-artifact-name }}
+      test-result: ${{ steps.test.outcome }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Cache dotnet tools
+        uses: actions/cache@v5
+        with:
+          path: ~/.dotnet/tools
+          key: ${{ runner.os }}-dotnet-tools-${{ hashFiles('.config/dotnet-tools.json') }}
+          restore-keys: ${{ runner.os }}-dotnet-tools-
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Install dotnet-coverage tool
+        if: ${{ inputs.collect-coverage }}
+        run: dotnet tool update --global dotnet-coverage
+
+      - name: Restore
+        run: dotnet restore ${{ inputs.test-project }}
+
+      - name: Build
+        run: dotnet build ${{ inputs.test-project }} --configuration ${{ inputs.configuration }} --no-restore
+
+      - name: Run tests with coverage
+        id: test
+        if: ${{ inputs.collect-coverage }}
+        run: |
+          dotnet-coverage collect \
+            "dotnet test --project ${{ inputs.test-project }} --configuration ${{ inputs.configuration }} --no-build --report-xunit-trx --report-xunit-trx-filename unit-tests-results.trx --results-directory ./TestResults" \
+            -f xml \
+            -o coverage.xml
+
+      - name: Run tests without coverage
+        id: test-no-coverage
+        if: ${{ !inputs.collect-coverage }}
+        run: |
+          dotnet test \
+            --project ${{ inputs.test-project }} \
+            --configuration ${{ inputs.configuration }} \
+            --no-build \
+            --report-xunit-trx \
+            --report-xunit-trx-filename unit-tests-results.trx \
+            --results-directory ./TestResults
+
+      - name: Set outputs
+        id: set-outputs
+        if: always()
+        run: |
+          echo "coverage-artifact-name=coverage-report" >> $GITHUB_OUTPUT
+
+      - name: Generate Test Summary
+        if: success() || failure()
+        run: bash ./.github/scripts/parse-test-results.sh ./TestResults
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v6
+        if: success() || failure()
+        with:
+          name: unit-test-results
+          path: ./TestResults/
+          retention-days: 30
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v6
+        if: ${{ inputs.collect-coverage && (success() || failure()) }}
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 30

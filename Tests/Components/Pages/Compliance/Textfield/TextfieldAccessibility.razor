@@ -1,0 +1,13 @@
+﻿@page "/component/compliance/textfield/accessibility"
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <section aria-label="Textfield with aria-label">
+        <Textfield Id="textfield-aria" aria-label="Search products" data-testid="aria-label"/>
+    </section>
+
+    <section aria-label="Textfield with aria-labelledby">
+        <h2 id="custom-label">Custom Label</h2>
+        <Textfield Id="textfield-labelledby" aria-labelledby="custom-label" data-testid="aria-labelledby"/>
+    </section>
+</main>

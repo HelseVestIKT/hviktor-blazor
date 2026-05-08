@@ -1,0 +1,48 @@
+﻿@using Hviktor.Components.Button
+@using Hviktor.Components.Details
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+@code {
+    private bool IsOpen => open1 && open2;
+
+    private bool open1;
+    private void SetOpen1(bool value) => open1 = value;
+
+    private bool open2;
+    private void SetOpen2(bool value) => open2 = value;
+
+    private void ToggleOpen()
+    {
+        var state = IsOpen;
+        SetOpen1(!state);
+        SetOpen2(!state);
+    }
+
+}
+
+<div class="flex flex-col gap-2">
+    <Button variant="tertiary" @onclick="@ToggleOpen" data-size="sm">
+        <Icon Definition="@(IsOpen ? IconSet.ChevronDownUp : IconSet.ChevronUpDown)" aria-hidden="true"/>
+        @(IsOpen ? "Close" : "Open") both
+    </Button>
+    <Details open="@open1" class="w-full">
+        <Details.Summary @onclick="@(() => SetOpen1(!open1))">Enkeltpersonforetak</Details.Summary>
+        <Details.Content>
+            Skal du starte for deg selv? Enkeltpersonforetak er ofte den enkleste
+            måten å etablere bedrift på. Denne organisasjonsformen har både
+            fordeler og ulemper. Det gir deg stor grad av frihet, men kan også gi
+            betydelig risiko fordi du har personlig ansvar for økonomien.
+        </Details.Content>
+    </Details>
+    <Details open="@open2" class="w-full">
+        <Details.Summary @onclick="@(() => SetOpen2(!open2))">Aksjeselskap (AS)</Details.Summary>
+        <Details.Content>
+            Planlegger du å starte næringsvirksomhet alene eller sammen med andre?
+            Innebærer næringsvirksomheten en økonomisk risiko? Vil du ha
+            rettigheter som arbeidstaker og muligheten til at andre kan investere
+            i selskapet ditt? Da kan aksjeselskap være en hensiktsmessig
+            organisasjonsform.
+        </Details.Content>
+    </Details>
+</div>

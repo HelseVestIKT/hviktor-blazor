@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/alert/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Alert
+
+<main data-testid="compliance-container">
+    <section aria-label="Extra extra small size">
+        <Alert size="@Size.ExtraExtraSmall" data-testid="2xs">Extra extra small alert message</Alert>
+    </section>
+
+    <section aria-label="Extra small size">
+        <Alert size="@Size.ExtraSmall" data-testid="xs">Extra small alert message</Alert>
+    </section>
+
+    <section aria-label="Small size">
+        <Alert size="@Size.Small" data-testid="sm">Small alert message</Alert>
+    </section>
+
+    <section aria-label="Medium size">
+        <Alert size="@Size.Medium" data-testid="md">Medium alert message</Alert>
+    </section>
+
+    <section aria-label="Large size">
+        <Alert size="@Size.Large" data-testid="lg">Large alert message</Alert>
+    </section>
+
+    <section aria-label="Extra large size">
+        <Alert size="@Size.ExtraLarge" data-testid="xl">Extra large alert message</Alert>
+    </section>
+
+    <section aria-label="Extra extra large size">
+        <Alert size="@Size.ExtraExtraLarge" data-testid="2xl">Extra extra large alert message</Alert>
+    </section>
+</main>

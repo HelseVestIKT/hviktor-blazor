@@ -1,0 +1,24 @@
+﻿@page "/component/compliance/breadcrumbs/structure"
+@using Hviktor.Components.Breadcrumbs
+
+<main data-testid="compliance-container">
+    <section aria-label="Default breadcrumbs structure">
+        <Breadcrumbs aria-label="Breadcrumb navigation" data-testid="default">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products/category">Category</Breadcrumbs.Link></Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+
+    <section aria-label="Breadcrumbs with aria-current">
+        <Breadcrumbs aria-label="Breadcrumb navigation" data-testid="with-aria-current">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item aria-current="page">Current Page</Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+</main>

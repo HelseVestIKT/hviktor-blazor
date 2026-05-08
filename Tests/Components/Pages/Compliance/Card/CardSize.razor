@@ -1,0 +1,32 @@
+﻿@page "/component/compliance/card/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Card
+
+<main data-testid="compliance-container">
+    <section aria-label="Small size">
+        <Card Size="@Size.Small" data-testid="sm">
+            <Card.Block>
+                <h3>Small Card</h3>
+                <p>This is a card with small size styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Medium size">
+        <Card Size="@Size.Medium" data-testid="md">
+            <Card.Block>
+                <h3>Medium Card</h3>
+                <p>This is a card with medium size styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+
+    <section aria-label="Large size">
+        <Card Size="@Size.Large" data-testid="lg">
+            <Card.Block>
+                <h3>Large Card</h3>
+                <p>This is a card with large size styling.</p>
+            </Card.Block>
+        </Card>
+    </section>
+</main>

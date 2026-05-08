@@ -1,0 +1,41 @@
+﻿@page "/component/compliance/tag/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tag
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent color tag">
+        <Tag Color="@Color.Accent" data-testid="accent">Accent Tag</Tag>
+    </section>
+
+    <section aria-label="Neutral color tag">
+        <Tag Color="@Color.Neutral" data-testid="neutral">Neutral Tag</Tag>
+    </section>
+
+    <section aria-label="Brand1 color tag">
+        <Tag Color="@Color.Brand1" data-testid="brand1">Brand1 Tag</Tag>
+    </section>
+
+    <section aria-label="Brand2 color tag">
+        <Tag Color="@Color.Brand2" data-testid="brand2">Brand2 Tag</Tag>
+    </section>
+
+    <section aria-label="Brand3 color tag">
+        <Tag Color="@Color.Brand3" data-testid="brand3">Brand3 Tag</Tag>
+    </section>
+
+    <section aria-label="Info color tag">
+        <Tag Color="@Color.Info" data-testid="info">Info Tag</Tag>
+    </section>
+
+    <section aria-label="Success color tag">
+        <Tag Color="@Color.Success" data-testid="success">Success Tag</Tag>
+    </section>
+
+    <section aria-label="Warning color tag">
+        <Tag Color="@Color.Warning" data-testid="warning">Warning Tag</Tag>
+    </section>
+
+    <section aria-label="Danger color tag">
+        <Tag Color="@Color.Danger" data-testid="danger">Danger Tag</Tag>
+    </section>
+</main>

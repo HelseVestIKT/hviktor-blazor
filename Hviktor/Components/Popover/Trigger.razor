@@ -1,0 +1,17 @@
+@* ReSharper disable once CheckNamespace *@
+@namespace Popover
+@using Hviktor.Components.Spinner
+@inherits Hviktor.Models.TriggerBase
+
+<button @ref="ElementRef" @attributes="@(ComputeAttributes())">
+    @if (Loading)
+    {
+        <Spinner/>
+    }
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+</button>

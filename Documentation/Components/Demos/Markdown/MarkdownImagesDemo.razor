@@ -1,0 +1,15 @@
+@using Hviktor.Components.Markdown
+
+@code {
+
+    private const string Text = """
+                                ## Images
+                                
+                                ![This is a image.](assets/img/DocsLogo.svg "This is a sample image.")
+                                
+                                ![This is an alt text.](assets/invalid_image.svg "This is a sample image.")
+                                """;
+
+}
+
+<Markdown Value="@Text"/>

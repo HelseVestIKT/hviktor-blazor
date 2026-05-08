@@ -1,0 +1,125 @@
+﻿@page "/component/compliance/table/sorting"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Table with sortable columns">
+        <Table Id="table-sortable" data-testid="sortable">
+            <caption>Table with sortable columns</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col" sort="none" data-testid="sort-name">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col" sort="none" data-testid="sort-age">Age</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">City</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Alice</Table.Cell>
+                    <Table.Cell>28</Table.Cell>
+                    <Table.Cell>Boston</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Bob</Table.Cell>
+                    <Table.Cell>35</Table.Cell>
+                    <Table.Cell>Seattle</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Charlie</Table.Cell>
+                    <Table.Cell>22</Table.Cell>
+                    <Table.Cell>Denver</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with ascending sort">
+        <Table Id="table-ascending" data-testid="ascending">
+            <caption>Table sorted ascending</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col" sort="ascending" data-testid="sort-ascending">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Alpha</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Beta</Table.Cell>
+                    <Table.Cell>2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with descending sort">
+        <Table Id="table-descending" data-testid="descending">
+            <caption>Table sorted descending</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col" sort="descending" data-testid="sort-descending">Name
+                    </Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Zeta</Table.Cell>
+                    <Table.Cell>2</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Alpha</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with other sort">
+        <Table Id="table-other" data-testid="other">
+            <caption>Table with other sort (custom sorting)</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col" sort="other" data-testid="sort-other">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Custom</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Order</Table.Cell>
+                    <Table.Cell>2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+
+    <section aria-label="Table with empty sort">
+        <Table Id="table-empty-sort" data-testid="empty-sort">
+            <caption>Table with empty sort attribute</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col" sort="" data-testid="sort-empty">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Value</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>Item A</Table.Cell>
+                    <Table.Cell>1</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Item B</Table.Cell>
+                    <Table.Cell>2</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

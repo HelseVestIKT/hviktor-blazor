@@ -1,0 +1,49 @@
+﻿@page "/component/compliance/errorsummary/accessibility"
+@using Hviktor.Components.ErrorSummary
+@using Hviktor.Components.Field
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    @* Error summary with focusable container for screen reader announcement *@
+    <section aria-label="Error summary focus test" data-testid="focus-test">
+        <ErrorSummary @ref="@errorSummaryRef">
+            <ErrorSummary.Heading>Fix the following errors</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#firstname-field">First name cannot be empty</ErrorSummary.Link>
+                </ErrorSummary.Item>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#lastname-field">Last name is required</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+        
+        <form>
+            <Fieldset>
+                <Field>
+                    <Textfield Id="firstname-field" Label="First name" aria-invalid="true" />
+                </Field>
+                <Field>
+                    <Textfield Id="lastname-field" Label="Last name" aria-invalid="true" />
+                </Field>
+            </Fieldset>
+        </form>
+    </section>
+
+    @* Error summary with aria-labelledby connection *@
+    <section aria-label="Error summary with labelled by" data-testid="labelledby">
+        <ErrorSummary>
+            <ErrorSummary.Heading Id="error-heading">Errors found</ErrorSummary.Heading>
+            <ErrorSummary.List>
+                <ErrorSummary.Item>
+                    <ErrorSummary.Link Href="#address">Address field is required</ErrorSummary.Link>
+                </ErrorSummary.Item>
+            </ErrorSummary.List>
+        </ErrorSummary>
+    </section>
+</main>
+
+@code {
+    private ErrorSummary? errorSummaryRef;
+}

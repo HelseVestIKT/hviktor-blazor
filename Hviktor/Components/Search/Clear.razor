@@ -1,0 +1,7 @@
+﻿@namespace Search
+@using Hviktor.Abstractions.Enums.Attributes
+@inherits Hviktor.Models.AsyncNestedComponentBase<Hviktor.Components.Search.Search>
+
+<Hviktor.Components.Button.Button Variant="@Variant.Tertiary" @attributes="@(ComputeAttributes())">
+    @ChildContent
+</Hviktor.Components.Button.Button>

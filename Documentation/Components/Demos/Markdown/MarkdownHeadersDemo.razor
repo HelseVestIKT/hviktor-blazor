@@ -1,0 +1,13 @@
+@using Hviktor.Components.Markdown
+
+@code {
+    private const string Text = """
+                                ## Headers
+                                
+                                # This is a Heading h1
+                                ## This is a Heading h2
+                                ###### This is a Heading h6
+                                """;
+}
+
+<Markdown Value="@Text"/>

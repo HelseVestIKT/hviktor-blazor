@@ -1,0 +1,10 @@
+﻿{
+  "$schema": "https://xunit.net/schema/current/testconfig.json",
+  "playwright": {
+    "headless": true,
+    "browser": "chromium",
+    "channel": "",
+    "slowMo": 0,
+    "timeout": 30000
+  }
+}

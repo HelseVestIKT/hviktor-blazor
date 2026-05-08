@@ -1,0 +1,36 @@
+﻿@page "/component/compliance/table/basic"
+@using Hviktor.Components.Table
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Basic table">
+        <Table Id="table-basic" data-testid="basic">
+            <caption>Sample data table</caption>
+            <Table.Head>
+                <Table.Row>
+                    <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Age</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">City</Table.HeaderCell>
+                </Table.Row>
+            </Table.Head>
+            <Table.Body>
+                <Table.Row>
+                    <Table.Cell>John Doe</Table.Cell>
+                    <Table.Cell>30</Table.Cell>
+                    <Table.Cell>New York</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Jane Smith</Table.Cell>
+                    <Table.Cell>25</Table.Cell>
+                    <Table.Cell>Los Angeles</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>Bob Johnson</Table.Cell>
+                    <Table.Cell>35</Table.Cell>
+                    <Table.Cell>Chicago</Table.Cell>
+                </Table.Row>
+            </Table.Body>
+        </Table>
+    </section>
+</main>

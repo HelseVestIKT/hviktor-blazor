@@ -1,0 +1,39 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tag
+@using Hviktor.Components.Typography
+
+@code {
+
+    private readonly Variant[] variants =
+    [
+        Variant.Default,
+        Variant.Outline
+    ];
+
+    private readonly Color[] colors =
+    [
+        Color.Accent,
+        Color.Brand1,
+        Color.Brand2,
+        Color.Brand3,
+        Color.Neutral,
+        Color.Success,
+        Color.Warning,
+        Color.Danger,
+        Color.Info,
+    ];
+
+}
+
+<div class="flex flex-col flex-wrap gap-2">
+    @foreach (var variant in variants)
+    {
+        <div class="flex flex-wrap gap-2">
+            <Paragraph>@variant.ToString():</Paragraph>
+            @foreach (var color in colors)
+            {
+                <Tag Variant="@variant" Color="@color">Tag</Tag>
+            }
+        </div>
+    }
+</div>

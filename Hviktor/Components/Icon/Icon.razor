@@ -1,0 +1,8 @@
+﻿@if (Definition is { HasValue: true })
+{
+    @(new MarkupString(RenderIconElement()))
+}
+else
+{
+    <span inert @attributes="@(ComputeAttributes())">@ChildContent</span>
+}

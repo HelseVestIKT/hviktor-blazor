@@ -1,0 +1,9 @@
+﻿@using Hviktor.Components.Link
+
+@code {
+    static void OnClickEvent() => Console.WriteLine(@"Hello world!");
+}
+
+<ActionLink @onclick="@OnClickEvent">
+    Hello world
+</ActionLink>

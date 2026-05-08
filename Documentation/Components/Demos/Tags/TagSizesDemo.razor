@@ -1,0 +1,17 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tag
+@using Hviktor.Components.Typography
+
+@code {
+    private readonly Size[] sizes =
+    [
+        Size.Small,
+        Size.Medium,
+        Size.Large,
+    ];
+}
+
+@foreach (var size in sizes)
+{
+    <Tag size="@size">@size</Tag>
+}

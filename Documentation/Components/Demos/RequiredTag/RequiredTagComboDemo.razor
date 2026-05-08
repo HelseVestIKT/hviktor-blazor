@@ -1,0 +1,103 @@
+@using Hviktor.Components.Button
+@using Hviktor.Components.Card
+@using Hviktor.Components.Field
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Input
+@using Hviktor.Components.Radio
+@using Hviktor.Components.RequiredTag
+@using Hviktor.Components.Suggestion
+@using Hviktor.Components.Typography
+
+@code {
+    string? processingValue;
+    string? GetAriaInvalidProcessing() => string.IsNullOrEmpty(processingValue) ? "true" : null;
+
+    private readonly List<string> DATA_REASONS =
+    [
+        "Manglende opplysninger",
+        "Ugyldig opplysninger",
+        "Utvikling av nytt register",
+        "Annet"
+    ];
+
+}
+
+<Card class="block w-full">
+    <Card.Block class="py-4">
+        <Paragraph>Samordnet registermelding</Paragraph>
+    </Card.Block>
+    <Card.Block>
+        <div class="flex flex-col gap-6 justify-start items-start">
+            <div class="flex flex-col gap-2">
+                <Heading level="4">Slette foretak</Heading>
+            </div>
+
+            <Field>
+                <Label>Når skal foretaket slettes?</Label>
+                <Field.Description>
+                    dd.mm.åååå
+                    <RequiredTag required/>
+                </Field.Description>
+                <Input type="date"
+                       aria-required="true"
+                       aria-invalid="@(GetAriaInvalidProcessing())"
+                       value="@processingValue"
+                       @onchange="@(e => processingValue = Convert.ToString(e.Value))"/>
+            </Field>
+
+            <Fieldset>
+                <Fieldset.Legend>
+                    Hva skal skje med underenhetene når du sletter foretaket?
+                    <RequiredTag required/>
+                </Fieldset.Legend>
+                <Radio label="Jeg skal slette underenhetene"
+                       value="delete" checked
+                       name="units"/>
+                <Radio label="Jeg skal overdra underenhetene"
+                       value="transfer"
+                       name="units"/>
+                <Radio
+                    label="Jeg skal slette eller overdra underenhetene på forskjellige tidspunkt eller til forskjellige eiere"
+                    description="Opplysningene må meldes i eget vedlegg."
+                    value="other"
+                    name="units"/>
+            </Fieldset>
+
+            <Field>
+                <Label>
+                    Årsak til sletting
+                    <RequiredTag/>
+                </Label>
+                <Suggestion>
+                    <Suggestion.Input/>
+                    <Suggestion.Clear/>
+                    <Suggestion.List>
+                        <Suggestion.Empty>
+                            No results found
+                        </Suggestion.Empty>
+                        @foreach (var reason in DATA_REASONS)
+                        {
+                            <Suggestion.Option @key="@reason" label="@reason" value="@reason">
+                                @reason
+                            </Suggestion.Option>
+                        }
+                    </Suggestion.List>
+                </Suggestion>
+            </Field>
+
+            <div class="flex gap-2 justify-center items-center mt-4">
+                <Button color="accent" variant="secondary">
+                    Forrige
+                </Button>
+                <Button color="accent" variant="primary">
+                    Neste
+                </Button>
+            </div>
+        </div>
+    </Card.Block>
+    <Card.Block class="py-4">
+        <Button color="neutral" variant="tertiary">
+            Avbryt
+        </Button>
+    </Card.Block>
+</Card>

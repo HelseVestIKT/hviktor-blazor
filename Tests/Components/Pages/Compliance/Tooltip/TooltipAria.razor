@@ -1,0 +1,17 @@
+﻿@page "/component/compliance/tooltip/aria"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tooltip
+
+<main data-testid="compliance-container">
+    <section aria-label="Tooltip with default ARIA (labelledby)">
+        <Tooltip Content="Description text" Type="InputType.DescribedBy">
+            <button data-testid="describedby-trigger">With description</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Tooltip with describedby ARIA">
+        <Tooltip Content="Label text" Type="InputType.LabelledBy">
+            <button data-testid="labelledby-trigger">With label</button>
+        </Tooltip>
+    </section>
+</main>

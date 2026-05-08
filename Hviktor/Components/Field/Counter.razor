@@ -1,0 +1,22 @@
+﻿@* ReSharper disable once CheckNamespace *@
+@namespace Field
+@using Hviktor.Components.Typography
+@inherits Hviktor.Models.NestedComponentBase<Hviktor.Components.Field.Field>
+
+<div class="ds-sr-only" aria-live="polite">@GetLabel(HasExceededLimit ? Over : Under, Remainder)</div>
+@if (HasExceededLimit)
+{
+    <Hviktor.Components.Typography.ValidationMessage @attributes="@(ComputeAttributes())">
+        @GetLabel(Over, Remainder)
+    </Hviktor.Components.Typography.ValidationMessage>
+}
+else
+{
+    <Paragraph @attributes="@(ComputeAttributes())" data-variant="default">
+        @GetLabel(Under, Remainder)
+    </Paragraph>
+}
+
+<div @attributes="@(ComputeDescriptionAttributes())">
+    @Math.Abs(Limit).ToString()
+</div>

@@ -1,0 +1,84 @@
+@page "/components/changelog"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Card
+@using Hviktor.Components.Divider
+@using Hviktor.Components.Icon
+@using Hviktor.Components.Typography
+@using Hviktor.Components.Link
+@using Hviktor.Components.Markdown
+@using Hviktor.Icons.Types
+
+<PageTitle>Changelog</PageTitle>
+
+<div class="component-page__wrapper">
+    <div class="component-page__content">
+        <div class="component-page__header">
+            <div class="flex items-center justify-between mb-2">
+                <Heading level="1" id="changelog" size="@Size.Large">Changelog</Heading>
+            </div>
+            <Paragraph class="mb-4">
+                View the full changelog and release notes on GitHub:
+            </Paragraph>
+        </div>
+
+        <Divider class="my-6"/>
+
+        <Paragraph class="mt-2">
+            <HyperLink href="https://github.com/HelseVestIKT/hviktor-blazor/releases"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                Hviktor Releases on GitHub
+                <Icon Definition="@IconSet.ArrowRight"/>
+            </HyperLink>
+        </Paragraph>
+
+        <div class="flex flex-col gap-4 mt-6">
+            @if (isLoading)
+            {
+                <Paragraph>Loading changelog...</Paragraph>
+            }
+            else if (errorMessage is not null)
+            {
+                <Paragraph>@errorMessage</Paragraph>
+            }
+            else if (releases.Count == 0)
+            {
+                <Paragraph>No release entries were found in the changelog.</Paragraph>
+            }
+            else
+            {
+                <Heading level="2" size="@Size.Medium">
+                    Releases
+                </Heading>
+                @foreach (var release in releases)
+                {
+                    <Card class="p-6" id="@release.Version">
+                        <Heading level="2" size="@Size.Medium">
+                            @if (release.Version == "Unreleased")
+                            {
+                                <span>@release.Version</span>
+                            }
+                            else
+                            {
+                                <HyperLink
+                                    href="@($"https://github.com/HelseVestIKT/hviktor-blazor/releases/tag/{release.Version}")">
+                                    @release.Version
+                                </HyperLink>
+                            }
+                            @if (release.Date is not null)
+                            {
+                                <span class="text-sm font-normal text-(--ds-color-neutral-text-subtle) ml-2">
+                                    @release.Date.Value.ToString("yyyy-MM-dd")
+                                </span>
+                            }
+                        </Heading>
+                        @if (!string.IsNullOrWhiteSpace(release.Body))
+                        {
+                            <Markdown Value="@release.Body"/>
+                        }
+                    </Card>
+                }
+            }
+        </div>
+    </div>
+</div>

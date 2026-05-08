@@ -1,0 +1,158 @@
+﻿@page "/component/composition/user-profile-form"
+@using Hviktor.Components.Alert
+@using Hviktor.Components.Avatar
+@using Hviktor.Components.Button
+@using Hviktor.Components.Card
+@using Hviktor.Components.Divider
+@using Hviktor.Components.Field
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Input
+@using Hviktor.Components.Switch
+@using Hviktor.Components.Textarea
+@using Hviktor.Components.Typography
+@using Hviktor.Abstractions.Enums.Attributes
+
+<main data-testid="composition-user-profile-form">
+    <Card>
+        <Card.Block>
+            <Heading level="1" data-testid="form-title">Edit Profile</Heading>
+        </Card.Block>
+
+        <Card.Block>
+            @if (ShowSuccessAlert)
+            {
+                <Alert color="@Color.Success" data-testid="success-alert">
+                    Profile updated successfully!
+                </Alert>
+            }
+
+            @if (ShowErrorAlert)
+            {
+                <Alert color="@Color.Danger" data-testid="error-alert">
+                    Please fill in all required fields.
+                </Alert>
+            }
+
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                <Avatar Initials="@GetInitials()" variant="@Variant.Circle" size="@Size.Large" data-testid="user-avatar"
+                        aria-label="User avatar"/>
+                <div>
+                    <Paragraph data-testid="avatar-name">@GetDisplayName()</Paragraph>
+                    <Paragraph size="@Size.Small" data-testid="avatar-email">@Email</Paragraph>
+                </div>
+            </div>
+
+            <Divider/>
+
+            <Fieldset>
+                <Fieldset.Legend data-testid="personal-info-legend">Personal Information</Fieldset.Legend>
+
+                <Field>
+                    <Label data-testid="firstname-label">First Name</Label>
+                    <Input value="@FirstName"
+                           @oninput="@(e => FirstName = e.Value?.ToString() ?? "")"
+                           data-testid="firstname-input"
+                           aria-required="true"/>
+                </Field>
+
+                <Field>
+                    <Label data-testid="lastname-label">Last Name</Label>
+                    <Input value="@LastName"
+                           @oninput="@(e => LastName = e.Value?.ToString() ?? "")"
+                           data-testid="lastname-input"
+                           aria-required="true"/>
+                </Field>
+
+                <Field>
+                    <Label data-testid="email-label">Email</Label>
+                    <Input type="@InputType.Email"
+                           value="@Email"
+                           @oninput="@(e => Email = e.Value?.ToString() ?? "")"
+                           data-testid="email-input"
+                           aria-required="true"/>
+                </Field>
+
+                <Field>
+                    <Label data-testid="bio-label">Bio</Label>
+                    <Textarea value="@Bio"
+                              @oninput="@(e => Bio = e.Value?.ToString() ?? "")"
+                              rows="4"
+                              data-testid="bio-textarea"></Textarea>
+                </Field>
+            </Fieldset>
+
+            <Divider/>
+
+            <Fieldset>
+                <Fieldset.Legend data-testid="preferences-legend">Preferences</Fieldset.Legend>
+
+                <Field>
+                    <Switch @bind-checked="EmailNotifications" data-testid="email-notifications-switch">
+                        Receive email notifications
+                    </Switch>
+                </Field>
+
+                <Field>
+                    <Switch @bind-checked="MarketingEmails" data-testid="marketing-emails-switch">
+                        Receive marketing emails
+                    </Switch>
+                </Field>
+            </Fieldset>
+        </Card.Block>
+
+        <Card.Block>
+            <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <Button variant="@Variant.Secondary" @onclick="HandleCancel" data-testid="cancel-button">
+                    Cancel
+                </Button>
+                <Button variant="@Variant.Primary" @onclick="HandleSubmit" data-testid="submit-button">
+                    Save Changes
+                </Button>
+            </div>
+        </Card.Block>
+    </Card>
+</main>
+
+@code {
+    private string FirstName { get; set; } = "Ola";
+    private string LastName { get; set; } = "Nordmann";
+    private string Email { get; set; } = "ola.nordmann@example.com";
+    private string Bio { get; set; } = "";
+    private bool EmailNotifications { get; set; } = true;
+    private bool MarketingEmails { get; set; }
+    private bool ShowSuccessAlert { get; set; }
+    private bool ShowErrorAlert { get; set; }
+
+    private string GetInitials() => $"{(FirstName.Length > 0 ? FirstName[0] : ' ')}{(LastName.Length > 0 ? LastName[0] : ' ')}".Trim();
+
+    private string GetDisplayName() => $"{FirstName} {LastName}".Trim();
+
+    private void HandleSubmit()
+    {
+        ShowSuccessAlert = false;
+        ShowErrorAlert = false;
+
+        if (string.IsNullOrWhiteSpace(FirstName) ||
+            string.IsNullOrWhiteSpace(LastName) ||
+            string.IsNullOrWhiteSpace(Email))
+        {
+            ShowErrorAlert = true;
+            return;
+        }
+
+        ShowSuccessAlert = true;
+    }
+
+    private void HandleCancel()
+    {
+        FirstName = "Ola";
+        LastName = "Nordmann";
+        Email = "ola.nordmann@example.com";
+        Bio = "";
+        EmailNotifications = true;
+        MarketingEmails = false;
+        ShowSuccessAlert = false;
+        ShowErrorAlert = false;
+    }
+
+}

@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/link/accessibility"
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    @* Link with proper href and text content for accessibility *@
+    <section aria-label="Accessible link with descriptive text" data-testid="accessible-text">
+        <NavigationLink Href="/products">View all products</NavigationLink>
+    </section>
+
+    @* Link with aria-current for active navigation *@
+    <section aria-label="Active navigation link" data-testid="active-link">
+        <nav>
+            <NavigationLink href="/component/compliance/link/accessibility" Match="@NavLinkMatch.All">Current Page</NavigationLink>
+        </nav>
+    </section>
+
+    @* Multiple links for keyboard navigation *@
+    <section aria-label="Multiple links for tab navigation" data-testid="keyboard-navigation">
+        <nav>
+            <NavigationLink href="/home" data-testid="nav-link-1">Home</NavigationLink>
+            <NavigationLink href="/about" data-testid="nav-link-2">About</NavigationLink>
+            <NavigationLink href="/contact" data-testid="nav-link-3">Contact</NavigationLink>
+        </nav>
+    </section>
+
+    @* Link with focus visible styling *@
+    <section aria-label="Link with focus background" data-testid="focus-styling">
+        <p>Focus on this
+            <NavigationLink href="/focus-test" data-testid="focusable-link">link</NavigationLink>
+            to see the background styling.
+        </p>
+    </section>
+</main>

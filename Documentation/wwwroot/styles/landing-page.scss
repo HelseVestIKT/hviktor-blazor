@@ -1,0 +1,56 @@
+﻿.landing-page {
+  padding: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.landing-page__header {
+  margin-bottom: 2.5rem;
+}
+
+.landing-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.landing-page__card-link {
+  text-decoration: none !important;
+  display: block;
+
+  &:focus-visible {
+    outline: 2px solid var(--ds-color-focus-outer);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+}
+
+.landing-page__card {
+  height: 100%;
+  padding: 1.25rem !important;
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.landing-page__card-title {
+  margin-bottom: 0.5rem;
+}
+
+.landing-page__card-desc {
+  color: var(--ds-color-neutral-text-subtle);
+  margin: 0;
+}
+
+.card-image {
+  min-height: 8.75rem;
+  min-width: 22rem;
+  padding: var(--ds-size-1) var(--ds-size-10);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page__card {
+    transition: none;
+  }
+}

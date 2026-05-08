@@ -1,0 +1,104 @@
+#
+# FLOW
+# 1. Trigger manually: Go to Actions > "Prepare Release" > Run workflow, enter a tag like v5.1.0 and optionally check "pre-release".
+# 2. The workflow generates the changelog, bumps the package version in Directory.Build.props, and opens a PR from branch changelog/v5.1.0.
+# 3. Review and merge: The PR shows the changelog and version bump. You can edit it before merging if needed.
+# 4. Tag + release are created automatically: When the PR merges, create-release.yml detects the changelog/v* branch, creates an annotated git tag on the merge commit, generates the release body, and creates the GitHub release (with --prerelease if flagged).
+# 5. Packages publish: The release: published event triggers publish-packages.yml as before.
+#
+name: Prepare Release
+
+# Manual workflow: generates changelog, bumps version, and creates a PR.
+# When the PR is merged, create-release.yml creates the tag and GitHub release,
+# which in turn triggers publish-packages.yml.
+#
+# On pull_request: posts an unreleased changelog preview as a PR comment.
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Version tag to release (e.g. v5.1.0)'
+        required: true
+        type: string
+      prerelease:
+        description: 'Mark as pre-release'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare:
+    name: Prepare release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Run changelog action
+        uses: HelseVestIKT/samlepunktet-actions/changelog@v0.0.12
+        with:
+          tag-name: ${{ inputs.tag_name }}
+          prerelease: ${{ inputs.prerelease }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup branch on failure
+        if: failure() && github.event_name == 'workflow_dispatch'
+        env:
+          TAG: ${{ inputs.tag_name }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="changelog/$TAG"
+          if git ls-remote --heads origin "$BRANCH" | grep -q .; then
+            echo "::notice::Deleting orphaned branch $BRANCH"
+            git push origin --delete "$BRANCH"
+          fi
+
+      - name: Update version in Directory.Build.props
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          TAG: ${{ inputs.tag_name }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${TAG#v}"
+          BRANCH="changelog/$TAG"
+
+          echo "::notice::Updating Directory.Build.props to version $VERSION"
+
+          # Get the current file from the remote branch via the API
+          FILE_RESPONSE=$(gh api \
+            "/repos/${{ github.repository }}/contents/Directory.Build.props?ref=$BRANCH")
+          CURRENT_CONTENT=$(echo "$FILE_RESPONSE" | jq -r '.content' | base64 -d)
+
+          # Apply the version update
+          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" \
+            | sed "s|<Version>.*</Version>|<Version>$VERSION</Version>|")
+
+          if [ "$CURRENT_CONTENT" = "$UPDATED_CONTENT" ]; then
+            echo "::notice::Version already set to $VERSION, no changes needed"
+          else
+            # Use the Contents API to create a verified (signed) bot commit.
+            # This works because the request is authenticated as the GitHub App
+            # with no custom author, committer, or signature information.
+            FILE_SHA=$(echo "$FILE_RESPONSE" | jq -r '.sha')
+
+            gh api \
+              --method PUT \
+              "/repos/${{ github.repository }}/contents/Directory.Build.props" \
+              -f message="chore: update package version to $VERSION" \
+              -f content="$(echo -n "$UPDATED_CONTENT" | base64 -w 0)" \
+              -f sha="$FILE_SHA" \
+              -f branch="$BRANCH" > /dev/null
+
+            echo "::notice::Pushed verified version update to $BRANCH"
+          fi

@@ -1,0 +1,50 @@
+﻿@page "/component/compliance/pagination/variants"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Pagination
+
+<main data-testid="compliance-container">
+    <section aria-label="Primary variant pagination" data-testid="variant-primary">
+        <Pagination>
+            <Pagination.Button Variant="@Variant.Primary" aria-label="Forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button Variant="@Variant.Primary">1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button Variant="@Variant.Primary" aria-current="page">2</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button Variant="@Variant.Primary" aria-label="Neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+
+    <section aria-label="Secondary variant pagination" data-testid="variant-secondary">
+        <Pagination>
+            <Pagination.Button Variant="@Variant.Secondary" aria-label="Forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button Variant="@Variant.Secondary">1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button Variant="@Variant.Secondary" aria-current="page">2</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button Variant="@Variant.Secondary" aria-label="Neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+
+    <section aria-label="Tertiary variant pagination" data-testid="variant-tertiary">
+        <Pagination>
+            <Pagination.Button Variant="@Variant.Tertiary" aria-label="Forrige side">Forrige</Pagination.Button>
+            <Pagination.List>
+                <Pagination.Item>
+                    <Pagination.Button Variant="@Variant.Tertiary">1</Pagination.Button>
+                </Pagination.Item>
+                <Pagination.Item>
+                    <Pagination.Button Variant="@Variant.Tertiary" aria-current="page">2</Pagination.Button>
+                </Pagination.Item>
+            </Pagination.List>
+            <Pagination.Button Variant="@Variant.Tertiary" aria-label="Neste side">Neste</Pagination.Button>
+        </Pagination>
+    </section>
+</main>

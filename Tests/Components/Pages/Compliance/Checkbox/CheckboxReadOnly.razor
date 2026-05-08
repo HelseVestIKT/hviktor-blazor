@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/checkbox/readonly"
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="ReadOnly unchecked checkbox">
+        <Checkbox Id="checkbox-readonly-unchecked" 
+                  ReadOnly="true"
+                  Label="ReadOnly unchecked checkbox"
+                  Description="This checkbox is read-only and unchecked"
+                  data-testid="readonly-unchecked"/>
+    </section>
+
+    <section aria-label="ReadOnly checked checkbox">
+        <Checkbox Id="checkbox-readonly-checked" 
+                  ReadOnly="true"
+                  Checked="true"
+                  Label="ReadOnly checked checkbox"
+                  Description="This checkbox is read-only and checked"
+                  data-testid="readonly-checked"/>
+    </section>
+</main>

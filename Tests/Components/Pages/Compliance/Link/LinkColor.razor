@@ -1,0 +1,25 @@
+﻿@page "/component/compliance/link/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent colored link" data-testid="color-accent">
+        <HyperLink Href="/page" Color="@Color.Accent">Accent Link</HyperLink>
+    </section>
+
+    <section aria-label="Neutral colored link" data-testid="color-neutral">
+        <HyperLink Href="/page" Color="@Color.Neutral">Neutral Link</HyperLink>
+    </section>
+
+    <section aria-label="Brand1 colored link" data-testid="color-brand1">
+        <HyperLink Href="/page" Color="@Color.Brand1">Brand1 Link</HyperLink>
+    </section>
+
+    <section aria-label="Brand2 colored link" data-testid="color-brand2">
+        <HyperLink Href="/page" Color="@Color.Brand2">Brand2 Link</HyperLink>
+    </section>
+
+    <section aria-label="Brand3 colored link" data-testid="color-brand3">
+        <HyperLink Href="/page" Color="@Color.Brand3">Brand3 Link</HyperLink>
+    </section>
+</main>

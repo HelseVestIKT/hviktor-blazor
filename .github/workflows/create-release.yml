@@ -1,0 +1,137 @@
+name: Create Release
+
+# Triggered when a changelog PR (changelog/v*) is merged into the default branch.
+# Creates the git tag and GitHub release, then explicitly triggers
+# publish-packages.yml via workflow_dispatch (GITHUB_TOKEN events
+# do not trigger other workflows automatically).
+on:
+  pull_request:
+    types: [ closed ]
+    branches:
+      - main
+    paths:
+      - 'CHANGELOG.md'
+      - 'Directory.Build.props'
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: read
+
+jobs:
+  release:
+    name: Create tag and GitHub release
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'changelog/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Resolve tag from branch name
+        id: resolve_tag
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          TAG="${BRANCH#changelog/}"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "::notice::Creating release for tag: $TAG"
+
+      - name: Detect pre-release from PR body
+        id: prerelease
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          if echo "$PR_BODY" | grep -qi "pre-release"; then
+            echo "flag=--prerelease" >> $GITHUB_OUTPUT
+          else
+            echo "flag=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create git tag
+        env:
+          TAG: ${{ steps.resolve_tag.outputs.tag }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COMMIT_SHA=$(git rev-parse HEAD)
+
+          # Create an annotated tag object via the API
+          # Do not pass custom tagger info so GitHub signs with the bot's key
+          TAG_SHA=$(gh api \
+            --method POST \
+            "/repos/${{ github.repository }}/git/tags" \
+            -f tag="$TAG" \
+            -f message="Release $TAG" \
+            -f object="$COMMIT_SHA" \
+            -f type="commit" \
+            --jq '.sha')
+
+          # Create the tag reference
+          gh api \
+            --method POST \
+            "/repos/${{ github.repository }}/git/refs" \
+            -f ref="refs/tags/$TAG" \
+            -f sha="$TAG_SHA"
+
+          echo "::notice::Created verified tag $TAG"
+
+      - name: Resolve previous tag
+        id: prev_tag
+        env:
+          TAG: ${{ steps.resolve_tag.outputs.tag }}
+        run: |
+          if echo "$TAG" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            # Stable release: compare against previous stable tag
+            PREV=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | grep -v "^$TAG$" | head -n 1)
+          else
+            # Pre-release: compare against the immediately previous tag
+            PREV=$(git tag --sort=-v:refname | grep -v "^$TAG$" | head -n 1)
+          fi
+          echo "tag=$PREV" >> $GITHUB_OUTPUT
+          echo "::notice::Previous tag: $PREV"
+
+      - name: Extract release notes from CHANGELOG.md
+        env:
+          TAG: ${{ steps.resolve_tag.outputs.tag }}
+          PREV_TAG: ${{ steps.prev_tag.outputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Extract the latest entry from CHANGELOG.md (between first and second ## headings).
+          # This preserves manually edited changelog content instead of re-generating it.
+          awk '/^## \[/{if(found) exit; found=1; next} found{print}' CHANGELOG.md \
+            | sed -e '/./,$!d' -e :a -e '/^\n*$/{$d;N;ba}' > CHANGELOG_ENTRY.md
+
+          if [ ! -s CHANGELOG_ENTRY.md ]; then
+            echo "::error::No changelog entry found in CHANGELOG.md"
+            exit 1
+          fi
+
+          {
+            echo "## What's Changed"
+            echo ""
+            cat CHANGELOG_ENTRY.md
+            echo ""
+            echo "**Full Changelog**: https://github.com/$REPO/compare/$PREV_TAG...$TAG"
+          } > RELEASE_BODY.md
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.resolve_tag.outputs.tag }}
+          PRERELEASE_FLAG: ${{ steps.prerelease.outputs.flag }}
+        run: |
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --notes-file RELEASE_BODY.md \
+            $PRERELEASE_FLAG
+          echo "::notice::GitHub release created for $TAG"
+
+      - name: Trigger package publishing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.resolve_tag.outputs.tag }}
+        run: |
+          gh workflow run publish-packages.yml --field tag="$TAG"
+          echo "::notice::Triggered publish-packages workflow for $TAG"

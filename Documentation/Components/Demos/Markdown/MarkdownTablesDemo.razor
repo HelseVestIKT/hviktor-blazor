@@ -1,0 +1,17 @@
+@using Hviktor.Components.Markdown
+
+@code {
+
+    private const string Text = """
+                                ## Tables
+                                
+                                | Left columns  | Right columns |
+                                | ------------- |:-------------:|
+                                | left foo      | right foo     |
+                                | left bar      | right bar     |
+                                | left baz      | right baz     |
+                                """;
+
+}
+
+<Markdown Value="@Text"/>

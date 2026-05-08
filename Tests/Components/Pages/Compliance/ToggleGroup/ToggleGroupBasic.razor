@@ -1,0 +1,14 @@
+﻿@page "/component/compliance/togglegroup/basic"
+@using Hviktor.Components.ToggleGroup
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Basic toggle group">
+        <ToggleGroup data-testid="basic" DefaultValue="option1">
+            <ToggleGroup.Item value="option1" data-testid="item1">Option 1</ToggleGroup.Item>
+            <ToggleGroup.Item value="option2" data-testid="item2">Option 2</ToggleGroup.Item>
+            <ToggleGroup.Item value="option3" data-testid="item3">Option 3</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+</main>

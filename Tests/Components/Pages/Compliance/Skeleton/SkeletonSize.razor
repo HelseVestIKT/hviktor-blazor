@@ -1,0 +1,25 @@
+﻿@page "/component/compliance/skeleton/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Skeleton
+
+<main data-testid="compliance-container">
+    @* Small skeleton *@
+    <section aria-label="Small skeleton" data-testid="size-small">
+        <Skeleton variant="@Variant.Rectangle" Width="50" Height="20" data-testid="small-skeleton"/>
+    </section>
+
+    @* Medium skeleton *@
+    <section aria-label="Medium skeleton" data-testid="size-medium">
+        <Skeleton variant="rectangle" Width="150" Height="50" data-testid="medium-skeleton"/>
+    </section>
+
+    @* Large skeleton *@
+    <section aria-label="Large skeleton" data-testid="size-large">
+        <Skeleton variant="@Variant.Rectangle" Width="300" Height="100" data-testid="large-skeleton"/>
+    </section>
+
+    @* Custom width and height *@
+    <section aria-label="Custom dimensions" data-testid="custom-dimensions">
+        <Skeleton variant="@Variant.Rectangle" Width="250" Height="75" data-testid="custom-skeleton"/>
+    </section>
+</main>

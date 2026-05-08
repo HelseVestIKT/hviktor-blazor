@@ -1,0 +1,18 @@
+﻿@using Hviktor.Components.Code
+
+@if (!string.IsNullOrEmpty(Value))
+{
+    <div @attributes="@(ComputeAttributes())">
+        @foreach (var segment in MarkdownRenderer.Parse(Value))
+        {
+            if (segment.IsCodeBlock)
+            {
+                <CodeBlock Language="@segment.Language" Code="@segment.Content" />
+            }
+            else
+            {
+                @((MarkupString)segment.Content)
+            }
+        }
+    </div>
+}

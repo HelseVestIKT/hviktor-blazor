@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/switch/position"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Switch
+
+<main data-testid="compliance-container">
+    <section aria-label="Switch with position start">
+        <Switch Id="switch-position-start"
+                Position="Position.Start"
+                Label="Switch at start position"
+                Description="The switch is positioned at the start"
+                data-testid="position-start"/>
+    </section>
+
+    <section aria-label="Switch with position end">
+        <Switch Id="switch-position-end"
+                Position="Position.End"
+                Label="Switch at end position"
+                Description="The switch is positioned at the end"
+                data-testid="position-end"/>
+    </section>
+</main>

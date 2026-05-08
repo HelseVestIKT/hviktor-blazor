@@ -1,0 +1,10 @@
+﻿@inherits Hviktor.Models.PopoverBase
+
+<div @ref="ElementRef" @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+</div>

@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/fieldset/legend"
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Fieldset with visible legend" data-testid="legend-visible">
+        <Fieldset>
+            <Fieldset.Legend>Payment method</Fieldset.Legend>
+            <Checkbox Id="pay-card" Label="Credit card" />
+            <Checkbox Id="pay-bank" Label="Bank transfer" />
+        </Fieldset>
+    </section>
+
+    <section aria-label="Fieldset with screen reader only legend" data-testid="legend-sr-only">
+        <Fieldset>
+            <Fieldset.Legend class="ds-sr-only">Shipping options (screen reader only)</Fieldset.Legend>
+            <Checkbox Id="ship-standard" Label="Standard shipping" />
+            <Checkbox Id="ship-express" Label="Express shipping" />
+        </Fieldset>
+    </section>
+</main>

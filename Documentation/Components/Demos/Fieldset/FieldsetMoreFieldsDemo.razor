@@ -1,0 +1,24 @@
+﻿@using Hviktor.Components.Field
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Input
+@using Hviktor.Components.Select
+@using Hviktor.Components.Typography
+
+<Fieldset>
+    <Fieldset.Legend>Personal information</Fieldset.Legend>
+    <Fieldset.Description>
+        Fill in your personal information below.
+    </Fieldset.Description>
+    <Field>
+        <Label>First name</Label>
+        <Input/>
+    </Field>
+    <Field>
+        <Label>Gender</Label>
+        <Select>
+            <Select.Option value="male">Male</Select.Option>
+            <Select.Option value="female">Female</Select.Option>
+            <Select.Option value="other">Other</Select.Option>
+        </Select>
+    </Field>
+</Fieldset>

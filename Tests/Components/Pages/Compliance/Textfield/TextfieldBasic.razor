@@ -1,0 +1,19 @@
+﻿@page "/component/compliance/textfield/basic"
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Basic textfield with label">
+        <Textfield Id="textfield-basic" Label="Name" data-testid="basic"/>
+    </section>
+
+    <section aria-label="Textfield with label and description">
+        <Textfield Id="textfield-description" Label="Email" Description="We'll never share your email"
+                   data-testid="with-description"/>
+    </section>
+
+    <section aria-label="Textfield with value">
+        <Textfield Id="textfield-value" Label="Username" Value="john_doe" data-testid="with-value"/>
+    </section>
+</main>

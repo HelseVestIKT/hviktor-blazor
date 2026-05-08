@@ -1,0 +1,27 @@
+﻿@page "/component/compliance/dialog/modal"
+@using Hviktor.Components.Button
+@using Hviktor.Components.Dialog
+
+@code {
+    private Dialog modalDialogRef = null!;
+    private Dialog nonModalDialogRef = null!;
+}
+
+<main data-testid="compliance-container">
+    <section aria-label="Modal dialog" data-testid="modal-true">
+        <Dialog @ref="modalDialogRef" Modal="@true">
+            <h2>Modal Dialog</h2>
+            <p>This is a modal dialog that blocks interaction with the page.</p>
+            <p>Press Escape or click the close button to close.</p>
+        </Dialog>
+        <Button @onclick="@(() => modalDialogRef.ShowModal())">Open Modal Dialog</Button>
+    </section>
+
+    <section aria-label="Non-modal dialog" data-testid="modal-false">
+        <Dialog @ref="nonModalDialogRef" Modal="@false">
+            <h2>Non-Modal Dialog</h2>
+            <p>This is a non-modal dialog that allows interaction with the page.</p>
+        </Dialog>
+        <Button @onclick="@(() => nonModalDialogRef.ShowModal())">Open Non-Modal Dialog</Button>
+    </section>
+</main>

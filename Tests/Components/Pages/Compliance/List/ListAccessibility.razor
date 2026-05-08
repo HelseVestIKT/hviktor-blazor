@@ -1,0 +1,47 @@
+﻿@page "/component/compliance/list/accessibility"
+@using Hviktor.Components.Button
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    @* List used for navigation with nav wrapper and aria-label *@
+    <section aria-label="Navigation list with nav wrapper" data-testid="navigation-list">
+        <nav aria-label="Snarveier">
+            <List.Unordered>
+                <List.Item>
+                    <HyperLink href="/home">Home</HyperLink>
+                </List.Item>
+                <List.Item>
+                    <HyperLink href="/about">About</HyperLink>
+                </List.Item>
+                <List.Item>
+                    <HyperLink href="/contact">Contact</HyperLink>
+                </List.Item>
+            </List.Unordered>
+        </nav>
+    </section>
+
+    @* List with interactive elements (buttons) *@
+    <section aria-label="List with interactive elements" data-testid="interactive-list">
+        <List.Unordered>
+            <List.Item>
+                <Button data-testid="btn-copy">Copy</Button>
+            </List.Item>
+            <List.Item>
+                <Button data-testid="btn-cut">Cut</Button>
+            </List.Item>
+            <List.Item>
+                <Button data-testid="btn-paste">Paste</Button>
+            </List.Item>
+        </List.Unordered>
+    </section>
+
+    @* Ordered list for step-by-step instructions *@
+    <section aria-label="Step-by-step instructions" data-testid="instructions-list">
+        <List.Ordered>
+            <List.Item>Open the application</List.Item>
+            <List.Item>Click on "New File"</List.Item>
+            <List.Item>Enter the file name</List.Item>
+            <List.Item>Click "Save"</List.Item>
+        </List.Ordered>
+    </section>
+</main>

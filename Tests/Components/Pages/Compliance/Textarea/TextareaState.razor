@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/textarea/state"
+@using Hviktor.Components.Textarea
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Disabled textarea">
+        <label for="textarea-disabled">Disabled field</label>
+        <Textarea Id="textarea-disabled" Disabled data-testid="disabled">This textarea is disabled</Textarea>
+    </section>
+
+    <section aria-label="Readonly textarea">
+        <label for="textarea-readonly">Readonly field</label>
+        <Textarea Id="textarea-readonly" ReadOnly data-testid="readonly">This textarea is readonly</Textarea>
+    </section>
+
+    <section aria-label="Required textarea">
+        <label for="textarea-required">Required field</label>
+        <Textarea Id="textarea-required" required aria-required="true" data-testid="required"></Textarea>
+    </section>
+</main>

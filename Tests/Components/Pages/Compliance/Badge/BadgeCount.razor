@@ -1,0 +1,17 @@
+﻿@page "/component/compliance/badge/count"
+@using Hviktor.Components.Badge
+
+<main data-testid="compliance-container">
+    <section aria-label="Badge with count">
+        <Badge Count="5" role="status" data-testid="with-count" aria-label="5 notifications"/>
+    </section>
+
+    <section aria-label="Badge with max count">
+        <Badge Count="150" MaxCount="99" role="status" data-testid="with-max-count"
+               aria-label="More than 99 notifications"/>
+    </section>
+
+    <section aria-label="Badge without count">
+        <Badge Count="0" role="status" data-testid="without-count" aria-label="No notifications"/>
+    </section>
+</main>

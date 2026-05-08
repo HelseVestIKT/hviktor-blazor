@@ -1,0 +1,97 @@
+﻿name: Quality Gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      skip-tests:
+        description: 'Skip all tests and only run SonarQube analysis'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: quality-gate-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      source-code: ${{ steps.filter.outputs.source-code }}
+      unit-tests: ${{ steps.filter.outputs.unit-tests }}
+      playwright-tests: ${{ steps.filter.outputs.playwright-tests }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed files
+        id: filter
+        shell: bash
+        env:
+          PATHS_SOURCE_CODE: ${{ vars.QUALITY_GATE_SOURCE_CODE_PATHS }}
+          PATHS_UNIT_TESTS: ${{ vars.QUALITY_GATE_UNIT_TESTS_PATHS }}
+          PATHS_PLAYWRIGHT: ${{ vars.QUALITY_GATE_PLAYWRIGHT_PATHS }}
+        run: |
+          bash ./.github/scripts/detect-changed-paths.sh \
+            --base-branch "${{ github.base_ref }}" \
+            --before-sha "${{ github.event.before }}" \
+            --event-name "${{ github.event_name }}" \
+            --source-code-pattern "$PATHS_SOURCE_CODE" \
+            --unit-test-pattern "$PATHS_UNIT_TESTS" \
+            --playwright-pattern "$PATHS_PLAYWRIGHT" \
+            --output-to-github
+
+  # Job run modes (set in repository variables):
+  #   auto   - Run based on change detection (this is default if not set)
+  #   always - Always run regardless of changes
+  #   never  - Never run (disabled)
+  unit-tests:
+    name: Unit Tests
+    needs: [ changes ]
+    if: |
+      vars.QUALITY_GATE_UNIT_TESTS_MODE != 'never' &&
+      !inputs.skip-tests && (
+        vars.QUALITY_GATE_UNIT_TESTS_MODE == 'always' ||
+        needs.changes.outputs.source-code == 'true' ||
+        needs.changes.outputs.unit-tests == 'true'
+      )
+    uses: ./.github/workflows/unit-tests-reusable.yml
+    with:
+      collect-coverage: true
+
+  playwright-wcag-tests:
+    name: Playwright WCAG Tests
+    needs: [ changes ]
+    if: |
+      vars.QUALITY_GATE_PLAYWRIGHT_MODE != 'never' &&
+      !inputs.skip-tests && (
+        vars.QUALITY_GATE_PLAYWRIGHT_MODE == 'always' ||
+        needs.changes.outputs.source-code == 'true' ||
+        needs.changes.outputs.playwright-tests == 'true'
+      )
+    uses: ./.github/workflows/playwright-wcag-tests.yml
+    with:
+      browser: 'chromium'
+      channel: ''
+
+  sonarqube:
+    name: SonarQube Analysis
+    needs: [ changes, unit-tests ]
+    if: |
+      vars.QUALITY_GATE_SONARQUBE_MODE != 'never' &&
+      always() && !cancelled() && (
+        vars.QUALITY_GATE_SONARQUBE_MODE == 'always' ||
+        needs.changes.outputs.source-code == 'true' ||
+        needs.changes.outputs.unit-tests == 'true'
+      )
+    uses: ./.github/workflows/sonarqube-reusable.yml
+    with:
+      include-coverage: ${{ !inputs.skip-tests && needs.unit-tests.result != 'skipped' }}
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -1,0 +1,34 @@
+@mixin animation() {
+  position: absolute;
+  opacity: 1;
+  border-radius: 50%;
+  border: 3px solid var(--ds-color-accent-base-default);
+}
+
+@mixin no-animation() {
+  position: absolute;
+  opacity: 1;
+}
+
+@mixin animation-svg() {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin svg() {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+@mixin failure-no-animation-svg() {
+  color: var(--ds-color-danger-base-default);
+}
+
+@mixin failure-animation-svg() {
+  color: var(--ds-color-danger-base-default);
+  border-color: var(--ds-color-danger-base-default);
+}

@@ -1,0 +1,33 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Button
+@using Hviktor.Components.Typography
+
+<div class="flex flex-col gap-4">
+    <Heading level="4">@Localizer.GetValue("ChipRemovable_Tag")</Heading>
+    <div class="flex gap-2 flex-wrap">
+        <Chip.Removable>@Localizer.GetValue("ChipRemovable_Tag") 1</Chip.Removable>
+        <Chip.Removable>@Localizer.GetValue("ChipRemovable_Tag") 2</Chip.Removable>
+    </div>
+    <Heading level="4" class="mt-4">@Localizer.GetValue("ChipRemovable_ActiveFilters")</Heading>
+    <div class="flex gap-2 flex-wrap items-center">
+        @if (removableChipFilters.Count > 0)
+        {
+            @foreach (var filter in removableChipFilters.ToList())
+            {
+                <Chip.Removable @onclick="() => RemoveChipFilter(filter)">@filter</Chip.Removable>
+            }
+        }
+        else
+        {
+            <Paragraph>@Localizer.GetValue("ChipRemovable_NoFilters")</Paragraph>
+        }
+    </div>
+    @if (removableChipFilters.Count < 3)
+    {
+        <div>
+            <Button variant="@Variant.Secondary" size="@Size.Small" @onclick="ResetChipFilters">
+                @Localizer.GetValue("ChipRemovable_Reset")
+            </Button>
+        </div>
+    }
+</div>

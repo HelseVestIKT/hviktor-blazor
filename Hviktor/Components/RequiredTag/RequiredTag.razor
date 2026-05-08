@@ -1,0 +1,15 @@
+﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Tag
+
+
+@if (required)
+{
+    <Tag color="@Color.Warning" variant="@Variant.Default" @attributes="@(ComputeAttributes())">
+        @(mode is "all" ? "Alle felt må fylles ut" : "Må fylles ut")
+    </Tag>
+    return;
+}
+
+<Tag color="@Color.Info" variant="@Variant.Default" @attributes="@(ComputeAttributes())">
+    @(mode is "all" ? "Alle felt er valgfrie" : "Valgfritt")
+</Tag>

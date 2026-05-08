@@ -1,0 +1,68 @@
+﻿@using Hviktor.Components.Table
+
+@code {
+    private string sortField = "name";
+    private string sortDirection = "asc";
+
+    private readonly List<(string Name, string Email, string Phone)> data =
+    [
+        ("Charlie", "charlie@example.com", "555-123-4567"),
+        ("Bob", "bob@example.com", "987-654-3210"),
+        ("Alice", "alice@example.com", "123-456-7890"),
+    ];
+
+    private List<(string Name, string Email, string Phone)> sortedData = [];
+
+    protected override void OnInitialized() => sortedData = data.OrderBy(row => row.Name).ToList();
+
+    private void HandleSort(string field)
+    {
+        if (field == sortField)
+        {
+            sortDirection = sortDirection == "asc" ? "desc" : "asc";
+        }
+        else
+        {
+            sortField = field;
+            sortDirection = "asc";
+        }
+
+        Func<(string Name, string Email, string Phone), string> keySelector = field switch
+        {
+            "phone" => row => row.Phone,
+            _ => row => row.Name,
+        };
+
+        sortedData = sortDirection == "asc"
+            ? data.OrderBy(keySelector).ToList()
+            : data.OrderByDescending(keySelector).ToList();
+    }
+
+}
+
+<Table>
+    <Table.Head>
+        <Table.Row>
+            <Table.HeaderCell sort="@(sortField == "name" ? sortDirection : "none")"
+                              @onclick="@(() => HandleSort("name"))">
+                Name
+            </Table.HeaderCell>
+            <Table.HeaderCell>Email</Table.HeaderCell>
+            <Table.HeaderCell sort="@(sortField == "phone" ? sortDirection : "none")"
+                              @onclick="@(() => HandleSort("phone"))">
+                Phone
+            </Table.HeaderCell>
+        </Table.Row>
+    </Table.Head>
+    <Table.Body>
+        @foreach (var row in sortedData)
+        {
+            var index = sortedData.IndexOf(row);
+            <Table.Row @key="@index">
+                <Table.Cell>@row.Name</Table.Cell>
+                <Table.Cell>@row.Email</Table.Cell>
+                <Table.Cell>@row.Phone</Table.Cell>
+            </Table.Row>
+        }
+    </Table.Body>
+</Table>

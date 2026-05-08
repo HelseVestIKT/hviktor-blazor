@@ -1,0 +1,47 @@
+﻿@page "/component/compliance/dropdown/heading"
+@using Hviktor.Components.Dropdown
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Dropdown with heading level 2" data-testid="heading-level-2">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Menu with H2</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.Heading level="2">Level 2 Heading</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown with heading level 3" data-testid="heading-level-3">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Menu with H3</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.Heading level="3">Level 3 Heading</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+
+    <section aria-label="Dropdown with heading level 4" data-testid="heading-level-4">
+        <Dropdown.TriggerContext>
+            <Dropdown.Trigger>Menu with H4</Dropdown.Trigger>
+            <Dropdown>
+                <Dropdown.Heading level="4">Level 4 Heading</Dropdown.Heading>
+                <Dropdown.List>
+                    <Dropdown.Item>
+                        <Button>Item</Button>
+                    </Dropdown.Item>
+                </Dropdown.List>
+            </Dropdown>
+        </Dropdown.TriggerContext>
+    </section>
+</main>

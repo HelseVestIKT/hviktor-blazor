@@ -1,0 +1,35 @@
+﻿@page "/component/compliance/badge/placement"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Badge
+@using Hviktor.Components.Icon
+@using Hviktor.Icons.Types
+
+<main data-testid="compliance-container">
+    <section aria-label="Top end placement">
+        <Badge.Position placement="@Placement.TopEnd" data-testid="top-end">
+            <Badge Count="1" role="status" aria-label="1 notification"/>
+            <Icon Definition="@IconSet.EnvelopeClosed"/>
+        </Badge.Position>
+    </section>
+
+    <section aria-label="Top start placement">
+        <Badge.Position placement="@Placement.TopStart" data-testid="top-start">
+            <Badge Count="2" role="status" aria-label="2 notifications"/>
+            <Icon Definition="@IconSet.EnvelopeClosed"/>
+        </Badge.Position>
+    </section>
+
+    <section aria-label="Bottom end placement">
+        <Badge.Position placement="@Placement.BottomEnd" data-testid="bottom-end">
+            <Badge Count="3" role="status" aria-label="3 notifications"/>
+            <Icon Definition="@IconSet.EnvelopeClosed"/>
+        </Badge.Position>
+    </section>
+
+    <section aria-label="Bottom start placement">
+        <Badge.Position placement="@Placement.BottomStart" data-testid="bottom-start">
+            <Badge Count="4" role="status" aria-label="4 notifications"/>
+            <Icon Definition="@IconSet.EnvelopeClosed"/>
+        </Badge.Position>
+    </section>
+</main>

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+@use "mixins/layers/dark" as dark;
+@use "mixins/layers/light" as light;
+
+@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@layer ds.theme.color-scheme.light {
+  :root,
+  [data-color-scheme="light"] {
+    @include light.layer();
+    color-scheme: light;
+  }
+}
+
+@layer ds.theme.color-scheme.dark {
+  [data-color-scheme="dark"] {
+    @include dark.layer();
+    color-scheme: dark;
+  }
+}
+
+@layer ds.theme.typography.primary {
+  [data-typography="primary"] {
+    --ds-font-family: "Albert Sans", sans-serif;
+  }
+}
+
+@layer ds.theme.typography.secondary {
+  [data-typography="secondary"] {
+    --ds-font-family: "Albert Sans", sans-serif;
+  }
+}
+
+.ds-link :is(img, svg) {
+  display: inline;
+}

@@ -1,0 +1,41 @@
+﻿@page "/component/compliance/alert/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Alert
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent color">
+        <Alert color="@Color.Accent" data-testid="accent">Accent alert message</Alert>
+    </section>
+
+    <section aria-label="Neutral color">
+        <Alert color="@Color.Neutral" data-testid="neutral">Neutral alert message</Alert>
+    </section>
+
+    <section aria-label="Brand1 color">
+        <Alert color="@Color.Brand1" data-testid="brand1">Brand1 alert message</Alert>
+    </section>
+
+    <section aria-label="Brand2 color">
+        <Alert color="@Color.Brand2" data-testid="brand2">Brand2 alert message</Alert>
+    </section>
+
+    <section aria-label="Brand3 color">
+        <Alert color="@Color.Brand3" data-testid="brand3">Brand3 alert message</Alert>
+    </section>
+
+    <section aria-label="Success color">
+        <Alert color="@Color.Success" data-testid="success">Success alert message</Alert>
+    </section>
+
+    <section aria-label="Danger color">
+        <Alert color="@Color.Danger" data-testid="danger">Danger alert message</Alert>
+    </section>
+
+    <section aria-label="Info color">
+        <Alert color="@Color.Info" data-testid="info">Info alert message</Alert>
+    </section>
+
+    <section aria-label="Warning color">
+        <Alert color="@Color.Warning" data-testid="warning">Warning alert message</Alert>
+    </section>
+</main>

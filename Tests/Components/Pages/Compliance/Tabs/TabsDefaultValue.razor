@@ -1,0 +1,44 @@
+﻿@page "/component/compliance/tabs/default-value"
+@using Hviktor.Components.Tabs
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Tabs with first tab selected by default">
+        <Tabs data-testid="tabs-first-default" DefaultValue="first">
+            <Tabs.List>
+                <Tabs.Tab Value="first" data-testid="first-tab">First</Tabs.Tab>
+                <Tabs.Tab Value="second" data-testid="second-tab">Second</Tabs.Tab>
+                <Tabs.Tab Value="third" data-testid="third-tab">Third</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panel Value="first" data-testid="first-panel">
+                <p>First panel content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="second" data-testid="second-panel">
+                <p>Second panel content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="third" data-testid="third-panel">
+                <p>Third panel content</p>
+            </Tabs.Panel>
+        </Tabs>
+    </section>
+
+    <section aria-label="Tabs with second tab selected by default">
+        <Tabs data-testid="tabs-second-default" DefaultValue="second">
+            <Tabs.List>
+                <Tabs.Tab Value="first" data-testid="second-first-tab">First</Tabs.Tab>
+                <Tabs.Tab Value="second" data-testid="second-second-tab">Second</Tabs.Tab>
+                <Tabs.Tab Value="third" data-testid="second-third-tab">Third</Tabs.Tab>
+            </Tabs.List>
+            <Tabs.Panel Value="first" data-testid="second-first-panel">
+                <p>First panel content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="second" data-testid="second-second-panel">
+                <p>Second panel content</p>
+            </Tabs.Panel>
+            <Tabs.Panel Value="third" data-testid="second-third-panel">
+                <p>Third panel content</p>
+            </Tabs.Panel>
+        </Tabs>
+    </section>
+</main>

@@ -1,0 +1,90 @@
+﻿name: Update Dependencies
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays at 06:00 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-dependencies
+  cancel-in-progress: true
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check for outdated packages
+        id: check-outdated
+        run: |
+          # Capture outdated packages in JSON format
+          set +e
+          OUTDATED=$(pnpm outdated --recursive --format json 2>/dev/null || true)
+          set -e
+
+          if [ -z "$OUTDATED" ] || [ "$OUTDATED" = "{}" ] || [ "$OUTDATED" = "[]" ]; then
+            echo "All dependencies are up to date."
+            echo "has_updates=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_updates=true" >> "$GITHUB_OUTPUT"
+            echo "$OUTDATED" > /tmp/outdated.json
+          fi
+
+      - name: Update all dependencies
+        if: steps.check-outdated.outputs.has_updates == 'true'
+        run: |
+          pnpm update --recursive --latest
+          pnpm install
+
+      - name: Build summary of changes
+        if: steps.check-outdated.outputs.has_updates == 'true'
+        id: summary
+        run: |
+          CHANGES=$(git diff --stat)
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "changes<<$EOF" >> "$GITHUB_OUTPUT"
+          echo "$CHANGES" >> "$GITHUB_OUTPUT"
+          echo "$EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update pull request
+        if: steps.check-outdated.outputs.has_updates == 'true'
+        uses: HelseVestIKT/samlepunktet-actions/create-pr@v0.0.10
+        with:
+          delete-branch-on-failure: true
+          branch: automated/update-dependencies
+          commit-message: "build: update npm dependencies"
+          pr-body: |
+            ## Automated Dependency Update
+
+            This PR updates npm dependencies across the pnpm workspace to their latest versions.
+
+            **Changes:**
+            ```
+            ${{ steps.summary.outputs.changes }}
+            ```
+
+            **Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          reset-branch: true
+          labels: |
+            dependencies
+            automated
+          github-token: ${{ secrets.GITHUB_TOKEN }}

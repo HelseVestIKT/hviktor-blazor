@@ -1,0 +1,73 @@
+﻿@page "/component/compliance/suggestion/accessibility"
+@using Hviktor.Components.Suggestion
+
+<main data-testid="compliance-container">
+    @* Suggestion for keyboard navigation testing *@
+    <section aria-label="Keyboard navigation test" data-testid="keyboard-navigation">
+        <Suggestion data-testid="keyboard-suggestion">
+            <Suggestion.Input aria-label="Navigate with keyboard" data-testid="keyboard-input"/>
+            <Suggestion.List Singular="%d suggestion" Plural="%d suggestions">
+                <Suggestion.Option Value="first">First Option</Suggestion.Option>
+                <Suggestion.Option Value="second">Second Option</Suggestion.Option>
+                <Suggestion.Option Value="third">Third Option</Suggestion.Option>
+                <Suggestion.Option Value="fourth">Fourth Option</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with aria-autocomplete *@
+    <section aria-label="Autocomplete suggestion" data-testid="autocomplete">
+        <Suggestion data-testid="autocomplete-suggestion">
+            <Suggestion.Input aria-label="Type to search" data-testid="autocomplete-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="suggestion1">Suggestion 1</Suggestion.Option>
+                <Suggestion.Option Value="suggestion2">Suggestion 2</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with disabled options *@
+    <section aria-label="Disabled options" data-testid="disabled-options">
+        <Suggestion data-testid="disabled-suggestion">
+            <Suggestion.Input aria-label="Select available option" data-testid="disabled-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="enabled1">Enabled Option 1</Suggestion.Option>
+                <Suggestion.Option Value="disabled1" Disabled="true">Disabled Option</Suggestion.Option>
+                <Suggestion.Option Value="enabled2">Enabled Option 2</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with readonly *@
+    <section aria-label="Readonly suggestion" data-testid="readonly">
+        <Suggestion ReadOnly="true" DefaultSelected="readonly-value" data-testid="readonly-suggestion">
+            <Suggestion.Input aria-label="Read only selection" data-testid="readonly-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="readonly-value">Read Only Value</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with clear button *@
+    <section aria-label="Clearable suggestion" data-testid="clearable">
+        <Suggestion DefaultSelected="clearable" data-testid="clearable-suggestion">
+            <Suggestion.Input aria-label="Clearable selection" data-testid="clearable-input"/>
+            <Suggestion.Clear aria-label="Clear selection" data-testid="clear-button"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="clearable">Clearable Option</Suggestion.Option>
+                <Suggestion.Option Value="other">Other Option</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with empty state *@
+    <section aria-label="Empty state suggestion" data-testid="empty-state">
+        <Suggestion data-testid="empty-suggestion">
+            <Suggestion.Input aria-label="Search for items" data-testid="empty-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="item1">Item 1</Suggestion.Option>
+            </Suggestion.List>
+            <Suggestion.Empty data-testid="empty-message">No results found</Suggestion.Empty>
+        </Suggestion>
+    </section>
+</main>

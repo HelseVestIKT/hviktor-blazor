@@ -1,0 +1,43 @@
+﻿@page "/component/compliance/divider/accessibility"
+@using Hviktor.Components.Divider
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Divider with proper semantic structure - headings provide accessible separation *@
+    <section aria-label="Divider with headings for accessible structure" data-testid="divider-with-headings">
+        <h2>First Topic</h2>
+        <p>Content about the first topic.</p>
+        <Divider/>
+        <h2>Second Topic</h2>
+        <p>Content about the second topic.</p>
+    </section>
+
+    @* Divider within a list context *@
+    <section aria-label="Divider context with list" data-testid="divider-with-list">
+        <Heading level="2">Categories</Heading>
+        <List.Unordered>
+            <List.Item>Category A</List.Item>
+            <List.Item>Category B</List.Item>
+            <List.Item>Category C</List.Item>
+        </List.Unordered>
+        <Divider/>
+        <Heading level="2">Tags</Heading>
+        <List.Unordered>
+            <List.Item>Tag 1</List.Item>
+            <List.Item>Tag 2</List.Item>
+        </List.Unordered>
+    </section>
+
+    @* Divider with aria-labelledby for accessible sections *@
+    <div data-testid="divider-accessible-sections">
+        <section aria-labelledby="nav-section">
+            <h3 id="nav-section">Navigation</h3>
+            <p>Navigation content here.</p>
+        </section>
+        <Divider/>
+        <section aria-labelledby="content-section">
+            <h3 id="content-section">Content Area</h3>
+            <p>Main content here.</p>
+        </section>
+    </div>
+</main>

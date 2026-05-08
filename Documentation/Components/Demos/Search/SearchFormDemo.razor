@@ -1,0 +1,23 @@
+﻿@using Hviktor.Components.Search
+@using Hviktor.Components.Typography
+
+@code {
+    private string searchValue = "";
+    private string submittedValue = "";
+
+    private void OnSearchSubmit() => submittedValue = searchValue;
+    private void OnSearchChange(ChangeEventArgs args) => searchValue = args.Value?.ToString() ?? "";
+}
+
+<div class="flex flex-col gap-4">
+    <form @onsubmit="@OnSearchSubmit">
+        <Search>
+            <Search.Input value="@searchValue" aria-label="Søk" @onchange="@OnSearchChange"/>
+            <Search.Clear/>
+            <Search.Button/>
+        </Search>
+    </form>
+    <Paragraph data-size="md" class="mt-2">
+        Submitted value: @submittedValue
+    </Paragraph>
+</div>

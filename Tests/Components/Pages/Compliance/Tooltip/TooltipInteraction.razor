@@ -1,0 +1,26 @@
+﻿@page "/component/compliance/tooltip/interaction"
+@using Hviktor.Components.Tooltip
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+
+    <section aria-label="Tooltip for hover interaction">
+        <Tooltip Content="Hover tooltip content">
+            <button data-testid="hover-trigger">Hover over me</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Tooltip for focus interaction">
+        <Tooltip Content="Focus tooltip content">
+            <button data-testid="focus-trigger">Focus on me</button>
+        </Tooltip>
+    </section>
+
+    <section aria-label="Another tooltip">
+        <Tooltip Content="Another tooltip">
+            <button data-testid="other-trigger">Other button</button>
+        </Tooltip>
+    </section>
+
+    <button data-testid="focus-end">Focus End</button>
+</main>

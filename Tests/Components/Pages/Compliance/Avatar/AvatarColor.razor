@@ -1,0 +1,41 @@
+﻿@page "/component/compliance/avatar/color"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Avatar
+
+<main data-testid="compliance-container">
+    <section aria-label="Accent color">
+        <Avatar Color="@Color.Accent" Initials="AC" data-testid="accent" aria-label="User avatar AC"/>
+    </section>
+
+    <section aria-label="Neutral color">
+        <Avatar Color="@Color.Neutral" Initials="NE" data-testid="neutral" aria-label="User avatar NE"/>
+    </section>
+
+    <section aria-label="Brand1 color">
+        <Avatar Color="@Color.Brand1" Initials="B1" data-testid="brand1" aria-label="User avatar B1"/>
+    </section>
+
+    <section aria-label="Brand2 color">
+        <Avatar Color="@Color.Brand2" Initials="B2" data-testid="brand2" aria-label="User avatar B2"/>
+    </section>
+
+    <section aria-label="Brand3 color">
+        <Avatar Color="@Color.Brand3" Initials="B3" data-testid="brand3" aria-label="User avatar B3"/>
+    </section>
+
+    <section aria-label="Success color">
+        <Avatar Color="@Color.Success" Initials="SU" data-testid="success" aria-label="User avatar SU"/>
+    </section>
+
+    <section aria-label="Danger color">
+        <Avatar Color="@Color.Danger" Initials="DA" data-testid="danger" aria-label="User avatar DA"/>
+    </section>
+
+    <section aria-label="Info color">
+        <Avatar Color="@Color.Info" Initials="IN" data-testid="info" aria-label="User avatar IN"/>
+    </section>
+
+    <section aria-label="Warning color">
+        <Avatar Color="@Color.Warning" Initials="WA" data-testid="warning" aria-label="User avatar WA"/>
+    </section>
+</main>

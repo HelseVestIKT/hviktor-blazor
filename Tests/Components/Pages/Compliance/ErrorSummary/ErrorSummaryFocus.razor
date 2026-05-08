@@ -1,0 +1,65 @@
+﻿@page "/component/compliance/errorsummary/focus"
+@using Hviktor.Components.Button
+@using Hviktor.Components.ErrorSummary
+@using Hviktor.Components.Field
+@using Hviktor.Components.Fieldset
+@using Hviktor.Components.Textfield
+
+<main data-testid="compliance-container">
+    <section aria-label="Error summary focus test" data-testid="focus-management">
+        <Button data-testid="trigger-validation" @onclick="ShowErrors">Submit Form</Button>
+
+        @if (showErrors)
+        {
+            <ErrorSummary data-testid="error-summary" id="error-summary-container">
+                <ErrorSummary.Heading>Please fix the following errors</ErrorSummary.Heading>
+                <ErrorSummary.List>
+                    <ErrorSummary.Item>
+                        <ErrorSummary.Link Href="#firstname-input" data-testid="error-link-firstname">First name is
+                            required
+                        </ErrorSummary.Link>
+                    </ErrorSummary.Item>
+                    <ErrorSummary.Item>
+                        <ErrorSummary.Link Href="#email-input" data-testid="error-link-email">Email format is invalid
+                        </ErrorSummary.Link>
+                    </ErrorSummary.Item>
+                </ErrorSummary.List>
+            </ErrorSummary>
+        }
+
+        <form>
+            <Fieldset>
+                <Field>
+                    <Textfield Id="firstname-input"
+                               Label="First name"
+                               data-testid="firstname-field"
+                               aria-invalid="@showErrors.ToString().ToLower()"/>
+                </Field>
+                <Field>
+                    <Textfield Id="email-input"
+                               Label="Email"
+                               data-testid="email-field"
+                               aria-invalid="@showErrors.ToString().ToLower()"/>
+                </Field>
+            </Fieldset>
+        </form>
+    </section>
+</main>
+
+@code {
+
+    [Inject] private IJSRuntime Js { get; set; } = null!;
+
+    private bool showErrors;
+
+    private async Task ShowErrors()
+    {
+        showErrors = true;
+        StateHasChanged();
+
+        // Wait for render then focus the error summary (recommended accessibility pattern)
+        await Task.Delay(100);
+        await Js.InvokeVoidAsync("eval", "document.getElementById('error-summary-container')?.focus()");
+    }
+
+}

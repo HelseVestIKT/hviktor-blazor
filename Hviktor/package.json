@@ -1,0 +1,39 @@
+{
+  "name": "hviktor",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "wwwroot/dist"
+  ],
+  "scripts": {
+    "build": "node build.mjs --configuration Debug",
+    "build:dev": "node build.mjs --configuration Debug",
+    "build:prod": "node build.mjs --configuration Release",
+    "test-pack": "node test-pack.mjs",
+    "test-pack:skip-build": "node test-pack.mjs --skip-build",
+    "prettier": "prettier --write \"**/*.{ts,tsx,scss,css,html,json,md}\""
+  },
+  "dependencies": {
+    "@digdir/designsystemet-css": "1.14.0",
+    "@floating-ui/dom": "1.7.6",
+    "globalthis": "1.0.4"
+  },
+  "devDependencies": {
+    "@digdir/designsystemet-types": "1.14.0",
+    "@microsoft/dotnet-js-interop": "10.0.0",
+    "@tailwindcss/postcss": "4.3.0",
+    "@types/blazor__javascript-interop": "3.1.7",
+    "@types/node": "25.6.2",
+    "autoprefixer": "10.5.0",
+    "cssnano": "8.0.1",
+    "glob": "13.0.6",
+    "postcss": "8.5.14",
+    "postcss-cli": "11.0.1",
+    "rollup-plugin-visualizer": "7.0.1",
+    "sass": "1.99.0",
+    "sass-embedded": "1.99.0",
+    "tailwindcss": "4.3.0",
+    "typescript": "6.0.3",
+    "vite": "8.0.11"
+  }
+}

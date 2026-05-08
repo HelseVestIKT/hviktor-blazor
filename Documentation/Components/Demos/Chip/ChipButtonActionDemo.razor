@@ -1,0 +1,11 @@
+﻿@using Hviktor.Components.Typography
+
+@code {
+    int counter = 0;
+    void IncrementCounter() => counter++;
+}
+
+<div class="flex flex-col gap-2 flex-wrap">
+    <Chip.Button @onclick="IncrementCounter">Increment Counter +1</Chip.Button>
+    <Paragraph>Count: @counter</Paragraph>
+</div>

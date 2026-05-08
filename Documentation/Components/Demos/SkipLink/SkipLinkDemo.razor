@@ -1,0 +1,14 @@
+﻿@using Hviktor.Components.Link
+@using Hviktor.Components.Typography
+
+<div class="flex flex-col gap-4">
+    <Paragraph>
+        To reveal the SkipLink, tab into this example, or click inside the
+        example and press <kbd>Tab</kbd>.
+        <SkipLink href="#main-content">Skip to main content</SkipLink>
+    </Paragraph>
+
+    <main id="main-content" tabIndex="-1">
+        Region that can receive focus from the skip link.
+    </main>
+</div>

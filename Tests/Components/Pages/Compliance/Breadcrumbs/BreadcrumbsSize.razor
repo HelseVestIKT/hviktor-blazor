@@ -1,0 +1,35 @@
+﻿@page "/component/compliance/breadcrumbs/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Breadcrumbs
+
+<main data-testid="compliance-container">
+    <section aria-label="Small size">
+        <Breadcrumbs Size="@Size.Small" aria-label="Breadcrumb navigation" data-testid="sm">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item aria-current="page">Current Page</Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+
+    <section aria-label="Medium size">
+        <Breadcrumbs Size="@Size.Medium" aria-label="Breadcrumb navigation" data-testid="md">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item aria-current="page">Current Page</Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+
+    <section aria-label="Large size">
+        <Breadcrumbs Size="@Size.Large" aria-label="Breadcrumb navigation" data-testid="lg">
+            <Breadcrumbs.List>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/">Home</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item><Breadcrumbs.Link Href="/products">Products</Breadcrumbs.Link></Breadcrumbs.Item>
+                <Breadcrumbs.Item aria-current="page">Current Page</Breadcrumbs.Item>
+            </Breadcrumbs.List>
+        </Breadcrumbs>
+    </section>
+</main>

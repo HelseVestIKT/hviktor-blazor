@@ -1,0 +1,9 @@
+﻿@namespace Suggestion
+@inherits Hviktor.Models.Suggestion.AsyncSuggestionChildBase
+
+@if (!ReadOnly && !Disabled)
+{
+    <div @attributes="@(ComputeAttributes())">
+        @ChildContent
+    </div>
+}

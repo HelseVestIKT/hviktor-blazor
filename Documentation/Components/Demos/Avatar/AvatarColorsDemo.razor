@@ -1,0 +1,11 @@
+@using Hviktor.Components.Avatar
+
+@code {
+    private readonly string[] colors = ["neutral", "accent", "brand1", "brand2", "brand3"];
+}
+
+@foreach (var color in colors)
+{
+    var label = $"color {color}";
+    <Avatar @key="@color" aria-label="@label" color="@color"/>
+}

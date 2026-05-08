@@ -1,0 +1,82 @@
+﻿@page "/component/compliance/select/accessibility"
+@using Hviktor.Components.Select
+@using Hviktor.Components.Field
+@using Hviktor.Components.Typography
+
+<main data-testid="compliance-container">
+    @* Select with proper label for screen readers *@
+    <section aria-label="Accessible select with label" data-testid="accessible-label">
+        <Field>
+            <Label for="labeled-select-id">Choose your preferred language</Label>
+            <Field.Description>This will be used for all communications</Field.Description>
+            <Select Id="labeled-select-id" data-testid="labeled-select">
+                <Select.Option Value="">Select a language</Select.Option>
+                <Select.Option Value="nn">Nynorsk</Select.Option>
+                <Select.Option Value="nb">Bokmål</Select.Option>
+                <Select.Option Value="en">English</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Select for keyboard navigation testing *@
+    <section aria-label="Keyboard navigation test" data-testid="keyboard-navigation">
+        <Field>
+            <Label for="keyboard-select-id">Keyboard test select</Label>
+            <Select Id="keyboard-select-id" data-testid="keyboard-select">
+                <Select.Option Value="">Select an option</Select.Option>
+                <Select.Option Value="apple">Apple</Select.Option>
+                <Select.Option Value="banana">Banana</Select.Option>
+                <Select.Option Value="cherry">Cherry</Select.Option>
+                <Select.Option Value="date">Date</Select.Option>
+                <Select.Option Value="elderberry">Elderberry</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Multiple selects for tab navigation *@
+    <section aria-label="Multiple selects for tab navigation" data-testid="multiple-selects">
+        <Field>
+            <Label for="first-select-id">First select</Label>
+            <Select Id="first-select-id" data-testid="first-select">
+                <Select.Option Value="">Select first</Select.Option>
+                <Select.Option Value="1">Option 1</Select.Option>
+                <Select.Option Value="2">Option 2</Select.Option>
+            </Select>
+        </Field>
+
+        <Field>
+            <Label for="second-select-id">Second select</Label>
+            <Select Id="second-select-id" data-testid="second-select">
+                <Select.Option Value="">Select second</Select.Option>
+                <Select.Option Value="a">Option A</Select.Option>
+                <Select.Option Value="b">Option B</Select.Option>
+            </Select>
+        </Field>
+    </section>
+
+    @* Select with aria-labelledby *@
+    <section aria-label="Select with aria-labelledby" data-testid="aria-labelledby">
+        <span id="custom-label-id">Custom label via aria-labelledby</span>
+        <Select aria-labelledby="custom-label-id" data-testid="labelledby-select">
+            <Select.Option Value="">Select option</Select.Option>
+            <Select.Option Value="x">Option X</Select.Option>
+            <Select.Option Value="y">Option Y</Select.Option>
+        </Select>
+    </section>
+
+    @* Select with character jump navigation testing *@
+    <section aria-label="Character jump navigation" data-testid="character-jump">
+        <Field>
+            <Label for="character-select-id">Character navigation test</Label>
+            <Select Id="character-select-id" data-testid="character-select">
+                <Select.Option Value="">Select a name</Select.Option>
+                <Select.Option Value="alice">Alice</Select.Option>
+                <Select.Option Value="anna">Anna</Select.Option>
+                <Select.Option Value="bob">Bob</Select.Option>
+                <Select.Option Value="charlie">Charlie</Select.Option>
+                <Select.Option Value="david">David</Select.Option>
+                <Select.Option Value="diana">Diana</Select.Option>
+            </Select>
+        </Field>
+    </section>
+</main>

@@ -1,0 +1,42 @@
+﻿@page "/component/compliance/suggestion/basic"
+@using Hviktor.Components.Suggestion
+
+<main data-testid="compliance-container">
+    @* Basic suggestion with options *@
+    <section aria-label="Basic suggestion" data-testid="basic">
+        <Suggestion data-testid="basic-suggestion">
+            <Suggestion.Input aria-label="Select a fruit" data-testid="basic-input"/>
+            <Suggestion.List data-testid="basic-list">
+                <Suggestion.Option Value="apple">Apple</Suggestion.Option>
+                <Suggestion.Option Value="banana">Banana</Suggestion.Option>
+                <Suggestion.Option Value="cherry">Cherry</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with default selected *@
+    <section aria-label="Default selected suggestion" data-testid="default-selected">
+        <Suggestion DefaultSelected="banana" data-testid="default-suggestion">
+            <Suggestion.Input aria-label="Select a fruit" data-testid="default-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="apple">Apple</Suggestion.Option>
+                <Suggestion.Option Value="banana">Banana</Suggestion.Option>
+                <Suggestion.Option Value="cherry">Cherry</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+
+    @* Suggestion with many options *@
+    <section aria-label="Many options suggestion" data-testid="many-options">
+        <Suggestion data-testid="many-suggestion">
+            <Suggestion.Input aria-label="Select a country" data-testid="many-input"/>
+            <Suggestion.List>
+                <Suggestion.Option Value="norway">Norway</Suggestion.Option>
+                <Suggestion.Option Value="sweden">Sweden</Suggestion.Option>
+                <Suggestion.Option Value="denmark">Denmark</Suggestion.Option>
+                <Suggestion.Option Value="finland">Finland</Suggestion.Option>
+                <Suggestion.Option Value="iceland">Iceland</Suggestion.Option>
+            </Suggestion.List>
+        </Suggestion>
+    </section>
+</main>

@@ -1,0 +1,36 @@
+﻿@page "/component/compliance/link/target"
+@using Hviktor.Components.Link
+
+<main data-testid="compliance-container">
+    <section aria-label="Link opening in same tab" data-testid="target-self">
+        <HyperLink href="/internal-page" target="@Hviktor.Abstractions.Enums.LinkTarget.Self">
+            Internal Link (Same Tab)
+        </HyperLink>
+    </section>
+
+    <section aria-label="Link opening in new tab" data-testid="target-newtab">
+        <HyperLink href="https://example.com" target="@Hviktor.Abstractions.Enums.LinkTarget.NewTab">
+            External Link (New Tab)
+        </HyperLink>
+    </section>
+
+    @* Internal link in new tab - does NOT need security attributes *@
+    <section aria-label="Internal link in new tab without security attributes" data-testid="internal">
+        <HyperLink href="/internal-new-tab" target="@Hviktor.Abstractions.Enums.LinkTarget.NewTab">Internal Link (New
+            Tab)
+        </HyperLink>
+    </section>
+
+    <section aria-label="External link with security attributes" data-testid="external-unsecure">
+        <HyperLink href="https://external-site.com" rel="noopener" target="@Hviktor.Abstractions.Enums.LinkTarget.NewTab">
+            Secure External Link
+        </HyperLink>
+    </section>
+
+    @* External link in new tab - NEEDS security attributes (rel="noopener") *@
+    <section aria-label="External link with security attributes" data-testid="external-secure">
+        <HyperLink href="https://external-site.com" target="@Hviktor.Abstractions.Enums.LinkTarget.NewTab">
+            Secure External Link
+        </HyperLink>
+    </section>
+</main>

@@ -1,0 +1,58 @@
+﻿@page "/component/compliance/radio/accessibility"
+@using Hviktor.Components.Radio
+@using Hviktor.Components.Fieldset
+
+<main data-testid="compliance-container">
+    @* Radio group with proper fieldset and legend for accessibility *@
+    <section aria-label="Accessible radio group" data-testid="accessible-group">
+        <Fieldset>
+            <Fieldset.Legend>Select your preferred contact method</Fieldset.Legend>
+            <Radio Name="contact" Value="email" Label="Email" Description="We'll send updates to your email"/>
+            <Radio Name="contact" Value="phone" Label="Phone" Description="We'll call you during business hours"/>
+            <Radio Name="contact" Value="sms" Label="SMS" Description="We'll text you updates"/>
+        </Fieldset>
+    </section>
+
+    @* Radio with aria-label *@
+    <section aria-label="Radio with aria-label" data-testid="aria-label">
+        <Fieldset>
+            <Fieldset.Legend>Notifications</Fieldset.Legend>
+            <Radio Name="notify" Value="all" Label="All notifications" aria-label="Receive all notifications"/>
+            <Radio Name="notify" Value="important" Label="Important only" aria-label="Receive important notifications only"/>
+        </Fieldset>
+    </section>
+
+    @* Keyboard navigation test group *@
+    <section aria-label="Keyboard navigation" data-testid="keyboard-navigation">
+        <Fieldset>
+            <Fieldset.Legend>Select size</Fieldset.Legend>
+            <Radio Name="size" Value="small" Label="Small" data-testid="size-small"/>
+            <Radio Name="size" Value="medium" Label="Medium" data-testid="size-medium"/>
+            <Radio Name="size" Value="large" Label="Large" data-testid="size-large"/>
+        </Fieldset>
+    </section>
+
+    @* Multiple radio groups for tab navigation *@
+    <section aria-label="Multiple groups" data-testid="multiple-groups">
+        <Fieldset data-testid="group-1">
+            <Fieldset.Legend>First group</Fieldset.Legend>
+            <Radio Name="group1" Value="a" Label="Option A" data-testid="group1-a"/>
+            <Radio Name="group1" Value="b" Label="Option B" data-testid="group1-b"/>
+        </Fieldset>
+        
+        <Fieldset data-testid="group-2">
+            <Fieldset.Legend>Second group</Fieldset.Legend>
+            <Radio Name="group2" Value="x" Label="Option X" data-testid="group2-x"/>
+            <Radio Name="group2" Value="y" Label="Option Y" data-testid="group2-y"/>
+        </Fieldset>
+    </section>
+
+    @* Radio with aria-labelledby *@
+    <section aria-label="Radio with aria-labelledby" data-testid="aria-labelledby">
+        <Fieldset>
+            <Fieldset.Legend id="custom-label-id">Custom labeled options</Fieldset.Legend>
+            <Radio Name="labelledby" Value="opt1" Label="First option" aria-labelledby="custom-label-id"/>
+            <Radio Name="labelledby" Value="opt2" Label="Second option" aria-labelledby="custom-label-id"/>
+        </Fieldset>
+    </section>
+</main>

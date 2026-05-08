@@ -1,0 +1,76 @@
+﻿@using Hviktor.Components.Avatar
+@using Hviktor.Components.AvatarStack
+@using Hviktor.Components.Checkbox
+@using Hviktor.Components.Typography
+
+@code {
+    private bool expandable;
+    private void SetExpandable(ChangeEventArgs args) => expandable = args.Value is true;
+    private bool square;
+    private void SetSquare(ChangeEventArgs args) => square = args.Value is true;
+    private double size = 64;
+    private void SetSize(ChangeEventArgs args) => size = args.Value?.ToString() is null ? size : double.Parse(args.Value.ToString()!);
+    private int overlap = 50;
+    private void SetOverlap(ChangeEventArgs args) => overlap = args.Value?.ToString() is null ? overlap : int.Parse(args.Value.ToString()!);
+    private int gap = 2;
+    private void SetGap(ChangeEventArgs args) => gap = args.Value?.ToString() is null ? gap : int.Parse(args.Value.ToString()!);
+
+    private const string LabelClasses = "flex flex-col gap-2 accent-(--ds-color-base-default)";
+}
+
+<div class="flex flex-col gap-8">
+    <fieldset class="grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));">
+        <div class="flex gap-3 items-center">
+            <Checkbox label="Expandable" checked="@expandable" @onchange="@SetExpandable"/>
+            <Checkbox label="square" checked="@square" @onchange="@SetSquare"/>
+        </div>
+        <Label class="@LabelClasses">
+            avatar-size @(size)px
+            <input
+                min="24"
+                max="150"
+                step="0.1"
+                type="range"
+                value="@size"
+                @onchange="@SetSize"/>
+        </Label>
+        <Label class="@LabelClasses">
+            overlap @(overlap)
+            <input
+                min="-10"
+                max="100"
+                step="1"
+                type="range"
+                value="@overlap"
+                @onchange="@SetOverlap"/>
+        </Label>
+        <Label class="@LabelClasses">
+            gap @(gap)px
+            <input
+                min="0"
+                max="15"
+                step="1"
+                type="range"
+                value="@gap"
+                @onchange="@SetGap"/>
+        </Label>
+    </fieldset>
+
+    <AvatarStack overlap="@overlap" gap="@gap" square="@square" expandable="@expandable" avatarSize="@size">
+        <Avatar aria-label="" variant="@(square ? "square" : "circle")">
+            <img src="assets/img/cats/cat1.webp" alt=""/>
+        </Avatar>
+        <Avatar aria-label="" variant="@(square ? "square" : "circle")">
+            <img src="assets/img/cats/cat6.webp" alt=""/>
+        </Avatar>
+        <Avatar aria-label="" variant="@(square ? "square" : "circle")">
+            md
+        </Avatar>
+        <Avatar aria-label="" variant="@(square ? "square" : "circle")">
+            <img src="assets/img/cats/cat1.webp" alt=""/>
+        </Avatar>
+        <Avatar aria-label="" variant="@(square ? "square" : "circle")">
+            <img src="assets/img/cats/cat6.webp" alt=""/>
+        </Avatar>
+    </AvatarStack>
+</div>

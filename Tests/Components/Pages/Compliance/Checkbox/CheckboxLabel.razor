@@ -1,0 +1,24 @@
+﻿@page "/component/compliance/checkbox/label"
+@using Hviktor.Components.Checkbox
+
+<main data-testid="compliance-container">
+    <section aria-label="Checkbox with label">
+        <Checkbox Id="checkbox-with-label" 
+                  Label="Checkbox with visible label"
+                  Description="This checkbox has a visible label"
+                  data-testid="with-label"/>
+    </section>
+
+    <section aria-label="Checkbox with aria-label">
+        <Checkbox Id="checkbox-with-aria-label" 
+                  aria-label="Checkbox with aria-label"
+                  data-testid="with-aria-label"/>
+    </section>
+
+    <section aria-label="Checkbox with aria-labelledby">
+        <span id="external-label">External label for checkbox</span>
+        <Checkbox Id="checkbox-with-aria-labelledby" 
+                  aria-labelledby="external-label"
+                  data-testid="with-aria-labelledby"/>
+    </section>
+</main>

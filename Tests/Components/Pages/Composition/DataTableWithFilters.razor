@@ -1,0 +1,158 @@
+﻿@page "/component/composition/data-table-with-filters"
+@using Hviktor.Components.Badge
+@using Hviktor.Components.Button
+@using Hviktor.Components.Card
+@using Hviktor.Components.Search
+@using Hviktor.Components.Table
+@using Hviktor.Components.Tag
+@using Hviktor.Components.Typography
+@using Hviktor.Components.ToggleGroup
+@using Hviktor.Abstractions.Enums.Attributes
+
+<main data-testid="composition-data-table-with-filters">
+    <Card>
+        <Card.Block>
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <Heading level="1" data-testid="table-title">User Management</Heading>
+                <Badge Count="@FilteredUsers.Count()" data-testid="result-count"
+                       aria-label="@($"{FilteredUsers.Count()} results")"/>
+            </div>
+        </Card.Block>
+
+        <Card.Block>
+            <div style="margin-bottom: 1rem;">
+                <Search>
+                    <Search.Input value="@SearchQuery" data-testid="search-input" placeholder="Search users..."
+                                  @oninput="@(args => SearchQuery = args.Value?.ToString() ?? "")"/>
+                    <Search.Clear/>
+                    <Search.Button variant="@Variant.Secondary"/>
+                </Search>
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+                <ToggleGroup @bind-Value="StatusFilterValue" DefaultValue="All" data-testid="status-filter-group">
+                    <ToggleGroup.Item value="All" data-testid="filter-all">All</ToggleGroup.Item>
+                    <ToggleGroup.Item value="Active" data-testid="filter-active">Active</ToggleGroup.Item>
+                    <ToggleGroup.Item value="Inactive" data-testid="filter-inactive">Inactive</ToggleGroup.Item>
+                    <ToggleGroup.Item value="Pending" data-testid="filter-pending">Pending</ToggleGroup.Item>
+                </ToggleGroup>
+            </div>
+
+            <Table data-testid="users-table">
+                <Table.Head>
+                    <Table.Row>
+                        <Table.HeaderCell data-testid="header-name">Name</Table.HeaderCell>
+                        <Table.HeaderCell data-testid="header-email">Email</Table.HeaderCell>
+                        <Table.HeaderCell data-testid="header-role">Role</Table.HeaderCell>
+                        <Table.HeaderCell data-testid="header-status">Status</Table.HeaderCell>
+                        <Table.HeaderCell data-testid="header-actions">Actions</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Head>
+                <Table.Body>
+                    @if (!FilteredUsers.Any())
+                    {
+                        <Table.Row>
+                            <Table.Cell ColSpan="5" data-testid="no-results">
+                                <Paragraph>No users found matching your criteria.</Paragraph>
+                            </Table.Cell>
+                        </Table.Row>
+                    }
+                    else
+                    {
+                        @foreach (var user in FilteredUsers)
+                        {
+                            var userId = user.Id;
+                            <Table.Row @key="@userId" data-testid="@($"user-row-{userId}")">
+                                <Table.Cell data-testid="@($"user-name-{userId}")">@user.Name</Table.Cell>
+                                <Table.Cell data-testid="@($"user-email-{userId}")">@user.Email</Table.Cell>
+                                <Table.Cell>
+                                    <Tag data-testid="@($"user-role-{userId}")">@user.Role</Tag>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <Tag Color="@GetStatusColor(user.Status)" data-testid="@($"user-status-{userId}")">
+                                        @user.Status.ToString()
+                                    </Tag>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    <div style="display: flex; gap: 0.25rem;">
+                                        <Button variant="@Variant.Tertiary" size="@Size.Small"
+                                                @onclick="@(() => EditUser(user))"
+                                                data-testid="@($"edit-button-{userId}")">
+                                            Edit
+                                        </Button>
+                                        <Button variant="@Variant.Tertiary" size="@Size.Small" color="@Color.Danger"
+                                                @onclick="@(() => DeleteUser(user))"
+                                                data-testid="@($"delete-button-{userId}")">
+                                            Delete
+                                        </Button>
+                                    </div>
+                                </Table.Cell>
+                            </Table.Row>
+                        }
+                    }
+                </Table.Body>
+            </Table>
+        </Card.Block>
+
+        <Card.Block>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <Paragraph size="@Size.Small" data-testid="showing-count">
+                    Showing @FilteredUsers.Count() of @Users.Count users
+                </Paragraph>
+                <Button variant="@Variant.Primary" data-testid="add-user-button">
+                    Add User
+                </Button>
+            </div>
+        </Card.Block>
+    </Card>
+</main>
+
+@code {
+    private string SearchQuery { get; set; } = "";
+    private string StatusFilterValue { get; set; } = "All";
+    private User? SelectedUser { get; set; }
+
+    private UserStatus? StatusFilter => StatusFilterValue switch
+    {
+        "Active" => UserStatus.Active,
+        "Inactive" => UserStatus.Inactive,
+        "Pending" => UserStatus.Pending,
+        _ => null // "All" or any other value shows all users
+    };
+
+    private List<User> Users { get; } =
+    [
+        new(1, "Ola Nordmann", "ola@example.com", "Admin", UserStatus.Active),
+        new(2, "Kari Hansen", "kari@example.com", "Editor", UserStatus.Active),
+        new(3, "Per Olsen", "per@example.com", "Viewer", UserStatus.Inactive),
+        new(4, "Anne Berg", "anne@example.com", "Editor", UserStatus.Pending),
+        new(5, "Erik Larsen", "erik@example.com", "Viewer", UserStatus.Active)
+    ];
+
+    private IEnumerable<User> FilteredUsers => Users
+        .Where(u => StatusFilter == null || u.Status == StatusFilter)
+        .Where(u => string.IsNullOrWhiteSpace(SearchQuery) ||
+                    u.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase) ||
+                    u.Email.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
+
+    private void EditUser(User user) => SelectedUser = user;
+    private void DeleteUser(User user) => Users.Remove(user);
+
+    private static Color GetStatusColor(UserStatus status) => status switch
+    {
+        UserStatus.Active => Color.Success,
+        UserStatus.Inactive => Color.Neutral,
+        UserStatus.Pending => Color.Warning,
+        _ => Color.Neutral
+    };
+
+    private sealed record User(int Id, string Name, string Email, string Role, UserStatus Status);
+
+    private enum UserStatus
+    {
+        Active,
+        Inactive,
+        Pending
+    }
+
+}

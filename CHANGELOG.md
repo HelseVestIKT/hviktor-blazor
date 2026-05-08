@@ -1,0 +1,89 @@
+## [v1.0.0] - 2026-05-12
+
+### Features
+
+- _(init)_ Initial release of the Blazor component library
+- _(tokens)_ Integrate design tokens from Designsystemet
+- _(a11y)_ WCAG 2.1 AA compliance and keyboard navigation across all interactive components
+- _(core)_ Blazor Server and WebAssembly render mode support
+- _(docs)_ XML documentation on all public APIs
+- _(components)_ Initial release of 45 components:
+  - _(alert)_ with `color` and `size`
+  - _(avatar)_ with `variant`, `size`, `color`, and `asChild`
+  - _(avatarstack)_ with `color`, `size`, `overlap`, `gap`, `avatar-size`, `suffix`, and `expandable`
+  - _(badge)_ with `variant`, `color`, `count`, and `maxCount`
+  - _(breadcrumbs)_ with `size` and `color`
+  - _(button)_ with `variant`, `size`, `color`, `icon`, `loading`, and `command`
+  - _(card)_ with `variant`, `size`, `color`, and `asChild`
+  - _(checkbox)_ with `checked`, `disabled`, `readonly`, `allowIndeterminate`, `label`, and `description`
+  - _(chip)_ with `size` and `color`, including Button, Checkbox, Radio, and Removable sub-types
+  - _(codeblock)_ with `language`, `size`, `color`, `lineNumbers`, `copyable`, `overflow`, and `noHighlight`
+  - _(details)_ with `variant`, `size`, `color`, `open`, and `defaultOpen`
+  - _(dialog)_ with `open`, `modal`, `placement`, `closeButton`, and `closedby`
+  - _(divider)_
+  - _(dropdown)_ with `open`, `placement`, and `autoPlacement`
+  - _(errorsummary)_ with heading and linked error items
+  - _(field)_ with `position` for toggle input alignment
+  - _(fieldset)_ with Legend and Description sub-components
+  - _(heading)_ with `level` and `size`
+  - _(icon)_ with `definition`, `size`, `color`, `width`, and `height`
+  - _(input)_ with `type`, `size` (character width), `disabled`, and `readonly`
+  - _(label)_ with `weight`
+  - _(link)_ with `size`, `color`, `href`, and `target`, including HyperLink, ActionLink, NavigationLink, and SkipLink
+    sub-types
+  - _(list)_ with Ordered and Unordered sub-components
+  - _(loader)_ with `size`, `color`, `modal`, and `position`
+  - _(logo)_ with `company` and `size`
+  - _(markdown)_ with trusted Markdown-to-HTML rendering
+  - _(pagination)_ with `data-current`, `data-total`, and page navigation
+  - _(paragraph)_ with `variant` and `size`
+  - _(popover)_ with `placement` and `autoPlacement`
+  - _(radio)_ with `value`, `label`, `description`, and `disabled`
+  - _(requiredtag)_ with `required` and `mode`
+  - _(search)_ with search field and button composition
+  - _(select)_ with `width`
+  - _(skeleton)_ with `variant`, `width`, and `height`
+  - _(skiplink)_ with `href` for skip navigation
+  - _(spinner)_ with `size`, `color`, and `title`
+  - _(suggestion)_ with `filter` and multi-select
+  - _(switch)_ with `value`, `position`, `label`, and `description`
+  - _(table)_ with `size`, `color`, `sticky-header`, and sorting
+  - _(tabs)_ with `value`, `defaultValue`, and `@onchange`
+  - _(tag)_ with `variant`, `size`, and `color`
+  - _(textarea)_ with `size`
+  - _(textfield)_ with `label`, `description`, and validation
+  - _(togglegroup)_ with `size`
+  - _(tooltip)_ with `content`, `placement`, and `type`
+  - _(validationMessage)_ with `size` and `color`
+- _(rendering)_ `HtmlAttributeBuilder` utility for constructing and manipulating HTML attributes
+- _(models)_ Component base classes:
+  - Base classes for cascading, nested, async, and popover component patterns
+  - `PopoverBase` with JS interop, positioning, and controlled state
+  - `CssLength`, `CssBoolean`, and `EnumValue` model types
+- _(security)_ `Cryptography.GenerateId` for unpredictable DOM element IDs
+- _(localization)_ Localization infrastructure:
+  - `LocalizationService` for cookie-based culture management
+  - `ResourceOverrideManager` for thread-safe resource overrides
+  - `LocalizationExtensions` and `ResourceExtensions` helpers
+- _(globalization)_ `Culture` utility with date and time format constants
+- _(comparers)_ Generic `PropertyComparer<T>` for reflection-based property sorting
+- _(extensions)_ Service and extension methods:
+  - `ServiceCollectionExtensions` for Hviktor DI registration
+  - `ApplicationBuilderExtensions` for Hviktor middleware setup
+  - Attribute services for Color, Size, Variant, Placement, Position, Weight, and Width
+  - `JsRuntimeService` and `JsObjectReferenceService` for JS interop
+  - `StringLocalizerService` for typed resource localization
+  - `ConverterExtensions`, `StringExtensions`, and `EnumExtensions` helpers
+- _(abstractions)_ Shared types and interfaces:
+  - Attribute enums for Color, Size, Variant, Placement, Position, Weight, and Width
+  - `LinkTarget` and `InteractionType` enums
+  - Table-specific enums for sorting and selection
+  - Component and service interfaces
+- _(icons)_ Icon system:
+  - `IconDefinition` type and `IconSet` constants with `generate-iconset.mjs` codegen
+  - `Hviktor.Icons.Abstractions` package with shared icon types
+- _(i18n)_ Resource files with Norwegian Bokmål, Nynorsk, and English translations
+- _(build)_ Build tooling:
+  - `vite.config.js` with CSS code-splitting and icon chunk output
+  - `Directory.Build.props` and `Directory.Packages.props` for centralized build configuration
+  - `packages.lock.json` for reproducible NuGet builds

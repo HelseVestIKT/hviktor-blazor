@@ -1,0 +1,33 @@
+﻿@page "/component/compliance/divider/sections"
+@using Hviktor.Components.Divider
+
+<main data-testid="compliance-container">
+    <article data-testid="divider-article">
+        <section aria-labelledby="section1-heading">
+            <h2 id="section1-heading">Introduction</h2>
+            <p>This is the introduction section of the article.</p>
+        </section>
+        
+        <Divider />
+        
+        <section aria-labelledby="section2-heading">
+            <h2 id="section2-heading">Main Content</h2>
+            <p>This is the main content section of the article.</p>
+        </section>
+        
+        <Divider />
+        
+        <section aria-labelledby="section3-heading">
+            <h2 id="section3-heading">Conclusion</h2>
+            <p>This is the conclusion section of the article.</p>
+        </section>
+    </article>
+
+    <div role="group" aria-label="Grouped content with dividers" data-testid="divider-group">
+        <p>First group item</p>
+        <Divider />
+        <p>Second group item</p>
+        <Divider />
+        <p>Third group item</p>
+    </div>
+</main>

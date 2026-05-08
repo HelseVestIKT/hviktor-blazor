@@ -1,0 +1,22 @@
+﻿@using Hviktor.Components.Card
+@using Hviktor.Components.Dialog
+@using Hviktor.Components.Spinner
+
+@if (!isModal)
+{
+    <Card @attributes="@(ComputeAttributes())">
+        <span class="flex gap-4 items-center justify-center">
+            <Spinner/>
+            @ChildContent
+        </span>
+    </Card>
+}
+else
+{
+    <Dialog @ref="@DialogRef" @attributes="@(ComputeAttributes())" closedby="none" CloseButton="false">
+        <Dialog.Block class="flex gap-4 items-center justify-center">
+            <Spinner/>
+            @ChildContent
+        </Dialog.Block>
+    </Dialog>
+}

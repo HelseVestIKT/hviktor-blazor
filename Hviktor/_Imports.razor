@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+
+@* Server-side specific imports *@
+#if !BROWSER
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+#endif
+
+@* WebAssembly-specific imports *@
+#if BROWSER
+#endif
+
+@* Project-specific imports (common to both) *@
+@using Hviktor.Components.Input
+@using Hviktor.Components.Button
+@using Hviktor.Components.Icon

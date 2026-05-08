@@ -1,0 +1,157 @@
+name: Publish NuGet Package (Reusable Workflow)
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+      project_name:
+        required: true
+        type: string
+      requires: # List of packages that this package requires to be installed before it can be built. For example: "npm,sass"
+        type: string
+        default: ''
+
+env:
+  DOTNET_VERSION: '10.0.x'
+
+concurrency:
+  group: publish-package-${{ inputs.project_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and Pack NuGet Packages
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+      contents: read
+    env:
+      NUGET_USER: ${{ github.actor }}
+      NUGET_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Ensure NuGet packages directory exists # Prevents failure in case of a cache miss... (actions/setup-dotnet@v5 bug)
+        run: mkdir -p "${NUGET_PACKAGES:-$HOME/.nuget/packages}"
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: Find project path
+        id: find-project
+        env:
+          PROJECT_NAME: ${{ inputs.project_name }}
+        run: |
+          PROJECT_PATH=$(bash .github/scripts/find-project.sh "$PROJECT_NAME")
+          PROJECT_DIR=$(dirname "$PROJECT_PATH")
+          echo "project_path=$PROJECT_PATH" >> $GITHUB_OUTPUT
+          echo "project_dir=$PROJECT_DIR" >> $GITHUB_OUTPUT
+
+      - name: Clean the application
+        run: dotnet clean ${{ steps.find-project.outputs.project_path }}
+
+      - name: Check for package.json
+        id: check-npm
+        run: |
+          if [ -f "${{ steps.find-project.outputs.project_dir }}/package.json" ]; then
+            echo "has_package_json=true" >> $GITHUB_OUTPUT
+            echo "Found package.json in project directory"
+          else
+            echo "has_package_json=false" >> $GITHUB_OUTPUT
+            echo "No package.json found, skipping pnpm operations"
+          fi
+
+      - name: NPM package installation
+        if: steps.check-npm.outputs.has_package_json == 'true'
+        run: pnpm install --prefix ${{ steps.find-project.outputs.project_dir }} --prefer-offline
+
+      - name: Update Project NuGet dependencies
+        env:
+          PROJECT_NAME: ${{ inputs.project_name }}
+          VERSION: ${{ inputs.version }}
+          PROJECT_PATH: ${{ steps.find-project.outputs.project_path }}
+        run: |
+          export project="$PROJECT_NAME"
+          bash .github/scripts/update-dependencies.sh "$VERSION" "https://nuget.pkg.github.com/HelseVestIKT/index.json" "$PROJECT_PATH"
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ steps.find-project.outputs.project_path }}
+
+      - name: Build Vite assets
+        if: steps.check-npm.outputs.has_package_json == 'true'
+        run: |
+          if grep -q '"build:prod"' "${{ steps.find-project.outputs.project_dir }}/package.json" 2>/dev/null; then
+            echo "Building Vite assets with build:prod..."
+            pnpm build:prod --prefix ${{ steps.find-project.outputs.project_dir }}
+          elif grep -q '"build:dev"' "${{ steps.find-project.outputs.project_dir }}/package.json" 2>/dev/null; then
+            echo "Building Vite assets with build:dev..."
+            pnpm build:dev --prefix ${{ steps.find-project.outputs.project_dir }}
+          else
+            echo "No build script found, skipping Vite build"
+          fi
+
+      - name: Build and Pack NuGet package
+        env:
+          VERSION: ${{ inputs.version }}
+          PROJECT_PATH: ${{ steps.find-project.outputs.project_path }}
+        run: |
+          dotnet pack "$PROJECT_PATH" -p:Version="$VERSION" -p:IncludeSymbols=false -c Release
+          echo "::notice::Package built successfully"
+
+        # Create artifact
+        # NOTE: We must clean out the artifact directory BEFORE we save the new Artifact.
+      - name: Archive production artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: artifacts-${{ inputs.project_name }}
+          path: ${{ steps.find-project.outputs.project_dir }}/bin/Release/
+
+  publish:
+    name: Publish NuGet Packages
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      # Download new Artifact.
+      - name: Download artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: artifacts-${{ inputs.project_name }}
+          path: package
+
+      - name: Add NuGet Package Source
+        env:
+          USR: ${{ github.actor }}
+          PWD: ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget add source "https://nuget.pkg.github.com/HelseVestIKT/index.json" --name HviktorNuGetSource --username "${{ env.USR }}" --password "${{ env.PWD }}" --store-password-in-clear-text
+
+      - name: Push package to GitHub NuGet Registry
+        env:
+          PWD: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_NAME: ${{ inputs.project_name }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          dotnet nuget push "package/$PROJECT_NAME.$VERSION.nupkg" --api-key "${{ env.PWD }}" --source HviktorNuGetSource --skip-duplicate
+          echo "::notice::Package pushed to GitHub NuGet Registry"

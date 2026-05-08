@@ -1,0 +1,7 @@
+﻿@inherits Hviktor.Models.CascadingComponentBase
+
+<details @attributes="@(ComputeAttributes())">
+    <CascadingValue Value="@this">
+        @ChildContent
+    </CascadingValue>
+</details>

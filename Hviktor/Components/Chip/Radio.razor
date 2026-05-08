@@ -1,0 +1,7 @@
+﻿@namespace Chip
+@inherits Hviktor.Components.Chip.Chip
+
+<label @attributes="@(ComputeAttributes())">
+    <input type="radio" @attributes="@(ComputeInputAttributes())" />
+    @ChildContent    
+</label>

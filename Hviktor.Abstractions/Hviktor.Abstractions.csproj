@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <OptimizeCompilations>true</OptimizeCompilations>
+        <!--  XML Documentation  -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- Package Metadata -->
+        <PackageId>Hviktor.Abstractions</PackageId>
+        <PackageTags>blazor;dotnet;csharp;components;component-library;hviktor;abstractions;interfaces;contracts</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Hviktor.Abstractions.xml</DocumentationFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
+        <PackageReference Include="Microsoft.Extensions.Localization.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PackageReference Include="Hviktor.Icons.Abstractions"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    <!-- Embed XML docs as a resource so WASM consumers can read them -->
+    <Target Name="EmbedXmlDocumentation" AfterTargets="Build">
+        <ItemGroup>
+            <EmbeddedResource Include="$(OutputPath)$(AssemblyName).xml"
+                              LogicalName="$(AssemblyName).$(AssemblyName).xml"
+                              Condition="Exists('$(OutputPath)$(AssemblyName).xml')"/>
+        </ItemGroup>
+    </Target>
+
+</Project>

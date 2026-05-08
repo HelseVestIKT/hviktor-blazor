@@ -1,0 +1,21 @@
+﻿@page "/component/compliance/popover/basic"
+@using Hviktor.Components.Popover
+@using Hviktor.Components.Button
+
+<main data-testid="compliance-container">
+    <section aria-label="Basic popover with trigger context" data-testid="basic">
+        <Popover.TriggerContext>
+            <Popover.Trigger data-testid="basic-trigger">Open popover</Popover.Trigger>
+            <Popover data-testid="basic-popover">
+                <p>Popover content</p>
+            </Popover>
+        </Popover.TriggerContext>
+    </section>
+
+    <section aria-label="Popover without context" data-testid="standalone">
+        <Button popovertarget="standalone-popover" data-testid="standalone-trigger">Open standalone</Button>
+        <Popover Id="standalone-popover" data-testid="standalone-popover">
+            <p>Standalone popover content</p>
+        </Popover>
+    </section>
+</main>

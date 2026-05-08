@@ -1,0 +1,26 @@
+﻿@page "/component/compliance/togglegroup/size"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.ToggleGroup
+
+<main data-testid="compliance-container">
+    <section aria-label="Small size toggle group">
+        <ToggleGroup data-testid="sm" size="@Size.Small" DefaultValue="opt1">
+            <ToggleGroup.Item value="opt1" data-testid="sm-item1">Small 1</ToggleGroup.Item>
+            <ToggleGroup.Item value="opt2" data-testid="sm-item2">Small 2</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+
+    <section aria-label="Medium size toggle group">
+        <ToggleGroup data-testid="md" size="@Size.Medium" DefaultValue="opt1">
+            <ToggleGroup.Item value="opt1" data-testid="md-item1">Medium 1</ToggleGroup.Item>
+            <ToggleGroup.Item value="opt2" data-testid="md-item2">Medium 2</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+
+    <section aria-label="Large size toggle group">
+        <ToggleGroup data-testid="lg" size="@Size.Large" DefaultValue="opt1">
+            <ToggleGroup.Item value="opt1" data-testid="lg-item1">Large 1</ToggleGroup.Item>
+            <ToggleGroup.Item value="opt2" data-testid="lg-item2">Large 2</ToggleGroup.Item>
+        </ToggleGroup>
+    </section>
+</main>

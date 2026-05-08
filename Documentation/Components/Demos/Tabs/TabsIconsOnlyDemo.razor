@@ -1,0 +1,26 @@
+﻿@using Hviktor.Components.Icon
+@using Hviktor.Components.Tabs
+@using Hviktor.Icons.Types
+
+<Tabs defaultValue="car">
+    <Tabs.List>
+        <Tabs.Tab value="car" data-tooltip="Your cars">
+            <Icon Definition="@IconSet.Car" title="Car"/>
+        </Tabs.Tab>
+        <Tabs.Tab value="bicycle" data-tooltip="Your bicycles">
+            <Icon Definition="@IconSet.Bicycle" title="Bicycle"/>
+        </Tabs.Tab>
+        <Tabs.Tab value="motorcycle" data-tooltip="Your motorcycles">
+            <Icon Definition="@IconSet.Motorcycle" title="Motorcycle"/>
+        </Tabs.Tab>
+    </Tabs.List>
+    <Tabs.Panel value="car">
+        You have no items of this type registered with us
+    </Tabs.Panel>
+    <Tabs.Panel value="bicycle">
+        You have no items of this type registered with us
+    </Tabs.Panel>
+    <Tabs.Panel value="motorcycle">
+        You have no items of this type registered with us
+    </Tabs.Panel>
+</Tabs>

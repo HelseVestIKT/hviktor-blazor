@@ -1,0 +1,63 @@
+﻿@using Hviktor.Models.Icons
+
+<figure @attributes="@(ComputeAttributes())">
+    @if (ShowHeader)
+    {
+        <div class="codeblock-header">
+            @if (!string.IsNullOrEmpty(Language))
+            {
+                <span class="codeblock-language">@LanguageDisplay</span>
+            }
+            @if (!string.IsNullOrEmpty(Filename))
+            {
+                <span class="codeblock-filename">@Filename</span>
+            }
+            @if (Copyable)
+            {
+                <button type="button"
+                        class="codeblock-copy"
+                        aria-label="@CopyButtonLabel"
+                        @onclick="@(async () => await CopyToClipboardAsync())">
+                    @if (isCopied)
+                    {
+                        <Icon Definition="@InternalIconSet.Checkmark" size="small"/>
+                        <span class="codeblock-copy-text">
+                            @Localizer.GetValue("Hviktor.Components.CodeBlock.Copied.Button")
+                        </span>
+                    }
+                    else
+                    {
+                        <Icon Definition="@InternalIconSet.Files" size="small"/>
+                        <span class="codeblock-copy-text">
+                            @Localizer.GetValue("Hviktor.Components.CodeBlock.Copy.Button")
+                        </span>
+                    }
+                </button>
+            }
+        </div>
+    }
+
+    <div class="codeblock-container">
+        @if (LineNumbers && Lines.Length > 0)
+        {
+            <div class="codeblock-line-numbers" aria-hidden="true">
+                @for (var i = 1; i <= Lines.Length; i++)
+                {
+                    <span class="codeblock-line-number">@i</span>
+                }
+            </div>
+        }
+        <pre class="@(LineNumbers ? "codeblock-pre codeblock-pre-with-numbers" : "codeblock-pre")"
+             tabindex="0"><code
+                class="@LanguageCssClass">@((MarkupString)HighlightedCode)</code></pre>
+    </div>
+
+    @* Screen reader live region for copy feedback *@
+    <div class="codeblock-sr-only" role="status" aria-live="polite" aria-atomic="true">
+        @if (isCopied)
+        {
+            @Localizer.GetValue("Hviktor.Components.CodeBlock.CopiedAnnouncement")
+        }
+    </div>
+</figure>
+

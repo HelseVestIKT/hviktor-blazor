@@ -1,0 +1,17 @@
+﻿@using Hviktor.Models
+@inherits AsyncCascadingComponentBase
+
+<div @attributes="@(ComputeAttributes())">
+    @if (ChildContent is not null)
+    {
+        <CascadingValue Value="@this">
+            @ChildContent
+        </CascadingValue>
+    }
+
+    @* Hidden select so it will be sent with a form *@
+    @if (name is not null)
+    {
+        <select name="@name" multiple hidden id="@($"{InternalId}-select")"></select>
+    }
+</div>

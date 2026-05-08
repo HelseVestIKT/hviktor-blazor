@@ -1,0 +1,13 @@
+﻿@page "/component/compliance/avatar/variant"
+@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Avatar
+
+<main data-testid="compliance-container">
+    <section aria-label="Circle variant">
+        <Avatar Variant="@Variant.Circle" Initials="AB" data-testid="circle" aria-label="User avatar AB"/>
+    </section>
+
+    <section aria-label="Square variant">
+        <Avatar Variant="@Variant.Square" Initials="CD" data-testid="square" aria-label="User avatar CD"/>
+    </section>
+</main>

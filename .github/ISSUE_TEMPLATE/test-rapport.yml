@@ -1,0 +1,131 @@
+name: 🧪 Test Report
+description: Create a test report when you have tests to be performed
+title: "[Test]: "
+labels: [ "test", "chore" ]
+projects: [ "HelseVestIKT/47" ]
+type: Task
+
+body:
+  # INTRO:
+  - type: markdown
+    attributes:
+      value: |
+        This issue outlines testing activities related to a particular issue or epic.
+        This and other comments should be removed as you write the plan
+
+        [Here is an example test plan](https://gitlab.com/gitlab-org/gitlab-foss/issues/50353)
+
+  # DESCRIPTION:
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Problem Statement
+      description: |
+        Describe the current limitation or issue this test plan addresses.
+        This could be related to a new feature, a bug fix, or an improvement.
+
+        Please fill out the example information below and add more information between the heading & this comment.
+      placeholder: |
+        This test plan is related to issue #1234 and issue #5678.
+        The goal is to ensure that the new feature works as expected and does not introduce any regressions.
+    validations:
+      required: true
+
+  # SCOPE:
+  - type: textarea
+    id: scope
+    attributes:
+      label: 🔭 Scope
+      description: |
+        Add any limiting aspects to the issue(s) being tested here.
+
+        Describe the types of data included in the testing.
+        Describe the types of tests to be performed (functional, security, performance, database, etc.).
+      placeholder: ...
+    validations:
+      required: false
+
+  # MATRIX:
+  - type: textarea
+    id: matrix
+    attributes:
+      label: 𝄜 ACC Matrix
+      description: |
+        ### ACC: `Attributes`, `Components` and `Capabilities`
+
+        Use the matrix below as a template to identify AACs relevant to the scope of this test plan.
+
+        Add or remove AACs as needed in the next section.
+        Attributes (columns) are verbs or adjectives that describe (high-level),
+        what quality testing is meant to ensure the components have.
+        Components (rows) are nouns that define larger parts of the application to be tested.
+
+        For more information see [Google Testing Blog](https://testing.googleblog.com/2011/09/10-minute-test-plan.html)
+        and [ACC model](https://code.google.com/archive/p/test-analytics/wikis/AccExplained.wiki)
+
+        ### Use this template to create an ACC matrix.
+
+        ```bash
+        |            | Secure | Responsive | Intuitive | Reliable |
+        |:-----------|:------:|:----------:|:---------:|:--------:|
+        | Admin      |        |            |           |          |
+        | Groups     |        |            |           |          |
+        | Project    |        |            |           |          |
+        | Repository |        |            |           |          |
+        | Issues     |        |            |           |          |
+        | MRs        |        |            |           |          |
+        | CI/CD      |        |            |           |          |
+        | Ops        |        |            |           |          |
+        | Registry   |        |            |           |          |
+        | Wiki       |        |            |           |          |
+        | Snippets   |        |            |           |          |
+        | Settings   |        |            |           |          |
+        | Tracking   |        |            |           |          |
+        | API        |        |            |           |          |
+        ```
+      placeholder: |
+        |     | ... | ... | ... | ... |
+        |:----|:---:|:---:|:---:|:---:|
+        | ... | ... | ... | ... | ... |
+        | ... | ... | ... | ... | ... |
+
+  # CAPABILITIES:
+  - type: textarea
+    id: capabilities
+    attributes:
+      label: 🔍 Capabilities
+      description: |
+        Use the ACC matrix above to help you identify capabilities at each relevant intersection between components and attributes.
+        Some features may be simple enough that they only involve one component, while more complex features may involve several or even all.
+
+        Example (from https://gitlab.com/gitlab-org/gitlab-foss/issues/50353):
+        ```
+        Repository is:
+        * Intuitive
+          * It is easy to select the desired file template
+          * It does not require unnecessary actions to save the change
+          * It is easy to undo the change after selecting a template
+        * Responsive
+          * The list of templates can be filtered to allow a user to find a specific template among many
+          * When a template is selected, the file content is updated quickly and smoothly
+        ```
+      placeholder: ...
+
+  # TEST PLAN:
+  - type: textarea
+    id: test-plan
+    attributes:
+      label: 📝 Test Plan
+      description: |
+        Outline the specific tests to be performed. Consider including:
+
+        * Unit tests (component/function level)
+        * Integration tests (between components)
+        * End-to-end tests (complete user flows)
+        * Performance tests (load, stress, endurance)
+        * Security tests (authentication, authorization)
+        * Accessibility tests
+        * Cross-browser/device compatibility tests
+
+        For each test, note the priority and risk level.
+      placeholder: ...

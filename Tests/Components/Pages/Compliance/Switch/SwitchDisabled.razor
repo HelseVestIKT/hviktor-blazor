@@ -1,0 +1,23 @@
+﻿@page "/component/compliance/switch/disabled"
+@using Hviktor.Components.Switch
+
+<main data-testid="compliance-container">
+    <button data-testid="focus-start" style="position: absolute; left: -9999px;">Focus Start</button>
+    
+    <section aria-label="Disabled unchecked switch">
+        <Switch Id="switch-disabled-unchecked"
+                disabled
+                Label="Disabled unchecked switch"
+                Description="This switch is disabled and off"
+                data-testid="disabled-unchecked"/>
+    </section>
+
+    <section aria-label="Disabled checked switch">
+        <Switch Id="switch-disabled-checked"
+                disabled
+                Checked="true"
+                Label="Disabled checked switch"
+                Description="This switch is disabled and on"
+                data-testid="disabled-checked"/>
+    </section>
+</main>
