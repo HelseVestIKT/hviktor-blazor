@@ -2,12 +2,6 @@
 
 ### Features
 
-- _(initial)_ Initial commit
-
-## [v1.0.0] - 2026-05-12
-
-### Features
-
 - _(init)_ Initial release of the Blazor component library
 - _(tokens)_ Integrate design tokens from Designsystemet
 - _(a11y)_ WCAG 2.1 AA compliance and keyboard navigation across all interactive components
