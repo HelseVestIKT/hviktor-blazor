@@ -1,3 +1,9 @@
+## [v1.0.0] - 2026-05-13
+
+### Features
+
+- _(initial)_ Initial commit
+
 ## [v1.0.0] - 2026-05-12
 
 ### Features
