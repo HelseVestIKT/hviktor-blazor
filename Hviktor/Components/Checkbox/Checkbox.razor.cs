@@ -3,6 +3,7 @@ using Hviktor.Abstractions.Interfaces.Localization;
 using Hviktor.Rendering;
 using Hviktor.Security;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
 namespace Hviktor.Components.Checkbox;
@@ -84,6 +85,7 @@ public partial class Checkbox : ComponentBase
 {
     [Inject] private IJsRuntimeService JsRuntimeService { get; set; } = null!;
     [Inject] private IJsObjectReferenceService JsObjectReferenceService { get; set; } = null!;
+    [Inject] private ILogger<Checkbox> Logger { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the unique identifier for the <see cref="Checkbox"/> component.<br/>

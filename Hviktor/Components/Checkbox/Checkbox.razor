@@ -1,5 +1,6 @@
 ﻿@using Hviktor.Components.Field
 @using Hviktor.Components.Typography
+@using Microsoft.Extensions.Logging
 
 <Field>
     @BuildAndRenderCheckbox()
@@ -17,6 +18,8 @@
 
 @code {
 
+    private const int ElementReferenceCaptureSequence = 1000;
+
     private RenderFragment BuildAndRenderCheckbox() => builder =>
     {
         var seq = 0;
@@ -27,7 +30,12 @@
             builder.AddAttribute(seq++, attribute.Key, attribute.Value);
         }
 
-        builder.AddElementReferenceCapture(1000, elementRef => ElementRef = elementRef);
+        if (seq >= ElementReferenceCaptureSequence)
+        {
+            Logger.LogWarning("Checkbox attribute sequence ({Sequence}) has reached the ElementReferenceCapture reserved sequence ({Reserved}), which may cause render tree diff failures", seq, ElementReferenceCaptureSequence);
+        }
+
+        builder.AddElementReferenceCapture(ElementReferenceCaptureSequence, elementRef => ElementRef = elementRef);
         builder.CloseElement();
     };
 
