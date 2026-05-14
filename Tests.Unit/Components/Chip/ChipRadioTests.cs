@@ -7,7 +7,6 @@ namespace Tests.Unit.Components.Chip;
 [Trait(TestCollections.Traits.Component, "Chip.Radio")]
 public class ChipRadioTests : HviktorBunitContext
 {
-
     [Fact]
     public void ChipRadio_RendersWithDefaultValues()
     {
@@ -124,17 +123,17 @@ public class ChipRadioTests : HviktorBunitContext
     }
 
     [Fact]
-    public void ChipRadio_TriggersCheckedChangedOnChange()
+    public void ChipRadio_TriggersOnChangeOnChange()
     {
-        var checkedValue = false;
+        var triggered = false;
         var component = Render<global::Chip.Radio>(parameters => parameters
             .AddUnmatched("checked", false)
-            .Add(p => p.CheckedChanged, value => checkedValue = value));
+            .Add(p => p.OnChange, () => triggered = true));
 
         var input = component.Find("input");
         input.Change(true);
 
-        Assert.True(checkedValue);
+        Assert.True(triggered);
     }
 
     [Fact]

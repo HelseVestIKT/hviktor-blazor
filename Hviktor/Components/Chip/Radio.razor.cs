@@ -67,12 +67,15 @@ public partial class Radio : Hviktor.Components.Chip.Chip
     private Dictionary<string, object?>? preComputedAttributes;
 
     /// <summary>
-    /// Gets or sets a callback that updates the bound checked value.
+    /// Gets or sets a callback that is invoked when this radio becomes selected.
     /// </summary>
     [Parameter]
-    public EventCallback<bool> CheckedChanged { get; set; }
+    public EventCallback OnChange { get; set; }
 
-    private bool? isChecked;
+    /// <summary>
+    /// Gets or sets a value indicating whether this radio is checked.
+    /// </summary>
+    protected bool IsChecked;
 
     private string? internalName;
     private string? internalValue;
@@ -92,10 +95,11 @@ public partial class Radio : Hviktor.Components.Chip.Chip
 
         // Consume the checked attribute and set the isChecked property so we can apply it to the input element.
         var checkedValue = builder.ConsumeAttribute("checked");
-        isChecked ??= checkedValue switch
+        IsChecked = checkedValue switch
         {
-            not null when bool.TryParse(checkedValue, out var parsed) => parsed,
-            _ => null
+            null => false,
+            _ when bool.TryParse(checkedValue, out var parsed) => parsed,
+            _ => checkedValue is not ""
         };
 
         preComputedAttributes = builder;
@@ -121,29 +125,19 @@ public partial class Radio : Hviktor.Components.Chip.Chip
             .AddClasses("ds-input")
             .AddAttribute("name", internalName)
             .AddAttribute("value", internalValue)
-            .AddAttribute("checked", isChecked is true ? true : null); // The checked attribute we consumed in ComputeAttributes()
-
-        if (CheckedChanged.HasDelegate)
-        {
-            if (builder.ContainsKey("onchange"))
-            {
-                throw new InvalidOperationException("The 'onchange' event is already defined. Please remove it to use the CheckedChanged callback.");
-            }
-
-            builder.AddAttribute("onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnCheckedChangeAsync));
-        }
-        else if (!builder.ContainsKey("onchange"))
-        {
-            // If no onchange handler is defined, we still want to update the isChecked state when the input changes.
-            builder.AddAttribute("onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnCheckedChangeAsync));
-        }
+            .AddAttribute("checked", IsChecked ? true : null)
+            .AddAttribute("onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnCheckedChangeAsync));
 
         return builder;
     }
 
-    private async Task OnCheckedChangeAsync(ChangeEventArgs args)
+    /// <summary>
+    /// Handles the change event when the radio input state changes.
+    /// </summary>
+    /// <param name="args">The change event arguments from the input element.</param>
+    protected virtual async Task OnCheckedChangeAsync(ChangeEventArgs args)
     {
-        isChecked = args.Value is true or "true" or "True";
-        await CheckedChanged.InvokeAsync(isChecked.Value);
+        IsChecked = true;
+        await OnChange.InvokeAsync();
     }
 }

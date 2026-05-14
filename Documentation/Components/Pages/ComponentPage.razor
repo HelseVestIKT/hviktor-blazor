@@ -402,10 +402,10 @@ else
     private RenderFragment<(DemoInfo Demo, string KeySuffix)> RenderDemoCard => ctx =>
         @<Card class="component-page__demo-card"
                data-color-scheme="@GetDemoColorScheme(ctx.Demo)">
-            <div class="@GetCssDemoContainerDisplayClass(ctx.Demo.Display)">
+            <form class="@GetCssDemoContainerDisplayClass(ctx.Demo.Display)" role="presentation" onsubmit="return false">
                 <DynamicComponent @key="@(ctx.Demo.DemoType.Name + "-" + ctx.KeySuffix)"
                                   Type="@ctx.Demo.DemoType"/>
-            </div>
+            </form>
         </Card>;
 
     private RenderFragment<DemoInfo> RenderDemoToggle => demo =>
