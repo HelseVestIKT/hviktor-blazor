@@ -344,4 +344,95 @@ public class CheckboxTests : HviktorBunitContext
         var input = component.Find("input");
         Assert.Equal("INPUT", input.TagName);
     }
+
+    #region Re-render stability (ElementReferenceCapture sequence fix)
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Checkbox_ReRendersWithoutError_WhenCheckedStateChanges()
+    {
+        var component = Render<Hviktor.Components.Checkbox.Checkbox>(parameters => parameters
+            .AddUnmatched("checked", false));
+
+        component.Render(parameters => parameters
+            .AddUnmatched("checked", true));
+
+        var reRenderedInput = component.Find("input");
+        Assert.NotNull(reRenderedInput);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Checkbox_ReRendersWithoutError_WhenCheckedToggledMultipleTimes()
+    {
+        var component = Render<Hviktor.Components.Checkbox.Checkbox>(parameters => parameters
+            .AddUnmatched("checked", false));
+
+        for (var i = 0; i < 5; i++)
+        {
+            var mod2 = i % 2;
+            component.Render(parameters => parameters
+                .AddUnmatched("checked", mod2 == 0));
+            var input = component.Find("input");
+            Assert.NotNull(input);
+        }
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Checkbox_ReRendersWithoutError_WhenAttributeCountChanges()
+    {
+        var component = Render<Hviktor.Components.Checkbox.Checkbox>(parameters => parameters
+            .AddUnmatched("checked", true)
+            .AddUnmatched("data-testid", "re-render-test"));
+
+        component.Render(parameters => parameters
+            .AddUnmatched("checked", true)
+            .AddUnmatched("data-testid", "re-render-test")
+            .AddUnmatched("aria-label", "New attribute added")
+            .AddUnmatched("data-custom", "extra"));
+
+        var input = component.Find("input");
+        Assert.NotNull(input);
+        Assert.Equal("New attribute added", input.GetAttribute("aria-label"));
+        Assert.Equal("extra", input.GetAttribute("data-custom"));
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Checkbox_ReRendersWithoutError_WhenIndeterminateStateChanges()
+    {
+        var component = Render<Hviktor.Components.Checkbox.Checkbox>(parameters => parameters
+            .AddUnmatched("allowIndeterminate", true)
+            .AddUnmatched("checked", true));
+
+        component.Render(parameters => parameters
+            .AddUnmatched("allowIndeterminate", true));
+
+        var input = component.Find("input");
+        Assert.NotNull(input);
+        Assert.False(input.HasAttribute("checked"));
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Checkbox_ReRendersWithoutError_WhenAttributeCountExceedsReservedSequence()
+    {
+        var component = Render<Hviktor.Components.Checkbox.Checkbox>(parameters =>
+        {
+            parameters.AddUnmatched("checked", true);
+            for (var i = 0; i < 10_000; i++)
+            {
+                parameters.AddUnmatched($"data-test-attr-{i}", i);
+            }
+        });
+
+        component.Render(parameters => parameters
+            .AddUnmatched("checked", true));
+
+        var input = component.Find("input");
+        Assert.NotNull(input);
+    }
+
+    #endregion
 }

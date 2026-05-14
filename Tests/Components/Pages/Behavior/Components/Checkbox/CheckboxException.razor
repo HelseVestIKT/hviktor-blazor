@@ -1,0 +1,106 @@
+﻿@page "/component/behavior/checkbox/exception"
+@using Hviktor.Components.Checkbox
+
+<main data-testid="behavior-container">
+    <p data-testid="render-count">@_renderCount</p>
+
+    <section aria-label="Unchecked checkbox">
+        <Checkbox Id="checkbox-unchecked"
+                  Label="Unchecked checkbox"
+                  Description="This checkbox is unchecked"
+                  @attributes="_uncheckedAttributes"
+                  data-testid="unchecked"/>
+    </section>
+
+    <section aria-label="Checked checkbox">
+        <Checkbox Id="checkbox-checked"
+                  Label="Checked checkbox"
+                  Description="This checkbox is checked"
+                  @attributes="_checkedAttributes"
+                  data-testid="checked"/>
+    </section>
+
+    <section aria-label="Indeterminate checkbox">
+        <Checkbox Id="checkbox-indeterminate"
+                  allowIndeterminate
+                  Label="Indeterminate checkbox"
+                  Description="This checkbox is in indeterminate state"
+                  @attributes="_indeterminateAttributes"
+                  data-testid="indeterminate"/>
+    </section>
+</main>
+
+@code {
+    private int _renderCount;
+    private bool? _uncheckedState = false;
+    private bool? _checkedState = true;
+    private bool? _indeterminateState;
+
+    private Dictionary<string, object> _uncheckedAttributes = new();
+    private Dictionary<string, object> _checkedAttributes = new();
+    private Dictionary<string, object> _indeterminateAttributes = new();
+
+    protected override void OnInitialized()
+    {
+        RebuildAttributes();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _renderCount++;
+    }
+
+    private void RebuildAttributes()
+    {
+        _uncheckedAttributes = BuildAttributes(_uncheckedState, nameof(OnUncheckedChanged));
+        _checkedAttributes = BuildAttributes(_checkedState, nameof(OnCheckedChanged));
+        _indeterminateAttributes = BuildAttributes(_indeterminateState, nameof(OnIndeterminateChanged));
+    }
+
+    private Dictionary<string, object> BuildAttributes(bool? state, string handlerName)
+    {
+        var attrs = new Dictionary<string, object>
+        {
+            ["onchange"] = EventCallback.Factory.Create<ChangeEventArgs>(this, handlerName switch
+            {
+                nameof(OnUncheckedChanged) => OnUncheckedChanged,
+                nameof(OnCheckedChanged) => OnCheckedChanged,
+                _ => OnIndeterminateChanged
+            })
+        };
+
+        if (state == true)
+        {
+            attrs["Checked"] = "true";
+            attrs["data-extra-a"] = "on";
+            attrs["data-extra-b"] = "yes";
+            attrs["data-extra-c"] = "active";
+            attrs["data-extra-d"] = "enabled";
+        }
+
+        return attrs;
+    }
+
+    private void OnUncheckedChanged(ChangeEventArgs e)
+    {
+        _uncheckedState = e.Value is true or "true";
+        RebuildAttributes();
+    }
+
+    private void OnCheckedChanged(ChangeEventArgs e)
+    {
+        _checkedState = e.Value is true or "true";
+        RebuildAttributes();
+    }
+
+    private void OnIndeterminateChanged(ChangeEventArgs e)
+    {
+        _indeterminateState = _indeterminateState switch
+        {
+            null => true,
+            true => false,
+            false => null
+        };
+        RebuildAttributes();
+    }
+}

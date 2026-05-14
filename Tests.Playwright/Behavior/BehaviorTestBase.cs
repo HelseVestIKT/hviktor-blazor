@@ -12,20 +12,36 @@ public abstract class BehaviorTestBase<TFixture>(TFixture fixture) : IClassFixtu
 {
     protected IPage Page { get; private set; } = null!;
 
+    protected readonly List<string> Errors = [];
+
     /// <summary>
     /// The component path segment used in URLs (e.g., "dropdown", "dialog", "details").
     /// </summary>
     protected abstract string ComponentPath { get; }
+
+    /// <summary>
+    /// The path to the directory containing the component's test files (e.g., "components/compliance").
+    /// </summary>
+    protected virtual string DirectoryPath { get; } = "component/compliance";
 
     #region Lifecycle
 
     public async ValueTask InitializeAsync()
     {
         Page = await fixture.CreatePageAsync();
+        Page.PageError += (_, exception) => Errors.Add(exception);
+        Page.Console += (_, msg) =>
+        {
+            if (msg.Type == "error")
+            {
+                Errors.Add(msg.Text);
+            }
+        };
     }
 
     public async ValueTask DisposeAsync()
     {
+        Errors.Clear();
         await Page.CloseAsync();
         GC.SuppressFinalize(this);
     }
@@ -40,7 +56,7 @@ public abstract class BehaviorTestBase<TFixture>(TFixture fixture) : IClassFixtu
     /// <param name="pageName">The page name (e.g., "keyboard", "state")</param>
     protected async Task GoToPageAsync(string pageName)
     {
-        var url = $"{fixture.BaseUrl}/component/compliance/{ComponentPath}/{pageName}";
+        var url = $"{fixture.BaseUrl}/{DirectoryPath}/{ComponentPath}/{pageName}";
         var response = await Page.GotoAsync(url);
         Assert.NotNull(response);
         Assert.True(response.Ok, $"Failed to load page. Status: {response.Status}");
