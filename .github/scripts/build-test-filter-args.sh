@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Builds filter arguments for xUnit v3 test platform from a pipe-separated filter string.
 #
 # Usage:

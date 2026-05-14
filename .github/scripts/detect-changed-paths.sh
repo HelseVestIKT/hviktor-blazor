@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # Detects which paths have changed in a Git repository for CI/CD workflows.
 #
 # Usage:
@@ -148,4 +148,3 @@ fi
 echo ""
 echo "Detection complete:"
 echo "  Source Code: $SOURCE_CODE_CHANGED | Unit Tests: $UNIT_TESTS_CHANGED | Playwright: $PLAYWRIGHT_CHANGED"
-

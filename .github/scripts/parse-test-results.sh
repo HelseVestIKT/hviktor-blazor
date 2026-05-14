@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 #
 # Parses TRX test result files and outputs a summary to GitHub Step Summary or console.
 #
