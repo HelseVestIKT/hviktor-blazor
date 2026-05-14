@@ -97,8 +97,9 @@ public partial class Radio : Hviktor.Components.Chip.Chip
         var checkedValue = builder.ConsumeAttribute("checked");
         IsChecked = checkedValue switch
         {
-            not null when bool.TryParse(checkedValue, out var parsed) => parsed,
-            _ => false
+            null => false,
+            _ when bool.TryParse(checkedValue, out var parsed) => parsed,
+            _ => checkedValue is not ""
         };
 
         preComputedAttributes = builder;
