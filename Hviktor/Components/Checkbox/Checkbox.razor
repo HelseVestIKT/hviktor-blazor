@@ -27,7 +27,7 @@
             builder.AddAttribute(seq++, attribute.Key, attribute.Value);
         }
 
-        builder.AddElementReferenceCapture(seq, elementRef => ElementRef = elementRef);
+        builder.AddElementReferenceCapture(1000, elementRef => ElementRef = elementRef);
         builder.CloseElement();
     };
 
