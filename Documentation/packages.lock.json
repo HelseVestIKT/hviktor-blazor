@@ -27,12 +27,6 @@
         "resolved": "10.0.7",
         "contentHash": "VfFuuTIgLXbtFclhz5f/PQWlygaSaF9pwtiXJjpt8k3pjndlm+aUWZ26LtpbBWY0e+Punqr9Xy/ar6W0cdWlww=="
       },
-      "Microsoft.DotNet.HotReload.WebAssembly.Browser": {
-        "type": "Direct",
-        "requested": "[10.0.107, )",
-        "resolved": "10.0.107",
-        "contentHash": "PkusSbB46QQD/X4MHjxelrG67Av2TPxlYkkBgW5PJAPR4d9I6zprYAOhOUovO3WkdaFUyVYO7vGtFKdjJGg6MA=="
-      },
       "Microsoft.Extensions.Localization": {
         "type": "Direct",
         "requested": "[10.0.7, )",
