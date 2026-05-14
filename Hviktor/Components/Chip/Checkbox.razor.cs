@@ -63,7 +63,21 @@ namespace Chip;
 /// </parameters>
 public partial class Checkbox : Radio
 {
+    /// <summary>
+    /// Gets or sets a callback that is invoked when the checked state changes, passing the new value.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; }
+
     /// <inheritdoc/>
     protected override Dictionary<string, object?> ComputeAttributes() => HtmlAttributeBuilder.ToDictionary(base.ComputeAttributes())
         .AddAttribute("type", "checkbox");
+
+    /// <inheritdoc/>
+    protected override async Task OnCheckedChangeAsync(ChangeEventArgs args)
+    {
+        IsChecked = args.Value is true or "true" or "True";
+        await OnChange.InvokeAsync();
+        await CheckedChanged.InvokeAsync(IsChecked);
+    }
 }
