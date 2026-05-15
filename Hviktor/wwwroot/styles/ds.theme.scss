@@ -2,7 +2,21 @@
 @use "mixins/layers/dark" as dark;
 @use "mixins/layers/light" as light;
 
-@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@font-face {
+  font-family: "Albert Sans";
+  src: url("_content/Hviktor/fonts/albert-sans.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("_content/Hviktor/fonts/albert-sans-italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
 @layer ds.theme.color-scheme.light {
   :root,

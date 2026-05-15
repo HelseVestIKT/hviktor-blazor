@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "pnpm compile-postcss && pnpm compile-sass",
+    "build:dev": "pnpm build",
     "compile-sass": "sass --load-path=node_modules \"wwwroot/styles/index.scss\" \"wwwroot/styles/index.css\" --no-source-map --style=compressed",
     "compile-postcss": "postcss \"wwwroot/styles/tailwind.css\" -o \"wwwroot/styles/tailwind.min.css\""
   },
