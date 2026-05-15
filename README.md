@@ -1,23 +1,24 @@
 <div align="center">
 <h1>
   <a href="https://github.com/HelseVestIKT/hviktor-blazor/" align="center">
-    <img src="https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor/logo.svg" width="24"/>
+    <img src="https://github.com/HelseVestIKT/hviktor-blazor/blob/main/logo.svg" width="24"/>
   </a>
   <strong>Hviktor</strong>
 </h1>
 
 <div align="center">
 
-[![Unit Tests](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/unit-tests.yml)
-[![Playwright WCAG tests](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-wcag-tests.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-wcag-tests.yml)
-[![Playwright Composition tests](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-composition-tests.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-composition-tests.yml)
-
 [![Quality Gates](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/quality-gate-validation.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/quality-gate-validation.yml)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=bugs&token=c31c2945ffc1d17aab3f50397bb38408616db200)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=vulnerabilities&token=c31c2945ffc1d17aab3f50397bb38408616db200)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=reliability_rating&token=c31c2945ffc1d17aab3f50397bb38408616db200)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=security_rating&token=c31c2945ffc1d17aab3f50397bb38408616db200)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=sqale_rating&token=c31c2945ffc1d17aab3f50397bb38408616db200)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
+[![Unit Tests](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/unit-tests.yml)
+[![Playwright WCAG Tests](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-wcag-tests.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-wcag-tests.yml)
+[![Playwright Composition Tests](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-composition-tests.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor-blazor/actions/workflows/playwright-composition-tests.yml)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=alert_status&token=4ce24ab5f68ff3cbb1071de842596ef47adc0bc0)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=bugs&token=4ce24ab5f68ff3cbb1071de842596ef47adc0bc0)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=vulnerabilities&token=4ce24ab5f68ff3cbb1071de842596ef47adc0bc0)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=reliability_rating&token=4ce24ab5f68ff3cbb1071de842596ef47adc0bc0)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=coverage&token=4ce24ab5f68ff3cbb1071de842596ef47adc0bc0)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HelseVestIKT_hviktor-blazor&metric=sqale_rating&token=4ce24ab5f68ff3cbb1071de842596ef47adc0bc0)](https://sonarcloud.io/summary/new_code?id=HelseVestIKT_hviktor-blazor)
 
 </div>
 </div>

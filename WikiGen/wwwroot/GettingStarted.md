@@ -36,11 +36,42 @@ app.UseHviktor();
 app.Run();
 ```
 
-**2. Import stylesheets in `App.razor`:**
+**2. Load scripts and styles in `App.razor`:**
+
+The simplest approach is to load `entry.js`, which injects all required CSS automatically at runtime. It provides:
+
+- Blazor startup orchestration
+- JS interop for interactive components (Search, Tooltip, Popover, and more)
+- Lazy-loading of icon web components
+- CSS injection (when not using a custom SCSS build)
 
 ```html
-<link rel="stylesheet" href="_content/Hviktor/dist/index.css" />
-<link rel="stylesheet" href="_content/Hviktor/dist/tailwind.css" />
+<script type="module" src="_content/Hviktor/dist/entry.js" async></script>
+```
+
+By default `entry.js` also injects all required CSS at runtime, so no additional stylesheet tags are needed.
+
+**Alternative: compile-time CSS (recommended for apps with their own SCSS build)**
+
+If your host app has an SCSS build pipeline you can import Hviktor's pre-built CSS directly into your own stylesheet.
+This moves CSS out of the JS runtime and into a single compiled bundle, avoiding a flash of unstyled content on load.
+`entry.js` is still required for the JS runtime, only the CSS injection is replaced.
+
+```scss
+// styles/imports.scss
+@import "../_content/Hviktor/dist/assets/entry.css";
+
+// Optional: Blazor UI overlays
+@import "../_content/Hviktor/dist/assets/blazor-error-ui.css";
+@import "../_content/Hviktor/dist/assets/dot-net-error-ui.css";
+@import "../_content/Hviktor/dist/assets/reconnect-modal.css";
+```
+
+Then reference the compiled stylesheet alongside `entry.js`:
+
+```html
+<link rel="stylesheet" href="styles/index.css" />
+<script type="module" src="_content/Hviktor/dist/entry.js" async></script>
 ```
 
 **3. Append namespaces in `_Imports.razor`:**
@@ -54,6 +85,7 @@ app.Run();
 
 ```razor
 @using Hviktor.Components.Button
+@inject ILogger<MyPage> Logger
 
 <Button variant="@Variant.Primary" size="@Size.Medium" @onclick="@HandleClick">
     Click me!
@@ -62,7 +94,7 @@ app.Run();
 @code {
     private void HandleClick()
     {
-        Console.WriteLine("Button clicked!");
+        Logger.LogInformation("Button clicked!");
     }
 }
 ```
