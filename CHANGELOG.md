@@ -1,3 +1,25 @@
+## [v1.1.0] - 2026-05-15
+
+### Breaking Changes
+
+- BREAKING CHANGE: `EventCallback<bool> CheckedChanged` parameter renamed to `EventCallback OnChange`
+  - Affected components: _(chip.radio)_ & _(chip.checbox)_
+
+### Bug Fixes
+
+- _(chip.radio)_
+  - Ensure `checked` is `true` on change event fire
+  - Update `IsChecked` parsing to handle empty string correctly
+- _(componentpage)_ Replace `div` with `form` to ensure names are scoped to their owning forms
+
+### Refactor
+
+- _(chip.checkbox)_ Move `CheckedChanged` callback for state change handling from `Chip.Radio`
+
+### Documentation
+
+- Update getting started guide with corrected setup instructions
+
 ## [v1.0.0] - 2026-05-13
 
 ### Features
