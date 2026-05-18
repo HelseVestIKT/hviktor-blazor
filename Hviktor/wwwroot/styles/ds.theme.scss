@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Albert Sans";
-  src: url("_content/Hviktor/fonts/albert-sans.woff2") format("woff2");
+  src: url("../fonts/albert-sans.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: "Albert Sans";
-  src: url("_content/Hviktor/fonts/albert-sans-italic.woff2") format("woff2");
+  src: url("../fonts/albert-sans-italic.woff2") format("woff2");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -34,6 +34,7 @@
 }
 
 @layer ds.theme.typography.primary {
+  :root,
   [data-typography="primary"] {
     --ds-font-family: "Albert Sans", sans-serif;
   }
