@@ -1,3 +1,4 @@
+using Hviktor.Accessors.Layout;
 using Hviktor.Extensions;
 using Tests.Components;
 
@@ -24,7 +25,7 @@ app.UseHttpsRedirection();
 
 app.UseAntiforgery();
 
-app.UseHviktor();
+app.UseHviktor(typeof(ReconnectModal), typeof(BlazorErrorUI), typeof(DotNetErrorUI));
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()

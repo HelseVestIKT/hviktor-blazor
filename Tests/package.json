@@ -8,8 +8,9 @@
     "not op_mini all"
   ],
   "scripts": {
-    "build": "pnpm compile-postcss && pnpm compile-sass",
-    "build:dev": "pnpm build",
+    "build": "node build.mjs --configuration Debug",
+    "build:dev": "node build.mjs --configuration Debug",
+    "build:prod": "node build.mjs --configuration Release",
     "compile-sass": "sass --load-path=node_modules \"wwwroot/styles/index.scss\" \"wwwroot/styles/index.css\" --no-source-map --style=compressed",
     "compile-postcss": "postcss \"wwwroot/styles/tailwind.css\" -o \"wwwroot/styles/tailwind.min.css\""
   },
