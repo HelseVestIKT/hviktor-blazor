@@ -7,6 +7,36 @@
     <meta name="description" content="Hviktor Documentation" />
     <base href="/" />
 
+    <!--suppress CssUnknownTarget -->
+    <style>
+      @font-face {
+        font-family: "Albert Sans";
+        src: url("_content/Hviktor/fonts/AlbertSans.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Albert Sans";
+        src: url("_content/Hviktor/fonts/AlbertSans-Italic.woff2")
+          format("woff2");
+        font-weight: 100 900;
+        font-style: italic;
+        font-display: swap;
+      }
+    </style>
+
+    <!-- Preload and apply stylesheets (split for parallel download) -->
+    <link rel="preload" href="styles/index.css" as="style" />
+    <link
+      rel="preload"
+      href="_content/Hviktor/dist/assets/entry.css"
+      as="style"
+    />
+    <link rel="modulepreload" href="_framework/blazor.webassembly.js" />
+    <link rel="modulepreload" href="_content/Hviktor/dist/entry.js" />
+
     <!-- Inline critical CSS for loading skeleton to avoid render-blocking stylesheet -->
     <style>
       .hvikt-loading {
@@ -47,44 +77,22 @@
       }
     </style>
 
-    <!-- Inline theme detection to avoid FOUC -->
+    <!-- Inline theme detection to avoid FOUC, before any rendering -->
     <script>
       (function () {
         const t = localStorage.getItem("color-scheme");
-        if (t === "light" || t === "dark")
+        if (t === "light" || t === "dark") {
           document.documentElement.setAttribute("data-color-scheme", t);
-        else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
           document.documentElement.setAttribute("data-color-scheme", "dark");
-        else
+        } else {
           document.documentElement.setAttribute("data-color-scheme", "light");
+        }
       })();
     </script>
 
-    <style>
-      @font-face {
-        font-family: "Albert Sans";
-        src: url("_content/Hviktor/fonts/AlbertSans.woff2") format("woff2");
-        font-weight: 100 900;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Albert Sans";
-        src: url("_content/Hviktor/fonts/AlbertSans-Italic.woff2")
-          format("woff2");
-        font-weight: 100 900;
-        font-style: italic;
-        font-display: swap;
-      }
-    </style>
-
-    <!-- Preload and apply stylesheets (split for parallel download) -->
-    <link rel="preload" href="styles/index.css" as="style" />
-    <link rel="preload" href="styles/tailwind.min.css" as="style" />
     <link rel="stylesheet" href="styles/index.css" />
-    <link rel="stylesheet" href="styles/tailwind.min.css" />
-
+    <link rel="stylesheet" href="_content/Hviktor/dist/assets/entry.css" />
     <link
       rel="icon"
       type="image/svg+xml"
