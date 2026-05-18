@@ -81,10 +81,16 @@ function build() {
   log.info(buildCheck.reason);
   const commandResults = [];
 
-  const postcss = runBuildStep(
-    postcssStep(stylesDir, rootPath, __dirname, fileCache),
-  );
-  commandResults.push(postcss);
+  const postcssOptions = postcssStep(stylesDir, rootPath, __dirname, fileCache);
+  const hasPostcssInput = !!postcssOptions.findInput();
+  let postcss = null;
+  if (hasPostcssInput) {
+    postcss = runBuildStep(postcssOptions);
+    commandResults.push(postcss);
+  } else {
+    log.section("PostCSS (Tailwind)");
+    log.info("No Tailwind entry file found - skipping PostCSS step");
+  }
 
   const sass = runBuildStep(
     sassStep(stylesDir, rootPath, __dirname, fileCache),
@@ -98,11 +104,10 @@ function build() {
   if (viteResult) commandResults.push(viteResult);
 
   log.section("Collecting output files");
-  const cssOutputs = collectOutputFiles(
-    [postcss.outputPath, sass.outputPath],
-    rootPath,
-    fileCache,
-  );
+  const cssOutputPaths = postcss
+    ? [postcss.outputPath, sass.outputPath]
+    : [sass.outputPath];
+  const cssOutputs = collectOutputFiles(cssOutputPaths, rootPath, fileCache);
   const viteOutputs = collectViteOutputFiles(distDir, rootPath, fileCache);
   const outputFiles = [...cssOutputs, ...viteOutputs];
 
@@ -113,9 +118,9 @@ function build() {
     if (!sourceFileMap.has(path)) sourceFileMap.set(path, info);
   }
 
-  const tailwindFile = normalizeSlashes(
-    postcss.outputPath.replace(".min.css", ".css"),
-  );
+  const tailwindFile = postcss
+    ? normalizeSlashes(postcss.outputPath.replace(".min.css", ".css"))
+    : undefined;
   const sassFile = normalizeSlashes(sass.outputPath.replace(".css", ".scss"));
 
   const manifest = generateManifest({
