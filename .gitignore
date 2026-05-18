@@ -11,6 +11,7 @@
 *.sln.docstates
 appsettings.*.json
 testconfig.*.json
+nuget.*.config
 
 # Local NuGet Packages
 [Nn]u[Gg]et[Pp]ackage/

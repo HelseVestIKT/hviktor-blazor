@@ -67,30 +67,66 @@ jobs:
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
           CURRENT_VERSION: ${{ steps.current.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "$NEW_VERSION" = "$CURRENT_VERSION" ]; then
             echo "::notice::Version already up to date ($NEW_VERSION), skipping."
             echo "skip=true" >> $GITHUB_ENV
             exit 0
           fi
+
+          BRANCH="docs/v$NEW_VERSION"
+
+          # Create the branch from main
+          MAIN_SHA=$(gh api "/repos/${{ github.repository }}/git/ref/heads/main" --jq '.object.sha')
+          gh api --method POST "/repos/${{ github.repository }}/git/refs" \
+            -f ref="refs/heads/$BRANCH" \
+            -f sha="$MAIN_SHA" 2>/dev/null || true
+
+          # Get the current file from the branch
+          FILE_RESPONSE=$(gh api \
+            "/repos/${{ github.repository }}/contents/Directory.Packages.props?ref=$BRANCH")
+          CURRENT_CONTENT=$(echo "$FILE_RESPONSE" | jq -r '.content' | base64 -d)
+
+          # Apply the version updates
+          UPDATED_CONTENT="$CURRENT_CONTENT"
           for PKG in Hviktor Hviktor.Abstractions Hviktor.Extensions Hviktor.Icons Hviktor.Icons.Abstractions; do
-            sed -i "s|<PackageVersion Include=\"$PKG\" Version=\"[^\"]*\"|<PackageVersion Include=\"$PKG\" Version=\"$NEW_VERSION\"|g" Directory.Packages.props
+            UPDATED_CONTENT=$(echo "$UPDATED_CONTENT" \
+              | sed "s|<PackageVersion Include=\"$PKG\" Version=\"[^\"]*\"|<PackageVersion Include=\"$PKG\" Version=\"$NEW_VERSION\"|g")
           done
-          echo "::notice::Updated Directory.Packages.props from $CURRENT_VERSION to $NEW_VERSION"
 
-      - name: Create or update pull request
+          if [ "$CURRENT_CONTENT" = "$UPDATED_CONTENT" ]; then
+            echo "::notice::Versions already set to $NEW_VERSION, no changes needed"
+            echo "skip=true" >> $GITHUB_ENV
+          else
+            # Use the Contents API to create a verified (signed) bot commit
+            FILE_SHA=$(echo "$FILE_RESPONSE" | jq -r '.sha')
+
+            gh api \
+              --method PUT \
+              "/repos/${{ github.repository }}/contents/Directory.Packages.props" \
+              -f message="chore(docs): bump Hviktor packages to $NEW_VERSION" \
+              -f content="$(echo -n "$UPDATED_CONTENT" | base64 -w 0)" \
+              -f sha="$FILE_SHA" \
+              -f branch="$BRANCH" > /dev/null
+
+            echo "::notice::Pushed verified version update to $BRANCH"
+          fi
+
+      - name: Create pull request
         if: env.skip != 'true'
-        uses: HelseVestIKT/samlepunktet-actions/create-pr@v0.0.10
-        with:
-          delete-branch-on-failure: true
-          branch: docs/v${{ steps.version.outputs.version }}
-          commit-message: "chore(docs): bump Hviktor packages to ${{ steps.version.outputs.version }}"
-          pr-body: |
-            Bumps Hviktor package versions in `Directory.Packages.props` from `${{ steps.current.outputs.version }}` to `${{ steps.version.outputs.version }}`.
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.version }}
+          CURRENT_VERSION: ${{ steps.current.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "docs/v$NEW_VERSION" \
+            --title "chore(docs): bump Hviktor packages to $NEW_VERSION" \
+            --body "Bumps Hviktor package versions in \`Directory.Packages.props\` from \`$CURRENT_VERSION\` to \`$NEW_VERSION\`.
 
-            When merged, this will trigger documentation deployment and wiki generation.
-          paths: Directory.Packages.props
-          labels: |
-            documentation
-            automated
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          When merged, this will trigger documentation deployment and wiki generation." \
+            --label "documentation" \
+            --label "automated" 2>/dev/null || \
+          echo "::notice::PR already exists for docs/v$NEW_VERSION"

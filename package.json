@@ -10,8 +10,8 @@
     "prepare": "husky",
     "build:dev": "pnpm -r build:dev",
     "build:prod": "pnpm -r build:prod",
-    "pack --dry-run": "node test-pack.mjs",
-    "pack --dry-run --skip-build": "node test-pack.mjs --skip-build",
+    "pack:dev": "node tools/pack-dev.mjs",
+    "test-pack:dev": "pnpm -r test-pack",
     "format": "prettier --write \"**/*.{js,ts,mjs,scss,css,html,json,md}\""
   },
   "devDependencies": {

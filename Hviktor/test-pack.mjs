@@ -288,7 +288,7 @@ function main() {
   const testVersion = makeTestVersion();
   log.info(`Version: ${testVersion}`);
 
-  const nugetOutput = join(__dirname, "..", "..", "NuGetPackages");
+  const nugetOutput = join(__dirname, "..", "..", "./nupkg");
   mkdirSync(nugetOutput, { recursive: true }); // ensure output dir exists
 
   const packagePath = join(nugetOutput, `Hviktor.${testVersion}.nupkg`);
@@ -317,7 +317,7 @@ function main() {
   if (!existsSync(packagePath)) {
     log.error(`Package not found at expected path: ${packagePath}`);
     log.warning(
-      "dotnet pack may have used a different filename. Check NuGetPackages/ manually.",
+      "dotnet pack may have used a different filename. Check ./nupkg/ manually.",
     );
     process.exit(1);
   }

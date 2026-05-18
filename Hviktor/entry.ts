@@ -12,7 +12,7 @@ import "./wwwroot/styles/tailwind.scss";
 // @ts-ignore
 import "@digdir/designsystemet-css";
 // @ts-ignore
-import "@digdir/designsystemet-css/theme.css";
+import "@digdir/designsystemet-css/theme";
 
 // ---------------------------------------------------------------------------
 // Hviktor
