@@ -121,8 +121,7 @@ public partial class Loader : ComponentBase
         isModal = builder.ConsumeAttribute("modal") is not null and not "false";
         if (!isModal)
         {
-            builder.AddClasses(["flex!", "justify-center", "items-center"]);
-
+            builder.AddClasses("loader");
             if (!position.IsEmpty)
             {
                 Logger.LogWarning("Position attribute is not supported for non-modal loaders.");

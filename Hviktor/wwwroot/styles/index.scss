@@ -3,6 +3,7 @@
 @use "blazor" as blazor;
 @use "styles" as hviktor;
 
+@use "components/loader" as loader;
 @use "components/popover" as popover;
 @use "components/tooltip" as tooltip;
 @use "components/suggestion" as suggestion;
