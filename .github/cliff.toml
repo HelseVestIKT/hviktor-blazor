@@ -49,9 +49,9 @@ commit_parsers = [
     { message = "^fix", group = "<!-- 2 --> Bug Fixes" },
     { message = "^perf", group = "<!-- 3 --> Performance" },
     { message = "^refactor", group = "<!-- 4 --> Refactor" },
+    { message = "^revert", group = "<!-- 5 --> Reverts" },
     # Skip non-user-facing types
     { message = "^docs|^style|^test|^chore|^ci|^build", skip = true },
-    { message = "^revert", group = "<!-- 5 --> Reverts" },
     # Skip everything else
     { message = ".*", skip = true },
 ]
