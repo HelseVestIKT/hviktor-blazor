@@ -447,15 +447,15 @@ public class ApplicationBuilderExtensionsTests : IAsyncLifetime
 
     [Fact]
     [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
-    public async Task UseHviktor_InjectsNoStylesheets_WhenNoComponentTypesProvided()
+    public async Task UseHviktor_InjectsStylesheets_WhenNoComponentTypesProvided()
     {
         var client = await BuildClientAsync(HtmlResponse());
 
         var response = await client.GetAsync("/", TestContext.Current.CancellationToken);
         var html = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken);
 
-        Assert.DoesNotContain(
-            "<link rel=\"stylesheet\" href=\"/_content/Hviktor/dist/assets/",
+        Assert.Contains(
+            "<link rel=\"stylesheet\" href=\"/_content/Hviktor/dist/assets/entry.css\">",
             html);
     }
 
