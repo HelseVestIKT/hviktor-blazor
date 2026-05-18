@@ -54,44 +54,48 @@ The simplest approach is to load `entry.js`, which injects all required CSS auto
 For Blazor WebAssembly apps, load `entry.css` as a separate `<link>` tag alongside your own compiled stylesheet.
 This avoids a flash of unstyled content during the WASM boot phase and keeps CSS loading independent of JavaScript.
 
-Add both links to `index.html`, with your app stylesheet first:
+In `index.html`, preload both stylesheets and the entry script for parallel download, then apply them in order —
+your app stylesheet first, `entry.css` second:
 
 ```html
-<link rel="stylesheet" href="styles/index.css" />
-<link rel="stylesheet" href="_content/Hviktor/dist/assets/entry.css" />
-<script src="_framework/blazor.webassembly.js" autostart="false"></script>
-<script type="module" src="_content/Hviktor/dist/entry.js" async></script>
-```
+<head>
+  <!-- Preload for parallel download -->
+  <link rel="preload" href="styles/index.css" as="style" />
+  <link
+    rel="preload"
+    href="_content/Hviktor/dist/assets/entry.css"
+    as="style"
+  />
+  <link rel="modulepreload" href="_content/Hviktor/dist/entry.js" />
 
-You can also preload both for parallel download, which improves perceived performance:
-
-```html
-<link rel="preload" href="styles/index.css" as="style" />
-<link rel="preload" href="_content/Hviktor/dist/assets/entry.css" as="style" />
-<link rel="modulepreload" href="_content/Hviktor/dist/entry.js" />
-
-<link rel="stylesheet" href="styles/index.css" />
-<link rel="stylesheet" href="_content/Hviktor/dist/assets/entry.css" />
+  <!-- Apply stylesheets: app styles first, then Hviktor -->
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="_content/Hviktor/dist/assets/entry.css" />
+</head>
+<body>
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script type="module" src="_content/Hviktor/dist/entry.js" async></script>
+</body>
 ```
 
 **Important: if you use Tailwind CSS, order matters**
 
 Tailwind's base and reset styles must come before Hviktors design tokens. Place `@use "tailwind"` as the
 very first import in your root SCSS file, and load `entry.css` as a separate `<link>` tag — not as an SCSS import.
-Importing `entry.css` into SCSS would place Hviktor's styles inside the same cascade layer as Tailwind's reset,
+Importing `entry.css` into SCSS would place Hviktors styles inside the same cascade layer as Tailwind's reset,
 causing the design tokens to be overridden.
 
 ```scss
-// Tailwind MUST come first
-@use "tailwind";
-// compiles @import "tailwindcss" via postcss
+// Tailwind MUST be first
+@use "tailwind"; // compiles @import "tailwindcss" via postcss
 
 // Your app styles after Tailwind
 @use "layout";
 @use "navbar";
 ```
 
-The Blazor UI overlays can be imported inside your SCSS (they are standalone and not layout-sensitive):
+The Blazor UI overlay assets (`blazor-error-ui`, `dot-net-error-ui`, `reconnect-modal`) are standalone and
+not order-sensitive, so they can be imported inside your SCSS:
 
 ```scss
 @import "../_content/Hviktor/dist/assets/blazor-error-ui.css";
