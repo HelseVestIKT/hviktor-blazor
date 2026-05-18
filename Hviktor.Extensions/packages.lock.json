@@ -208,7 +208,7 @@
       "hviktor.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.0.0, )",
+          "Hviktor.Icons.Abstractions": "[1.1.0, )",
           "Microsoft.AspNetCore.Components": "[10.0.7, )",
           "Microsoft.AspNetCore.Components.Web": "[10.0.7, )",
           "Microsoft.Extensions.Localization.Abstractions": "[10.0.7, )"
