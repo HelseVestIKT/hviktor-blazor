@@ -1,5 +1,5 @@
 ﻿.param-name {
-  font-family: var(--ds-font-family-monospace, monospace);
+  font-family: var(--font-family-monospace), monospace;
   font-size: 0.8125rem;
   background: var(--ds-color-accent-background-default);
   color: var(--ds-color-accent-text-default);
@@ -8,7 +8,7 @@
 }
 
 .param-type {
-  font-family: var(--ds-font-family-monospace, monospace);
+  font-family: var(--font-family-monospace), monospace;
   font-size: 0.8125rem;
   background: var(--ds-color-neutral-background-default);
   color: var(--ds-color-neutral-text-default);
@@ -18,7 +18,7 @@
 }
 
 .param-value {
-  font-family: var(--ds-font-family-monospace, monospace);
+  font-family: var(--font-family-monospace), monospace;
   font-size: 0.75rem;
   background: var(--ds-color-success-background-default);
   color: var(--ds-color-success-text-default);
