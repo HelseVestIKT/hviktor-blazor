@@ -13,7 +13,7 @@ import "@digdir/designsystemet-css/theme";
 // ---------------------------------------------------------------------------
 import "./wwwroot/scripts/index"; // Main initialization script
 // @ts-ignore
-import "./wwwroot/styles/index.scss"; // Styles
+import "./wwwroot/styles/index.css";
 
 // Utilities (import to ensure they're bundled and attach to window.Hviktor)
 import "./wwwroot/scripts/cookie-storage";

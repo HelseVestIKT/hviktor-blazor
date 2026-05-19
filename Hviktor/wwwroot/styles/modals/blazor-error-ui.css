@@ -1,0 +1,19 @@
+body:has(dialog#boot-error-ui[open]) {
+  overflow: hidden;
+}
+
+#blazor-error-ui {
+  display: none;
+}
+
+#boot-error-ui {
+  .boot-error-ui-failed {
+    @mixin svg;
+
+    svg {
+      @mixin animation;
+      @mixin animation-svg;
+      @mixin failure-animation-svg;
+    }
+  }
+}

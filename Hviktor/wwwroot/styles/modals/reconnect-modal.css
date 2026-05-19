@@ -1,5 +1,3 @@
-@use "../mixins/modal-mixin" as reconnect-modal;
-
 .components-reconnect-first-attempt-visible,
 .components-pause-visible,
 .components-resume-failed-visible,
@@ -37,7 +35,7 @@
 #components-reconnect-modal.components-reconnect-retrying,
 #components-reconnect-modal.components-reconnect-retrying .components-reconnect-repeated-attempt-visible,
 #components-reconnect-modal.components-reconnect-retrying:has(.components-reconnect-repeated-attempt-visible) .components-rejoining-failed-animation,
-  // Override the default retry logic styles for the reconnect modal 
+    /* Override the default retry logic styles for the reconnect modal */
 #components-reconnect-modal.components-reconnect-retrying:has(.components-reconnect-first-attempt-visible):not(:has(.components-reconnect-repeated-attempt-visible)) .components-rejoining-animation,
 #components-reconnect-modal.components-reconnect-rejected,
 #components-reconnect-modal.components-reconnect-rejected .components-reconnect-rejected-visible,
@@ -61,7 +59,8 @@ body:has(dialog#components-reconnect-modal.components-reconnect-failed) {
 }
 
 dialog#components-reconnect-modal {
-  // When the dialog has class "components-reconnect-show", it will be displayed.
+  /* When the dialog has class "components-reconnect-show", it will be displayed. */
+
   &[open] {
     display: block;
     animation: components-reconnect-modal-fadeInOpacity 0.5s ease-in-out 0.3s;
@@ -78,7 +77,7 @@ dialog#components-reconnect-modal {
 
 .components-rejoining-success-animation,
 .components-rejoining-failed-animation {
-  @include reconnect-modal.svg();
+  @mixin svg;
 }
 
 .components-rejoining-animation {
@@ -86,7 +85,7 @@ dialog#components-reconnect-modal {
 }
 
 .components-rejoining-animation div {
-  @include reconnect-modal.animation();
+  @mixin animation;
 }
 
 .components-rejoining-animation div {
@@ -96,7 +95,7 @@ dialog#components-reconnect-modal {
 
 .components-rejoining-success-animation svg,
 .components-rejoining-failed-animation svg {
-  @include reconnect-modal.animation-svg();
+  @mixin animation-svg;
 }
 
 .components-rejoining-success-animation svg {
@@ -105,7 +104,7 @@ dialog#components-reconnect-modal {
 }
 
 .components-rejoining-failed-animation svg {
-  @include reconnect-modal.failure-no-animation-svg();
+  @mixin failure-no-animation-svg;
 }
 
 .components-rejoining-animation div:nth-child(2) {

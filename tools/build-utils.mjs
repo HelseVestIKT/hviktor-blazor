@@ -414,23 +414,23 @@ export function getScriptFileType(ext) {
 
 /**
  * Generates the build manifest object.
- * @param {object} options - Manifest options.
- * @param {Map} options.sourceFileMap - Source file map.
- * @param {string} options.tailwindFile - Tailwind entry file path.
- * @param {string} options.sassFile - Sass entry file path.
- * @param {object[]} options.commandResults - Build step results.
- * @param {object[]} options.outputFiles - Output file metadata.
- * @param {string} options.configuration - Build configuration.
- * @param {string} options.rootPath - Repository root for relative paths.
- * @param {string} options.scriptPath - Path to the calling script (__filename).
- * @param {object} options.fileCache - File cache instance.
- * @param {string} [options.version] - Manifest version string.
- * @param {(file: string, type: string) => string} [options.getFileType] - Custom file type resolver.
+ * @param {object} options: Manifest options.
+ * @param {Map} options.sourceFileMap: Source file map.
+ * @param {string} options.entryFile: PostCSS entry file path.
+ * @param {string} options.sassFile: Sass entry file path.
+ * @param {object[]} options.commandResults: Build step results.
+ * @param {object[]} options.outputFiles: Output file metadata.
+ * @param {string} options.configuration: Build configuration.
+ * @param {string} options.rootPath: Repository root for relative paths.
+ * @param {string} options.scriptPath: Path to the calling script (__filename).
+ * @param {object} options.fileCache: File cache instance.
+ * @param {string} [options.version]: Manifest version string.
+ * @param {(file: string, type: string) => string} [options.getFileType]: Custom file type resolver.
  * @returns {object} Manifest object.
  */
 export function generateManifest({
   sourceFileMap,
-  tailwindFile,
+  entryFile,
   sassFile,
   commandResults,
   outputFiles,
@@ -441,6 +441,19 @@ export function generateManifest({
   version = "1.0",
   getFileType: customGetFileType,
 }) {
+  const isTailwindEntry =
+    entryFile != null &&
+    (() => {
+      const name = basename(entryFile);
+      if (name === "tailwind.css" || name.includes("tailwind")) return true;
+      try {
+        const content = readFileSync(entryFile, "utf8");
+        return /@import\s+['"]tailwindcss['"]|tailwind\.css/.test(content);
+      } catch {
+        return false;
+      }
+    })();
+
   const defaultGetFileType = (file, type) => {
     if (type === "razor") {
       return "Razor";
@@ -451,8 +464,8 @@ export function generateManifest({
     if (type === "script") {
       return getScriptFileType(extname(file));
     }
-    if (file === tailwindFile) {
-      return "Tailwind CSS (Entry)";
+    if (file === entryFile) {
+      return isTailwindEntry ? "Tailwind CSS (Entry)" : "CSS (Entry)";
     }
     if (file === sassFile) {
       return "Sass (Entry)";
@@ -552,22 +565,31 @@ export function finalizeManifest(
 }
 
 /**
- * Standard PostCSS (Tailwind) build step configuration.
+ * Standard PostCSS build step configuration.
  * @param {string} stylesDir - Styles directory.
  * @param {string} rootPath - Repository root.
  * @param {string} cwd - Working directory.
  * @param {object} fileCache - File cache instance.
+ * @param {string} [explicitInput] - Optional explicit input file path, bypassing content detection.
  * @returns {object} Options for runBuildStep.
  */
-export function postcssStep(stylesDir, rootPath, cwd, fileCache) {
+export function postcssStep(
+  stylesDir,
+  rootPath,
+  cwd,
+  fileCache,
+  explicitInput,
+) {
   return {
-    name: "PostCSS (Tailwind)",
+    name: "PostCSS",
     findInput: () =>
-      findFileWithContent(
-        stylesDir,
-        "**/*.{css,scss}",
-        /@import\s+['"]tailwindcss['"]/,
-      ),
+      explicitInput && existsSync(explicitInput)
+        ? normalizeSlashes(explicitInput)
+        : findFileWithContent(
+            stylesDir,
+            "**/*.{css,scss}",
+            /@import\s+['"]tailwindcss['"]/,
+          ),
     getArgs: (input, output) => ["postcss", input, "-o", output],
     getOutput: (input) =>
       normalizeSlashes(

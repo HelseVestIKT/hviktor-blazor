@@ -36,13 +36,13 @@ import {
 } from "./build-utils.mjs";
 
 /**
- * Runs the PostCSS (Tailwind) build step and appends the result to `commandResults`.
+ * Runs the PostCSS build step and appends the result to `commandResults`.
  * Returns the postcss result, or `null` if skipped.
  *
  * @param {object} postcssOptions: Options object returned by `postcssStep`.
  * @param {boolean} requirePostcss: Whether to abort when no PostCSS entry file is found.
  * @param {Array} commandResults: Mutable array to push successful step results into.
- * @returns {object|null}: The postcss build result, or `null` when skipped.
+ * @returns {object|null}: The PostCSS build result, or `null` when skipped.
  */
 function runPostcssBuild(postcssOptions, requirePostcss, commandResults) {
   const hasPostcssInput = !!postcssOptions.findInput();
@@ -54,12 +54,12 @@ function runPostcssBuild(postcssOptions, requirePostcss, commandResults) {
   }
 
   if (requirePostcss) {
-    log.error("No Tailwind entry file found but PostCSS is required");
+    log.error("No PostCSS entry file found but PostCSS is required");
     process.exit(1);
   }
 
-  log.section("PostCSS (Tailwind)");
-  log.info("No Tailwind entry file found - skipping PostCSS step");
+  log.section("PostCSS");
+  log.info("No PostCSS entry file found - skipping PostCSS step");
   return null;
 }
 
@@ -96,6 +96,8 @@ function runViteBuild(projectDir, configuration, distDir, commandResults) {
  * @param {string[]} [options.viteConfigFileNames]: Vite-related config file names to watch.
  * @param {boolean} [options.enableVite]: Whether to run Vite build. Defaults to auto-detect via vite.config.js.
  * @param {boolean} [options.requirePostcss]: If true, fail when no PostCSS input is found. Defaults to false.
+ * @param {boolean} [options.enableSass]: Whether to run the Sass build step. Defaults to true.
+ * @param {string} [options.postcssInput]: Explicit PostCSS entry file path, bypassing content-based detection.
  */
 export function build(options = {}) {
   const {
@@ -116,6 +118,8 @@ export function build(options = {}) {
     viteConfigFileNames = ["entry.ts", "vite.config.js", "tsconfig.json"],
     enableVite = existsSync(join(projectDir, "vite.config.js")),
     requirePostcss = false,
+    enableSass = true,
+    postcssInput,
   } = options;
 
   const manifestVersion =
@@ -162,18 +166,19 @@ export function build(options = {}) {
   log.info(buildCheck.reason);
   const commandResults = [];
 
-  // PostCSS (Tailwind)
+  // PostCSS
   const postcss = runPostcssBuild(
-    postcssStep(stylesDir, rootPath, projectDir, fileCache),
+    postcssStep(stylesDir, rootPath, projectDir, fileCache, postcssInput),
     requirePostcss,
     commandResults,
   );
 
   // Sass
-  const sass = runBuildStep(
-    sassStep(stylesDir, rootPath, projectDir, fileCache),
-  );
-  commandResults.push(sass);
+  let sass = null;
+  if (enableSass) {
+    sass = runBuildStep(sassStep(stylesDir, rootPath, projectDir, fileCache));
+    commandResults.push(sass);
+  }
 
   // Vite
   if (enableVite) {
@@ -182,9 +187,13 @@ export function build(options = {}) {
 
   // Collect output files
   log.section("Collecting output files");
-  const cssOutputPaths = postcss
-    ? [postcss.outputPath, sass.outputPath]
-    : [sass.outputPath];
+  const cssOutputPaths = [];
+  if (postcss) {
+    cssOutputPaths.push(postcss.outputPath);
+  }
+  if (sass) {
+    cssOutputPaths.push(sass.outputPath);
+  }
   const cssOutputs = collectOutputFiles(cssOutputPaths, rootPath, fileCache);
   const viteOutputs = enableVite
     ? collectViteOutputFiles(distDir, rootPath, fileCache)
@@ -199,14 +208,16 @@ export function build(options = {}) {
     if (!sourceFileMap.has(path)) sourceFileMap.set(path, info);
   }
 
-  const tailwindFile = postcss
+  const entryFile = postcss
     ? normalizeSlashes(postcss.outputPath.replace(".min.css", ".css"))
     : undefined;
-  const sassFile = normalizeSlashes(sass.outputPath.replace(".css", ".scss"));
+  const sassFile = sass
+    ? normalizeSlashes(sass.outputPath.replace(".css", ".scss"))
+    : undefined;
 
   const manifest = generateManifest({
     sourceFileMap,
-    tailwindFile,
+    entryFile,
     sassFile,
     commandResults,
     outputFiles,

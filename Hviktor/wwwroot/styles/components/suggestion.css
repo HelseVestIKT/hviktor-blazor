@@ -49,13 +49,11 @@
   [role="listbox"]
   > [role="option"][data-active]:not([data-empty]) {
   background: var(--dsc-suggestion-option-background--selected);
-  border-inline-start-color: var(--dsc-suggestion-option-border-color);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .ds-suggestion [role="listbox"] > [role="option"]:not([data-empty]):hover {
     background: var(--dsc-suggestion-option-background--selected);
-    border-inline-start-color: var(--dsc-suggestion-option-border-color);
   }
 }
 

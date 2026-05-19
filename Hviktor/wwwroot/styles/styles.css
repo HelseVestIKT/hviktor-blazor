@@ -1,17 +1,16 @@
-// Common styles for readonly inputs
-// this is necessary because some browsers (like Safari) or components like select or checkbox do not support the readonly attribute
-@mixin readonly() {
-  pointer-events: none;
-  cursor: default;
-}
-
+/*
+ * Some browsers (e.g. Safari) or elements like select/checkbox do not support the readonly attribute,
+ * so pointer-events and cursor are set manually.
+ */
 input[readonly],
 select[readonly],
 textarea[readonly] {
-  @include readonly();
+  pointer-events: none;
+  cursor: default;
 
   label {
-    @include readonly();
+    pointer-events: none;
+    cursor: default;
   }
 }
 

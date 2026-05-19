@@ -1,5 +1,3 @@
-@use "../mixins/codeblock-theme" as *;
-
 :root {
   --codeblock-font: var(
     --font-family-monospace,
@@ -76,7 +74,7 @@
   padding: 0.5rem var(--codeblock-padding);
   background-color: var(--codeblock-header-bg);
   border-bottom: 1px solid var(--codeblock-border);
-  font-family: var(--ds-font-family-default, system-ui, sans-serif);
+  font-family: var(--ds-font-family), system-ui, sans-serif;
   font-size: 0.75rem;
 }
 
@@ -147,7 +145,6 @@
   display: flex;
   flex-direction: column;
   padding: var(--codeblock-padding);
-  padding-right: var(--codeblock-padding);
   background-color: var(--codeblock-bg);
   border-right: 1px solid var(--codeblock-border);
   user-select: none;
@@ -158,7 +155,7 @@
 }
 
 .codeblock-line-number {
-  font-family: var(--codeblock-font);
+  font-family: var(--codeblock-font), monospace;
   font-size: var(--codeblock-font-size);
   line-height: var(--codeblock-line-height);
   color: var(--codeblock-line-number);
@@ -183,7 +180,7 @@
 }
 
 .codeblock-code {
-  font-family: var(--codeblock-font);
+  font-family: var(--codeblock-font), monospace;
   font-size: var(--codeblock-font-size);
   line-height: var(--codeblock-line-height);
   color: var(--codeblock-text);
@@ -197,219 +194,258 @@
   }
 
   &.lang-css {
-    @include codeblock-theme(
-      (
-        keyword: #9333ea,
-        attr: #0550ae,
-        tag: #116329,
-        number: #0b6e4f,
-        string: #cf222e,
-        function: #8250df,
-        field: #484d55,
-      ),
-      (
-        keyword: #c084fc,
-        attr: #79c0ff,
-        tag: #7ee787,
-        number: #6897bb,
-        string: #ffa657,
-        function: #d2a8ff,
-        field: #cdcdcd,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #9333ea;
+        --codeblock-attr: #0550ae;
+        --codeblock-tag: #116329;
+        --codeblock-number: #0b6e4f;
+        --codeblock-string: #cf222e;
+        --codeblock-function: #8250df;
+        --codeblock-field: #484d55;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #c084fc;
+        --codeblock-attr: #79c0ff;
+        --codeblock-tag: #7ee787;
+        --codeblock-number: #6897bb;
+        --codeblock-string: #ffa657;
+        --codeblock-function: #d2a8ff;
+        --codeblock-field: #cdcdcd;
+      }
+    }
   }
 
   &.lang-js {
-    @include codeblock-theme(
-      (
-        keyword: #cf222e,
-        function: #0550ae,
-        field: #0c7d9e,
-        type: #b35000,
-        string: #0a3069,
-        number: #0b6e4f,
-        comment: #656d76,
-      ),
-      (
-        keyword: #ff7b72,
-        function: #79c0ff,
-        field: #9ecbff,
-        type: #ffa657,
-        string: #a5d6ff,
-        number: #6897bb,
-        comment: #8b949e,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #cf222e;
+        --codeblock-function: #0550ae;
+        --codeblock-field: #0c7d9e;
+        --codeblock-type: #b35000;
+        --codeblock-string: #0a3069;
+        --codeblock-number: #0b6e4f;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #ff7b72;
+        --codeblock-function: #79c0ff;
+        --codeblock-field: #9ecbff;
+        --codeblock-type: #ffa657;
+        --codeblock-string: #a5d6ff;
+        --codeblock-number: #6897bb;
+        --codeblock-comment: #8b949e;
+      }
+    }
   }
 
   &.lang-json {
-    @include codeblock-theme(
-      (
-        attr: #0550ae,
-        string: #b35000,
-        keyword: #cf222e,
-        number: #0b6e4f,
-      ),
-      (
-        attr: #79c0ff,
-        string: #ffa657,
-        keyword: #ff7b72,
-        number: #6897bb,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-attr: #0550ae;
+        --codeblock-string: #b35000;
+        --codeblock-keyword: #cf222e;
+        --codeblock-number: #0b6e4f;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-attr: #79c0ff;
+        --codeblock-string: #ffa657;
+        --codeblock-keyword: #ff7b72;
+        --codeblock-number: #6897bb;
+      }
+    }
   }
 
   &.lang-xml {
-    @include codeblock-theme(
-      (
-        tag: #116329,
-        attr: #0550ae,
-        string: #0a3069,
-        keyword: #cf222e,
-        comment: #656d76,
-      ),
-      (
-        tag: #7ee787,
-        attr: #79c0ff,
-        string: #a5d6ff,
-        keyword: #ff7b72,
-        comment: #8b949e,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-attr: #0550ae;
+        --codeblock-string: #b35000;
+        --codeblock-keyword: #cf222e;
+        --codeblock-number: #0b6e4f;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-attr: #79c0ff;
+        --codeblock-string: #ffa657;
+        --codeblock-keyword: #ff7b72;
+        --codeblock-number: #6897bb;
+      }
+    }
   }
 
   &.lang-sql {
-    @include codeblock-theme(
-      (
-        keyword: #0550ae,
-        string: #0a3069,
-        number: #0b6e4f,
-        comment: #656d76,
-      ),
-      (
-        keyword: #79c0ff,
-        string: #a5d6ff,
-        number: #6897bb,
-        comment: #8b949e,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-tag: #116329;
+        --codeblock-attr: #0550ae;
+        --codeblock-string: #0a3069;
+        --codeblock-keyword: #cf222e;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-tag: #7ee787;
+        --codeblock-attr: #79c0ff;
+        --codeblock-string: #a5d6ff;
+        --codeblock-keyword: #ff7b72;
+        --codeblock-comment: #8b949e;
+      }
+    }
+  }
+
+  &.lang-sql {
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #0550ae;
+        --codeblock-string: #0a3069;
+        --codeblock-number: #0b6e4f;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #79c0ff;
+        --codeblock-string: #a5d6ff;
+        --codeblock-number: #6897bb;
+        --codeblock-comment: #8b949e;
+      }
+    }
   }
 
   &.lang-yaml {
-    @include codeblock-theme(
-      (
-        attr: #0550ae,
-        string: #b35000,
-        keyword: #cf222e,
-        number: #0b6e4f,
-        type: #8250df,
-        field: #8250df,
-        comment: #656d76,
-      ),
-      (
-        attr: #79c0ff,
-        string: #ffa657,
-        keyword: #ff7b72,
-        number: #6897bb,
-        type: #d2a8ff,
-        field: #d2a8ff,
-        comment: #8b949e,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-attr: #0550ae;
+        --codeblock-string: #b35000;
+        --codeblock-keyword: #cf222e;
+        --codeblock-number: #0b6e4f;
+        --codeblock-type: #8250df;
+        --codeblock-field: #8250df;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-attr: #79c0ff;
+        --codeblock-string: #ffa657;
+        --codeblock-keyword: #ff7b72;
+        --codeblock-number: #6897bb;
+        --codeblock-type: #d2a8ff;
+        --codeblock-field: #d2a8ff;
+        --codeblock-comment: #8b949e;
+      }
+    }
   }
 
   &.lang-bash {
-    @include codeblock-theme(
-      (
-        keyword: #cf222e,
-        string: #0a3069,
-        field: #0550ae,
-        type: #656d76,
-        comment: #656d76,
-      ),
-      (
-        keyword: #ff7b72,
-        string: #a5d6ff,
-        field: #79c0ff,
-        type: #8b949e,
-        comment: #8b949e,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #cf222e;
+        --codeblock-string: #0a3069;
+        --codeblock-field: #0550ae;
+        --codeblock-type: #656d76;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #ff7b72;
+        --codeblock-string: #a5d6ff;
+        --codeblock-field: #79c0ff;
+        --codeblock-type: #8b949e;
+        --codeblock-comment: #8b949e;
+      }
+    }
   }
 
   &.lang-powershell {
-    @include codeblock-theme(
-      (
-        keyword: #0550ae,
-        function: #8250df,
-        field: #0c7d9e,
-        attr: #7b3814,
-        string: #0a3069,
-        number: #0b6e4f,
-        comment: #656d76,
-      ),
-      (
-        keyword: #79c0ff,
-        function: #d2a8ff,
-        field: #9876aa,
-        attr: #ffa657,
-        string: #a5d6ff,
-        number: #6897bb,
-        comment: #8b949e,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #0550ae;
+        --codeblock-function: #8250df;
+        --codeblock-field: #0c7d9e;
+        --codeblock-attr: #7b3814;
+        --codeblock-string: #0a3069;
+        --codeblock-number: #0b6e4f;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #79c0ff;
+        --codeblock-function: #d2a8ff;
+        --codeblock-field: #9876aa;
+        --codeblock-attr: #ffa657;
+        --codeblock-string: #a5d6ff;
+        --codeblock-number: #6897bb;
+        --codeblock-comment: #8b949e;
+      }
+    }
   }
 
   &.lang-csharp {
-    @include codeblock-theme(
-      (
-        keyword: #cf222e,
-        type: #b35000,
-        function: #8250df,
-        field: #0c7d9e,
-        string: #0550ae,
-        number: #0b6e4f,
-        attr: #7b3814,
-        comment: #656d76,
-      ),
-      (
-        keyword: #cc7832,
-        type: #bbb529,
-        function: #ffc66d,
-        field: #9876aa,
-        string: #6a8759,
-        number: #6897bb,
-        attr: #bababa,
-        comment: #808080,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #cf222e;
+        --codeblock-type: #b35000;
+        --codeblock-function: #8250df;
+        --codeblock-field: #0c7d9e;
+        --codeblock-string: #0550ae;
+        --codeblock-number: #0b6e4f;
+        --codeblock-attr: #7b3814;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #cc7832;
+        --codeblock-type: #bbb529;
+        --codeblock-function: #ffc66d;
+        --codeblock-field: #9876aa;
+        --codeblock-string: #6a8759;
+        --codeblock-number: #6897bb;
+        --codeblock-attr: #bababa;
+        --codeblock-comment: #808080;
+      }
+    }
   }
 
   &.lang-razor {
-    @include codeblock-theme(
-      (
-        keyword: #cf222e,
-        type: #b35000,
-        function: #8250df,
-        field: #0c7d9e,
-        string: #0550ae,
-        number: #0b6e4f,
-        tag: #116329,
-        attr: #7b3814,
-        comment: #656d76,
-      ),
-      (
-        keyword: #cc7832,
-        type: #bbb529,
-        function: #ffc66d,
-        field: #9876aa,
-        string: #6a8759,
-        number: #6897bb,
-        tag: #e8bf6a,
-        attr: #bababa,
-        comment: #808080,
-      )
-    );
+    @scope ([data-color-scheme="light"]) {
+      :scope {
+        --codeblock-keyword: #cf222e;
+        --codeblock-type: #b35000;
+        --codeblock-function: #8250df;
+        --codeblock-field: #0c7d9e;
+        --codeblock-string: #0550ae;
+        --codeblock-number: #0b6e4f;
+        --codeblock-tag: #116329;
+        --codeblock-attr: #7b3814;
+        --codeblock-comment: #656d76;
+      }
+    }
+    @scope ([data-color-scheme="dark"]) {
+      :scope {
+        --codeblock-keyword: #cc7832;
+        --codeblock-type: #bbb529;
+        --codeblock-function: #ffc66d;
+        --codeblock-field: #9876aa;
+        --codeblock-string: #6a8759;
+        --codeblock-number: #6897bb;
+        --codeblock-tag: #e8bf6a;
+        --codeblock-attr: #bababa;
+        --codeblock-comment: #808080;
+      }
+    }
   }
 }
 
