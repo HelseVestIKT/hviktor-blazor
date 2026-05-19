@@ -1334,11 +1334,15 @@ public sealed partial class ComponentMetadataService : IComponentMetadataService
         var cref = seeEl.Attribute("cref")?.Value;
         if (cref is not null)
         {
-            var name = cref.Contains('.')
-                ? cref[(cref.LastIndexOf('.') + 1)..]
-                : cref.Length > 2 && cref[1] == ':'
-                    ? cref[2..]
-                    : cref;
+            var name = cref;
+            if (cref.Contains('.'))
+            {
+                name = cref[(cref.LastIndexOf('.') + 1)..];
+            }
+            else if (cref.Length > 2 && cref[1] == ':')
+            {
+                name = cref[2..];
+            }
 
             var encodedName = WebUtility.HtmlEncode(name);
 
