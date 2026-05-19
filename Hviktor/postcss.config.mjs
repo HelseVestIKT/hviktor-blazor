@@ -8,4 +8,5 @@
     autoprefixer: {},
     cssnano: {},
   },
+  map: process.env.NODE_ENV !== "production",
 };

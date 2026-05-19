@@ -3,6 +3,7 @@ using Hviktor.Abstractions.Interfaces.Services.Attributes;
 using Hviktor.Abstractions.Models;
 using Hviktor.Rendering;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 
 namespace Hviktor.Components.Avatar;
 
@@ -70,17 +71,6 @@ namespace Hviktor.Components.Avatar;
 ///   </item>
 ///   <item>
 ///     <term>
-///       <b>asChild</b>: <see cref="bool"/><br/>
-///       <i>(optional)</i>
-///     </term>
-///     <description>
-///       <b>Description</b>: When true, the avatar will render its child content directly without adding role="img".<br/>
-///                           Use this when the child content is interactive and manages its own semantics (e.g., a button or link).<br/>
-///                           Adding role="img" to an interactive element would cause nested-interactive and role-img-alt WCAG violations (axe rules: nested-interactive, role-img-alt).
-///     </description>
-///   </item>
-///   <item>
-///     <term>
 ///       <b>data-tooltip</b>: <see cref="string"/>?<br/>
 ///       <i>(optional)</i>
 ///     </term>
@@ -93,6 +83,7 @@ namespace Hviktor.Components.Avatar;
 /// </parameters>
 public partial class Avatar : ComponentBase
 {
+    [Inject] private ILogger<Avatar> Logger { get; set; } = null!;
     [Inject] private IColorService ColorService { get; set; } = null!;
     [Inject] private IVariantService VariantService { get; set; } = null!;
     [Inject] private ISizeService SizeService { get; set; } = null!;
@@ -137,12 +128,10 @@ public partial class Avatar : ComponentBase
             builder.AddDataAttribute("size", SizeService.GetDataAttribute(size));
         }
 
-        if (!builder.ContainsKey("asChild"))
+        builder.AddAttribute("role", "img");
+        if (builder.ContainsKey("asChild"))
         {
-            // Do not add role="img" when asChild is present — the child element is interactive and
-            // manages its own semantics. Adding role="img" would cause nested-interactive and
-            // role-img-alt WCAG violations (axe rules: nested-interactive, role-img-alt).
-            builder.AddAttribute("role", "img");
+            Logger.LogWarning("The 'asChild' attribute is not supported on the Avatar component and will be ignored.");
         }
 
         return builder;
