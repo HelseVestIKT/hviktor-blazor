@@ -197,7 +197,7 @@ public class LoaderTests : HviktorBunitContext
     {
         var component = Render<LoaderComponent>(p => p.AddUnmatched("data-size", "large"));
         var element = component.Find("[data-size]");
-        Assert.Equal("large", element.GetAttribute("data-size"));
+        Assert.Equal("lg", element.GetAttribute("data-size"));
     }
 
     [Fact]
