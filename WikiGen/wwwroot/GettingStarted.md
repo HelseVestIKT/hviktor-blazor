@@ -21,6 +21,7 @@ dotnet add package Hviktor.Extensions
 **1. Register services in `Program.cs`:**
 
 ```csharp
+using Hviktor.Accessors.Layout;
 using Hviktor.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,9 +32,9 @@ builder.Services.AddHviktor();
 var app = builder.Build();
 
 // Configure Hviktor
-app.UseHviktor();
+app.UseHviktor(typeof(ReconnectModal), typeof(BlazorErrorUI), typeof(DotNetErrorUI));
 
-app.Run();
+await app.RunAsync();
 ```
 
 **2. Load scripts and styles in `App.razor`:**
@@ -49,30 +50,73 @@ The simplest approach is to load `entry.js`, which injects all required CSS auto
 <script type="module" src="_content/Hviktor/dist/entry.js" async></script>
 ```
 
-By default `entry.js` also injects all required CSS at runtime, so no additional stylesheet tags are needed.
+**Blazor WebAssembly: compile-time CSS (recommended)**
 
-**Alternative: compile-time CSS (recommended for apps with their own SCSS build)**
+For Blazor WebAssembly apps, load `entry.css` as a separate `<link>` tag alongside your own compiled stylesheet.
+This avoids a flash of unstyled content during the WASM boot phase and keeps CSS loading independent of JavaScript.
 
-If your host app has an SCSS build pipeline you can import Hviktor's pre-built CSS directly into your own stylesheet.
-This moves CSS out of the JS runtime and into a single compiled bundle, avoiding a flash of unstyled content on load.
-`entry.js` is still required for the JS runtime, only the CSS injection is replaced.
+In `index.html`, preload both stylesheets and the entry script for parallel download, then apply them in order —
+your app stylesheet first, `entry.css` second:
+
+```html
+<head>
+  <!-- Preload for parallel download -->
+  <link rel="preload" href="styles/index.css" as="style" />
+  <link
+    rel="preload"
+    href="_content/Hviktor/dist/assets/entry.css"
+    as="style"
+  />
+  <link rel="modulepreload" href="_framework/blazor.webassembly.js" />
+  <link rel="modulepreload" href="_content/Hviktor/dist/entry.js" />
+
+  <!-- Apply stylesheets: app styles first, then Hviktor -->
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="_content/Hviktor/dist/assets/entry.css" />
+</head>
+<body>
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script type="module" src="_content/Hviktor/dist/entry.js" async></script>
+</body>
+```
+
+**Important: if you use Tailwind CSS, order matters**
+
+Tailwind's base and reset styles must come before Hviktors design tokens. Place `@use "tailwind"` as the
+very first import in your root SCSS file, and load `entry.css` as a separate `<link>` tag — not as an SCSS import.
+Importing `entry.css` into SCSS would place Hviktors styles inside the same cascade layer as Tailwind's reset,
+causing the design tokens to be overridden.
 
 ```scss
-// styles/imports.scss
-@import "../_content/Hviktor/dist/assets/entry.css";
+// Tailwind MUST be first
+@use "tailwind"; // compiles @import "tailwindcss" via postcss
 
-// Optional: Blazor UI overlays
+// Your app styles after Tailwind
+@use "layout";
+@use "navbar";
+```
+
+**Blazor WebAssembly only:** The UI overlay assets (`blazor-error-ui`, `dot-net-error-ui`, `reconnect-modal`) are
+standalone and not order-sensitive, so they can be imported inside your SCSS:
+
+```scss
 @import "../_content/Hviktor/dist/assets/blazor-error-ui.css";
 @import "../_content/Hviktor/dist/assets/dot-net-error-ui.css";
 @import "../_content/Hviktor/dist/assets/reconnect-modal.css";
 ```
 
-Then reference the compiled stylesheet alongside `entry.js`:
+For Blazor Server, pass the component types to `UseHviktor()` instead. The middleware renders the components and
+injects both their HTML and CSS `<link>` tags automatically into every HTML response.
 
-```html
-<link rel="stylesheet" href="styles/index.css" />
-<script type="module" src="_content/Hviktor/dist/entry.js" async></script>
-```
+**Blazor Server: automatic injection**
+
+For Blazor Server apps, `UseHviktor()` automatically:
+
+- Injects `entry.css` and `entry.js` into every HTML response.
+- Renders and injects any component types passed as arguments (e.g., `ReconnectModal`), including their CSS.
+- Calls `UseRequestLocalization()` internally, so you do not need to call it separately.
+
+Preloading styles and scripts is still recommended for perceived performance.
 
 **3. Append namespaces in `_Imports.razor`:**
 

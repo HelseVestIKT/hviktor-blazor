@@ -76,6 +76,7 @@ public static class ApplicationBuilderExtensions
                     html = html.Replace("</body>", $"{componentsHtml}</body>");
                 }
 
+                html = html.Replace("</head>", "<link rel=\"stylesheet\" href=\"/_content/Hviktor/dist/assets/entry.css\"></head>");
                 html = html.Replace("</body>", "<script type=\"module\" src=\"/_content/Hviktor/dist/entry.js\"></script></body>");
 
                 context.Response.ContentLength = null;

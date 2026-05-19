@@ -1,5 +1,4 @@
 ﻿.markdown {
-  // Block spacing
   > * + * {
     margin-block-start: var(--ds-size-2);
   }
@@ -14,39 +13,32 @@
     font-size: 0.875em;
   }
 
-  // Bold & italic
   strong {
-    font-weight: var(--ds-font-weight-bold, 700);
+    font-weight: var(--ds-font-weight-semibold), 700;
   }
 
-  // Strikethrough
   del {
     text-decoration: line-through;
   }
 
-  // Underline
   u {
     text-decoration: underline;
   }
 
-  // Links
   a {
     color: var(--ds-color-accent-text-default);
     text-decoration: underline;
 
     &:hover {
-      color: var(--ds-color-accent-text-hover);
+      color: var(--ds-color-accent-text-subtle);
     }
 
     &:visited {
-      color: var(
-        --ds-color-accent-text-visited,
-        var(--ds-color-accent-text-default)
-      );
+      color:
+        var(--ds-color-accent-text-subtle), var(--ds-color-accent-text-default);
     }
   }
 
-  // Blockquote
   .markdown-blockquote {
     border-inline-start: 3px solid var(--ds-color-accent-border-default);
     padding-inline-start: var(--ds-size-4);
@@ -58,7 +50,6 @@
     }
   }
 
-  // Lists
   ul.ds-list,
   ol.ds-list {
     padding-inline-start: var(--ds-size-6);
@@ -76,7 +67,6 @@
     list-style: decimal;
   }
 
-  // Horizontal rule
   hr.ds-divider {
     margin-block: var(--ds-size-4);
   }

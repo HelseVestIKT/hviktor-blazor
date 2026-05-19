@@ -1,3 +1,7 @@
 ﻿@import "tailwindcss";
 
+@theme {
+    --font-sans: "Albert Sans", sans-serif;
+}
+
 @custom-variant dark (&:where([data-color-scheme=dark], [data-color-scheme=dark] *));

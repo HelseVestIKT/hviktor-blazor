@@ -8,11 +8,11 @@
  *   pnpm pack:dev -- --version 1.2.0 --output ./dist --configfile nuget.custom.config
  */
 
-import { spawnSync } from "child_process";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
-import { homedir } from "os";
-import { rmSync, existsSync } from "fs";
+import { spawnSync } from "node:child_process";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { homedir } from "node:os";
+import { rmSync, existsSync } from "node:fs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -98,7 +98,6 @@ if (restoreResult.status !== 0) {
 }
 
 for (const project of PROJECTS) {
-  const packageName = project.split("/")[0].toLowerCase();
   const output = customOutput || LOCAL_FEED;
 
   console.log(`Packing ${project} -> ${output}`);

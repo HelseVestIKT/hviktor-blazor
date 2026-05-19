@@ -13,20 +13,13 @@
     "build:prod": "node build.mjs --configuration Release",
     "compile-sass": "sass --load-path=node_modules \"wwwroot/styles/index.scss\" \"wwwroot/styles/index.css\" --no-source-map --style=compressed",
     "compile-postcss": "postcss \"wwwroot/styles/tailwind.css\" -o \"wwwroot/styles/tailwind.min.css\"",
-    "generate:metadata": "node generate-metadata.mjs"
+    "generate:metadata": "node generate-metadata.mjs",
+    "generate:html": "node generate-html-entries.mjs"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.0",
-    "autoprefixer": "10.5.0",
-    "cssnano": "8.0.1",
-    "glob": "13.0.6",
-    "immutable": "5.1.5",
-    "postcss": "8.5.14",
-    "postcss-cli": "11.0.1",
-    "postcss-import": "16.1.1",
     "sass": "1.99.0",
     "sass-embedded": "1.99.0",
-    "svgo": "4.0.1",
     "tailwindcss": "4.3.0"
   }
 }

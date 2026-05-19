@@ -319,7 +319,9 @@ export function checkIfBuildNeeded({
     }
 
     const outputResult = checkOutputFiles(manifest, fileCache);
-    if (outputResult.needed) return outputResult;
+    if (outputResult.needed) {
+      return outputResult;
+    }
 
     const sourceResult = checkSourceFiles(
       manifest,
@@ -327,7 +329,9 @@ export function checkIfBuildNeeded({
       fileCache,
       extraSourceFiles,
     );
-    if (sourceResult.needed) return sourceResult;
+    if (sourceResult.needed) {
+      return sourceResult;
+    }
 
     log.success("Build not needed - all files are up to date");
     log.info(`Last build: ${manifest.BuildInfo.EndTime}`);
@@ -373,7 +377,9 @@ export function collectOutputFiles(outputPaths, rootPath, fileCache) {
  */
 export function collectDistFiles(dir, exts = [".js", ".css", ".json"]) {
   const results = [];
-  if (!existsSync(dir)) return results;
+  if (!existsSync(dir)) {
+    return results;
+  }
 
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const fullPath = join(dir, entry.name);
@@ -408,23 +414,23 @@ export function getScriptFileType(ext) {
 
 /**
  * Generates the build manifest object.
- * @param {object} options - Manifest options.
- * @param {Map} options.sourceFileMap - Source file map.
- * @param {string} options.tailwindFile - Tailwind entry file path.
- * @param {string} options.sassFile - Sass entry file path.
- * @param {object[]} options.commandResults - Build step results.
- * @param {object[]} options.outputFiles - Output file metadata.
- * @param {string} options.configuration - Build configuration.
- * @param {string} options.rootPath - Repository root for relative paths.
- * @param {string} options.scriptPath - Path to the calling script (__filename).
- * @param {object} options.fileCache - File cache instance.
- * @param {string} [options.version] - Manifest version string.
- * @param {(file: string, type: string) => string} [options.getFileType] - Custom file type resolver.
+ * @param {object} options: Manifest options.
+ * @param {Map} options.sourceFileMap: Source file map.
+ * @param {string} options.entryFile: PostCSS entry file path.
+ * @param {string} options.sassFile: Sass entry file path.
+ * @param {object[]} options.commandResults: Build step results.
+ * @param {object[]} options.outputFiles: Output file metadata.
+ * @param {string} options.configuration: Build configuration.
+ * @param {string} options.rootPath: Repository root for relative paths.
+ * @param {string} options.scriptPath: Path to the calling script (__filename).
+ * @param {object} options.fileCache: File cache instance.
+ * @param {string} [options.version]: Manifest version string.
+ * @param {(file: string, type: string) => string} [options.getFileType]: Custom file type resolver.
  * @returns {object} Manifest object.
  */
 export function generateManifest({
   sourceFileMap,
-  tailwindFile,
+  entryFile,
   sassFile,
   commandResults,
   outputFiles,
@@ -435,13 +441,38 @@ export function generateManifest({
   version = "1.0",
   getFileType: customGetFileType,
 }) {
+  const isTailwindEntry =
+    entryFile != null &&
+    (() => {
+      const name = basename(entryFile);
+      if (name === "tailwind.css" || name.includes("tailwind")) return true;
+      try {
+        const content = readFileSync(entryFile, "utf8");
+        return /@import\s+['"]tailwindcss['"]|tailwind\.css/.test(content);
+      } catch {
+        return false;
+      }
+    })();
+
   const defaultGetFileType = (file, type) => {
-    if (type === "razor") return "Razor";
-    if (type === "config") return "Vite Configuration";
-    if (type === "script") return getScriptFileType(extname(file));
-    if (file === tailwindFile) return "Tailwind CSS (Entry)";
-    if (file === sassFile) return "Sass (Entry)";
-    if (file.endsWith(".scss")) return "Sass Partial/Import";
+    if (type === "razor") {
+      return "Razor";
+    }
+    if (type === "config") {
+      return "Vite Configuration";
+    }
+    if (type === "script") {
+      return getScriptFileType(extname(file));
+    }
+    if (file === entryFile) {
+      return isTailwindEntry ? "Tailwind CSS (Entry)" : "CSS (Entry)";
+    }
+    if (file === sassFile) {
+      return "Sass (Entry)";
+    }
+    if (file.endsWith(".scss")) {
+      return "Sass Partial/Import";
+    }
     return "CSS";
   };
 
@@ -522,7 +553,9 @@ export function finalizeManifest(
 
   log.info("Build Summary:");
   log.info(`  CSS files: ${cssCount}`);
-  if (jsCount > 0) log.info(`  JS files: ${jsCount}`);
+  if (jsCount > 0) {
+    log.info(`  JS files: ${jsCount}`);
+  }
   log.info(
     `  Total output: ${manifest.OutputFiles.length} files (${totalSizeKB} KB)`,
   );
@@ -532,22 +565,31 @@ export function finalizeManifest(
 }
 
 /**
- * Standard PostCSS (Tailwind) build step configuration.
+ * Standard PostCSS build step configuration.
  * @param {string} stylesDir - Styles directory.
  * @param {string} rootPath - Repository root.
  * @param {string} cwd - Working directory.
  * @param {object} fileCache - File cache instance.
+ * @param {string} [explicitInput] - Optional explicit input file path, bypassing content detection.
  * @returns {object} Options for runBuildStep.
  */
-export function postcssStep(stylesDir, rootPath, cwd, fileCache) {
+export function postcssStep(
+  stylesDir,
+  rootPath,
+  cwd,
+  fileCache,
+  explicitInput,
+) {
   return {
-    name: "PostCSS (Tailwind)",
+    name: "PostCSS",
     findInput: () =>
-      findFileWithContent(
-        stylesDir,
-        "**/*.{css,scss}",
-        /@import\s+['"]tailwindcss['"]/,
-      ),
+      explicitInput && existsSync(explicitInput)
+        ? normalizeSlashes(explicitInput)
+        : findFileWithContent(
+            stylesDir,
+            "**/*.{css,scss}",
+            /@import\s+['"]tailwindcss['"]/,
+          ),
     getArgs: (input, output) => ["postcss", input, "-o", output],
     getOutput: (input) =>
       normalizeSlashes(
@@ -672,7 +714,9 @@ export function ensurePnpmDependencies(projectDir) {
  * @returns {object|null} Command result for the manifest, or null if no vite.config.js.
  */
 export function buildViteAssets(projectDir, configuration, distDir) {
-  if (!existsSync(join(projectDir, "vite.config.js"))) return null;
+  if (!existsSync(join(projectDir, "vite.config.js"))) {
+    return null;
+  }
 
   log.section("Building Vite assets");
   const start = new Date();
@@ -721,21 +765,23 @@ export function buildViteAssets(projectDir, configuration, distDir) {
  */
 export function collectViteOutputFiles(distDir, rootPath, fileCache) {
   const viteOutputs = [];
-  if (!existsSync(distDir)) return viteOutputs;
+  if (!existsSync(distDir)) {
+    return viteOutputs;
+  }
 
   for (const filePath of collectDistFiles(distDir)) {
     fileCache.clear(filePath);
     const stats = fileCache.getStats(filePath);
     const sizeKB = Number((stats.size / 1024).toFixed(2));
     const ext = extname(filePath);
-    const fileType =
-      ext === ".js"
-        ? "Vite JavaScript"
-        : ext === ".css"
-          ? "Vite CSS Asset"
-          : ext === ".json"
-            ? "Vite Manifest"
-            : "Vite Asset";
+    let fileType = "Vite Asset";
+    if (ext === ".js") {
+      fileType = "Vite JavaScript";
+    } else if (ext === ".css") {
+      fileType = "Vite CSS Asset";
+    } else if (ext === ".json") {
+      fileType = "Vite Manifest";
+    }
 
     log.info(`Found: ${basename(filePath)} (${sizeKB} KB) [${fileType}]`);
     viteOutputs.push({

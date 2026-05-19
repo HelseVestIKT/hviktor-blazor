@@ -5,7 +5,7 @@
 @if (!isModal)
 {
     <Card @attributes="@(ComputeAttributes())">
-        <span class="flex gap-4 items-center justify-center">
+        <span class="loader-content">
             <Spinner/>
             @ChildContent
         </span>
@@ -14,7 +14,7 @@
 else
 {
     <Dialog @ref="@DialogRef" @attributes="@(ComputeAttributes())" closedby="none" CloseButton="false">
-        <Dialog.Block class="flex gap-4 items-center justify-center">
+        <Dialog.Block class="loader-content">
             <Spinner/>
             @ChildContent
         </Dialog.Block>

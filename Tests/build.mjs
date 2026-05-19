@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * CSS + Vite Build Script for Hviktor
+ * CSS Build Script for Tests
  * Usage: node build.mjs [--configuration Debug|Release]
  */
 
@@ -19,6 +19,6 @@ try {
     postcssInput: join(__dirname, "wwwroot/styles/index.css"),
   });
 } catch (error) {
-  console.error(`Build failed: ${error.message}`);
+  console.error(`CSS build failed: ${error.message}`);
   process.exit(1);
 }

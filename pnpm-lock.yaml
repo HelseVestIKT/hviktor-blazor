@@ -14,27 +14,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: 21.0.1
         version: 21.0.1
-      glob:
-        specifier: 13.0.6
-        version: 13.0.6
-      husky:
-        specifier: 9.1.7
-        version: 9.1.7
-      lint-staged:
-        specifier: 17.0.5
-        version: 17.0.5
-      prettier:
-        specifier: 3.8.3
-        version: 3.8.3
-      prettier-plugin-tailwindcss:
-        specifier: 0.8.0
-        version: 0.8.0(prettier@3.8.3)
-
-  Documentation:
-    devDependencies:
-      '@tailwindcss/postcss':
-        specifier: 4.3.0
-        version: 4.3.0
       autoprefixer:
         specifier: 10.5.0
         version: 10.5.0(postcss@8.5.14)
@@ -44,9 +23,15 @@ importers:
       glob:
         specifier: 13.0.6
         version: 13.0.6
+      husky:
+        specifier: 9.1.7
+        version: 9.1.7
       immutable:
         specifier: 5.1.5
         version: 5.1.5
+      lint-staged:
+        specifier: 17.0.5
+        version: 17.0.5
       postcss:
         specifier: 8.5.14
         version: 8.5.14
@@ -56,15 +41,33 @@ importers:
       postcss-import:
         specifier: 16.1.1
         version: 16.1.1(postcss@8.5.14)
+      postcss-mixins:
+        specifier: 12.1.2
+        version: 12.1.2(postcss@8.5.14)
+      postcss-nested:
+        specifier: 7.0.2
+        version: 7.0.2(postcss@8.5.14)
+      prettier:
+        specifier: 3.8.3
+        version: 3.8.3
+      prettier-plugin-tailwindcss:
+        specifier: 0.8.0
+        version: 0.8.0(prettier@3.8.3)
+      svgo:
+        specifier: 4.0.1
+        version: 4.0.1
+
+  Documentation:
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: 4.3.0
+        version: 4.3.0
       sass:
         specifier: 1.99.0
         version: 1.99.0
       sass-embedded:
         specifier: 1.99.0
         version: 1.99.0
-      svgo:
-        specifier: 4.0.1
-        version: 4.0.1
       tailwindcss:
         specifier: 4.3.0
         version: 4.3.0
@@ -74,9 +77,6 @@ importers:
       '@digdir/designsystemet-css':
         specifier: 1.14.0
         version: 1.14.0
-      '@floating-ui/dom':
-        specifier: 1.7.6
-        version: 1.7.6
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
@@ -87,48 +87,21 @@ importers:
       '@microsoft/dotnet-js-interop':
         specifier: 10.0.0
         version: 10.0.0
-      '@tailwindcss/postcss':
-        specifier: 4.3.0
-        version: 4.3.0
       '@types/blazor__javascript-interop':
         specifier: 3.1.7
         version: 3.1.7
       '@types/node':
         specifier: 25.8.0
         version: 25.8.0
-      autoprefixer:
-        specifier: 10.5.0
-        version: 10.5.0(postcss@8.5.14)
-      cssnano:
-        specifier: 8.0.1
-        version: 8.0.1(postcss@8.5.14)
-      glob:
-        specifier: 13.0.6
-        version: 13.0.6
-      postcss:
-        specifier: 8.5.14
-        version: 8.5.14
-      postcss-cli:
-        specifier: 11.0.1
-        version: 11.0.1(jiti@2.7.0)(postcss@8.5.14)
       rollup-plugin-visualizer:
         specifier: 7.0.1
         version: 7.0.1(rolldown@1.0.1)
-      sass:
-        specifier: 1.99.0
-        version: 1.99.0
-      sass-embedded:
-        specifier: 1.99.0
-        version: 1.99.0
-      tailwindcss:
-        specifier: 4.3.0
-        version: 4.3.0
       typescript:
         specifier: 6.0.3
         version: 6.0.3
       vite:
         specifier: 8.0.13
-        version: 8.0.13(@types/node@25.8.0)(jiti@2.7.0)(sass-embedded@1.99.0)(sass@1.99.0)(yaml@2.9.0)
+        version: 8.0.13(@types/node@25.8.0)(jiti@2.7.0)(sass-embedded@1.99.0)(sass@1.99.0)(sugarss@5.0.1(postcss@8.5.14))(yaml@2.9.0)
 
   Hviktor.Icons:
     devDependencies:
@@ -136,41 +109,7 @@ importers:
         specifier: 0.0.48
         version: 0.0.48
 
-  Tests:
-    devDependencies:
-      '@tailwindcss/postcss':
-        specifier: 4.3.0
-        version: 4.3.0
-      autoprefixer:
-        specifier: 10.5.0
-        version: 10.5.0(postcss@8.5.14)
-      cssnano:
-        specifier: 8.0.1
-        version: 8.0.1(postcss@8.5.14)
-      immutable:
-        specifier: 5.1.5
-        version: 5.1.5
-      postcss:
-        specifier: 8.5.14
-        version: 8.5.14
-      postcss-cli:
-        specifier: 11.0.1
-        version: 11.0.1(jiti@2.7.0)(postcss@8.5.14)
-      postcss-import:
-        specifier: 16.1.1
-        version: 16.1.1(postcss@8.5.14)
-      sass:
-        specifier: 1.99.0
-        version: 1.99.0
-      sass-embedded:
-        specifier: 1.99.0
-        version: 1.99.0
-      svgo:
-        specifier: 4.0.1
-        version: 4.0.1
-      tailwindcss:
-        specifier: 4.3.0
-        version: 4.3.0
+  Tests: {}
 
 packages:
 
@@ -287,15 +226,6 @@ packages:
 
   '@emnapi/wasi-threads@1.2.1':
     resolution: {integrity: sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w==}
-
-  '@floating-ui/core@1.7.5':
-    resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
-
-  '@floating-ui/dom@1.7.6':
-    resolution: {integrity: sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==}
-
-  '@floating-ui/utils@0.2.11':
-    resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
   '@helsevestikt/hviktor-icons@0.0.48':
     resolution: {integrity: sha512-AZS9IKSw3oSYny5mMxqHSOmn/XtuRqPMBYdFXZlA+Dq6QXE8V9uFh+uNt2xXZ3ayrpAb1zzyW2ROBIFeTxkKiQ==}
@@ -699,6 +629,10 @@ packages:
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+
+  camelcase-css@2.0.1:
+    resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
+    engines: {node: '>= 6'}
 
   caniuse-api@3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
@@ -1332,6 +1266,12 @@ packages:
     peerDependencies:
       postcss: ^8.0.0
 
+  postcss-js@4.1.0:
+    resolution: {integrity: sha512-oIAOTqgIo7q2EOwbhb8UalYePMvYoIeRY2YKntdpFQXNosSu3vLrniGgmH9OKs/qAkfoj5oB3le/7mINW1LCfw==}
+    engines: {node: ^12 || ^14 || >= 16}
+    peerDependencies:
+      postcss: ^8.4.21
+
   postcss-load-config@5.1.0:
     resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
     engines: {node: '>= 18'}
@@ -1382,6 +1322,18 @@ packages:
     engines: {node: ^22.11.0 || ^24.11.0 || >=26.0}
     peerDependencies:
       postcss: ^8.5.14
+
+  postcss-mixins@12.1.2:
+    resolution: {integrity: sha512-90pSxmZVfbX9e5xCv7tI5RV1mnjdf16y89CJKbf/hD7GyOz1FCxcYMl8ZYA8Hc56dbApTKKmU9HfvgfWdCxlwg==}
+    engines: {node: ^20.0 || ^22.0 || >=24.0}
+    peerDependencies:
+      postcss: ^8.2.14
+
+  postcss-nested@7.0.2:
+    resolution: {integrity: sha512-5osppouFc0VR9/VYzYxO03VaDa3e8F23Kfd6/9qcZTUI8P58GIYlArOET2Wq0ywSl2o2PjELhYOFI4W7l5QHKw==}
+    engines: {node: '>=18.0'}
+    peerDependencies:
+      postcss: ^8.2.14
 
   postcss-normalize-charset@8.0.0:
     resolution: {integrity: sha512-s88FUNDSUD8m0wBYvTQQcubVts6zhXwBU8zCD4vkRKiecd0v8cOjHVIF9r/i+5xzS/WG3f98qq4XsOM0JqvfLA==}
@@ -1464,6 +1416,12 @@ packages:
   postcss-selector-parser@7.1.1:
     resolution: {integrity: sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg==}
     engines: {node: '>=4'}
+
+  postcss-simple-vars@7.0.1:
+    resolution: {integrity: sha512-5GLLXaS8qmzHMOjVxqkk1TZPf1jMqesiI7qLhnlyERalG0sMbHIbJqrcnrpmZdKCLglHnRHoEBB61RtGTsj++A==}
+    engines: {node: '>=14.0'}
+    peerDependencies:
+      postcss: ^8.2.1
 
   postcss-svgo@8.0.0:
     resolution: {integrity: sha512-Q2fMSYEiNE1ioDc/3sxvI24NdgA/MJno2XLNpOxgv8aCcJbym8mZY10/lDY5+AWCIc3Aiqzy2Wcp9/zaIXBZgQ==}
@@ -1801,6 +1759,12 @@ packages:
     peerDependencies:
       postcss: ^8.5.14
 
+  sugarss@5.0.1:
+    resolution: {integrity: sha512-ctS5RYCBVvPoZAnzIaX5QSShK8ZiZxD5HUqSxlusvEMC+QZQIPCPOIJg6aceFX+K2rf4+SH89eu++h1Zmsr2nw==}
+    engines: {node: '>=18.0'}
+    peerDependencies:
+      postcss: ^8.3.3
+
   supports-color@8.1.1:
     resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
     engines: {node: '>=10'}
@@ -2109,17 +2073,6 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@floating-ui/core@1.7.5':
-    dependencies:
-      '@floating-ui/utils': 0.2.11
-
-  '@floating-ui/dom@1.7.6':
-    dependencies:
-      '@floating-ui/core': 1.7.5
-      '@floating-ui/utils': 0.2.11
-
-  '@floating-ui/utils@0.2.11': {}
-
   '@helsevestikt/hviktor-icons@0.0.48':
     dependencies:
       tslib: 2.8.1
@@ -2420,6 +2373,8 @@ snapshots:
       run-applescript: 7.1.0
 
   callsites@3.1.0: {}
+
+  camelcase-css@2.0.1: {}
 
   caniuse-api@3.0.0:
     dependencies:
@@ -3017,6 +2972,11 @@ snapshots:
       read-cache: 1.0.0
       resolve: 1.22.12
 
+  postcss-js@4.1.0(postcss@8.5.14):
+    dependencies:
+      camelcase-css: 2.0.1
+      postcss: 8.5.14
+
   postcss-load-config@5.1.0(jiti@2.7.0)(postcss@8.5.14):
     dependencies:
       lilconfig: 3.1.3
@@ -3063,6 +3023,19 @@ snapshots:
       browserslist: 4.28.2
       caniuse-api: 3.0.0
       cssesc: 3.0.0
+      postcss: 8.5.14
+      postcss-selector-parser: 7.1.1
+
+  postcss-mixins@12.1.2(postcss@8.5.14):
+    dependencies:
+      postcss: 8.5.14
+      postcss-js: 4.1.0(postcss@8.5.14)
+      postcss-simple-vars: 7.0.1(postcss@8.5.14)
+      sugarss: 5.0.1(postcss@8.5.14)
+      tinyglobby: 0.2.16
+
+  postcss-nested@7.0.2(postcss@8.5.14):
+    dependencies:
       postcss: 8.5.14
       postcss-selector-parser: 7.1.1
 
@@ -3138,6 +3111,10 @@ snapshots:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
+
+  postcss-simple-vars@7.0.1(postcss@8.5.14):
+    dependencies:
+      postcss: 8.5.14
 
   postcss-svgo@8.0.0(postcss@8.5.14):
     dependencies:
@@ -3386,6 +3363,10 @@ snapshots:
       postcss: 8.5.14
       postcss-selector-parser: 7.1.1
 
+  sugarss@5.0.1(postcss@8.5.14):
+    dependencies:
+      postcss: 8.5.14
+
   supports-color@8.1.1:
     dependencies:
       has-flag: 4.0.0
@@ -3443,7 +3424,7 @@ snapshots:
 
   varint@6.0.0: {}
 
-  vite@8.0.13(@types/node@25.8.0)(jiti@2.7.0)(sass-embedded@1.99.0)(sass@1.99.0)(yaml@2.9.0):
+  vite@8.0.13(@types/node@25.8.0)(jiti@2.7.0)(sass-embedded@1.99.0)(sass@1.99.0)(sugarss@5.0.1(postcss@8.5.14))(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -3456,6 +3437,7 @@ snapshots:
       jiti: 2.7.0
       sass: 1.99.0
       sass-embedded: 1.99.0
+      sugarss: 5.0.1(postcss@8.5.14)
       yaml: 2.9.0
 
   wrap-ansi@10.0.0:

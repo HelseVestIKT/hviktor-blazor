@@ -7,7 +7,7 @@
 
 @code {
     private Loader loaderRef = null!;
-    private CancellationTokenSource cts = new();
+    private readonly CancellationTokenSource cts = new();
 
     private async Task OpenAndCloseAfterFiveSecondsAsync()
     {

@@ -115,11 +115,7 @@ function discoverFromCustomElementsManifest() {
 
   for (const mod of manifest.modules ?? []) {
     for (const decl of mod.declarations ?? []) {
-      if (
-        decl.customElement &&
-        decl.tagName &&
-        decl.tagName.startsWith("hvi-icon-")
-      ) {
+      if (decl.customElement && decl.tagName?.startsWith("hvi-icon-")) {
         const fileBase = decl.tagName.replace(/^hvi-/, "");
         const filePath = resolve(wcDir, `${fileBase}.webcomponent.js`);
         const pathData = existsSync(filePath)

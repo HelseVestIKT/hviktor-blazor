@@ -7,7 +7,7 @@
 <main data-testid="compliance-container">
     @* Error summary with focusable container for screen reader announcement *@
     <section aria-label="Error summary focus test" data-testid="focus-test">
-        <ErrorSummary @ref="@errorSummaryRef">
+        <ErrorSummary>
             <ErrorSummary.Heading>Fix the following errors</ErrorSummary.Heading>
             <ErrorSummary.List>
                 <ErrorSummary.Item>
@@ -43,7 +43,3 @@
         </ErrorSummary>
     </section>
 </main>
-
-@code {
-    private ErrorSummary? errorSummaryRef;
-}

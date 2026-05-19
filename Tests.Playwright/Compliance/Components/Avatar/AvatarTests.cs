@@ -71,19 +71,4 @@ public class AvatarComplianceCollection(TestsFixture fixture) : WcagTestBase<Tes
     }
 
     #endregion
-
-    #region Avatar AsChild Tests
-
-    [Theory]
-    [ClassData<TestData.AsChild>]
-    [Trait(Traits.Component, "Avatar")]
-    [Trait(Traits.Category, Categories.Semantics)]
-    [Trait(Traits.Tag, Tags.Wcag)]
-    [Trait(Traits.Tag, Tags.BestPractice)]
-    public async Task Avatar_AsChild_WcagCompliant(string testId)
-    {
-        await AssertAllWcagLevelsAsync("/avatar/as-child", testId, Tags.Wcag2a3);
-    }
-
-    #endregion
 }

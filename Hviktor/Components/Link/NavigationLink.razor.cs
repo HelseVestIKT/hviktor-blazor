@@ -110,8 +110,20 @@ public partial class NavigationLink : ComponentBase, IDisposable
     /// <inheritdoc />
     public void Dispose()
     {
-        NavigationManager.LocationChanged -= OnLocationChanged;
+        Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Releases the unmanaged resources used by the component and optionally releases the managed resources.
+    /// </summary>
+    /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            NavigationManager.LocationChanged -= OnLocationChanged;
+        }
     }
 
     private Dictionary<string, object?> ComputeAttributes()
