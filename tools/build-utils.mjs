@@ -319,7 +319,9 @@ export function checkIfBuildNeeded({
     }
 
     const outputResult = checkOutputFiles(manifest, fileCache);
-    if (outputResult.needed) return outputResult;
+    if (outputResult.needed) {
+      return outputResult;
+    }
 
     const sourceResult = checkSourceFiles(
       manifest,
@@ -327,7 +329,9 @@ export function checkIfBuildNeeded({
       fileCache,
       extraSourceFiles,
     );
-    if (sourceResult.needed) return sourceResult;
+    if (sourceResult.needed) {
+      return sourceResult;
+    }
 
     log.success("Build not needed - all files are up to date");
     log.info(`Last build: ${manifest.BuildInfo.EndTime}`);
@@ -373,7 +377,9 @@ export function collectOutputFiles(outputPaths, rootPath, fileCache) {
  */
 export function collectDistFiles(dir, exts = [".js", ".css", ".json"]) {
   const results = [];
-  if (!existsSync(dir)) return results;
+  if (!existsSync(dir)) {
+    return results;
+  }
 
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const fullPath = join(dir, entry.name);
@@ -436,12 +442,24 @@ export function generateManifest({
   getFileType: customGetFileType,
 }) {
   const defaultGetFileType = (file, type) => {
-    if (type === "razor") return "Razor";
-    if (type === "config") return "Vite Configuration";
-    if (type === "script") return getScriptFileType(extname(file));
-    if (file === tailwindFile) return "Tailwind CSS (Entry)";
-    if (file === sassFile) return "Sass (Entry)";
-    if (file.endsWith(".scss")) return "Sass Partial/Import";
+    if (type === "razor") {
+      return "Razor";
+    }
+    if (type === "config") {
+      return "Vite Configuration";
+    }
+    if (type === "script") {
+      return getScriptFileType(extname(file));
+    }
+    if (file === tailwindFile) {
+      return "Tailwind CSS (Entry)";
+    }
+    if (file === sassFile) {
+      return "Sass (Entry)";
+    }
+    if (file.endsWith(".scss")) {
+      return "Sass Partial/Import";
+    }
     return "CSS";
   };
 
@@ -522,7 +540,9 @@ export function finalizeManifest(
 
   log.info("Build Summary:");
   log.info(`  CSS files: ${cssCount}`);
-  if (jsCount > 0) log.info(`  JS files: ${jsCount}`);
+  if (jsCount > 0) {
+    log.info(`  JS files: ${jsCount}`);
+  }
   log.info(
     `  Total output: ${manifest.OutputFiles.length} files (${totalSizeKB} KB)`,
   );
@@ -672,7 +692,9 @@ export function ensurePnpmDependencies(projectDir) {
  * @returns {object|null} Command result for the manifest, or null if no vite.config.js.
  */
 export function buildViteAssets(projectDir, configuration, distDir) {
-  if (!existsSync(join(projectDir, "vite.config.js"))) return null;
+  if (!existsSync(join(projectDir, "vite.config.js"))) {
+    return null;
+  }
 
   log.section("Building Vite assets");
   const start = new Date();
@@ -721,21 +743,23 @@ export function buildViteAssets(projectDir, configuration, distDir) {
  */
 export function collectViteOutputFiles(distDir, rootPath, fileCache) {
   const viteOutputs = [];
-  if (!existsSync(distDir)) return viteOutputs;
+  if (!existsSync(distDir)) {
+    return viteOutputs;
+  }
 
   for (const filePath of collectDistFiles(distDir)) {
     fileCache.clear(filePath);
     const stats = fileCache.getStats(filePath);
     const sizeKB = Number((stats.size / 1024).toFixed(2));
     const ext = extname(filePath);
-    const fileType =
-      ext === ".js"
-        ? "Vite JavaScript"
-        : ext === ".css"
-          ? "Vite CSS Asset"
-          : ext === ".json"
-            ? "Vite Manifest"
-            : "Vite Asset";
+    let fileType = "Vite Asset";
+    if (ext === ".js") {
+      fileType = "Vite JavaScript";
+    } else if (ext === ".css") {
+      fileType = "Vite CSS Asset";
+    } else if (ext === ".json") {
+      fileType = "Vite Manifest";
+    }
 
     log.info(`Found: ${basename(filePath)} (${sizeKB} KB) [${fileType}]`);
     viteOutputs.push({
