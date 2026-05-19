@@ -1,14 +1,5 @@
 :root {
-  --codeblock-font: var(
-    --font-family-monospace,
-    ui-monospace,
-    SFMono-Regular,
-    "SF Mono",
-    Menlo,
-    Consolas,
-    "Liberation Mono",
-    monospace
-  );
+  --codeblock-font: var(--font-family-monospace), monospace;
   --codeblock-font-size: 0.8125rem;
   --codeblock-line-height: 1.7;
   --codeblock-padding: 1rem;
@@ -277,27 +268,6 @@
         --codeblock-string: #ffa657;
         --codeblock-keyword: #ff7b72;
         --codeblock-number: #6897bb;
-      }
-    }
-  }
-
-  &.lang-sql {
-    @scope ([data-color-scheme="light"]) {
-      :scope {
-        --codeblock-tag: #116329;
-        --codeblock-attr: #0550ae;
-        --codeblock-string: #0a3069;
-        --codeblock-keyword: #cf222e;
-        --codeblock-comment: #656d76;
-      }
-    }
-    @scope ([data-color-scheme="dark"]) {
-      :scope {
-        --codeblock-tag: #7ee787;
-        --codeblock-attr: #79c0ff;
-        --codeblock-string: #a5d6ff;
-        --codeblock-keyword: #ff7b72;
-        --codeblock-comment: #8b949e;
       }
     }
   }
