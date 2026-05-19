@@ -13,7 +13,8 @@
     "build:prod": "node build.mjs --configuration Release",
     "compile-sass": "sass --load-path=node_modules \"wwwroot/styles/index.scss\" \"wwwroot/styles/index.css\" --no-source-map --style=compressed",
     "compile-postcss": "postcss \"wwwroot/styles/tailwind.css\" -o \"wwwroot/styles/tailwind.min.css\"",
-    "generate:metadata": "node generate-metadata.mjs"
+    "generate:metadata": "node generate-metadata.mjs",
+    "generate:html": "node generate-html-entries.mjs"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.0",

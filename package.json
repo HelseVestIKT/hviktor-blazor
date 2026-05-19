@@ -12,7 +12,9 @@
     "build:prod": "pnpm -r build:prod",
     "pack:dev": "node tools/pack-dev.mjs",
     "test-pack:dev": "pnpm -r test-pack",
-    "format": "prettier --write \"**/*.{js,ts,mjs,scss,css,html,json,md}\""
+    "format": "prettier --write \"**/*.{js,ts,mjs,scss,css,html,json,md}\"",
+    "generate:metadata": "pnpm -r generate:metadata",
+    "generate:html": "pnpm -r generate:html"
   },
   "devDependencies": {
     "@commitlint/cli": "21.0.1",
