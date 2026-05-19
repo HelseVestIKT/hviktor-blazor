@@ -100,7 +100,9 @@
         const t = localStorage.getItem("color-scheme");
         if (t === "light" || t === "dark") {
           document.documentElement.dataset.colorScheme = t;
-        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        } else if (
+          globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
           document.documentElement.dataset.colorScheme = "dark";
         } else {
           document.documentElement.dataset.colorScheme = "light";
@@ -248,7 +250,7 @@
     </div>
 
     <script>
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         document
           .querySelectorAll(
             ".hvikt-loading__body svg, .component-page__demo-container svg",
