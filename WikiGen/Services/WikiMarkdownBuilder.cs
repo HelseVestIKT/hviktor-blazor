@@ -121,9 +121,22 @@ public sealed partial class WikiMarkdownBuilder
 
             foreach (var component in group.Items)
             {
-                var prefix = component.IsDeprecated ? "~~" : component.IsExperimental ? "**" : "";
-                var suffix = component.IsDeprecated ? "~~" : component.IsExperimental ? "**" : "";
-                var tag = component.IsDeprecated ? " DEPRECATED" : component.IsExperimental ? " EXPERIMENTAL" : "";
+                var prefix = "";
+                var suffix = "";
+                var tag = "";
+                if (component.IsDeprecated)
+                {
+                    prefix = "~~";
+                    suffix = "~~";
+                    tag = " DEPRECATED";
+                }
+                else if (component.IsExperimental)
+                {
+                    prefix = "**";
+                    suffix = "**";
+                    tag = " EXPERIMENTAL";
+                }
+
                 var link = component.Title.Replace(' ', '_');
                 sb.AppendLine($"- {prefix}[{component.Title}]({link}){suffix}{tag}");
             }
