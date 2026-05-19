@@ -21,6 +21,7 @@ dotnet add package Hviktor.Extensions
 **1. Register services in `Program.cs`:**
 
 ```csharp
+using Hviktor.Accessors.Layout;
 using Hviktor.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,9 +32,9 @@ builder.Services.AddHviktor();
 var app = builder.Build();
 
 // Configure Hviktor
-app.UseHviktor();
+app.UseHviktor(typeof(ReconnectModal), typeof(BlazorErrorUI), typeof(DotNetErrorUI));
 
-app.Run();
+await app.RunAsync();
 ```
 
 **2. Load scripts and styles in `App.razor`:**
@@ -95,8 +96,8 @@ causing the design tokens to be overridden.
 @use "navbar";
 ```
 
-The Blazor UI overlay assets (`blazor-error-ui`, `dot-net-error-ui`, `reconnect-modal`) are standalone and
-not order-sensitive, so they can be imported inside your SCSS:
+**Blazor WebAssembly only:** The UI overlay assets (`blazor-error-ui`, `dot-net-error-ui`, `reconnect-modal`) are
+standalone and not order-sensitive, so they can be imported inside your SCSS:
 
 ```scss
 @import "../_content/Hviktor/dist/assets/blazor-error-ui.css";
@@ -104,12 +105,18 @@ not order-sensitive, so they can be imported inside your SCSS:
 @import "../_content/Hviktor/dist/assets/reconnect-modal.css";
 ```
 
+For Blazor Server, pass the component types to `UseHviktor()` instead. The middleware renders the components and
+injects both their HTML and CSS `<link>` tags automatically into every HTML response.
+
 **Blazor Server: automatic injection**
 
-For Blazor Server apps, `UseHviktor()` automatically injects both `entry.css` and `entry.js` into every HTML
-response, so no manual stylesheet tags are needed.
+For Blazor Server apps, `UseHviktor()` automatically:
 
-However, keep in mind that preloading styles and scripts is still recommended for perceived performance.
+- Injects `entry.css` and `entry.js` into every HTML response.
+- Renders and injects any component types passed as arguments (e.g., `ReconnectModal`), including their CSS.
+- Calls `UseRequestLocalization()` internally, so you do not need to call it separately.
+
+Preloading styles and scripts is still recommended for perceived performance.
 
 **3. Append namespaces in `_Imports.razor`:**
 
