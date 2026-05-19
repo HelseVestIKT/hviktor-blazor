@@ -32,6 +32,8 @@ protect_breaking_commits = true
 tag_pattern = "v[0-9].*"
 
 commit_preprocessors = [
+    # Normalize [Type]: to type: for non-conventional PR titles
+    { pattern = '^\[([A-Za-z]+)\]:', replace = "${1}:" },
     # Strip PR number suffixes e.g. (#123)
     { pattern = '\s*\(#([0-9]+)\)$', replace = "" },
     # Strip leading bullet markers from squash commit bodies
@@ -49,9 +51,9 @@ commit_parsers = [
     { message = "^fix", group = "<!-- 2 --> Bug Fixes" },
     { message = "^perf", group = "<!-- 3 --> Performance" },
     { message = "^refactor", group = "<!-- 4 --> Refactor" },
-    { message = "^revert", group = "<!-- 5 --> Reverts" },
-    # Skip non-user-facing types
-    { message = "^docs|^style|^test|^chore|^ci|^build", skip = true },
+    { message = "^docs", group = "<!-- 5 --> Documentation" },
+    { message = "^chore|^style|^test|^ci|^build", group = "<!-- 6 --> Miscellaneous" },
+    { message = "^revert", group = "<!-- 7 --> Reverts" },
     # Skip everything else
     { message = ".*", skip = true },
 ]
