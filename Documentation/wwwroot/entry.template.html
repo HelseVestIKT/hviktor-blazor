@@ -99,11 +99,11 @@
       (function () {
         const t = localStorage.getItem("color-scheme");
         if (t === "light" || t === "dark") {
-          document.documentElement.setAttribute("data-color-scheme", t);
+          document.documentElement.dataset.colorScheme = t;
         } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          document.documentElement.setAttribute("data-color-scheme", "dark");
+          document.documentElement.dataset.colorScheme = "dark";
         } else {
-          document.documentElement.setAttribute("data-color-scheme", "light");
+          document.documentElement.dataset.colorScheme = "light";
         }
       })();
     </script>
