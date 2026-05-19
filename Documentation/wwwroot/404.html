@@ -281,7 +281,7 @@
               cache: "no-cache",
             });
             if (response.ok) {
-              cache.put(defaultUri, response.clone());
+              await cache.put(defaultUri, response.clone());
             }
             return response;
           })();
