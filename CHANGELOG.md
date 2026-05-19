@@ -1,3 +1,23 @@
+## [v1.1.1] - 2026-05-19
+
+### Features
+
+- _(scripts)_ Add `pack:dev` script to package Hviktor projects with versioning support
+
+### Bug Fixes
+
+- _(styles)_ Update font URLs for vite auto detection and correct typography layer selectors
+- _(styles)_ Unify monospace font variable for consistency across themes
+- _(scripts)_ Update output paths and npm scripts for test-pack
+- _(config)_ Reorder message group for `revert` type in cliff configuration
+
+### Miscellaneous
+
+- _(styles)_ Remove duplicate custom spacing utilities in favor of standard Tailwind utilities
+- _(icons)_ Rename loader.svg to Loader.svg
+- _(workflows)_ Add signing commits to the "Update Directory.Packages.props" step
+- _(cliff)_ Update grouping rules for commit message types
+
 ## [v1.1.0] - 2026-05-15
 
 ### Breaking Changes
