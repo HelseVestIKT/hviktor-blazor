@@ -245,7 +245,7 @@ public sealed partial class Suggestion : AsyncCascadingComponentBase
         onBeforeMatchCallback = ConsumeEventCallback<string>(builder, "onBeforeMatch");
 
         defaultSelected = ConsumeStringList(builder, "defaultSelected");
-        InternalSelected = ConsumeStringList(builder, "selected") is { Count: > 0 } sel ? sel : defaultSelected;
+        InternalSelected = ConsumeStringList(builder, "selected") is { Length: > 0 } sel ? sel : defaultSelected;
 
         // Only sync to JS when the selected values actually changed from a parameter update,
         // not when re-rendering after a JS-initiated selection.
@@ -296,7 +296,7 @@ public sealed partial class Suggestion : AsyncCascadingComponentBase
     /// Consumes an attribute that may be a <see cref="string"/>, <c>string[]</c>,
     /// or <see cref="IEnumerable{T}"/> of strings, and returns a normalized list.
     /// </summary>
-    private static IReadOnlyList<string> ConsumeStringList(Dictionary<string, object?> builder, string key)
+    private static string[] ConsumeStringList(Dictionary<string, object?> builder, string key)
     {
         if (!builder.Remove(key, out var raw) || raw is null)
         {

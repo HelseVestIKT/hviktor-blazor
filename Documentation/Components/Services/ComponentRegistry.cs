@@ -104,7 +104,7 @@ public sealed class ComponentRegistry
     }
 
     /// <summary>Builds and enriches all component groups on first access.</summary>
-    private IReadOnlyList<ComponentGroup> EnsureBuilt()
+    private ComponentGroup[] EnsureBuilt()
     {
         var components = BuildComponents();
         var typography = BuildTypography();
