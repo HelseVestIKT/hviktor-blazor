@@ -123,4 +123,91 @@ public class LoaderTests : HviktorBunitContext
     }
 
     #endregion
+
+    #region Methods
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Loader_Close_ClosesDialog()
+    {
+        var component = Render<LoaderComponent>(p => p.AddUnmatched("modal", "true"));
+        component.Instance.Close();
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Loader_Open_OpensDialog()
+    {
+        var component = Render<LoaderComponent>(p => p.AddUnmatched("modal", "true"));
+        component.Instance.Open();
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Loader_Close_WhenNotModal_DoesNotThrow()
+    {
+        var component = Render<LoaderComponent>();
+        component.Instance.Close();
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void Loader_Open_WhenNotModal_DoesNotThrow()
+    {
+        var component = Render<LoaderComponent>();
+        component.Instance.Open();
+    }
+
+    #endregion
+
+    #region ComputeAttributes Branch Coverage
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Attributes)]
+    public void Loader_NonModal_WithPosition_LogsWarning()
+    {
+        var component = Render<LoaderComponent>(p => p.AddUnmatched("position", "top"));
+        var element = component.Find(".loader");
+        Assert.NotNull(element);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Attributes)]
+    public void Loader_UsesDataPositionAttribute()
+    {
+        var component = Render<LoaderComponent>(p => p
+            .AddUnmatched("modal", "true")
+            .AddUnmatched("data-position", "bottom"));
+        var dialog = component.Find("dialog");
+        Assert.Equal("bottom", dialog.GetAttribute("data-position"));
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Attributes)]
+    public void Loader_UsesDataColorAttribute()
+    {
+        var component = Render<LoaderComponent>(p => p.AddUnmatched("data-color", "accent"));
+        var element = component.Find("[data-color]");
+        Assert.Equal("accent", element.GetAttribute("data-color"));
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Attributes)]
+    public void Loader_UsesDataSizeAttribute()
+    {
+        var component = Render<LoaderComponent>(p => p.AddUnmatched("data-size", "large"));
+        var element = component.Find("[data-size]");
+        Assert.Equal("large", element.GetAttribute("data-size"));
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Attributes)]
+    public void Loader_ModalFalseString_IsNotModal()
+    {
+        var component = Render<LoaderComponent>(p => p.AddUnmatched("modal", "false"));
+        var element = component.Find(".loader");
+        Assert.NotNull(element);
+    }
+
+    #endregion
 }
