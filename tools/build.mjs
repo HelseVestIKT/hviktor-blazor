@@ -36,6 +36,54 @@ import {
 } from "./build-utils.mjs";
 
 /**
+ * Runs the PostCSS (Tailwind) build step and appends the result to `commandResults`.
+ * Returns the postcss result, or `null` if skipped.
+ *
+ * @param {object} postcssOptions: Options object returned by `postcssStep`.
+ * @param {boolean} requirePostcss: Whether to abort when no PostCSS entry file is found.
+ * @param {Array} commandResults: Mutable array to push successful step results into.
+ * @returns {object|null}: The postcss build result, or `null` when skipped.
+ */
+function runPostcssBuild(postcssOptions, requirePostcss, commandResults) {
+  const hasPostcssInput = !!postcssOptions.findInput();
+
+  if (hasPostcssInput) {
+    const result = runBuildStep(postcssOptions);
+    commandResults.push(result);
+    return result;
+  }
+
+  if (requirePostcss) {
+    log.error("No Tailwind entry file found but PostCSS is required");
+    process.exit(1);
+  }
+
+  log.section("PostCSS (Tailwind)");
+  log.info("No Tailwind entry file found - skipping PostCSS step");
+  return null;
+}
+
+/**
+ * Runs the Vite build step and appends results to `commandResults`.
+ *
+ * @param {string} projectDir: Absolute path to the project directory.
+ * @param {string} configuration: Build configuration ("Debug" or "Release").
+ * @param {string} distDir: Output directory for Vite assets.
+ * @param {Array} commandResults: Mutable array to push successful step results into.
+ */
+function runViteBuild(projectDir, configuration, distDir, commandResults) {
+  const npmResult = ensurePnpmDependencies(projectDir);
+  if (npmResult) {
+    commandResults.push(npmResult);
+  }
+
+  const viteResult = buildViteAssets(projectDir, configuration, distDir);
+  if (viteResult) {
+    commandResults.push(viteResult);
+  }
+}
+
+/**
  * Runs a CSS (+ optional Vite) build for a project.
  *
  * @param {object} options: Build configuration.
@@ -115,25 +163,11 @@ export function build(options = {}) {
   const commandResults = [];
 
   // PostCSS (Tailwind)
-  const postcssOptions = postcssStep(
-    stylesDir,
-    rootPath,
-    projectDir,
-    fileCache,
+  const postcss = runPostcssBuild(
+    postcssStep(stylesDir, rootPath, projectDir, fileCache),
+    requirePostcss,
+    commandResults,
   );
-  const hasPostcssInput = !!postcssOptions.findInput();
-  let postcss = null;
-
-  if (hasPostcssInput) {
-    postcss = runBuildStep(postcssOptions);
-    commandResults.push(postcss);
-  } else if (requirePostcss) {
-    log.error("No Tailwind entry file found but PostCSS is required");
-    process.exit(1);
-  } else {
-    log.section("PostCSS (Tailwind)");
-    log.info("No Tailwind entry file found - skipping PostCSS step");
-  }
 
   // Sass
   const sass = runBuildStep(
@@ -143,11 +177,7 @@ export function build(options = {}) {
 
   // Vite
   if (enableVite) {
-    const npmResult = ensurePnpmDependencies(projectDir);
-    if (npmResult) commandResults.push(npmResult);
-
-    const viteResult = buildViteAssets(projectDir, configuration, distDir);
-    if (viteResult) commandResults.push(viteResult);
+    runViteBuild(projectDir, configuration, distDir, commandResults);
   }
 
   // Collect output files
