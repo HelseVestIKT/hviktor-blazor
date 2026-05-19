@@ -31,7 +31,8 @@ public class LoaderTests : HviktorBunitContext
     public void Loader_NonModal_RendersSpinner()
     {
         var component = Render<LoaderComponent>();
-        component.Find(".loader-content");
+        var spinner = component.Find(".loader-content");
+        Assert.NotNull(spinner);
     }
 
     [Fact]
@@ -132,6 +133,9 @@ public class LoaderTests : HviktorBunitContext
     {
         var component = Render<LoaderComponent>(p => p.AddUnmatched("modal", "true"));
         component.Instance.Close();
+
+        var dialog = component.Find("dialog");
+        Assert.NotEqual("false", dialog.GetAttribute("open"));
     }
 
     [Fact]
@@ -140,6 +144,9 @@ public class LoaderTests : HviktorBunitContext
     {
         var component = Render<LoaderComponent>(p => p.AddUnmatched("modal", "true"));
         component.Instance.Open();
+
+        var dialog = component.Find("dialog");
+        Assert.NotEqual("true", dialog.GetAttribute("open"));
     }
 
     [Fact]
@@ -147,7 +154,8 @@ public class LoaderTests : HviktorBunitContext
     public void Loader_Close_WhenNotModal_DoesNotThrow()
     {
         var component = Render<LoaderComponent>();
-        component.Instance.Close();
+        var exception = Record.Exception(() => component.Instance.Close());
+        Assert.Null(exception);
     }
 
     [Fact]
@@ -155,7 +163,8 @@ public class LoaderTests : HviktorBunitContext
     public void Loader_Open_WhenNotModal_DoesNotThrow()
     {
         var component = Render<LoaderComponent>();
-        component.Instance.Open();
+        var exception = Record.Exception(() => component.Instance.Open());
+        Assert.Null(exception);
     }
 
     #endregion
