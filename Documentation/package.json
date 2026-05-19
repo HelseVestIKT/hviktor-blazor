@@ -18,16 +18,8 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.0",
-    "autoprefixer": "10.5.0",
-    "cssnano": "8.0.1",
-    "glob": "13.0.6",
-    "immutable": "5.1.5",
-    "postcss": "8.5.14",
-    "postcss-cli": "11.0.1",
-    "postcss-import": "16.1.1",
     "sass": "1.99.0",
     "sass-embedded": "1.99.0",
-    "svgo": "4.0.1",
     "tailwindcss": "4.3.0"
   }
 }

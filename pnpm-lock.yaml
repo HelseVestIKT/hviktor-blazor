@@ -14,27 +14,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: 21.0.1
         version: 21.0.1
-      glob:
-        specifier: 13.0.6
-        version: 13.0.6
-      husky:
-        specifier: 9.1.7
-        version: 9.1.7
-      lint-staged:
-        specifier: 17.0.5
-        version: 17.0.5
-      prettier:
-        specifier: 3.8.3
-        version: 3.8.3
-      prettier-plugin-tailwindcss:
-        specifier: 0.8.0
-        version: 0.8.0(prettier@3.8.3)
-
-  Documentation:
-    devDependencies:
-      '@tailwindcss/postcss':
-        specifier: 4.3.0
-        version: 4.3.0
       autoprefixer:
         specifier: 10.5.0
         version: 10.5.0(postcss@8.5.14)
@@ -44,9 +23,15 @@ importers:
       glob:
         specifier: 13.0.6
         version: 13.0.6
+      husky:
+        specifier: 9.1.7
+        version: 9.1.7
       immutable:
         specifier: 5.1.5
         version: 5.1.5
+      lint-staged:
+        specifier: 17.0.5
+        version: 17.0.5
       postcss:
         specifier: 8.5.14
         version: 8.5.14
@@ -56,15 +41,33 @@ importers:
       postcss-import:
         specifier: 16.1.1
         version: 16.1.1(postcss@8.5.14)
+      postcss-mixins:
+        specifier: 12.1.2
+        version: 12.1.2(postcss@8.5.14)
+      postcss-nested:
+        specifier: 7.0.2
+        version: 7.0.2(postcss@8.5.14)
+      prettier:
+        specifier: 3.8.3
+        version: 3.8.3
+      prettier-plugin-tailwindcss:
+        specifier: 0.8.0
+        version: 0.8.0(prettier@3.8.3)
+      svgo:
+        specifier: 4.0.1
+        version: 4.0.1
+
+  Documentation:
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: 4.3.0
+        version: 4.3.0
       sass:
         specifier: 1.99.0
         version: 1.99.0
       sass-embedded:
         specifier: 1.99.0
         version: 1.99.0
-      svgo:
-        specifier: 4.0.1
-        version: 4.0.1
       tailwindcss:
         specifier: 4.3.0
         version: 4.3.0
@@ -90,30 +93,6 @@ importers:
       '@types/node':
         specifier: 25.8.0
         version: 25.8.0
-      autoprefixer:
-        specifier: 10.5.0
-        version: 10.5.0(postcss@8.5.14)
-      cssnano:
-        specifier: 8.0.1
-        version: 8.0.1(postcss@8.5.14)
-      glob:
-        specifier: 13.0.6
-        version: 13.0.6
-      postcss:
-        specifier: 8.5.14
-        version: 8.5.14
-      postcss-cli:
-        specifier: 11.0.1
-        version: 11.0.1(jiti@2.7.0)(postcss@8.5.14)
-      postcss-import:
-        specifier: 16.1.1
-        version: 16.1.1(postcss@8.5.14)
-      postcss-mixins:
-        specifier: 12.1.2
-        version: 12.1.2(postcss@8.5.14)
-      postcss-nested:
-        specifier: 7.0.2
-        version: 7.0.2(postcss@8.5.14)
       rollup-plugin-visualizer:
         specifier: 7.0.1
         version: 7.0.1(rolldown@1.0.1)
@@ -130,41 +109,7 @@ importers:
         specifier: 0.0.48
         version: 0.0.48
 
-  Tests:
-    devDependencies:
-      '@tailwindcss/postcss':
-        specifier: 4.3.0
-        version: 4.3.0
-      autoprefixer:
-        specifier: 10.5.0
-        version: 10.5.0(postcss@8.5.14)
-      cssnano:
-        specifier: 8.0.1
-        version: 8.0.1(postcss@8.5.14)
-      immutable:
-        specifier: 5.1.5
-        version: 5.1.5
-      postcss:
-        specifier: 8.5.14
-        version: 8.5.14
-      postcss-cli:
-        specifier: 11.0.1
-        version: 11.0.1(jiti@2.7.0)(postcss@8.5.14)
-      postcss-import:
-        specifier: 16.1.1
-        version: 16.1.1(postcss@8.5.14)
-      sass:
-        specifier: 1.99.0
-        version: 1.99.0
-      sass-embedded:
-        specifier: 1.99.0
-        version: 1.99.0
-      svgo:
-        specifier: 4.0.1
-        version: 4.0.1
-      tailwindcss:
-        specifier: 4.3.0
-        version: 4.3.0
+  Tests: {}
 
 packages:
 
