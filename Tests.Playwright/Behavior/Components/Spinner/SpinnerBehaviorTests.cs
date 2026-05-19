@@ -14,7 +14,7 @@ namespace Tests.Playwright.Behavior.Components.Spinner;
 /// - Animation respects prefers-reduced-motion (slows to 6 seconds, not disabled)
 /// </summary>
 [Trait(Traits.Collection, TestCollections.Compliance)]
-public class SpinnerBehaviorTests(TestsFixture fixture) : BehaviorTestBase<TestsFixture>(fixture)
+public partial class SpinnerBehaviorTests(TestsFixture fixture) : BehaviorTestBase<TestsFixture>(fixture)
 {
     protected override string ComponentPath => "spinner";
 
@@ -42,7 +42,7 @@ public class SpinnerBehaviorTests(TestsFixture fixture) : BehaviorTestBase<Tests
 
         var spinner = GetByTestId("basic-spinner");
 
-        await Expect(spinner).ToHaveClassAsync(new System.Text.RegularExpressions.Regex("ds-spinner"));
+        await Expect(spinner).ToHaveClassAsync(DsSpinnerRegex());
     }
 
     [Fact]
@@ -328,8 +328,14 @@ public class SpinnerBehaviorTests(TestsFixture fixture) : BehaviorTestBase<Tests
         await Expect(animatedCircle).ToBeAttachedAsync();
 
         // Verify the circle has the animation class
-        await Expect(animatedCircle).ToHaveClassAsync(new System.Text.RegularExpressions.Regex("ds-spinner__circle"));
+        await Expect(animatedCircle).ToHaveClassAsync(DsSpinnerCircleRegex());
     }
 
     #endregion
+
+    [System.Text.RegularExpressions.GeneratedRegex("ds-spinner")]
+    private static partial System.Text.RegularExpressions.Regex DsSpinnerRegex();
+
+    [System.Text.RegularExpressions.GeneratedRegex("ds-spinner__circle")]
+    private static partial System.Text.RegularExpressions.Regex DsSpinnerCircleRegex();
 }

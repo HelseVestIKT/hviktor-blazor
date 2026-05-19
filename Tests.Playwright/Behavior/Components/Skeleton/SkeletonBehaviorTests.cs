@@ -13,7 +13,7 @@ namespace Tests.Playwright.Behavior.Components.Skeleton;
 /// - Text variant uses data-text attribute for character width
 /// </summary>
 [Trait(Traits.Collection, TestCollections.Compliance)]
-public class SkeletonBehaviorTests(TestsFixture fixture) : BehaviorTestBase<TestsFixture>(fixture)
+public partial class SkeletonBehaviorTests(TestsFixture fixture) : BehaviorTestBase<TestsFixture>(fixture)
 {
     protected override string ComponentPath => "skeleton";
 
@@ -41,7 +41,7 @@ public class SkeletonBehaviorTests(TestsFixture fixture) : BehaviorTestBase<Test
 
         var skeleton = GetByTestId("rectangle-skeleton");
 
-        await Expect(skeleton).ToHaveClassAsync(new System.Text.RegularExpressions.Regex("ds-skeleton"));
+        await Expect(skeleton).ToHaveClassAsync(DsSkeletonRegex());
     }
 
     #endregion
@@ -318,4 +318,7 @@ public class SkeletonBehaviorTests(TestsFixture fixture) : BehaviorTestBase<Test
     }
 
     #endregion
+
+    [System.Text.RegularExpressions.GeneratedRegex("ds-skeleton")]
+    private static partial System.Text.RegularExpressions.Regex DsSkeletonRegex();
 }
