@@ -13,14 +13,9 @@
 
 ### Miscellaneous
 
-- _(docs)_ Bump Hviktor packages to 1.1.0
-- Update npm dependencies
-- Update npm dependencies
 - _(styles)_ Remove duplicate custom spacing utilities in favor of standard Tailwind utilities
 - _(icons)_ Rename loader.svg to Loader.svg
-- _(dependencies)_ Bump Hviktor.Icons.Abstractions to version 1.1.0 in packages.lock.json
 - _(workflows)_ Add signing commits to the "Update Directory.Packages.props" step
-- Update npm dependencies
 - _(cliff)_ Update grouping rules for commit message types
 
 ## [v1.1.0] - 2026-05-15
