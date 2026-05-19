@@ -145,9 +145,4 @@ public partial class HyperLink : ComponentBase
 
         return href.StartsWith("http://") || href.StartsWith("https://");
     }
-
-    private bool IsHashLink(string href)
-    {
-        return href.StartsWith("#");
-    }
 }

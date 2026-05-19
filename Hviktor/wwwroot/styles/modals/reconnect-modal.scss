@@ -83,13 +83,6 @@ dialog#components-reconnect-modal {
 
 .components-rejoining-animation {
   position: relative;
-  //width: 80px;
-  //height: 80px;
-}
-
-.components-rejoining-success-animation svg,
-.components-rejoining-failed-animation svg {
-  @include reconnect-modal.no-animation();
 }
 
 .components-rejoining-animation div {

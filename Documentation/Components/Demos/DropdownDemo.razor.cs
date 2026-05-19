@@ -24,12 +24,4 @@ public partial class DropdownDemo : ComponentBase
     };
 
     private int SelectedColumnCount => Columns.Count(c => c.Value);
-
-    private void ToggleColumn(string key)
-    {
-        if (Columns.TryGetValue(key, out var value))
-        {
-            Columns[key] = Columns[key] = !value;
-        }
-    }
 }

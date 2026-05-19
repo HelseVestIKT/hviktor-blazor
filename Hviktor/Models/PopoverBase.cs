@@ -117,7 +117,6 @@ public abstract partial class PopoverBase : AsyncOptionalNestedComponentBase<Tri
         return builder;
     }
 
-    // [Parameter] public Placement Placement { get; set; } = Placement.BottomStart;
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
