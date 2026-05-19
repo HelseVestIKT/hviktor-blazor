@@ -66,6 +66,7 @@ your app stylesheet first, `entry.css` second:
     href="_content/Hviktor/dist/assets/entry.css"
     as="style"
   />
+  <link rel="modulepreload" href="_framework/blazor.webassembly.js" />
   <link rel="modulepreload" href="_content/Hviktor/dist/entry.js" />
 
   <!-- Apply stylesheets: app styles first, then Hviktor -->
