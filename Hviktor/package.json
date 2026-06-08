@@ -14,16 +14,16 @@
     "prettier": "prettier --write \"**/*.{ts,tsx,scss,css,html,json,md}\""
   },
   "dependencies": {
-    "@digdir/designsystemet-css": "1.14.0",
+    "@digdir/designsystemet-css": "1.15.0",
     "globalthis": "1.0.4"
   },
   "devDependencies": {
-    "@digdir/designsystemet-types": "1.14.0",
+    "@digdir/designsystemet-types": "1.15.0",
     "@microsoft/dotnet-js-interop": "10.0.0",
     "@types/blazor__javascript-interop": "3.1.7",
-    "@types/node": "25.8.0",
+    "@types/node": "25.9.2",
     "rollup-plugin-visualizer": "7.0.1",
     "typescript": "6.0.3",
-    "vite": "8.0.13"
+    "vite": "8.0.16"
   }
 }
