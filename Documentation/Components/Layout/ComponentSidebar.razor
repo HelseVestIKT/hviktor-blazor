@@ -12,7 +12,7 @@
         <li class="sidebar__group">
             <ul class="sidebar__group-list" role="list">
                 <li @class="sidebar__item">
-                    <a href="components/changelog"
+                    <a href="./components/changelog"
                        class="@("ds-link ds-paragraph sidebar__link ds-paragraph" + (isChangelog ? " active" : ""))"
                        aria-current="@(isChangelog ? "page" : null)" data-discover="true"
                        @onclick="@(() => SetActive("changelog"))">
@@ -31,7 +31,7 @@
                     @foreach (var component in group.Items)
                     {
                         var slug = component.Slug;
-                        var href = $"/components/{slug}/{CurrentTab}";
+                        var href = $"./components/{slug}/{CurrentTab}";
                         var isActive = ActiveSlug?.Equals(slug, StringComparison.OrdinalIgnoreCase) == true;
                         <li @key="slug" class="sidebar__item">
                             <a href="@href"
