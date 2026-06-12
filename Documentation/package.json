@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.0",
-    "sass": "1.99.0",
-    "sass-embedded": "1.99.0",
+    "sass": "1.100.0",
+    "sass-embedded": "1.100.0",
     "tailwindcss": "4.3.0"
   }
 }
