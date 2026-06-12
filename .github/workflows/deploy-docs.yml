@@ -94,7 +94,7 @@ jobs:
       - name: Set BasePath in appsettings.json
         working-directory: Documentation
         run: |
-          BASE_HREF="${{ env.BASE_PATH }}"
+          BASE_HREF="/${{ env.BASE_PATH }}/"
           echo "Setting BasePath to: $BASE_HREF"
           tmp=$(mktemp)
           jq --arg bp "$BASE_HREF" '.BasePath = $bp' appsettings.json > "$tmp" && mv "$tmp" appsettings.json
@@ -136,10 +136,7 @@ jobs:
           echo "=== index.html base href ==="
           grep 'base href' output/wwwroot/index.html || true
 
-      # For sub-path deployment (e.g. username.github.io/repo-name), set the
-      # BASE_PATH to the repo name. Leave unset/empty for root or custom-domain deployments.
       - name: Update base href
-        if: env.BASE_PATH != ''
         run: |
           sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/entry.template.html
           sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/index.html
