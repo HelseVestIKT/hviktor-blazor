@@ -145,8 +145,10 @@ jobs:
       - name: Update base href
         if: env.BASE_PATH != ''
         run: |
+          sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/entry.template.html
           sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/index.html
           sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/404.html
+          grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/entry.template.html || (echo "ERROR: entry.template.html base href rewrite failed" && exit 1)
           grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/index.html || (echo "ERROR: index.html base href rewrite failed" && exit 1)
           grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/404.html  || (echo "ERROR: 404.html base href rewrite failed" && exit 1)
           if grep -q 'var segmentCount = 0;' output/wwwroot/404.html; then
