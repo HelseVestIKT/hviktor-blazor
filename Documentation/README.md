@@ -93,7 +93,7 @@ The site starts at `http://localhost:5237` (or `https://localhost:7237`).
 
 - Add the component to `ComponentRegistry.cs` with its slug, title, type, demos, and implicit parameters.
 - Create demo `.razor` files under `Components/Demos/` (flat or in a subfolder matching the component name).
-- The `ComponentPage.razor` route (`/components/{slug}`) renders everything automatically from the registry entry.
+- The `ComponentPage.razor` route (`./components/{slug}`) renders everything automatically from the registry entry.
 
 > [!NOTE]
 > Demo `.razor` files are included as embedded resources via the `.csproj` glob:

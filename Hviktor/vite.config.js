@@ -44,6 +44,15 @@ export default defineConfig(async ({ mode }) => {
   return {
     plugins,
     base: `/_content/Hviktor/dist/`, // makes dynamic chunk imports absolute
+    experimental: {
+      renderBuiltUrl(filename, { hostType }) {
+        // keep dynamic chunk imports absolute and CSS asset URLs relative
+        if (hostType === "css") {
+          return { relative: true };
+        }
+        return undefined; // undefined => default: prepend `base`
+      },
+    },
     build: {
       target: "esnext",
       cssTarget: ["chrome120", "firefox120", "safari17", "edge120"],

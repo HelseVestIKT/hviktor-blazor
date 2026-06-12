@@ -47,17 +47,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
 
       - name: Cache dotnet tools
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: ~/.dotnet/tools
           key: ${{ runner.os }}-dotnet-tools-${{ hashFiles('.config/dotnet-tools.json') }}
           restore-keys: ${{ runner.os }}-dotnet-tools-
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
         with:
           dotnet-version: ${{ inputs.dotnet-version }}
           cache: true
@@ -105,7 +105,7 @@ jobs:
         run: bash ./.github/scripts/parse-test-results.sh ./TestResults
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         if: success() || failure()
         with:
           name: unit-test-results
@@ -113,7 +113,7 @@ jobs:
           retention-days: 30
 
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         if: ${{ inputs.collect-coverage && (success() || failure()) }}
         with:
           name: coverage-report

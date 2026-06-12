@@ -1,3 +1,26 @@
+## [v1.1.2] - 2026-06-12
+
+### Features
+
+- _(deploy)_ Configure dynamic BasePath for sub-path deployments
+- _(deploy)_ Configure dynamic BasePath for sub-path deployments
+- _(link)_ Improve active-state handling for non-root base URIs
+
+### Bug Fixes
+
+- _(workflows)_ Ensure base href rewrite in entry.template.html with validation steps
+- _(workflows)_ Always use BasePath as is
+- _(workflows)_ Update BasePath handling and conditional href replacement logic
+- _(components)_ Remove leading slashes from href paths for consistency and rel base path support
+- _(docs)_ Adjust href paths to use relative links for BasePath compatibility
+- _(docs)_ Correct relative link in README for ComponentPage route
+- _(vite)_ Handle CSS asset URLs as relative in experimental renderBuiltUrl config
+
+### Miscellaneous
+
+- _(docs)_ Bump Hviktor packages to 1.1.1
+- _(workflows)_ Update GitHub Actions to latest versions and commit SHAs
+
 ## [v1.1.1] - 2026-05-19
 
 ### Features

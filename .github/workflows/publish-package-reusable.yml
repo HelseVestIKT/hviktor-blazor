@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
         with:
           fetch-depth: 0
 
@@ -41,17 +41,17 @@ jobs:
         run: mkdir -p "${NUGET_PACKAGES:-$HOME/.nuget/packages}"
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
@@ -120,7 +120,7 @@ jobs:
         # Create artifact
         # NOTE: We must clean out the artifact directory BEFORE we save the new Artifact.
       - name: Archive production artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: artifacts-${{ inputs.project_name }}
           path: ${{ steps.find-project.outputs.project_dir }}/bin/Release/
@@ -136,7 +136,7 @@ jobs:
     steps:
       # Download new Artifact.
       - name: Download artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: artifacts-${{ inputs.project_name }}
           path: package

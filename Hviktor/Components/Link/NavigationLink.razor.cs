@@ -188,9 +188,31 @@ public partial class NavigationLink : ComponentBase, IDisposable
 
     private void ApplyActiveState(Dictionary<string, object?> builder, string href)
     {
-        var currentRelative = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-        var hrefAbsolute = NavigationManager.ToAbsoluteUri(href).ToString();
-        var hrefRelative = NavigationManager.ToBaseRelativePath(hrefAbsolute);
+        // Defensive: when the app is hosted under a non-root base href (e.g. GitHub Pages /hviktor-blazor/),
+        // a consumer-supplied root-relative href like "/components/alert" resolves to an absolute URI
+        // outside the base URI. Calling ToBaseRelativePath in that case throws ArgumentException and
+        // breaks rendering. Skip active-state matching when either URI cannot be made base-relative.
+        if (!TryGetBaseRelativePath(NavigationManager.Uri, out var currentRelative))
+        {
+            return;
+        }
+
+        string hrefAbsolute;
+        try
+        {
+            hrefAbsolute = NavigationManager.ToAbsoluteUri(href).ToString();
+        }
+        catch (UriFormatException ex)
+        {
+            Logger.LogWarning(ex, "NavigationLink failed to resolve href '{Href}' to an absolute URI; skipping active state.", href);
+            return;
+        }
+
+        if (!TryGetBaseRelativePath(hrefAbsolute, out var hrefRelative))
+        {
+            Logger.LogWarning("NavigationLink href '{Href}' resolves outside the application base URI '{BaseUri}'; skipping active state. Use a base-relative path (without a leading '/').", href, NavigationManager.BaseUri);
+            return;
+        }
 
         var isActive = Match switch
         {
@@ -203,6 +225,20 @@ public partial class NavigationLink : ComponentBase, IDisposable
         {
             builder.AddAttribute("active", true);
             builder.AddAttribute("aria-current", "page");
+        }
+    }
+
+    private bool TryGetBaseRelativePath(string uri, out string relative)
+    {
+        try
+        {
+            relative = NavigationManager.ToBaseRelativePath(uri);
+            return true;
+        }
+        catch (ArgumentException)
+        {
+            relative = string.Empty;
+            return false;
         }
     }
 
