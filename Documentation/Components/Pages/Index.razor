@@ -23,7 +23,7 @@
             @foreach (var component in group.Items)
             {
                 var srcTitle = component.Title.Replace(" ", string.Empty);
-                <NavigationLink href="@($"/components/{component.Slug}/overview")" asChild>
+                <NavigationLink href="@($"components/{component.Slug}/overview")" asChild>
                     <Card variant="tinted" color="info" class="h-full!">
                         <Card.Block>
                             @if (component.Title == "Logo")
