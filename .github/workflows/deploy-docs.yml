@@ -94,11 +94,7 @@ jobs:
       - name: Set BasePath in appsettings.json
         working-directory: Documentation
         run: |
-          if [ -z "${{ env.BASE_PATH }}" ]; then
-            BASE_HREF="/"
-          else
-            BASE_HREF="/${{ env.BASE_PATH }}/"
-          fi
+          BASE_HREF="${{ env.BASE_PATH }}"
           echo "Setting BasePath to: $BASE_HREF"
           tmp=$(mktemp)
           jq --arg bp "$BASE_HREF" '.BasePath = $bp' appsettings.json > "$tmp" && mv "$tmp" appsettings.json
