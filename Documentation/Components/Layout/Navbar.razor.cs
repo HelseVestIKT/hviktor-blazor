@@ -173,7 +173,7 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
         public string Title => $"{Component.Title} - {Page}";
 
         /// <summary>Route path for this result.</summary>
-        public string Href => $"/components/{Component.Slug}/{Page}";
+        public string Href => $"components/{Component.Slug}/{Page}";
     }
 
     /// <summary>Returns a relevance score for a component against the search filter. Zero means no match.</summary>

@@ -238,7 +238,7 @@ public sealed partial class ComponentPage : ComponentBase, IAsyncDisposable
             tab = Overview;
         }
 
-        NavigationManager.NavigateTo($"/components/{Slug}/{tab}");
+        NavigationManager.NavigateTo($"./components/{Slug}/{tab}");
     }
 
     [System.Text.RegularExpressions.GeneratedRegex("([A-Z])")]
