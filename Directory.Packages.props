@@ -22,11 +22,11 @@
         <PackageVersion Include="Microsoft.JSInterop" Version="10.0.7"/>
 
         <!-- Hviktor (used in Release-mode package references) -->
-        <PackageVersion Include="Hviktor" Version="1.1.1"/>
-        <PackageVersion Include="Hviktor.Abstractions" Version="1.1.1"/>
-        <PackageVersion Include="Hviktor.Extensions" Version="1.1.1"/>
-        <PackageVersion Include="Hviktor.Icons" Version="1.1.1"/>
-        <PackageVersion Include="Hviktor.Icons.Abstractions" Version="1.1.1"/>
+        <PackageVersion Include="Hviktor" Version="1.1.2"/>
+        <PackageVersion Include="Hviktor.Abstractions" Version="1.1.2"/>
+        <PackageVersion Include="Hviktor.Extensions" Version="1.1.2"/>
+        <PackageVersion Include="Hviktor.Icons" Version="1.1.2"/>
+        <PackageVersion Include="Hviktor.Icons.Abstractions" Version="1.1.2"/>
 
         <!-- Third-party -->
         <PackageVersion Include="EPPlus" Version="8.5.4"/>
