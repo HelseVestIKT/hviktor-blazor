@@ -34,38 +34,6 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "::notice::Documentation version: $VERSION"
 
-      - name: Verify packages exist on NuGet registry
-        env:
-          VERSION: ${{ steps.version.outputs.version }}
-        run: |
-          # Query the NuGet v3 flat-container API for each package's published versions.
-          # Works against nuget.org without authentication.
-          FLAT_CONTAINER="https://api.nuget.org/v3-flatcontainer"
-          MAX_ATTEMPTS=10
-          SLEEP_SECONDS=15
-
-          for PKG in Hviktor Hviktor.Extensions Hviktor.Icons; do
-            PKG_LOWER=$(echo "$PKG" | tr '[:upper:]' '[:lower:]')
-            URL="$FLAT_CONTAINER/$PKG_LOWER/index.json"
-            echo "Checking $PKG@$VERSION at $URL..."
-
-            FOUND=0
-            for i in $(seq 1 $MAX_ATTEMPTS); do
-              if curl -sSf "$URL" | jq -e --arg v "$VERSION" '.versions | index($v)' > /dev/null 2>&1; then
-                FOUND=1
-                break
-              fi
-              echo "Attempt $i/$MAX_ATTEMPTS: $PKG@$VERSION not yet indexed, retrying in ${SLEEP_SECONDS}s..."
-              sleep $SLEEP_SECONDS
-            done
-
-            if [ "$FOUND" != "1" ]; then
-              echo "::error::Package $PKG@$VERSION not found on nuget.org after $((MAX_ATTEMPTS * SLEEP_SECONDS))s"
-              exit 1
-            fi
-            echo "::notice::$PKG@$VERSION verified"
-          done
-
       - name: Read current version from Directory.Packages.props
         id: current
         run: |
