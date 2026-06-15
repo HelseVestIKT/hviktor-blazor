@@ -4,9 +4,9 @@
     "net10.0": {
       "Microsoft.AspNetCore.App.Internal.Assets": {
         "type": "Direct",
-        "requested": "[10.0.8, )",
-        "resolved": "10.0.8",
-        "contentHash": "v6KocthydFtUHBIRI29YsOHKOgsqcQubkNywVOxiYr4GSDSv+XO/AeyMJywlX+1tGUTGdydu/X7V+Tzeq4SsoA=="
+        "requested": "[10.0.9, )",
+        "resolved": "10.0.9",
+        "contentHash": "E9Wp/LPKAYkGOVBv4lt5U5TnUA/7pov7QZAwF3eI64kK8AAXqkPDwuadEOwpL1WXEfgecYm0fccluvABp32D8g=="
       },
       "EPPlus.Interfaces": {
         "type": "Transitive",
@@ -32,26 +32,26 @@
         "type": "Project",
         "dependencies": {
           "EPPlus": "[8.5.4, )",
-          "Hviktor.Abstractions": "[1.0.0, )",
-          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+          "Hviktor.Abstractions": "[1.1.2, )",
+          "Hviktor.Icons.Abstractions": "[1.1.2, )"
         }
       },
       "hviktor.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+          "Hviktor.Icons.Abstractions": "[1.1.2, )"
         }
       },
       "hviktor.extensions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Abstractions": "[1.0.0, )"
+          "Hviktor.Abstractions": "[1.1.2, )"
         }
       },
       "hviktor.icons": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+          "Hviktor.Icons.Abstractions": "[1.1.2, )"
         }
       },
       "hviktor.icons.abstractions": {
