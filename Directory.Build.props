@@ -5,6 +5,11 @@
         <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <UseInternalProjectReferences Condition=" '$(UseInternalProjectReferences)' == '' AND '$(Configuration)' == 'Debug' ">true</UseInternalProjectReferences>
+        <UseInternalProjectReferences Condition=" '$(UseInternalProjectReferences)' == '' ">false</UseInternalProjectReferences>
+    </PropertyGroup>
+
     <!-- Shared package metadata for all Hviktor.* projects -->
     <PropertyGroup>
         <Version>1.1.4</Version>
