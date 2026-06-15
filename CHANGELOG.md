@@ -4,7 +4,6 @@
 
 - Update npm dependencies
 - _(docs)_ Bump Hviktor packages to 1.1.2
-- Update npm dependencies
 
 ## [v1.1.2] - 2026-06-12
 
