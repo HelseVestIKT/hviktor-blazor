@@ -166,33 +166,3 @@ jobs:
         run: |
           gh workflow run update-docs.yml --repo "${{ github.repository }}" --field version="$VERSION"
           echo "::notice::Triggered update-docs for version $VERSION"
-
-  cleanup-on-failure:
-    name: Clean up published packages on failure
-    runs-on: ubuntu-latest
-    needs: [ build, publish ]
-    if: ${{ failure() }}
-    permissions:
-      packages: write
-    steps:
-      - name: Delete published packages for this version
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ needs.build.outputs.version }}
-          OWNER: ${{ github.repository_owner }}
-        run: |
-          set +e
-          while IFS= read -r PACKAGE; do
-            [ -z "$PACKAGE" ] && continue
-            VERSION_ID=$(gh api \
-              "orgs/$OWNER/packages/nuget/$PACKAGE/versions" \
-              --jq ".[] | select(.name == \"$VERSION\") | .id" 2>/dev/null)
-            if [ -n "$VERSION_ID" ]; then
-              gh api --method DELETE \
-                "orgs/$OWNER/packages/nuget/$PACKAGE/versions/$VERSION_ID" \
-                && echo "::notice::Deleted $PACKAGE@$VERSION" \
-                || echo "::warning::Failed to delete $PACKAGE@$VERSION"
-            else
-              echo "Package $PACKAGE@$VERSION not found, skipping."
-            fi
-          done <<< "$HVIKTOR_PACKAGES"
