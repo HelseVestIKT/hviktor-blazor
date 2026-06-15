@@ -8,6 +8,8 @@
 
 - _(config)_ Remove HelseVestIKT package source from nuget.config
 - _(docs)_ Bump Hviktor packages to 1.1.3
+- _(release)_ Update CHANGELOG.md for v1.1.4
+- Update package version to 1.1.4
 
 ## [v1.1.3] - 2026-06-15
 
