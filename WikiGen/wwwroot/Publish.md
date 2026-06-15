@@ -67,13 +67,13 @@ This produces `.nupkg` files for each project:
 Add the GitHub Packages registry as a NuGet source (one-time setup):
 
 ```shell
-dotnet nuget add source "https://nuget.pkg.github.com/HelseVestIKT/index.json" --name "github-hviktor" --username YOUR_USERNAME --password YOUR_GITHUB_TOKEN
+dotnet nuget add source "https://api.nuget.org/v3/index.json" --name "nuget.org"
 ```
 
 ### Push packages
 
 ```shell
-dotnet nuget push "**/*.nupkg" --source "github-hviktor"
+dotnet nuget push "**/*.nupkg" --source "nuget.org"
 ```
 
 ## Automated Release Pipeline
