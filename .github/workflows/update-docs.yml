@@ -38,8 +38,8 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_SOURCE: ${{ vars.NUGET_SOURCE }}
         run: |
-          NUGET_SOURCE="https://nuget.pkg.github.com/HelseVestIKT/index.json"
           for PKG in Hviktor Hviktor.Extensions Hviktor.Icons; do
             echo "Checking $PKG@$VERSION..."
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" -u "${{ github.actor }}:$GH_TOKEN" \
