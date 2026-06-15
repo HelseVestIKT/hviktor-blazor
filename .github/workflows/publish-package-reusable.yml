@@ -156,7 +156,6 @@ jobs:
 
       - name: Push package to GitHub NuGet Registry
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
           PROJECT_NAME: ${{ inputs.project_name }}
           VERSION: ${{ inputs.version }}
         run: |
