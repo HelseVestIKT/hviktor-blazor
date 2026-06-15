@@ -143,20 +143,20 @@ jobs:
           name: artifacts-${{ inputs.project_name }}
           path: package
 
-      - name: Add NuGet Package Source
-        run: dotnet nuget add source "$NUGET_SOURCE" --name HviktorNuGetSource
-
-      # Get a short-lived NuGet API key
+      # Get a short-lived NuGet API key via OIDC trusted publishing
       - name: NuGet login (OIDC → temp API key)
         uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
         id: login
         with:
           user: ${{ env.NUGET_USER }}
 
-      - name: Push package to GitHub NuGet Registry
+      - name: Push package to NuGet
         env:
           PROJECT_NAME: ${{ inputs.project_name }}
           VERSION: ${{ inputs.version }}
         run: |
-          dotnet nuget push "package/$PROJECT_NAME.$VERSION.nupkg" --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source HviktorNuGetSource --skip-duplicate
-          echo "::notice::Package pushed to GitHub NuGet Registry"
+          dotnet nuget push "package/$PROJECT_NAME.$VERSION.nupkg" \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --source "$NUGET_SOURCE" \
+            --skip-duplicate
+          echo "::notice::Package pushed to $NUGET_SOURCE"
