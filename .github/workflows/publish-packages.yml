@@ -16,6 +16,7 @@ permissions:
   actions: write
   contents: read
   packages: write
+  id-token: write
 
 jobs:
   #  test-gate:
@@ -47,7 +48,6 @@ jobs:
           VERSION="${VERSION#v}"
           echo "SemVer=$VERSION" >> $GITHUB_OUTPUT
           echo "::notice::Semantic Version: $VERSION"
-
 
   hviktor-icons-abstractions:
     name: Hviktor.Icons.Abstractions
