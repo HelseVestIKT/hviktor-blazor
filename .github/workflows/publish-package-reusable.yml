@@ -12,6 +12,10 @@ on:
       requires: # List of packages that this package requires to be installed before it can be built. For example: "npm,sass"
         type: string
         default: ''
+      dependency_artifacts:
+        description: 'Comma-separated list of upstream artifact names whose .nupkg files should be added as a local NuGet source.'
+        type: string
+        default: ''
 
 env:
   DOTNET_VERSION: '10.0.x'
@@ -92,6 +96,52 @@ jobs:
         run: |
           export project="$PROJECT_NAME"
           bash .github/scripts/update-dependencies.sh "$VERSION" "$NUGET_SOURCE" "$PROJECT_PATH"
+
+      # Bypass the remote feed by consuming upstream packages from a local folder source.
+      - name: Download upstream package artifacts
+        if: inputs.dependency_artifacts != ''
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          path: .local-nuget-feed
+          pattern: "{${{ inputs.dependency_artifacts }}}"
+          merge-multiple: true
+
+      - name: Register local NuGet feed
+        if: inputs.dependency_artifacts != ''
+        run: |
+          set -euo pipefail
+          FEED="$(pwd)/.local-nuget-feed"
+
+          while IFS= read -r -d '' nupkg; do
+            if [ "$(dirname "$nupkg")" != "$FEED" ]; then
+              mv -f "$nupkg" "$FEED/"
+            fi
+          done < <(find "$FEED" -type f -name '*.nupkg' -print0)
+
+          echo "Local feed contents:"
+          ls -la "$FEED"
+
+          cat > nuget.config <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <configuration>
+              <packageSources>
+                  <clear />
+                  <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+                  <add key="local-upstream" value="$FEED" />
+              </packageSources>
+              <packageSourceMapping>
+                  <packageSource key="nuget.org">
+                      <package pattern="*" />
+                  </packageSource>
+                  <packageSource key="local-upstream">
+                      <package pattern="Hviktor.*" />
+                  </packageSource>
+              </packageSourceMapping>
+          </configuration>
+          EOF
+
+          echo "::notice::Patched nuget.config to serve Hviktor.* from $FEED"
+          cat nuget.config
 
       - name: Restore dependencies
         run: dotnet restore ${{ steps.find-project.outputs.project_path }}
