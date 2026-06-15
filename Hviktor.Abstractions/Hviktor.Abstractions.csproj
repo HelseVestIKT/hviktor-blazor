@@ -18,10 +18,10 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
         <PackageReference Include="Microsoft.Extensions.Localization.Abstractions"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ItemGroup Condition=" '$(UseInternalProjectReferences)' != 'true' ">
         <PackageReference Include="Hviktor.Icons.Abstractions"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ItemGroup Condition=" '$(UseInternalProjectReferences)' == 'true' ">
         <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
     </ItemGroup>
     <ItemGroup>

@@ -24,10 +24,10 @@
         <PackageReference Include="Microsoft.AspNetCore.Localization"/>
         <PackageReference Include="Microsoft.Extensions.Localization"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ItemGroup Condition=" '$(UseInternalProjectReferences)' != 'true' ">
         <PackageReference Include="Hviktor.Abstractions"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ItemGroup Condition=" '$(UseInternalProjectReferences)' == 'true' ">
         <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
     </ItemGroup>
     <ItemGroup>
