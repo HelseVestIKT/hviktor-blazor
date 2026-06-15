@@ -15,7 +15,7 @@ on:
 
 env:
   DOTNET_VERSION: '10.0.x'
-  NUGET_USER: ${{ github.actor }}
+  NUGET_USER: ${{ vars.NUGET_USER }}
   NUGET_SOURCE: ${{ vars.NUGET_SOURCE }}
 
 concurrency:
