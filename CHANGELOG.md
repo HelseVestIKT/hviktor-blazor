@@ -1,3 +1,10 @@
+## [v1.1.3] - 2026-06-15
+
+### Miscellaneous
+
+- Update npm dependencies
+- _(docs)_ Bump Hviktor packages to 1.1.2
+
 ## [v1.1.2] - 2026-06-12
 
 ### Features
