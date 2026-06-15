@@ -14,7 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NUGET_SOURCE: https://nuget.pkg.github.com/HelseVestIKT/index.json
   NUGET_USER: ${{ github.actor }}
   NUGET_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   DOTNET_VERSION: '10.0.x'

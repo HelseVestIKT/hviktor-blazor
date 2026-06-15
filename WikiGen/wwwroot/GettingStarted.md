@@ -5,7 +5,7 @@
 Add the GitHub Packages registry as a NuGet source (one-time setup):
 
 ```bash
-dotnet nuget add source "https://nuget.pkg.github.com/HelseVestIKT/index.json" --name "github-hviktor" --username YOUR_USERNAME --password YOUR_GITHUB_TOKEN
+dotnet nuget add source "https://api.nuget.org/v3/index.json" --name "nuget.org"
 ```
 
 Install Hviktor via the .NET CLI:
@@ -89,7 +89,8 @@ causing the design tokens to be overridden.
 
 ```scss
 // Tailwind MUST be first
-@use "tailwind"; // compiles @import "tailwindcss" via postcss
+@use "tailwind";
+// compiles @import "tailwindcss" via postcss
 
 // Your app styles after Tailwind
 @use "layout";
