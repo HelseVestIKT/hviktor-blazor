@@ -19,15 +19,8 @@ permissions:
   id-token: write
 
 jobs:
-  #  test-gate:
-  #    name: Verify tests pass before publishing
-  #    uses: ./.github/workflows/unit-tests-reusable.yml
-  #    with:
-  #      collect-coverage: false
-
   build:
     name: Build and get latest version
-    #    needs: [ test-gate ]
     runs-on: ubuntu-latest
     outputs:
       SemVer: ${{ steps.set_version.outputs.SemVer }}
@@ -64,14 +57,16 @@ jobs:
     with:
       project_name: "Hviktor.Abstractions"
       version: ${{ needs.build.outputs.SemVer }}
+      dependency_artifacts: "artifacts-Hviktor.Icons.Abstractions"
 
   hviktor-extensions:
     name: Hviktor.Extensions
     uses: ./.github/workflows/publish-package-reusable.yml
-    needs: [ build, hviktor-abstractions ]
+    needs: [ build, hviktor-icons-abstractions, hviktor-abstractions ]
     with:
       project_name: "Hviktor.Extensions"
       version: ${{ needs.build.outputs.SemVer }}
+      dependency_artifacts: "artifacts-Hviktor.Icons.Abstractions,artifacts-Hviktor.Abstractions"
 
   hviktor-icons:
     name: Hviktor.Icons
@@ -80,6 +75,7 @@ jobs:
     with:
       project_name: "Hviktor.Icons"
       version: ${{ needs.build.outputs.SemVer }}
+      dependency_artifacts: "artifacts-Hviktor.Icons.Abstractions"
 
   hviktor:
     name: Hviktor
@@ -88,6 +84,7 @@ jobs:
     with:
       project_name: "Hviktor"
       version: ${{ needs.build.outputs.SemVer }}
+      dependency_artifacts: "artifacts-Hviktor.Icons.Abstractions,artifacts-Hviktor.Abstractions"
 
   update-docs:
     name: Trigger documentation version update
