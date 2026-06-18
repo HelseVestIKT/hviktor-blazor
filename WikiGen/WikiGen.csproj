@@ -18,9 +18,5 @@
         <PackageReference Include="Microsoft.Extensions.Localization.Abstractions"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj" />
-    </ItemGroup>
-
 </Project>
 

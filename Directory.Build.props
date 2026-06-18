@@ -43,15 +43,15 @@
 
         <!-- JS tooling config files: remove from Content (Razor SDK auto-includes) and mark as None -->
         <Content Remove="package.json"/>
-        <None Include="package.json" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include="package.json" Condition="Exists('package.json')" Pack="false" CopyToOutputDirectory="Never"/>
         <Content Remove="tsconfig.json"/>
-        <None Include="tsconfig.json" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include="tsconfig.json" Condition="Exists('tsconfig.json')" Pack="false" CopyToOutputDirectory="Never"/>
         <Content Remove="vite.config.js"/>
-        <None Include="vite.config.js" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include="vite.config.js" Condition="Exists('vite.config.js')" Pack="false" CopyToOutputDirectory="Never"/>
         <Content Remove="postcss.config.mjs"/>
-        <None Include="postcss.config.mjs" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include="postcss.config.mjs" Condition="Exists('postcss.config.mjs')" Pack="false" CopyToOutputDirectory="Never"/>
         <Content Remove="prettier.config.js"/>
-        <None Include="prettier.config.js" Pack="false" CopyToOutputDirectory="Never"/>
+        <None Include="prettier.config.js" Condition="Exists('prettier.config.js')" Pack="false" CopyToOutputDirectory="Never"/>
 
         <!-- Exclude source files from wwwroot -->
         <Content Remove="wwwroot\**\*.ts"/>
