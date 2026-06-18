@@ -63,8 +63,6 @@
         <Folder Include="wwwroot\videos\designsystemet\"/>
         <Folder Include="wwwroot\assets\img\cats\"/>
 
-        <Folder Include="wwwroot\dist\"/>
-
         <!-- Packaging -->
         <None Include="icon.png" Pack="true" PackagePath=""/>
         <None Include="README.md" Pack="true" PackagePath=""/>
