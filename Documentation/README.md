@@ -130,7 +130,8 @@ node generate-metadata.mjs [options]
 
 ### Configuring the MCP server
 
-A `.mcp.json` file in the workspace root registers a filesystem MCP server:
+To expose the metadata to MCP-aware clients, create a `.mcp.json` file in the workspace root that registers a
+filesystem MCP server:
 
 ```json
 {
@@ -142,19 +143,17 @@ A `.mcp.json` file in the workspace root registers a filesystem MCP server:
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "metadata.json",
-        "Documentation/notes.json",
-        "AGENTS.md"
+        "Documentation/notes.json"
       ]
     }
   }
 }
 ```
 
-| File                       | Content                                                    |
-| -------------------------- | ---------------------------------------------------------- |
-| `metadata.json`            | Full component metadata (parameters, examples, XML docs)   |
-| `Documentation/notes.json` | Internal team notes, known issues, migration notes         |
-| `AGENTS.md`                | Project conventions, code rules, and architecture overview |
+| File                       | Content                                                  |
+| -------------------------- | -------------------------------------------------------- |
+| `metadata.json`            | Full component metadata (parameters, examples, XML docs) |
+| `Documentation/notes.json` | Internal team notes, known issues, migration notes       |
 
 **JetBrains Rider / IntelliJ**: Detected automatically by GitHub Copilot.
 
