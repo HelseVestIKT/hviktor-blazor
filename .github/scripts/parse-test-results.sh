@@ -292,13 +292,6 @@ if [[ -s "$skipped_tests_file" ]]; then
     add_line ""
 fi
 
-# Footer
-add_line "---"
-add_line ""
-add_line '<div align="center">'
-add_line '  <sub>Bygget med ❤️ av Helse Vest IKT</sub>'
-add_line '</div>'
-
 # Output results
 if [[ -n "$OUTPUT_FILE" ]]; then
     echo "$output" >> "$OUTPUT_FILE"

@@ -1,26 +1,20 @@
-﻿<div align="center">
-<h1>WCAG Compliance</h1><!-- omit in toc -->
+﻿# Compliance Test Pages
 
-<p align="center">
-    <strong>Testing accessibility compliance of components and pages</strong>
-</p>
+Test pages for WCAG accessibility validation using [Deque axe-core](https://github.com/dequelabs/axe-core) via
+Playwright. Each component has a subfolder with pages rendering specific parameter combinations (variant, size, color,
+etc.) in isolation.
 
-</div>
+Each component folder contains one `.razor` page per parameter dimension:  
+Pages are routed at `/component/compliance/{component}/{variant}`.
 
----
+## Conventions
 
-## Description
+- One page per parameter dimension to isolate contrast and accessibility issues.
+- All test target elements must have `data-testid` attributes.
+- Keep pages minimal: only the component under test, no extra layout or decoration.
+- Render all allowed values for the parameter being tested.
 
-WCAG Compliance tests are designed to verify that components and pages meet the
-Web Content Accessibility Guidelines (WCAG) standards.
+## Reference
 
-These tests ensure that the application is accessible to users
-with disabilities, adhering to accessibility best practices and regulations.
-
-See the official [WCAG 2](https://www.w3.org/WAI/standards-guidelines/wcag/) overview
-
----
-
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>
+- [WCAG 2.1 (w3.org)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [Deque axe-core rules (github.com)](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)
