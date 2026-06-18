@@ -1,44 +1,23 @@
-<div align="center">
-<h1>
-  <a href="https://github.com/HelseVestIKT/hviktor-blazor/" align="center">
-    <img src="https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor/logo.svg" width="24"/>
-  </a>
-  <strong>HVIKTOR</strong>
-</h1><!-- omit in toc -->
+# **Hviktor**
 
-  <p><strong>Blazor komponentbibliotek for Helse Vest IKT</strong></p>
+Blazor komponentbibliotek for Helse Vest IKT
 
-  <p>
-    <a href="#funksjoner">Funksjoner</a> •
-    <a href="#installasjon">Installasjon</a> •
-    <a href="#hurtigstart">Hurtigstart</a> •
-    <a href="#slik-fungerer-komponenter">Slik fungerer komponenter</a> •
-    <a href="#dokumentasjon">Dokumentasjon</a>
-  </p>
-</div>
-
----
+- [Hva er Hviktor?](#hva-er-hviktor)
+- [Installasjon](#installasjon)
+- [Hurtigstart](#hurtigstart)
+- [Slik fungerer komponenter](#slik-fungerer-komponenter)
+- [Dokumentasjon](#dokumentasjon)
+- [Seneste endringer](#seneste-endringer)
+- [Lisens](#lisens)
 
 ## Hva er Hviktor?
 
 Hviktor er et moderne Blazor komponentbibliotek utviklet av Helse Vest IKT. Biblioteket er basert på designsystemet
-fra [Designsystemet](https://designsystemet.no/) og [Aksel](https://aksel.nav.no/), og er spesielt tilpasset for
+fra [Designsystemet (designsystemet.no)](https://designsystemet.no/) og [Aksel (aksel.nav.no)](https://aksel.nav.no/), og er spesielt tilpasset for
 utvikling av helseapplikasjoner.
 
-Hviktor bygger videre på arbeidet fra [Hviktor](https://github.com/HelseVestIKT/Hviktor) (Angular) og tilbyr
+Hviktor bygger videre på arbeidet fra [Hviktor (github.com)](https://github.com/HelseVestIKT/Hviktor) (Angular) og tilbyr
 tilsvarende funksjonalitet for Blazor-utviklere.
-
-## Funksjoner
-
-| Funksjon               | Beskrivelse                                                |
-| ---------------------- | ---------------------------------------------------------- |
-| 35+ komponenter        | Ferdigbygde UI-komponenter for rask utvikling              |
-| Tilgjengelighet (WCAG) | Alle komponenter er designet med universell utforming      |
-| Responsivt design      | Fungerer på alle skjermstørrelser                          |
-| Blazor Server & WASM   | Støtter både Blazor Server og WebAssembly                  |
-| Tailwind CSS           | Integrert med Tailwind for enkel styling                   |
-| Ikonbibliotek          | 900+ ikoner via @helsevestikt/hviktor-icons web components |
-| Lokalisering           | Innebygd støtte for flerspråklighet                        |
 
 ## Installasjon
 
@@ -76,29 +55,20 @@ app.UseHviktor();
 
 ## Hurtigstart
 
-```razor
-@using Hviktor.Components.Button
-@using Hviktor.Components.Alert
-@using Hviktor.Components.Card
+```html
+@using Hviktor.Components.Button @using Hviktor.Components.Alert @using
+Hviktor.Components.Card
 
 <Card>
-    <Card.Block>
-        <Alert color="Color.Info">
-            Velkommen til Hviktor!
-        </Alert>
+  <Card.Block>
+    <Alert color="Color.Info"> Velkommen til Hviktor! </Alert>
 
-        <Button color="@Color.Primary" @onclick="HandleClick">
-            Klikk meg
-        </Button>
-    </Card.Block>
+    <button color="@Color.Primary" @onclick="HandleClick">Klikk meg</button>
+  </Card.Block>
 </Card>
 
-@code {
-    private void HandleClick()
-    {
-        Console.WriteLine("Knappen ble klikket!");
-    }
-}
+@code { private void HandleClick() { Console.WriteLine("Knappen ble klikket!");
+} }
 ```
 
 ## Slik fungerer komponenter
@@ -126,7 +96,7 @@ Attributter som `width` og `height` konverteres automatisk til en `CssLength`-ve
 Bare tall (heltall eller desimaltall uten enhet) får automatisk `px` som suffiks. Alle andre CSS-lengdeuttrykk sendes
 gjennom uendret. Verdier av `0` eller `null` produserer en tom instans — ingen stil settes.
 
-```razor
+```html
 <Skeleton width="200" height="20" />
 <Skeleton width="10rem" height="2em" />
 <Skeleton width="50%" />
@@ -147,21 +117,24 @@ Når en typet enum sendes fra C# (f.eks. `variant="@Variant.Text"`), bokser Blaz
 dette som en streng. `GetFromString` gjør en case-insensitiv `Enum.TryParse` og returnerer den kanoniske lowercase
 data-attributtverdien.
 
-```razor
-{{/* Råstreng */}}
+```html
+<!-- Råstreng -->
 <Skeleton variant="text" width="200" />
 
-{{/* Typet enum fra C# */}}
+<!-- Typet enum fra C# -->
 <Skeleton variant="@Variant.Circle" width="48" height="48" />
 ```
 
 ## Dokumentasjon
 
-Wiki:
+Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-- [Hjem](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
-- [Kom i gang](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Get%20started)
-- [Bidra of publiser](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Contributing)
+Snarveier til Wiki dokumentasjon:
+
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
+- [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
 ## Seneste endringer
 
@@ -170,10 +143,4 @@ endringer og nye funksjoner.
 
 ## Lisens
 
-Dette prosjektet er utviklet av Helse Vest IKT for intern bruk i helseregionen.
-
----
-
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>
+Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for detaljer.
