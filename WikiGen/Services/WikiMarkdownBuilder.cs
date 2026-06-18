@@ -197,9 +197,6 @@ public sealed partial class WikiMarkdownBuilder
             sb.AppendLine();
         }
 
-        sb.AppendLine("---");
-        sb.AppendLine();
-
         // Use / Avoid sections
         AppendDocSection(sb, "Use", component.Documentation?.Use);
         AppendDocSection(sb, "Avoid", component.Documentation?.Avoid);
@@ -274,8 +271,6 @@ public sealed partial class WikiMarkdownBuilder
         }
 
         // Footer
-        sb.AppendLine("---");
-        sb.AppendLine();
         sb.AppendLine($"*Category: {groupTitle}*");
 
         if (component.LastUpdated != default)
@@ -285,13 +280,6 @@ public sealed partial class WikiMarkdownBuilder
         }
 
         sb.AppendLine();
-        sb.AppendLine("---");
-        sb.AppendLine();
-        sb.AppendLine("<div align=\"center\">");
-        sb.AppendLine("  <sub>Helse Vest IKT</sub>");
-        sb.AppendLine("</div>\n");
-        sb.AppendLine();
-
         return sb.ToString();
     }
 

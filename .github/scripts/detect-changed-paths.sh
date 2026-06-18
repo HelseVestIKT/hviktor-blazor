@@ -132,11 +132,6 @@ if [[ $FILE_COUNT -gt 0 ]]; then
   SUMMARY+="</details>\n\n"
 fi
 
-SUMMARY+="---\n\n"
-SUMMARY+="<div align=\"center\">\n"
-SUMMARY+="  <sub>Bygget med ❤️ av Helse Vest IKT</sub>\n"
-SUMMARY+="</div>\n"
-
 # Output summary
 if [[ "$OUTPUT_TO_GITHUB" == true && -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
   echo -e "$SUMMARY" >> "$GITHUB_STEP_SUMMARY"

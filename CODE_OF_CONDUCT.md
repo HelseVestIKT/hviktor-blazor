@@ -36,9 +36,3 @@ representation of the project.
 ## Attribution
 
 Adapted from the [Contributor Covenant](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
-
----
-
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>

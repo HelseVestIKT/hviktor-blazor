@@ -1,95 +1,130 @@
-<div align="center">
-  <h1>Hviktor.Abstractions</h1>
-  <p><strong>Grensesnitt, basistyper og abstraksjoner for Hviktor</strong></p>
-</div>
+# **Hviktor.Abstractions**
 
----
+Interfaces, base types, and abstractions for Hviktor
 
-## Oversikt
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Documentation](#documentation)
+- [Changelog](#changelog)
+- [License](#license)
 
-`Hviktor.Abstractions` inneholder grensesnitt, basisklasser og enumer som brukes på tvers av Hviktor
-komponentbiblioteket. Denne pakken er grunnlaget for å lage egendefinerte tjenester og modeller som integreres med
-Hviktor-komponenter.
+## Overview
 
-## Installasjon
+`Hviktor.Abstractions` contains interfaces, base classes, and enums used across the Hviktor
+component library. This package is the foundation for creating custom services and models that integrate with
+Hviktor components.
+
+## Installation
 
 ```bash
 dotnet add package Hviktor.Abstractions
 ```
 
-## Innhold
+## Usage
 
-### Grensesnitt (Interfaces)
+### Interfaces
 
-Pakken inneholder følgende grensesnitt for å utvide og tilpasse Hviktor:
+The package contains the following interfaces for extending and customizing Hviktor:
 
-| Grensesnitt            | Beskrivelse                                   |
-| ---------------------- | --------------------------------------------- |
-| `IColorService`        | Tjeneste for håndtering av farger             |
-| `ISizeService`         | Tjeneste for håndtering av størrelser         |
-| `IVariantService`      | Tjeneste for håndtering av komponentvarianter |
-| `ISeverityService`     | Tjeneste for håndtering av alvorlighetsnivåer |
-| `IPlacementService`    | Tjeneste for håndtering av plassering         |
-| `IPositionService`     | Tjeneste for håndtering av posisjonering      |
-| `IWeightService`       | Tjeneste for håndtering av skriftvekt         |
-| `IWidthService`        | Tjeneste for håndtering av bredde             |
-| `IInputTypeService`    | Tjeneste for håndtering av inputtyper         |
-| `IParameterService<T>` | Generisk tjeneste for parameterkonvertering   |
-| `IComparisonService`   | Tjeneste for sammenligning av verdier         |
+#### Attribute Services
 
-## Bruk
+| Interface              | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `IColorService`        | Service for handling colors              |
+| `ISizeService`         | Service for handling sizes               |
+| `IVariantService`      | Service for handling component variants  |
+| `IPlacementService`    | Service for handling placement           |
+| `IPositionService`     | Service for handling positioning         |
+| `IWeightService`       | Service for handling font weight         |
+| `IWidthService`        | Service for handling width               |
+| `IInputTypeService`    | Service for handling input types         |
+| `IParameterService<T>` | Generic service for parameter conversion |
+| `IComparisonService`   | Service for comparing values             |
 
-### Implementere IParameterService
+#### Localization and JS Interop
 
-Lag egne parametertjenester for å konvertere verdier til HTML-attributter:
+| Interface                    | Description                                                  |
+| ---------------------------- | ------------------------------------------------------------ |
+| `ILocalizationService`       | Service for handling language and localization               |
+| `IStringLocalizerService<T>` | Service for localized strings with resource overrides        |
+| `IJsRuntimeService`          | Service for dynamic import of JavaScript modules             |
+| `IJsObjectReferenceService`  | Service for type-safe JS method calls via IJSObjectReference |
+
+#### Component Interfaces
+
+| Interface                  | Description                              |
+| -------------------------- | ---------------------------------------- |
+| `ICascadingComponent`      | Interface for cascading component values |
+| `IAsyncCascadingComponent` | Async variant of cascading               |
+
+### Implementing IParameterService
+
+Create custom parameter services to convert values to HTML attributes:
 
 ```csharp
-using Hviktor.Abstractions.Interfaces;
-using Hviktor.Abstractions.Types;
+using Hviktor.Abstractions.Enums.Attributes;
+using Hviktor.Abstractions.Interfaces.Services.Attributes;
+using Hviktor.Abstractions.Models;
 
-public class CustomColorService : IParameterService<Color>
+namespace Services;
+
+/// <summary>
+/// A custom service that provides additional functionality for working with the <see cref="Color"/> enum.
+/// </summary>
+public class ColorService : IParameterService<Color>
 {
-    public string GetDataAttribute(Color value)
+    /// <inheritdoc />
+    public string GetDataAttribute(EnumValue<Color> value)
+        => GetDataAttribute(value, Color.Accent);
+
+    /// <summary>
+    /// Returns a custom string value for the specified <see cref="Color"/> values.
+    /// </summary>
+    public string GetDataAttribute(EnumValue<Color> value, Color defaultValue)
     {
-        return value switch
+        var resolved = value.EnumValueOrNull ?? defaultValue;
+        return resolved switch
         {
-            Color.Accent => "brand",
+            Color.Accent => "accent",
             Color.Success => "positive",
+            Color.Brand1 => "corp",
+            Color.Brand2 => "corp-secondary",
             Color.Danger => "negative",
-            _ => value.ToString().ToLowerInvariant()
+            _ => resolved.ToString().ToLowerInvariant()
         };
     }
 
-    public Color GetFromString(string value, Color defaultValue = default)
-    {
-        return Enum.TryParse<Color>(value, true, out var result)
+    /// <inheritdoc />
+    public Color GetFromString(string value) => GetFromString(value, default);
+
+    /// <inheritdoc />
+    public Color GetFromString(string value, Color defaultValue) =>
+        Enum.TryParse<Color>(value, true, out var result)
             ? result
             : defaultValue;
-    }
 }
 ```
 
-## Komponentgrensesnitt
+## Documentation
 
-Pakken inneholder også grensesnitt for komponentegenskaper:
+The documentation for Hviktor is written in English and is available
+at [Website (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-| Grensesnitt      | Beskrivelse                          |
-| ---------------- | ------------------------------------ |
-| `IAccessibility` | Tilgjengelighetsegenskaper (aria-\*) |
-| `ICommon`        | Felles komponentegenskaper           |
-| `IEvent`         | Hendelseshåndtering                  |
-| `IStyle`         | Stilegenskaper                       |
+Wiki documentation shortcuts:
 
-## Se også
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
+- [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
-- [Hviktor](../Hviktor/README.md) - Hovedkomponentbiblioteket
-- [Hviktor.Attributes](../Hviktor.Attributes/README.md) - Attributter for skjemavalidering
-- [Hviktor.Extensions](../Hviktor.Extensions/README.md) - Utvidelsesmetoder
-- [Hviktor Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+## Changelog
 
----
+See [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for a complete overview of
+changes and new features.
 
-<div align="center">
-  <sub>En del av Hviktor komponentbiblioteket</sub><br/>
-  <sub>Helse Vest IKT</sub>
-</div>
+## License
+
+Hviktor is licensed under the MIT License.
+See [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for details.

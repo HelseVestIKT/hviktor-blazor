@@ -3,14 +3,11 @@
 Thank you for your interest in contributing to **Hviktor**, your contribution is welcome and
 appreciated.
 
----
-
 ## Code of Conduct
 
-This project is governed by the [Hviktor Code of Conduct](./CODE_OF_CONDUCT.md).
+This project is governed by
+the [Hviktor Code of Conduct](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code.
-
----
 
 ## How to Get Involved
 
@@ -39,14 +36,12 @@ Have an idea for a new component or feature?
 > tokens, and compatibility with both Blazor Server and WebAssembly. For larger contributions, we may invite you to
 > participate in daily check-ins to ensure alignment with project standards.
 
----
-
 ## Getting Started with Development
 
 ### Prerequisites
 
-- [.NET 10 SDK](https://dot.net)
-- [Node.js](https://nodejs.org/) (for CSS/JS tooling)
+- [.NET 10 SDK (dot.net)](https://dot.net)
+- [Node.js (nodejs.org)](https://nodejs.org/) (for CSS/JS tooling)
 - A code editor (Visual Studio, Rider, or VS Code)
 
 ### Setup
@@ -64,7 +59,7 @@ Build the solution:
 dotnet build
 ```
 
-Build CSS and JS assets (from `Hviktor/`):
+Build CSS and JS assets (from `root`):
 
 ```bash
 pnpm install
@@ -80,12 +75,15 @@ dotnet run
 ### Running Tests
 
 ```bash
-dotnet test                              # All tests
-dotnet test Tests/Tests.Unit             # Unit tests (bUnit)
-dotnet test Tests/Tests.Playwright       # Playwright tests (WCAG, behavior, composition)
-```
+# All tests
+dotnet test
 
----
+# Unit tests (bUnit)
+dotnet test Tests.Unit
+
+# Playwright tests (WCAG, behavior, composition)
+dotnet test Tests.Playwright
+```
 
 ## Project Conventions
 
@@ -95,8 +93,6 @@ dotnet test Tests/Tests.Playwright       # Playwright tests (WCAG, behavior, com
 - **XML doc comments:** Required on all public members.
 - **Strong typing:** No `object` or untyped collections. Use generics.
 - **Testing:** Every public component needs both unit tests (bUnit) and WCAG compliance tests (Playwright + axe-core).
-
----
 
 ## Pull Requests
 
@@ -109,8 +105,6 @@ When creating a pull request:
    the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 4. **Pass CI checks:** Automated checks (build, lint, tests) must pass before merge.
 5. **Mark as ready:** When complete, remove the draft status. A team member will review your code and provide feedback.
-
----
 
 ## Commit Messages
 
@@ -129,22 +123,12 @@ Add a scope in parentheses to indicate the area of change:
 - `feat(table): add sortable column headers`
 - `docs(alert): add usage examples`
 
----
-
 ## Changelogs
 
 We use [git-cliff](https://github.com/orhun/git-cliff) to generate changelogs.
 Review previous releases for tone and wording conventions.
 
----
-
 ## Questions?
 
 Open a [discussion](https://github.com/HelseVestIKT/hviktor-blazor/discussions) or reach out to the team.
 We're happy to help you get started.
-
----
-
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>
