@@ -1,24 +1,12 @@
-﻿<div align="center">
-<h1>Component composition</h1><!-- omit in toc -->
+﻿# Composition Test Pages
 
-<p align="center">
-    <strong>Full page with multiple components</strong>
-</p>
+Test pages that render multiple components together in realistic scenarios.
 
-</div>
+Used by `Tests.Playwright` composition tests to validate cross-component interaction,
+data flow, and accessibility of composed layouts.
 
----
+## Conventions
 
-## Description
-
-Component composition tests are designed to verify the functionality and integration of multiple components within a
-single page.
-
-These tests ensure that each component behaves as expected when combined with others, and that the overall
-page layout and behavior meet the application's requirements.
-
----
-
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>
+- Each page represents a realistic usage scenario with multiple interacting components.
+- All interactive elements must have `data-testid` attributes for Playwright locators.
+- Keep pages focused on one integration scenario each.

@@ -7,8 +7,6 @@
 </h1><!-- omit in toc -->
 </div>
 
----
-
 > [!WARNING]
 > This documentation is a work in progress.
 
@@ -27,8 +25,6 @@
   - [Configuring the MCP server](#configuring-the-mcp-server)
   - [Private notes](#private-notes)
 
----
-
 ## Overview
 
 The Documentation project is a **Blazor WebAssembly** site that serves as the interactive component library reference
@@ -36,17 +32,16 @@ for Hviktor. It renders live demos, parameter tables (including implicit HTML at
 and accessibility links for every documented component.
 
 The site also generates a **structured JSON metadata file** for consumption by
-[Model Context Protocol](https://modelcontextprotocol.io/) servers and other LLM tooling, giving AI assistants full
-knowledge of the Hviktor component API.
-
----
+[Model Context Protocol (modelcontextprotocol.io)](https://modelcontextprotocol.io/) servers and other LLM tooling,
+giving AI assistants full knowledge of the Hviktor component API.
 
 ## Getting Started
 
 ### Prerequisites
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
-- [Node.js](https://nodejs.org/) 18+
+- [.NET 10 SDK (dotnet.microsoft.com)](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [Node.js (nodejs.org)](https://nodejs.org/) 18+
+- [pnpm (pnpm.io)](https://pnpm.io/) 11+
 
 ### Install dependencies
 
@@ -61,7 +56,7 @@ pnpm install
 pnpm build:dev
 ```
 
-This compiles SCSS via Sass and processes Tailwind CSS via PostCSS.
+This generates HTML entry files and compiles CSS (Sass + PostCSS/Tailwind).
 
 ### Run the site
 
@@ -69,13 +64,12 @@ This compiles SCSS via Sass and processes Tailwind CSS via PostCSS.
 dotnet run
 ```
 
-The site starts at `http://localhost:5237` (or `https://localhost:7237`).
+The site starts at `https://localhost:7237`.
 
 > [!TIP]
-> In Debug configuration, the project references `Hviktor`, `Hviktor.Extensions`, and `Hviktor.Icons` as local
-> project references. In Release, it references the published NuGet packages.
-
----
+> In Debug configuration, the project references `Hviktor`, `Hviktor.Abstractions`, `Hviktor.Extensions`,
+> `Hviktor.Icons`, and `Hviktor.Icons.Abstractions` as local project references. In Release, it references the
+> published NuGet packages.
 
 ## Services
 
@@ -84,7 +78,8 @@ The site starts at `http://localhost:5237` (or `https://localhost:7237`).
 | `ComponentRegistry`        | Maps URL slugs to component types, demos, implicit parameters, and sub-components |
 | `ComponentMetadataService` | Reads `[Parameter]` properties via reflection and enriches them with XML docs     |
 | `DemoSourceService`        | Reads demo `.razor` files from embedded resources for source code display         |
-| `ComponentSourceService`   | Reads `.razor` and `.razor.cs` source files from disk for the "Source" tab        |
+| `ComponentSearchService`   | Provides search and filtering over registered components                          |
+| `ChangelogDateProvider`    | Resolves last-updated dates for components from the changelog                     |
 | `ThemeService`             | Manages light/dark theme preference                                               |
 
 ---
@@ -93,13 +88,10 @@ The site starts at `http://localhost:5237` (or `https://localhost:7237`).
 
 - Add the component to `ComponentRegistry.cs` with its slug, title, type, demos, and implicit parameters.
 - Create demo `.razor` files under `Components/Demos/` (flat or in a subfolder matching the component name).
-- The `ComponentPage.razor` route (`./components/{slug}`) renders everything automatically from the registry entry.
 
 > [!NOTE]
 > Demo `.razor` files are included as embedded resources via the `.csproj` glob:
 > `<EmbeddedResource Include="Components\Demos\**\*.razor"/>`.
-
----
 
 ## MCP Metadata
 
@@ -191,7 +183,3 @@ in public NuGet packages or XML docs but is valuable for developers and LLM cont
 ```
 
 All fields are optional. JSON comments (`//`) are supported.
-
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>

@@ -23,8 +23,6 @@
 </div>
 </div>
 
----
-
 ## Dokumentasjon
 
 Documentation for Hviktor is written in English and is available
