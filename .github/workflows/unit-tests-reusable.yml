@@ -71,7 +71,7 @@ jobs:
         run: dotnet restore ${{ inputs.test-project }}
 
       - name: Build
-        run: dotnet build ${{ inputs.test-project }} --configuration ${{ inputs.configuration }} --no-restore
+        run: dotnet build ${{ inputs.test-project }} --configuration ${{ inputs.configuration }}
 
       - name: Run tests with coverage
         id: test

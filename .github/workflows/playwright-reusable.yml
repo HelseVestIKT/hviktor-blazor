@@ -82,7 +82,7 @@ jobs:
         run: dotnet restore Tests.Playwright/Tests.Playwright.csproj
 
       - name: Build test project
-        run: dotnet build Tests.Playwright/Tests.Playwright.csproj --configuration Debug --no-restore
+        run: dotnet build Tests.Playwright/Tests.Playwright.csproj --configuration Debug
 
       - name: Install Playwright browsers
         run: pwsh Tests.Playwright/bin/Debug/${{ steps.set-target-framework.outputs.target-framework }}/playwright.ps1 install --with-deps
