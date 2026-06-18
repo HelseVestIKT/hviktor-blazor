@@ -25,40 +25,55 @@
 
 ---
 
-## Links
+## Dokumentasjon
 
-- [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+Documentation for Hviktor is written in English and is available
+on [GitHub Pages (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
+
+Shortcuts to Wiki documentation:
+
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Usage](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Usage)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
+
+Discussions and documentation:
+
 - [Discussions](https://github.com/HelseVestIKT/hviktor-blazor/discussions)
-- [Documentation](https://literate-carnival-7p3vnlg.pages.github.io/)
+- [Documentation (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/)
 
----
+External references:
 
-- [Hviktor - Angular](https://helsevestikt.github.io/hviktor/)
-- [Designsystemet.no](https://designsystemet.no/en/)
-
----
+- [Hviktor - Angular (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor/)
+- [Designsystemet (designsystemet.no)](https://designsystemet.no/en/)
+- [Aksel (aksel.nav.no)](https://aksel.nav.no/)
 
 ## NuGet Packages
 
-- [Hviktor](https://github.com/HelseVestIKT/hviktor-blazor/pkgs/nuget/Hviktor)
-- [Hviktor.Abstractions](https://github.com/HelseVestIKT/hviktor-blazor/pkgs/nuget/Hviktor.Abstractions)
-- [Hviktor.Extensions](https://github.com/HelseVestIKT/hviktor-blazor/pkgs/nuget/Hviktor.Extensions)
-- [Hviktor.Icons](https://github.com/HelseVestIKT/hviktor-blazor/pkgs/nuget/Hviktor.Icons)
-- [Hviktor.Icons.Abstractions](https://github.com/HelseVestIKT/hviktor-blazor/pkgs/nuget/Hviktor.Icons.Abstractions)
-
----
+- [Hviktor (nuget.org)](https://www.nuget.org/packages/Hviktor)
+- [Hviktor.Abstractions (nuget.org)](https://www.nuget.org/packages/Hviktor.Abstractions)
+- [Hviktor.Extensions (nuget.org)](https://www.nuget.org/packages/Hviktor.Extensions)
+- [Hviktor.Icons (nuget.org)](https://www.nuget.org/packages/Hviktor.Icons)
+- [Hviktor.Icons.Abstractions (nuget.org)](https://www.nuget.org/packages/Hviktor.Icons.Abstractions)
 
 ## Getting started
 
 Learn how you can get started by reading
 the [Getting Started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted) guide.
 
+## Code of Conduct
+
+We expect all contributors to adhere to our code of conduct in order to maintain a welcoming and inclusive
+environment.  
+Please read
+the [Code of Conduct](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CODE_OF_CONDUCT.md) for more
+information.
+
 ## Contributing
 
 Learn how you can contribute by reading the [Contributing](CONTRIBUTING.md) guide.
 
----
+## License
 
-<div align="center">
-  <sub>Helse Vest IKT</sub>
-</div>
+Hviktor is licensed under the MIT-license.  
+See [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for details.
