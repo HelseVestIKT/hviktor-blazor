@@ -1,33 +1,34 @@
 # **Hviktor**
 
-Blazor komponentbibliotek for Helse Vest IKT
+Blazor component library for Helse Vest IKT
 
-- [Hva er Hviktor?](#hva-er-hviktor)
-- [Installasjon](#installasjon)
-- [Hurtigstart](#hurtigstart)
-- [Slik fungerer komponenter](#slik-fungerer-komponenter)
-- [Dokumentasjon](#dokumentasjon)
-- [Seneste endringer](#seneste-endringer)
-- [Lisens](#lisens)
+- [What is Hviktor?](#what-is-hviktor)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [How Components Work](#how-components-work)
+- [Documentation](#documentation)
+- [Changelog](#changelog)
+- [License](#license)
 
-## Hva er Hviktor?
+## What is Hviktor?
 
-Hviktor er et moderne Blazor komponentbibliotek utviklet av Helse Vest IKT. Biblioteket er basert på designsystemet
-fra [Designsystemet (designsystemet.no)](https://designsystemet.no/) og [Aksel (aksel.nav.no)](https://aksel.nav.no/), og er spesielt tilpasset for
-utvikling av helseapplikasjoner.
+Hviktor is a modern Blazor component library developed by Helse Vest IKT. The library is based on the design system
+from [Designsystemet (designsystemet.no)](https://designsystemet.no/) and [Aksel (aksel.nav.no)](https://aksel.nav.no/),
+and is specifically designed for
+developing healthcare applications.
 
-Hviktor bygger videre på arbeidet fra [Hviktor (github.com)](https://github.com/HelseVestIKT/Hviktor) (Angular) og tilbyr
-tilsvarende funksjonalitet for Blazor-utviklere.
+Hviktor builds on the work from [Designsystemet (designsystemet.no)](https://designsystemet.no/) and aims to offer
+equivalent functionality for Blazor developers.
 
-## Installasjon
+## Installation
 
-### 1. Installer NuGet-pakken
+### 1. Install the NuGet package
 
 ```bash
 dotnet add package Hviktor
 ```
 
-### 2. Registrer tjenester i `Program.cs`
+### 2. Register services in `Program.cs`
 
 ```csharp
 using Hviktor.Extensions;
@@ -35,25 +36,25 @@ using Hviktor.Extensions;
 builder.Services.AddHviktor();
 ```
 
-### 3. Legg til middleware i `Program.cs`
+### 3. Add middleware in `Program.cs`
 
 ```csharp
 app.UseHviktor();
 ```
 
-### 4. Importer komponenter i `_Imports.razor`
+### 4. Import components in `_Imports.razor`
 
 ```razor
 @using Hviktor.Components
 ```
 
-### 5. Legg til stilark i `App.razor` eller `_Host.cshtml`
+### 5. Add stylesheets in `App.razor` or `_Host.cshtml`
 
 ```html
 <link rel="stylesheet" href="_content/Hviktor/dist/assets/entry.css" />
 ```
 
-## Hurtigstart
+## Quick Start
 
 ```razor
 @using Hviktor.Components.Button @using Hviktor.Components.Alert @using
@@ -61,40 +62,40 @@ Hviktor.Components.Card
 
 <Card>
   <Card.Block>
-    <Alert color="Color.Info"> Velkommen til Hviktor! </Alert>
+    <Alert color="Color.Info"> Welcome to Hviktor! </Alert>
 
-    <button color="@Color.Primary" @onclick="HandleClick">Klikk meg</button>
+    <button color="@Color.Primary" @onclick="HandleClick">Click me</button>
   </Card.Block>
 </Card>
 
-@code { private void HandleClick() { Console.WriteLine("Knappen ble klikket!");
+@code { private void HandleClick() { Console.WriteLine("The button was clicked!");
 } }
 ```
 
-## Slik fungerer komponenter
+## How Components Work
 
-Noen komponenter i Hviktor bruker et mønster der visse HTML-attributter — som `width`, `height` og `variant` — **ikke
-** er deklarert som typede `[Parameter]`-egenskaper. I stedet fanges de opp av
-`[Parameter(CaptureUnmatchedValues = true)]` og behandles internt i `ComputeAttributes()` før resterende attributter
-videresendes til DOM-elementet.
+Some components in Hviktor use a pattern where certain HTML attributes, such as `width`, `height`, and `variant`, are
+**not** declared as typed `[Parameter]` properties. Instead, they are captured by
+`[Parameter(CaptureUnmatchedValues = true)]` and processed internally in `ComputeAttributes()` before the remaining
+attributes are forwarded to the DOM element.
 
-Dette gir en naturlig HTML-attributtsyntaks i markup, samtidig som full typesikkerhet ivaretas i kode.
+This provides a natural HTML attribute syntax in markup while maintaining full type safety in code.
 
-### Lengdeverdier — `CssLength` (`string | number`)
+### Length Values: `CssLength` (`string | number`)
 
-Attributter som `width` og `height` konverteres automatisk til en `CssLength`-verdi:
+Attributes such as `width` and `height` are automatically converted to a `CssLength` value:
 
-| Input                             | Resultat                                 |
+| Input                             | Result                                   |
 | --------------------------------- | ---------------------------------------- |
 | `width="200"`                     | `style="width: 200px"`                   |
 | `width="1.5"`                     | `style="width: 1.5px"`                   |
 | `width="10rem"`                   | `style="width: 10rem"`                   |
 | `width="50%"`                     | `style="width: 50%"`                     |
 | `width="clamp(4rem, 50%, 20rem)"` | `style="width: clamp(4rem, 50%, 20rem)"` |
-| _(utelatt)_                       | ingen `style`-attributt                  |
+| _(omitted)_                       | no `style` attribute                     |
 
-Bare tall (heltall eller desimaltall uten enhet) får automatisk `px` som suffiks. Alle andre CSS-lengdeuttrykk sendes
-gjennom uendret. Verdier av `0` eller `null` produserer en tom instans — ingen stil settes.
+Only numbers (integers or decimals without a unit) automatically receive `px` as a suffix. All other CSS length
+expressions are passed through unchanged. Values of `0` or `null` produce an empty instance: no style is set.
 
 ```razor
 <Skeleton width="200" height="20" />
@@ -102,45 +103,48 @@ gjennom uendret. Verdier av `0` eller `null` produserer en tom instans — ingen
 <Skeleton width="50%" />
 ```
 
-### Enum-verdier — `EnumValue<T>` (`string | enum`)
+### Enum Values: `EnumValue<T>` (`string | enum`)
 
-Attributter som `variant` aksepterer både en typet enum og en råstreng:
+Attributes such as `variant` accept both a typed enum and a raw string:
 
-| Input                       | Sti                                                       | Output                     |
-| --------------------------- | --------------------------------------------------------- | -------------------------- |
-| `variant="rectangle"`       | streng → `EnumValue` rå                                   | `data-variant="rectangle"` |
-| `variant="@Variant.Circle"` | bokset enum → `.ToString()` → `"Circle"` → `EnumValue` rå | `data-variant="circle"`    |
-| _(utelatt)_                 | tom `EnumValue` → standardverdi                           | `data-variant="rectangle"` |
+| Input                       | Path                                                         | Output                     |
+| --------------------------- | ------------------------------------------------------------ | -------------------------- |
+| `variant="rectangle"`       | string -> `EnumValue` raw                                    | `data-variant="rectangle"` |
+| `variant="@Variant.Circle"` | boxed enum -> `.ToString()` -> `"Circle"` -> `EnumValue` raw | `data-variant="circle"`    |
+| _(omitted)_                 | empty `EnumValue` -> default value                           | `data-variant="rectangle"` |
 
-Når en typet enum sendes fra C# (f.eks. `variant="@Variant.Text"`), bokser Blazor verdien som `object` i
-`AdditionalAttributes`. Komponenten kaller `.ToString()` på den boksede verdien, som gir `"Text"`, og viderebehandler
-dette som en streng. `GetFromString` gjør en case-insensitiv `Enum.TryParse` og returnerer den kanoniske lowercase
-data-attributtverdien.
+When a typed enum is passed from C# (e.g., `variant="@Variant.Text"`), Blazor boxes the value as `object` in
+`AdditionalAttributes`. The component calls `.ToString()` on the boxed value, which yields `"Text"`, and further
+processes this as a string. `GetFromString` performs a case-insensitive `Enum.TryParse` and returns the canonical
+lowercase data attribute value.
 
 ```razor
-@* Råstreng *@
+@* Raw string *@
 <Skeleton variant="text" width="200" />
 
-@* Typet enum fra C# *@
+@* Typed enum from C# *@
 <Skeleton variant="@Variant.Circle" width="48" height="48" />
 ```
 
-## Dokumentasjon
+## Documentation
 
-Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
+The documentation for Hviktor is written in English and is available
+at [Website (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-Snarveier til Wiki dokumentasjon:
+Wiki documentation shortcuts:
 
 - [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
 - [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
 - [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
 - [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
-## Seneste endringer
+## Changelog
 
-Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
-endringer og nye funksjoner.
+See [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for a complete overview of
+changes and new features.
 
-## Lisens
+## License
 
-Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for detaljer.
+Hviktor is licensed under the MIT License.
+See [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for details.

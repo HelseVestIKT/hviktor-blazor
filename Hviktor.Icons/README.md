@@ -1,61 +1,60 @@
 ﻿# **Hviktor.Icons**
 
-Typede ikonkonstanter for @helsevestikt/hviktor-icons webkomponentbiblioteket
+Typed icon constants with embedded SVG data from @helsevestikt/hviktor-icons
 
-- [Oversikt](#oversikt)
-- [Installasjon](#installasjon)
-- [Bruk](#bruk)
-- [Tilgjengelige ikoner](#tilgjengelige-ikoner)
-- [Egendefinerte ikoner](#egendefinerte-ikoner)
-- [Oppdatering av ikoner](#oppdatering-av-ikoner)
-- [Versjonsinformasjon](#versjonsinformasjon)
-- [Dokumentasjon](#dokumentasjon)
-- [Seneste endringer](#seneste-endringer)
-- [Lisens](#lisens)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Available Icons](#available-icons)
+- [Custom Icons](#custom-icons)
+- [Updating Icons](#updating-icons)
+- [Version Information](#version-information)
+- [Documentation](#documentation)
+- [Changelog](#changelog)
+- [License](#license)
 
-## Oversikt
+## Overview
 
-`Hviktor.Icons` er et typet ikonbibliotek som gir C#-konstanter for alle ikoner
-fra [`@helsevestikt/hviktor-icons`](https://www.npmjs.com/package/@helsevestikt/hviktor-icons).
-Ikonene rendres som `<hvi-icon-* />` web components og er optimalisert for bruk med Hviktor
-komponentbiblioteket.
+`Hviktor.Icons` is a typed icon library that provides C# constants for all icons
+from [`@helsevestikt/hviktor-icons`](https://www.npmjs.com/package/@helsevestikt/hviktor-icons).
+Each constant contains SVG path data that is rendered as inline `<svg>` elements via the `<Icon>` component.
 
-### Hvorfor Hviktor.Icons?
+### Why Hviktor.Icons?
 
-- **900+ Ikoner** - Komplett samling fra hviktor-icons
-- **Web Components** - Rendres som `<hvi-icon-* />` custom elements
-- **Type-sikker** - IntelliSense og kompileringsfeil ved feil ikonnavn
-- **Tilgjengelig** - Designet med WCAG-tilgjengelighet i tankene
-- **Konsistent** - Alle ikoner følger samme designspråk
-- **Enkel oppdatering** - Kjør `node generate-iconset.mjs` for å synkronisere
+- **940+ Icons** - Complete collection from hviktor-icons
+- **Inline SVG** - Rendered as `<svg>` with embedded path data, no JS loading required
+- **Type-safe** - IntelliSense and compile-time errors for incorrect icon names
+- **Accessible** - Designed with WCAG accessibility in mind
+- **Consistent** - All icons follow the same design language
+- **Easy updates** - Run `node generate-iconset.mjs` to sync
 
-## Funksjoner
+## Features
 
-| Funksjon            | Beskrivelse                                    |
-| ------------------- | ---------------------------------------------- |
-| Ferdigbygde ikoner  | 900+ ikoner klare til bruk                     |
-| Kategorisert        | Ikoner organisert i logiske kategorier         |
-| IntelliSense-støtte | Full autokomplettering i IDE                   |
-| Web Components      | Rendres som `<hvi-icon-*>` custom elements     |
-| Temakompatibel      | Arver `currentColor` for enkel fargetilpasning |
+| Feature              | Description                                    |
+| -------------------- | ---------------------------------------------- |
+| Pre-built icons      | 940+ icons ready to use                        |
+| Categorized          | Icons organized in logical categories          |
+| IntelliSense support | Full autocompletion in IDE                     |
+| Inline SVG           | Rendered as `<svg>` with embedded path data    |
+| Theme compatible     | Inherits `currentColor` for easy color styling |
 
-## Installasjon
+## Installation
 
-Installer via NuGet Package Manager:
+Install via NuGet Package Manager:
 
 ```bash
 dotnet add package Hviktor.Icons
 ```
 
-Eller via Package Manager Console:
+Or via Package Manager Console:
 
 ```powershell
 Install-Package Hviktor.Icons
 ```
 
-## Bruk
+## Usage
 
-### Grunnleggende bruk
+### Basic Usage
 
 ```razor
 @using Hviktor.Components.Icon
@@ -66,7 +65,7 @@ Install-Package Hviktor.Icons
 <Icon Definition="IconSet.Cog" />
 ```
 
-### Med størrelse
+### With Size
 
 ```razor
 @using Hviktor.Abstractions.Enums.Attributes
@@ -76,26 +75,26 @@ Install-Package Hviktor.Icons
 <Icon Definition="IconSet.Globe" Size="Size.Large" />
 ```
 
-### Dekorative ikoner (skjult for skjermlesere)
+### Decorative Icons (hidden from screen readers)
 
 ```razor
 <Button>
     <Icon Definition="IconSet.Plus" aria-hidden />
-    Legg til
+    Add
 </Button>
 ```
 
-### Ikoner med tilgjengelig beskrivelse
+### Icons with Accessible Description
 
 ```razor
-<Icon Definition="IconSet.Phone" aria-label="Ring oss" />
+<Icon Definition="IconSet.Phone" aria-label="Call us" />
 ```
 
-## Tilgjengelige ikoner
+## Available Icons
 
-Ikonene er organisert i følgende kategorier:
+The icons are organized into the following categories:
 
-| Kategori              | Eksempler                                      |
+| Category              | Examples                                       |
 | --------------------- | ---------------------------------------------- |
 | Accessibility         | `Braille`, `SignLanguage`, `UniversalAccess`   |
 | Arrows                | `ArrowLeft`, `ArrowRight`, `ChevronDown`       |
@@ -114,78 +113,77 @@ Ikonene er organisert i følgende kategorier:
 | Wellness              | `Heart`, `Hospital`, `Stethoscope`             |
 | Workplace             | `Briefcase`, `Calendar`, `Email`, `Phone`      |
 
-### Finne ikoner
+### Finding Icons
 
-I kode kan du bruke IntelliSense ved å skrive `IconSet.` for å se alle tilgjengelige ikoner.
+In code, you can use IntelliSense by typing `IconSet.` to see all available icons.
 
-## Egendefinerte ikoner
+## Custom Icons
 
-Trenger du ikoner som ikke finnes i hviktor-icons?
-Se [Hviktor.Icons.Abstractions](../Hviktor.Icons.Abstractions/README.md)
-for veiledning om hvordan du lager egendefinerte ikondefinisjoner.
+Need icons that are not available in hviktor-icons?
+See [Hviktor.Icons.Abstractions](../Hviktor.Icons.Abstractions/README.md)
+for guidance on how to create custom icon definitions.
 
 ```csharp
 using Hviktor.Icons.Abstractions.Types;
 
 public static class MyIcons
 {
-    /// <summary>My custom icon rendered as a web component.</summary>
-    public static readonly IconDefinition MySpecialIcon = new("hvi-icon-my-special");
+    /// <summary>My custom icon with inline SVG path data.</summary>
+    public static readonly IconDefinition MySpecialIcon = new("M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10...");
 }
 ```
 
-## Oppdatering av ikoner
+## Updating Icons
 
-For å regenerere `IconSet.cs` fra siste versjon av `@helsevestikt/hviktor-icons`:
+To regenerate `IconSet.cs` from the latest version of `@helsevestikt/hviktor-icons`:
 
 ```bash
-cd Hviktor.Icons/Hviktor.Icons
+cd Hviktor.Icons
 pnpm install
 pnpm generate
 ```
 
 > [!NOTE]
-> Kjør `pnpm install` først for å oppdatere til siste versjon av `@helsevestikt/hviktor-icons`.
+> Run `pnpm install` first to update to the latest version of `@helsevestikt/hviktor-icons`.
 
-## Versjonsinformasjon
+## Version Information
 
-Gjeldende versjon og tidspunkt for siste oppdatering finnes
-i `icons-meta.json`:
+The current version and timestamp of the last update can be found in `icons-meta.json`:
 
-> [!CAUTION] > `icons-meta.json` inneholder informasjon om den gjeldende versjonen og tidspunktet for siste oppdatering
-> av
-> ikonbiblioteket, og bør derfor ikke redigeres manuelt.
+> [!CAUTION]
+> `icons-meta.json` contains information about the current version and the timestamp of the last update
+> of the icon library, and should therefore not be edited manually.
 
-Eksempel innhold:
+Example contents:
 
 ```json
 {
-  "generatedAt": "2026-01-19T11:15:31Z",
-  "version": "1.0.0",
+  "generatedAt": "2026-04-13T07:41:02.723Z",
+  "version": "0.0.48",
   "source": "@helsevestikt/hviktor-icons",
-  "iconCount": 800
+  "iconCount": 947
 }
 ```
 
-## Dokumentasjon
+## Documentation
 
-Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
-på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+The documentation for Hviktor is written in English and is available
+at [Website (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
 via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-Snarveier til Wiki dokumentasjon:
+Wiki documentation shortcuts:
 
 - [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
 - [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
 - [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
 - [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
-## Seneste endringer
+## Changelog
 
-Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
-endringer og nye funksjoner.
+See [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for a complete overview of
+changes and new features.
 
-## Lisens
+## License
 
-Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
-for detaljer.
+Hviktor is licensed under the MIT License.
+See [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for details.

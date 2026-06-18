@@ -1,33 +1,33 @@
 # **Hviktor.Extensions**
 
-Utvidelsesmetoder og tjenester for Hviktor
+Extension methods and services for Hviktor
 
-- [Oversikt](#oversikt)
-- [Installasjon](#installasjon)
-- [Konfigurasjon](#konfigurasjon)
-- [Innhold](#innhold)
-- [Bruk](#bruk)
-- [Lokalisering](#lokalisering)
-- [Dokumentasjon](#dokumentasjon)
-- [Seneste endringer](#seneste-endringer)
-- [Lisens](#lisens)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Contents](#contents)
+- [Usage](#usage)
+- [Localization](#localization)
+- [Documentation](#documentation)
+- [Changelog](#changelog)
+- [License](#license)
 
-## Oversikt
+## Overview
 
-`Hviktor.Extensions` inneholder utvidelsesmetoder, hjelpefunksjoner og standardimplementasjoner av
-Hviktor-tjenester. Denne pakken er essensiell for å konfigurere og bruke Hviktor i din Blazor-applikasjon.
+`Hviktor.Extensions` contains extension methods, helper functions, and default implementations of
+Hviktor services. This package is essential for configuring and using Hviktor in your Blazor application.
 
-## Installasjon
+## Installation
 
 ```bash
 dotnet add package Hviktor.Extensions
 ```
 
-## Konfigurasjon
+## Configuration
 
-### Registrere tjenester
+### Registering Services
 
-Legg til Hviktor-tjenester i `Program.cs`:
+Add Hviktor services in `Program.cs`:
 
 ```csharp
 using Hviktor.Extensions;
@@ -76,14 +76,14 @@ builder.Services.AddHviktor(
 );
 ```
 
-### Legge til middleware
+### Adding Middleware
 
-Legg til Hviktor-middleware i `Program.cs`:
+Add Hviktor middleware in `Program.cs`:
 
 ```csharp
 var app = builder.Build();
 
-// Default moddleware
+// Default middleware
 app.UseHviktor();
 
 // With component injection (e.g. ReconnectModal)
@@ -97,117 +97,134 @@ app.UseHviktor(
 );
 ```
 
-## Innhold
+## Contents
 
-### Utvidelsesmetoder
+### Extension Methods
 
-| Klasse                         | Beskrivelse                                    |
+| Class                          | Description                                    |
 | ------------------------------ | ---------------------------------------------- |
-| `ServiceCollectionExtensions`  | Registrerer Hviktor-tjenester i DI-containeren |
-| `ApplicationBuilderExtensions` | Konfigurerer Hviktor-middleware                |
-| `EnumExtensions`               | Hjelpemetoder for enum-typer                   |
-| `Converter<T>`                 | Typekonvertering med fallback-verdier          |
+| `ServiceCollectionExtensions`  | Registers Hviktor services in the DI container |
+| `ApplicationBuilderExtensions` | Configures Hviktor middleware                  |
+| `EnumExtensions`               | Helper methods for enum types                  |
+| `Converter<T>`                 | Type conversion with fallback values           |
 
-### Tjenester
+### Services
 
-Pakken inneholder standardimplementasjoner av følgende tjenester:
+The package contains default implementations of the following services:
 
-| Tjeneste            | Grensesnitt          | Beskrivelse                          |
-| ------------------- | -------------------- | ------------------------------------ |
-| `ColorService`      | `IColorService`      | Håndterer fargekonvertering          |
-| `SizeService`       | `ISizeService`       | Håndterer størrelseskonvertering     |
-| `VariantService`    | `IVariantService`    | Håndterer variantkonvertering        |
-| `WeightService`     | `IWeightService`     | Håndterer skriftvektkonvertering     |
-| `WidthService`      | `IWidthService`      | Håndterer breddekonvertering         |
-| `PositionService`   | `IPositionService`   | Håndterer posisjoneringskonvertering |
-| `PlacementService`  | `IPlacementService`  | Håndterer plasseringskonvertering    |
-| `InputTypeService`  | `IInputTypeService`  | Håndterer input-type konvertering    |
-| `ComparisonService` | `IComparisonService` | Sammenligning av verdier             |
-| `JsRuntimeService`  | `IJsRuntimeService`  | JavaScript interop-tjeneste          |
+| Service                     | Interface                    | Description                                      |
+| --------------------------- | ---------------------------- | ------------------------------------------------ |
+| `ColorService`              | `IColorService`              | Handles color conversion                         |
+| `SizeService`               | `ISizeService`               | Handles size conversion                          |
+| `VariantService`            | `IVariantService`            | Handles variant conversion                       |
+| `WeightService`             | `IWeightService`             | Handles font weight conversion                   |
+| `WidthService`              | `IWidthService`              | Handles width conversion                         |
+| `PositionService`           | `IPositionService`           | Handles positioning conversion                   |
+| `PlacementService`          | `IPlacementService`          | Handles placement conversion                     |
+| `InputTypeService`          | `IInputTypeService`          | Handles input type conversion                    |
+| `ComparisonService`         | `IComparisonService`         | Compares values                                  |
+| `JsRuntimeService`          | `IJsRuntimeService`          | JavaScript interop service                       |
+| `JsObjectReferenceService`  | `IJsObjectReferenceService`  | Type-safe JS method calls via IJSObjectReference |
+| `StringLocalizerService<T>` | `IStringLocalizerService<T>` | Localized strings with resource overrides        |
 
-For mer informasjon,
-se [Hviktor.Abstractions (github.com)](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor.Abstractions/README.md),
-eller gå direkte til [Wiki (github.com)](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
+For more information,
+see [Hviktor.Abstractions (github.com)](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor.Abstractions/README.md),
+or go directly to the [Wiki (github.com)](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-## Bruk
+## Usage
 
 ### EnumExtensions
 
-Hent beskrivelser fra enum-verdier:
+Get descriptions from enum values:
 
 ```csharp
-using Hviktor.Extensions;
+using Hviktor.Extensions.Reflection;
 using System.ComponentModel;
 
 public enum States
 {
-    [Description("Under behandling")]
-    UnderBehandling,
+    [Description("In Progress")]
+    InProgress,
 
-    [Description("Godkjent")]
-    Godkjent,
+    [Description("Approved")]
+    Approved,
 
-    [Description("Avvist")]
-    Avvist
+    [Description("Rejected")]
+    Rejected
 }
 
 // Get description from enum value
-var state = States.UnderBehandling;
-var beskrivelse = state.GetDescription();
-// Returns: "Under behandling"
+var state = States.InProgress;
+var description = state.GetDescription();
+// Returns: "In Progress"
 
 // Get enum value from string
-var enumVerdi = "Godkjent".GetEnumValue<States>();
-// Returns: States.Godkjent
+var enumValue = "Approved".GetEnumValue<States>();
+// Returns: States.Approved
 ```
 
 ### Converter
 
-Sikker typekonvertering med fallback-verdier:
+Safe type conversion with fallback values:
 
 > [!WARNING]  
-> `Converter` er under aktiv utvikling og bør ikke brukes i produksjon.
+> `Converter` is under active development and should not be used in production.
 
 ```csharp
 using Hviktor.Extensions;
 
 // Convert to int
-int tall = Converter<int>.ToInt("42");        // 42
-int fallback = Converter<int>.ToInt(null, 0); // 0
+int number = Converter<int>.ToInt("42");        // 42
+int fallback = Converter<int>.ToInt(null, 0);   // 0
 
 // Convert to double
-double desimal = Converter<double>.ToDouble("3.14");
+double decimal_ = Converter<double>.ToDouble("3.14");
 
 // Convert to decimal
-decimal belop = Converter<decimal>.ToDecimal("1234.56");
+decimal amount = Converter<decimal>.ToDecimal("1234.56");
 
 // Convert to string
-string tekst = Converter<string>.ToString(verdi);
+string text = Converter<string>.ToString(value);
 ```
 
-### Overstyre tjenester
+### Overriding Services
 
-Du kan overstyre standardtjenester med egne implementasjoner:
+You can override default services with your own implementations:
 
 ```csharp
-using Hviktor.Abstractions.Interfaces;
+using Hviktor.Abstractions.Interfaces.Services.Attributes;
+using Hviktor.Abstractions.Models;
+using Hviktor.Abstractions.Enums.Attributes;
 
 public class MyColorService : IColorService
 {
-    public string GetDataAttribute(Color value)
+    public string GetDataAttribute(EnumValue<Color> value)
     {
-        return value switch
+        return GetDataAttribute(value, Color.Accent);
+    }
+
+    public string GetDataAttribute(EnumValue<Color> value, Color defaultValue)
+    {
+        var resolved = value.HasValue ? value.Value : defaultValue;
+        return resolved switch
         {
             Color.Accent => "accent",
             Color.Success => "positive",
             Color.Danger => "negative",
-            _ => value.ToString().ToLowerInvariant()
+            _ => resolved.ToString().ToLowerInvariant()
         };
     }
 
-    public Color GetFromString(string value, Color defaultValue = default)
+    public Color GetFromString(string value)
     {
-        // My implementation
+        return GetFromString(value, default);
+    }
+
+    public Color GetFromString(string value, Color defaultValue)
+    {
+        return Enum.TryParse<Color>(value, true, out var result)
+            ? result
+            : defaultValue;
     }
 }
 
@@ -216,9 +233,9 @@ builder.Services.AddSingleton<IColorService, MyColorService>();
 builder.Services.AddHviktor();
 ```
 
-## Lokalisering
+## Localization
 
-Pakken inkluderer støtte for lokalisering:
+The package includes localization support:
 
 ```csharp
 using Hviktor.Abstractions.Interfaces.Localization;
@@ -227,7 +244,7 @@ public class MyComponent
 {
     private readonly ILocalizationService _localization;
 
-    public MinKomponent(ILocalizationService localization)
+    public MyComponent(ILocalizationService localization)
     {
         _localization = localization;
     }
@@ -239,25 +256,25 @@ public class MyComponent
 }
 ```
 
-## Dokumentasjon
+## Documentation
 
-Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
-på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+The documentation for Hviktor is written in English and is available
+at [Website (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
 via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-Snarveier til Wiki dokumentasjon:
+Wiki documentation shortcuts:
 
 - [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
 - [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
 - [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
 - [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
-## Seneste endringer
+## Changelog
 
-Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
-endringer og nye funksjoner.
+See [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for a complete overview of
+changes and new features.
 
-## Lisens
+## License
 
-Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
-for detaljer.
+Hviktor is licensed under the MIT License.
+See [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for details.

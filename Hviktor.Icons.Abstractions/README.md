@@ -1,36 +1,35 @@
 ﻿# **Hviktor.Icons.Abstractions**
 
-Abstraksjoner for å lage egendefinerte ikondefinisjoner i Hviktor
+Abstractions for creating custom icon definitions in Hviktor
 
-- [Oversikt](#oversikt)
-- [Installasjon](#installasjon)
-- [Lage egendefinerte ikoner](#lage-egendefinerte-ikoner)
-- [API-referanse](#api-referanse)
-- [Beste praksis](#beste-praksis)
-- [Dokumentasjon](#dokumentasjon)
-- [Seneste endringer](#seneste-endringer)
-- [Lisens](#lisens)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Creating Custom Icons](#creating-custom-icons)
+- [API Reference](#api-reference)
+- [Best Practices](#best-practices)
+- [Documentation](#documentation)
+- [Changelog](#changelog)
+- [License](#license)
 
-## Oversikt
+## Overview
 
-`Hviktor.Icons.Abstractions` tilbyr grunnleggende typer for å lage egendefinerte ikondefinisjoner til bruk med
-Hviktor komponentbiblioteket. Denne pakken lar deg definere egne ikoner når de
-innebygde ikonene
-fra [@helsevestikt/hviktor-icons (npmjs.com)](https://www.npmjs.com/package/@helsevestikt/hviktor-icons)
-i `Hviktor.Icons` ikke dekker dine behov.
+`Hviktor.Icons.Abstractions` provides foundational types for creating custom icon definitions for use with the Hviktor
+component library. This package lets you define your own icons when the built-in icons
+from [@helsevestikt/hviktor-icons (npmjs.com)](https://www.npmjs.com/package/@helsevestikt/hviktor-icons) in
+`Hviktor.Icons` do not cover your needs.
 
-## Installasjon
+## Installation
 
 ```bash
 dotnet add package Hviktor.Icons.Abstractions
 ```
 
-## Lage egendefinerte ikoner
+## Creating Custom Icons
 
-### Steg 1: Definer ikonet ditt
+### Define Your Icon
 
-Opprett en statisk klasse med `IconDefinition`-konstanter. Hver definisjon inneholder
-navnet på det tilhørende `<hvi-icon-*>` web component custom element:
+Create a static class with `IconDefinition` constants. Each definition contains
+SVG path data (the `d` attribute) for the icon:
 
 ```csharp
 using Hviktor.Icons.Abstractions.Types;
@@ -41,28 +40,19 @@ public static class CustomIcons
 {
     /// <summary>
     /// Blood bag icon for medical applications.
-    /// Renders as <c>&lt;hvi-icon-blood-bag /&gt;</c>.
     /// </summary>
-    public static readonly IconDefinition BloodBag = new("hvi-icon-blood-bag");
+    public static readonly IconDefinition BloodBag = new("M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10...");
 
     /// <summary>
     /// Syringe icon for medical applications.
-    /// Renders as <c>&lt;hvi-icon-syringe /&gt;</c>.
     /// </summary>
-    public static readonly IconDefinition Syringe = new("hvi-icon-syringe");
+    public static readonly IconDefinition Syringe = new("M19.5 4.5l-1-1L17 5l-2.5-2.5-1 1L16 6...");
 }
 ```
 
-### Steg 2: Registrer web component
+### Use the Custom Icon
 
-Det tilhørende web component custom element må være registrert i nettleseren.
-Hvis ikonet finnes i `@helsevestikt/hviktor-icons`, registreres det automatisk
-via `entry.ts`-importen. For egendefinerte ikoner må du sørge for at
-custom element er registrert separat.
-
-### Steg 3: Bruk det egendefinerte ikonet
-
-Bruk det egendefinerte ikonet med `<Icon>`-komponenten:
+Use the custom icon with the `<Icon>` component:
 
 ```razor
 @using Hviktor.Components.Icon
@@ -71,39 +61,39 @@ Bruk det egendefinerte ikonet med `<Icon>`-komponenten:
 
 <Icon Definition="CustomIcons.BloodBag"/>
 
-@* Med størrelse *@
+@* With size *@
 <Icon Definition="CustomIcons.BloodBag" Size="Size.Large"/>
 
-@* Med tilleggsattributter *@
+@* With additional attributes *@
 <Icon Definition="CustomIcons.BloodBag" class="text-red-500" aria-hidden/>
 ```
 
-## API-referanse
+## API Reference
 
 ### IconDefinition
 
-`IconDefinition`-klassen innkapsler elementnavnet for et web component-ikon.
+The `IconDefinition` class encapsulates SVG path data for an icon.
 
-| Egenskap      | Type     | Beskrivelse                                                 |
-| ------------- | -------- | ----------------------------------------------------------- |
-| `ElementName` | `string` | Web component-elementnavnet (f.eks. `hvi-icon-arrow-right`) |
-| `HasValue`    | `bool`   | Returnerer `true` hvis elementnavnet er gyldig (ikke tomt)  |
+| Property   | Type     | Description                                          |
+| ---------- | -------- | ---------------------------------------------------- |
+| `PathData` | `string` | SVG path `d` attribute data for the icon             |
+| `HasValue` | `bool`   | Returns `true` if the path data is valid (not empty) |
 
-**Konstruktør:**
+**Constructor:**
 
 ```csharp
-public IconDefinition(string elementName)
+public IconDefinition(string pathData)
 ```
 
-## Beste praksis
+## Best Practices
 
-1. **Organiser ikoner etter kategori** — Grupper relaterte ikoner i separate statiske klasser
-2. **Legg til XML-dokumentasjon** — Dokumenter hvert ikon for IntelliSense-støtte
-3. **Bruk semantiske navn** — Navngi ikoner beskrivende (f.eks. `BloodBag`, ikke `Icon1`)
-4. **Test tilgjengelighet** — Sørg for at ikoner har riktig `aria-hidden` når de er dekorative
-5. **Bruk kebab-case for elementnavn** — Følg mønsteret `hvi-icon-{kebab-case-name}`
+1. **Organize icons by category** - Group related icons in separate static classes
+2. **Add XML documentation** - Document each icon for IntelliSense support
+3. **Use semantic names** - Name icons descriptively (e.g., `BloodBag`, not `Icon1`)
+4. **Test accessibility** - Ensure icons have the correct `aria-hidden` when decorative
+5. **Use standard SVG path data** - Extract the `d` attribute from SVG files or design tools
 
-## Eksempel: Komplett egendefinert ikonbibliotek
+## Example: Complete Custom Icon Library
 
 ```csharp
 using Hviktor.Icons.Abstractions.Types;
@@ -116,35 +106,35 @@ namespace MyApp.Icons;
 public static class MedicalIcons
 {
     /// <summary>Blood bag icon.</summary>
-    public static readonly IconDefinition BloodBag = new("hvi-icon-blood-bag");
+    public static readonly IconDefinition BloodBag = new("M12 2C6.48 2 2 6.48 2 12...");
 
     /// <summary>Syringe icon.</summary>
-    public static readonly IconDefinition Syringe = new("hvi-icon-syringe");
+    public static readonly IconDefinition Syringe = new("M19.5 4.5l-1-1L17 5l-2.5-2.5...");
 
     /// <summary>Stethoscope icon.</summary>
-    public static readonly IconDefinition Stethoscope = new("hvi-icon-stethoscope");
+    public static readonly IconDefinition Stethoscope = new("M9 2v1H6a2 2 0 00-2 2v6...");
 }
 ```
 
-## Dokumentasjon
+## Documentation
 
-Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
-på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+The documentation for Hviktor is written in English and is available
+at [Website (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
 via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-Snarveier til Wiki dokumentasjon:
+Wiki documentation shortcuts:
 
 - [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
 - [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
 - [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
 - [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
-## Seneste endringer
+## Changelog
 
-Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
-endringer og nye funksjoner.
+See [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for a complete overview of
+changes and new features.
 
-## Lisens
+## License
 
-Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
-for detaljer.
+Hviktor is licensed under the MIT License.
+See [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE) for details.
