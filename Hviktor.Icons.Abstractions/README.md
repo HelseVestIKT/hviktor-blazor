@@ -1,24 +1,22 @@
-﻿<div align="center">
-<h1>
-  <a href="https://github.com/HelseVestIKT/hviktor-blazor/" align="center">
-    <img src="https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor.Icons/icon.svg" width="24"/>
-  </a>
-  Hviktor.Icons.Abstractions
-</h1>
+﻿# **Hviktor.Icons.Abstractions**
 
-<p align="center">
-    <strong>Abstraksjoner for å lage egendefinerte ikondefinisjoner i Hviktor</strong>
-</p>
+Abstraksjoner for å lage egendefinerte ikondefinisjoner i Hviktor
 
-</div>
-
----
+- [Oversikt](#oversikt)
+- [Installasjon](#installasjon)
+- [Lage egendefinerte ikoner](#lage-egendefinerte-ikoner)
+- [API-referanse](#api-referanse)
+- [Beste praksis](#beste-praksis)
+- [Dokumentasjon](#dokumentasjon)
+- [Seneste endringer](#seneste-endringer)
+- [Lisens](#lisens)
 
 ## Oversikt
 
 `Hviktor.Icons.Abstractions` tilbyr grunnleggende typer for å lage egendefinerte ikondefinisjoner til bruk med
 Hviktor komponentbiblioteket. Denne pakken lar deg definere egne ikoner når de
-innebygde ikonene fra [`@helsevestikt/hviktor-icons`](https://www.npmjs.com/package/@helsevestikt/hviktor-icons)
+innebygde ikonene
+fra [@helsevestikt/hviktor-icons (npmjs.com)](https://www.npmjs.com/package/@helsevestikt/hviktor-icons)
 i `Hviktor.Icons` ikke dekker dine behov.
 
 ## Installasjon
@@ -71,13 +69,13 @@ Bruk det egendefinerte ikonet med `<Icon>`-komponenten:
 @using Hviktor.Abstractions.Enums.Attributes
 @using MyApp.Icons
 
-<Icon Definition="CustomIcons.BloodBag" />
+<Icon Definition="CustomIcons.BloodBag"/>
 
 @* Med størrelse *@
-<Icon Definition="CustomIcons.BloodBag" Size="Size.Large" />
+<Icon Definition="CustomIcons.BloodBag" Size="Size.Large"/>
 
 @* Med tilleggsattributter *@
-<Icon Definition="CustomIcons.BloodBag" class="text-red-500" aria-hidden />
+<Icon Definition="CustomIcons.BloodBag" class="text-red-500" aria-hidden/>
 ```
 
 ## API-referanse
@@ -128,15 +126,25 @@ public static class MedicalIcons
 }
 ```
 
-## Se også
+## Dokumentasjon
 
-- [Hviktor.Icons](../Hviktor.Icons/README.md) — Ferdigbygd ikonbibliotek
-- [@helsevestikt/hviktor-icons](https://www.npmjs.com/package/@helsevestikt/hviktor-icons) — Kildeikonbibliotek
-- [Hviktor Dokumentasjon](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
+på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
----
+Snarveier til Wiki dokumentasjon:
 
-<div align="center">
-  <sub>En del av Hviktor komponentbiblioteket</sub><br/>
-  <sub>Helse Vest IKT</sub>
-</div>
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
+- [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
+
+## Seneste endringer
+
+Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
+endringer og nye funksjoner.
+
+## Lisens
+
+Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
+for detaljer.

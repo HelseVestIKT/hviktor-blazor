@@ -1,25 +1,17 @@
-﻿<div align="center">
-<h1>
-  <a href="https://github.com/HelseVestIKT/hviktor-blazor/" align="center">
-    <img src="https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor.Icons/icon.svg" width="24"/>
-  </a>
-  Hviktor.Icons
-</h1>
+﻿# **Hviktor.Icons**
 
-<p align="center">
-    <strong>Typed icon constants for the @helsevestikt/hviktor-icons web component library</strong>
-</p>
+Typede ikonkonstanter for @helsevestikt/hviktor-icons webkomponentbiblioteket
 
-<p align="center">
-    <a href="#funksjoner">Funksjoner</a> •
-    <a href="#installasjon">Installasjon</a> •
-    <a href="#bruk">Bruk</a> •
-    <a href="#tilgjengelige-ikoner">Tilgjengelige ikoner</a> •
-    <a href="#egendefinerte-ikoner">Egendefinerte ikoner</a>
-</p>
-</div>
-
----
+- [Oversikt](#oversikt)
+- [Installasjon](#installasjon)
+- [Bruk](#bruk)
+- [Tilgjengelige ikoner](#tilgjengelige-ikoner)
+- [Egendefinerte ikoner](#egendefinerte-ikoner)
+- [Oppdatering av ikoner](#oppdatering-av-ikoner)
+- [Versjonsinformasjon](#versjonsinformasjon)
+- [Dokumentasjon](#dokumentasjon)
+- [Seneste endringer](#seneste-endringer)
+- [Lisens](#lisens)
 
 ## Oversikt
 
@@ -160,7 +152,8 @@ pnpm generate
 Gjeldende versjon og tidspunkt for siste oppdatering finnes
 i `icons-meta.json`:
 
-> [!CAUTION] > `icons-meta.json` inneholder informasjon om den gjeldende versjonen og tidspunktet for siste oppdatering av
+> [!CAUTION] > `icons-meta.json` inneholder informasjon om den gjeldende versjonen og tidspunktet for siste oppdatering
+> av
 > ikonbiblioteket, og bør derfor ikke redigeres manuelt.
 
 Eksempel innhold:
@@ -174,16 +167,25 @@ Eksempel innhold:
 }
 ```
 
-## Se også
+## Dokumentasjon
 
-- [Hviktor](../Hviktor/README.md) - Hovedkomponentbiblioteket
-- [Hviktor.Icons.Abstractions](../Hviktor.Icons.Abstractions/README.md) - Lag egne ikondefinisjoner
-- [@helsevestikt/hviktor-icons](https://www.npmjs.com/package/@helsevestikt/hviktor-icons) - Kildeikonbibliotek
-- [Hviktor Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
+på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
----
+Snarveier til Wiki dokumentasjon:
 
-<div align="center">
-  <sub>En del av Hviktor komponentbiblioteket</sub><br/>
-  <sub>Helse Vest IKT</sub>
-</div>
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
+- [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
+
+## Seneste endringer
+
+Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
+endringer og nye funksjoner.
+
+## Lisens
+
+Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
+for detaljer.

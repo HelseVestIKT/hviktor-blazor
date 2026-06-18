@@ -1,9 +1,13 @@
-<div align="center">
-  <h1>Hviktor.Abstractions</h1>
-  <p><strong>Grensesnitt, basistyper og abstraksjoner for Hviktor</strong></p>
-</div>
+# **Hviktor.Abstractions**
 
----
+Grensesnitt, basistyper og abstraksjoner for Hviktor
+
+- [Oversikt](#oversikt)
+- [Installasjon](#installasjon)
+- [Bruk](#bruk)
+- [Dokumentasjon](#dokumentasjon)
+- [Seneste endringer](#seneste-endringer)
+- [Lisens](#lisens)
 
 ## Oversikt
 
@@ -17,7 +21,7 @@ Hviktor-komponenter.
 dotnet add package Hviktor.Abstractions
 ```
 
-## Innhold
+## Bruk
 
 ### Grensesnitt (Interfaces)
 
@@ -36,8 +40,6 @@ Pakken inneholder følgende grensesnitt for å utvide og tilpasse Hviktor:
 | `IInputTypeService`    | Tjeneste for håndtering av inputtyper         |
 | `IParameterService<T>` | Generisk tjeneste for parameterkonvertering   |
 | `IComparisonService`   | Tjeneste for sammenligning av verdier         |
-
-## Bruk
 
 ### Implementere IParameterService
 
@@ -69,27 +71,25 @@ public class CustomColorService : IParameterService<Color>
 }
 ```
 
-## Komponentgrensesnitt
+## Dokumentasjon
 
-Pakken inneholder også grensesnitt for komponentegenskaper:
+Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
+på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
-| Grensesnitt      | Beskrivelse                          |
-| ---------------- | ------------------------------------ |
-| `IAccessibility` | Tilgjengelighetsegenskaper (aria-\*) |
-| `ICommon`        | Felles komponentegenskaper           |
-| `IEvent`         | Hendelseshåndtering                  |
-| `IStyle`         | Stilegenskaper                       |
+Snarveier til Wiki dokumentasjon:
 
-## Se også
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
+- [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
 
-- [Hviktor](../Hviktor/README.md) - Hovedkomponentbiblioteket
-- [Hviktor.Attributes](../Hviktor.Attributes/README.md) - Attributter for skjemavalidering
-- [Hviktor.Extensions](../Hviktor.Extensions/README.md) - Utvidelsesmetoder
-- [Hviktor Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+## Seneste endringer
 
----
+Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
+endringer og nye funksjoner.
 
-<div align="center">
-  <sub>En del av Hviktor komponentbiblioteket</sub><br/>
-  <sub>Helse Vest IKT</sub>
-</div>
+## Lisens
+
+Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
+for detaljer.

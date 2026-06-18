@@ -1,9 +1,16 @@
-<div align="center">
-  <h1>Hviktor.Extensions</h1>
-  <p><strong>Utvidelsesmetoder og tjenester for Hviktor</strong></p>
-</div>
+# **Hviktor.Extensions**
 
----
+Utvidelsesmetoder og tjenester for Hviktor
+
+- [Oversikt](#oversikt)
+- [Installasjon](#installasjon)
+- [Konfigurasjon](#konfigurasjon)
+- [Innhold](#innhold)
+- [Bruk](#bruk)
+- [Lokalisering](#lokalisering)
+- [Dokumentasjon](#dokumentasjon)
+- [Seneste endringer](#seneste-endringer)
+- [Lisens](#lisens)
 
 ## Oversikt
 
@@ -118,6 +125,10 @@ Pakken inneholder standardimplementasjoner av følgende tjenester:
 | `ComparisonService` | `IComparisonService` | Sammenligning av verdier             |
 | `JsRuntimeService`  | `IJsRuntimeService`  | JavaScript interop-tjeneste          |
 
+For mer informasjon,
+se [Hviktor.Abstractions (github.com)](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/Hviktor.Abstractions/README.md),
+eller gå direkte til [Wiki (github.com)](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
+
 ## Bruk
 
 ### EnumExtensions
@@ -150,7 +161,7 @@ var enumVerdi = "Godkjent".GetEnumValue<States>();
 // Returns: States.Godkjent
 ```
 
-### Converter<T>
+### Converter
 
 Sikker typekonvertering med fallback-verdier:
 
@@ -228,15 +239,25 @@ public class MyComponent
 }
 ```
 
-## Se også
+## Dokumentasjon
 
-- [Hviktor](../Hviktor/README.md) - Hovedkomponentbiblioteket
-- [Hviktor.Abstractions](../Hviktor.Abstractions/README.md) - Grensesnitt og basistyper
-- [Hviktor Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+Dokumentasjonen for Hviktor er skrevet på Engelsk og er tilgjengelig
+på [Nettsted (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), eller
+via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
----
+Snarveier til Wiki dokumentasjon:
 
-<div align="center">
-  <sub>En del av Hviktor komponentbiblioteket</sub><br/>
-  <sub>Helse Vest IKT</sub>
-</div>
+- [Home](https://github.com/HelseVestIKT/hviktor-blazor/wiki)
+- [Getting started](https://github.com/HelseVestIKT/hviktor-blazor/wiki/GettingStarted)
+- [Contributing](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/CONTRIBUTING.md)
+- [Publish](https://github.com/HelseVestIKT/hviktor-blazor/wiki/Publish)
+
+## Seneste endringer
+
+Se [releases](https://github.com/HelseVestIKT/hviktor-blazor/releases/latest) for en fullstendig oversikt over
+endringer og nye funksjoner.
+
+## Lisens
+
+Hviktor er lisensiert under MIT-lisensen. Se [LICENSE](https://github.com/HelseVestIKT/hviktor-blazor/blob/main/LICENSE)
+for detaljer.

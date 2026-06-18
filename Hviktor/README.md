@@ -55,7 +55,7 @@ app.UseHviktor();
 
 ## Hurtigstart
 
-```html
+```razor
 @using Hviktor.Components.Button @using Hviktor.Components.Alert @using
 Hviktor.Components.Card
 
@@ -96,7 +96,7 @@ Attributter som `width` og `height` konverteres automatisk til en `CssLength`-ve
 Bare tall (heltall eller desimaltall uten enhet) får automatisk `px` som suffiks. Alle andre CSS-lengdeuttrykk sendes
 gjennom uendret. Verdier av `0` eller `null` produserer en tom instans — ingen stil settes.
 
-```html
+```razor
 <Skeleton width="200" height="20" />
 <Skeleton width="10rem" height="2em" />
 <Skeleton width="50%" />
@@ -117,11 +117,11 @@ Når en typet enum sendes fra C# (f.eks. `variant="@Variant.Text"`), bokser Blaz
 dette som en streng. `GetFromString` gjør en case-insensitiv `Enum.TryParse` og returnerer den kanoniske lowercase
 data-attributtverdien.
 
-```html
-<!-- Råstreng -->
+```razor
+@* Råstreng *@
 <Skeleton variant="text" width="200" />
 
-<!-- Typet enum fra C# -->
+@* Typet enum fra C# *@
 <Skeleton variant="@Variant.Circle" width="48" height="48" />
 ```
 
