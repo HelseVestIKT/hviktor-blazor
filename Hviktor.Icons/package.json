@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "hviktor-icons",
   "version": "1.0.0",
   "private": true,
@@ -8,6 +8,6 @@
     "generate": "node generate-iconset.mjs"
   },
   "devDependencies": {
-    "@helsevestikt/hviktor-icons": "0.0.48"
+    "@helsevestikt/hviktor-icons": "0.0.51"
   }
 }

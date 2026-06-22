@@ -73,7 +73,7 @@ jobs:
         with:
           delete-branch-on-failure: true
           branch: automated/update-hviktor-icons
-          commit-message: "refactor: Update @helsevestikt/hviktor-icons to ${{ steps.get-version.outputs.version }}"
+          commit-message: "refactor: update @helsevestikt/hviktor-icons to ${{ steps.get-version.outputs.version }}"
           pr-body: |
             ## Automated Icon Update
 
