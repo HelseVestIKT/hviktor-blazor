@@ -23,7 +23,7 @@
 </div>
 </div>
 
-## Dokumentasjon
+## Documentation
 
 Documentation for Hviktor is written in English and is available
 on [GitHub Pages (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
