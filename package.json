@@ -17,22 +17,22 @@
     "generate:html": "pnpm -r generate:html"
   },
   "devDependencies": {
-    "@commitlint/cli": "21.0.2",
-    "@commitlint/config-conventional": "21.0.2",
-    "autoprefixer": "10.5.0",
+    "@commitlint/cli": "21.2.1",
+    "@commitlint/config-conventional": "21.2.0",
+    "autoprefixer": "10.5.4",
     "cssnano": "8.0.2",
     "glob": "13.0.6",
     "husky": "9.1.7",
-    "immutable": "5.1.6",
-    "lint-staged": "17.0.7",
-    "postcss": "8.5.15",
+    "immutable": "5.1.9",
+    "lint-staged": "17.1.0",
+    "postcss": "8.5.19",
     "postcss-cli": "11.0.1",
     "postcss-import": "16.1.1",
     "postcss-mixins": "12.1.2",
     "postcss-nested": "7.0.2",
-    "prettier": "3.8.4",
-    "prettier-plugin-tailwindcss": "0.8.0",
-    "svgo": "4.0.1"
+    "prettier": "3.9.5",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "svgo": "4.0.2"
   },
   "lint-staged": {
     "*.{js,ts,mjs}": "prettier --check",
