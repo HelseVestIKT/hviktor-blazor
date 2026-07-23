@@ -26,7 +26,7 @@
 ## Documentation
 
 Documentation for Hviktor is written in English and is available
-on [GitHub Pages (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
+on [GitHub Pages (helsevestikt.github.io)](https://blazor.hviktor.no), or
 via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
 Shortcuts to Wiki documentation:
