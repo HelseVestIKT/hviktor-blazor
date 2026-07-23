@@ -159,7 +159,7 @@ public sealed partial class WikiMarkdownBuilder
         sb.AppendLine("A component library and design system by Helse Vest IKT for digital health services.");
         sb.AppendLine();
         sb.AppendLine("- [GitHub](https://github.com/HelseVestIKT/hviktor)");
-        sb.AppendLine("- [Documentation](https://helsevestikt.github.io/hviktor/)");
+        sb.AppendLine("- [Documentation](https://hviktor.no/)");
         sb.AppendLine();
         sb.AppendLine("#### Designsystemet");
         sb.AppendLine();
