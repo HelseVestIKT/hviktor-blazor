@@ -33,6 +33,7 @@ public sealed record ComponentInfo(
     bool IsDeprecated = false,
     bool IsExperimental = false,
     bool IsValidated = false,
+    bool IsInvalidated = false,
     ClassDocumentation? Documentation = null,
     DateTime LastUpdated = default)
 {
