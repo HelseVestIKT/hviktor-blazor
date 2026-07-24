@@ -21,21 +21,15 @@ on:
         required: false
         default: ''
         type: string
-      dotnet-version:
-        description: '.NET SDK version to use'
-        required: false
-        default: '10.0.x'
-        type: string
-      node-version:
-        description: 'Node.js version to use'
-        required: false
-        default: '24'
-        type: string
       timeout-minutes:
         description: 'Job timeout in minutes'
         required: false
         default: 60
         type: number
+
+env:
+  DOTNET_VERSION: ${{ vars.DOTNET_VERSION }}
+  NODE_VERSION: ${{ vars.NODE_VERSION }}
 
 jobs:
   test:
@@ -47,7 +41,7 @@ jobs:
       - name: Set target framework
         id: set-target-framework
         run: |
-          MAJOR_VERSION=$(echo "${{ inputs.dotnet-version }}" | cut -d'.' -f1)
+          MAJOR_VERSION=$(echo "${{ env.DOTNET_VERSION }}" | cut -d'.' -f1)
           echo "target-framework=net${MAJOR_VERSION}.0" >> $GITHUB_OUTPUT
           echo "Using target framework: net${MAJOR_VERSION}.0"
 
@@ -60,13 +54,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
         with:
-          dotnet-version: ${{ inputs.dotnet-version }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 
