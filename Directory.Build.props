@@ -47,6 +47,8 @@
         <None Include="postcss.config.mjs" Condition="Exists('postcss.config.mjs')" Pack="false" CopyToOutputDirectory="Never"/>
         <Content Remove="prettier.config.js"/>
         <None Include="prettier.config.js" Condition="Exists('prettier.config.js')" Pack="false" CopyToOutputDirectory="Never"/>
+        <Content Remove="build-manifest.json"/>
+        <None Include="build-manifest.json" Condition="Exists('build-manifest.json')" Pack="false" CopyToOutputDirectory="Never"/>
 
         <!-- Exclude source files from wwwroot -->
         <Content Remove="wwwroot\**\*.ts"/>
