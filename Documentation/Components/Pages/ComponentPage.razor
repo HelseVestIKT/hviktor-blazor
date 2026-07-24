@@ -409,11 +409,10 @@ else
         </Card>;
 
     private RenderFragment<DemoInfo> RenderDemoToggle => demo =>
-        @<Chip.Button @onclick="@(() => ToggleDemoColorScheme(demo))">
-            <Icon Definition="@GetDemoColorSchemeIcon(demo)"
-                  aria-hidden="true"/>
+        @<Button variant="@Variant.Secondary" color="@Color.Accent" @onclick="@(() => ToggleDemoColorScheme(demo))">
+            <Icon Definition="@GetDemoColorSchemeIcon(demo)" aria-hidden="true"/>
             @GetDemoToggleAriaLabel(demo)
-        </Chip.Button>;
+        </Button>;
 
     private RenderFragment<DemoInfo> RenderCodeToggle => demo =>
         @<text>
@@ -422,11 +421,10 @@ else
                  var expanded = IsCodeVisible(demo);
                  <span class="flex justify-between gap-2">
                      @RenderDemoToggle(demo)
-                     <Chip.Button @onclick="@(() => ToggleCode(demo))">
-                         <Icon Definition="@(expanded ? IconSet.ChevronDown : IconSet.ChevronUp)"
-                               aria-hidden="true"/>
+                     <Button variant="@Variant.Secondary" color="@Color.Accent" @onclick="@(() => ToggleCode(demo))">
+                         <Icon Definition="@(expanded ? IconSet.ChevronDown : IconSet.ChevronUp)" aria-hidden="true"/>
                          @(expanded ? "Hide" : "Show") code
-                     </Chip.Button>
+                     </Button>
                  </span>
                  @if (expanded)
                  {
