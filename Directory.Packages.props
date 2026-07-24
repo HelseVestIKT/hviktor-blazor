@@ -18,12 +18,6 @@
         <PackageVersion Include="Microsoft.Extensions.Localization" Version="10.0.10"/>
         <PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="10.0.10"/>
         <PackageVersion Include="Microsoft.JSInterop" Version="10.0.10"/>
-        <!-- Hviktor (used in Release-mode package references) -->
-        <PackageVersion Include="Hviktor" Version="1.1.4"/>
-        <PackageVersion Include="Hviktor.Abstractions" Version="1.1.4"/>
-        <PackageVersion Include="Hviktor.Extensions" Version="1.1.4"/>
-        <PackageVersion Include="Hviktor.Icons" Version="1.1.4"/>
-        <PackageVersion Include="Hviktor.Icons.Abstractions" Version="1.1.4"/>
         <!-- Testing -->
         <PackageVersion Include="bunit" Version="2.7.2"/>
         <PackageVersion Include="Deque.AxeCore.Playwright" Version="4.12.0"/>
@@ -32,7 +26,6 @@
         <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.9.0"/>
         <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="2.3.2"/>
         <PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2"/>
-
         <!-- Manual security updates -->
         <PackageVersion Include="AngleSharp" Version="1.5.2"/>
     </ItemGroup>
