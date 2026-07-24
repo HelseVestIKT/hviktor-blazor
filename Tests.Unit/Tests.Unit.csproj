@@ -30,6 +30,9 @@
 
         <!-- Test reports -->
         <PackageReference Include="Microsoft.Testing.Extensions.TrxReport"/>
+
+        <!-- Manual security override bUnit transitive package -->
+        <PackageReference Include="AngleSharp"/>
     </ItemGroup>
 
     <ItemGroup>

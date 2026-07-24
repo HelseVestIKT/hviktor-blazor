@@ -37,9 +37,6 @@ tailwind.min.css
 # Generated files
 .idea/**/contentModel.xml
 
-# NuGet package lock files (auto-generated)
-**/packages.lock.json
-
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
@@ -316,9 +313,11 @@ dlldata.c
 BenchmarkDotNet.Artifacts/
 
 # .NET Core
+packages.lock.json
 project.lock.json
 project.fragment.lock.json
 artifacts/
+Directory.*.props
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
