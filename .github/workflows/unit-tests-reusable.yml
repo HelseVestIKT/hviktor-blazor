@@ -8,11 +8,6 @@ on:
         required: false
         default: 'Tests.Unit/Tests.Unit.csproj'
         type: string
-      dotnet-version:
-        description: '.NET SDK version to use'
-        required: false
-        default: '10.0.x'
-        type: string
       configuration:
         description: 'Build configuration'
         required: false
@@ -35,6 +30,9 @@ on:
       test-result:
         description: 'Test result (success/failure)'
         value: ${{ jobs.test.outputs.test-result }}
+
+env:
+  DOTNET_VERSION: ${{ vars.DOTNET_VERSION }}
 
 jobs:
   test:
@@ -59,7 +57,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
         with:
-          dotnet-version: ${{ inputs.dotnet-version }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 

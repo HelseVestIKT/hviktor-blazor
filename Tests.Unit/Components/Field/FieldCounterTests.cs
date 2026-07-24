@@ -208,7 +208,7 @@ public class FieldCounterTests : HviktorBunitContext
                 .Add(c => c.Count, 12)));
 
         var validationMessage = component.Find("p.ds-validation-message");
-        Assert.Contains("tegn for mye", validationMessage.TextContent);
+        Assert.Contains("2 characters too many", validationMessage.TextContent);
     }
 
     [Fact]
@@ -250,7 +250,7 @@ public class FieldCounterTests : HviktorBunitContext
                 .Add(c => c.Count, 5)));
 
         var paragraph = component.Find("p.ds-paragraph");
-        Assert.Contains("tegn igjen", paragraph.TextContent);
+        Assert.Contains("5 characters left", paragraph.TextContent);
     }
 
     [Fact]
@@ -537,7 +537,7 @@ public class FieldCounterTests : HviktorBunitContext
 
         // With null count (not set), should show limit as remaining
         var paragraph = component.Find("p.ds-paragraph");
-        Assert.Equal("10 tegn igjen", paragraph.TextContent);
+        Assert.Equal("10 characters left", paragraph.TextContent);
     }
 
     #endregion

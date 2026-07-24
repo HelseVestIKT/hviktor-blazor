@@ -1,20 +1,35 @@
 ﻿@using Hviktor.Components.Button
 @using Hviktor.Components.Popover
 @using Hviktor.Components.Typography
+@using Hviktor.Security
 
 @code {
+    private readonly string uniqueId = Cryptography.GenerateId();
+
     private bool? open;
 
-    private void SetOpen(bool? value) => open = value;
+    private void ToggleOpen()
+    {
+        if (open == true)
+        {
+            SetClosed();
+            return;
+        }
+
+        SetOpen();
+    }
+
+    private void SetOpen() => open = true;
+    private void SetClosed() => open = false;
 }
 
-<Button color="danger" popovertarget="my-popover" @onclick="@(() => SetOpen(!open))">
+<Button color="danger" popovertarget="@uniqueId" @onclick="@ToggleOpen">
     Delete
 </Button>
 
-<Popover id="my-popover" @bind-open="@open" OnClose="@(() => SetOpen(false))" color="danger">
+<Popover id="@uniqueId" @bind-open="@open" OnClose="@(() => SetClosed())" color="danger">
     <Paragraph>Are you sure you want to delete?</Paragraph>
-    <Button @onclick="@(() => SetOpen(false))" size="sm" class="mt-2">
+    <Button @onclick="@SetClosed" size="sm" class="mt-2">
         Delete
     </Button>
 </Popover>

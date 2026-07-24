@@ -15,18 +15,22 @@ public sealed partial class Counter : NestedComponentBase<Hviktor.Components.Fie
 {
     [Inject] private IJsRuntimeService JsRuntimeService { get; set; } = null!;
     [Inject] private IJsObjectReferenceService JsObjectReferenceService { get; set; } = null!;
+    [Inject] private IStringLocalizerService<Hviktor.Resources.Resources> Localizer { get; set; } = null!;
 
     /// <summary>
     /// Label template for when `maxCount` is exceeded. Use `{0}` to insert the number of characters.
     /// </summary>
     [Parameter]
-    public string Over { get; set; } = "{0} tegn for mye";
+    public string? Over { get; set; }
 
     /// <summary>
     /// Label template for count. Use `{0}` to insert the number of characters.
     /// </summary>
     [Parameter]
-    public string Under { get; set; } = "{0} tegn igjen";
+    public string? Under { get; set; }
+
+    private string EffectiveOver => Over ?? Localizer.GetValue("Hviktor.Components.Field.Counter.Over");
+    private string EffectiveUnder => Under ?? Localizer.GetValue("Hviktor.Components.Field.Counter.Under");
 
     /// <summary>
     /// The maximum allowed characters.

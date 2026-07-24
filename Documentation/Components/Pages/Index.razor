@@ -18,7 +18,7 @@
 
     @foreach (var group in Registry.Groups)
     {
-        <Heading level="2" size="@Size.Medium" class="my-4">@group.Title</Heading>
+        <Heading level="2" size="@Size.Medium" class="my-4!">@group.Title</Heading>
         <div class="grid gap-4" style="grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));">
             @foreach (var component in group.Items)
             {

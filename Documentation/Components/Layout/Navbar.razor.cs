@@ -20,11 +20,37 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
     private DotNetObjectReference<Navbar>? dotNetRef;
     private IJSObjectReference? navbarModule;
 
+    // Tracks whether a re-render is needed. Prevents unnecessary re-renders on parent layout updates (e.g., page navigation).
+    private bool shouldRender = true;
+
     private const string Light = "light";
 
     private string ColorScheme => ThemeService.CurrentScheme;
 
-    private async Task ToggleColorScheme() => await ThemeService.ToggleAsync();
+    /// <inheritdoc />
+    protected override bool ShouldRender()
+    {
+        if (!shouldRender)
+        {
+            return false;
+        }
+
+        shouldRender = false;
+        return true;
+    }
+
+    /// <summary>Marks the component as needing a re-render and requests one.</summary>
+    private void RequestRender()
+    {
+        shouldRender = true;
+        StateHasChanged();
+    }
+
+    private async Task ToggleColorScheme()
+    {
+        shouldRender = true;
+        await ThemeService.ToggleAsync();
+    }
 
     private IconDefinition GetIcon() => ColorScheme == Light ? DocumentationIconSet.Sun : DocumentationIconSet.Moon;
 
@@ -36,7 +62,7 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
             dotNetRef = DotNetObjectReference.Create(this);
             navbarModule = await JsRuntimeService.ImportAsync<Navbar>();
             await navbarModule.InvokeVoidAsync("registerSearchShortcut", dotNetRef);
-            StateHasChanged();
+            RequestRender();
         }
 
         await base.OnAfterRenderAsync(firstRender);
@@ -94,7 +120,7 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
 
         isSearching = true;
         cachedResults = null;
-        StateHasChanged();
+        RequestRender();
 
         try
         {
@@ -103,7 +129,7 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
 
             cachedResults = ComputeFilteredItems().ToList();
             isSearching = false;
-            StateHasChanged();
+            RequestRender();
         }
         catch (TaskCanceledException)
         {
@@ -118,6 +144,7 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
         isSearching = false;
         cachedResults = null;
         SearchService.Clear();
+        RequestRender();
     }
 
     private void SetSearchFilter(string filter)
@@ -126,6 +153,7 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
         SearchService.Filter = filter;
         cachedResults = ComputeFilteredItems().ToList();
         isSearching = false;
+        RequestRender();
     }
 
     [Inject] private ComponentRegistry Registry { get; set; } = null!;

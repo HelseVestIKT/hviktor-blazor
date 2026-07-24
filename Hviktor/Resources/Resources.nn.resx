@@ -15,6 +15,12 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="Hviktor.Components.Field.Counter.Over" xml:space="preserve">
+        <value>{0} teikn for mykje</value>
+    </data>
+    <data name="Hviktor.Components.Field.Counter.Under" xml:space="preserve">
+        <value>{0} teikn igjen</value>
+    </data>
     <data name="Blazor.Modal.Error.Close" xml:space="preserve">
         <value>Lukk</value>
     </data>

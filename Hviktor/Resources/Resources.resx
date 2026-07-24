@@ -23,6 +23,12 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="Hviktor.Components.Field.Counter.Over" xml:space="preserve">
+        <value>{0} tegn for mye</value>
+    </data>
+    <data name="Hviktor.Components.Field.Counter.Under" xml:space="preserve">
+        <value>{0} tegn igjen</value>
+    </data>
     <data name="Hviktor.Components.Dialog.Button.Close" xml:space="preserve">
         <value>Lukk dialogvindu</value>
     </data>

@@ -4,11 +4,11 @@
 
 <div class="flex flex-col gap-4">
     <Heading level="4">@Localizer.GetValue("ChipRemovable_Tag")</Heading>
-    <div class="flex gap-2 flex-wrap">
+    <div class="flex gap-2 flex-wrap mb-2">
         <Chip.Removable>@Localizer.GetValue("ChipRemovable_Tag") 1</Chip.Removable>
         <Chip.Removable>@Localizer.GetValue("ChipRemovable_Tag") 2</Chip.Removable>
     </div>
-    <Heading level="4" class="mt-4">@Localizer.GetValue("ChipRemovable_ActiveFilters")</Heading>
+    <Heading level="4">@Localizer.GetValue("ChipRemovable_ActiveFilters")</Heading>
     <div class="flex gap-2 flex-wrap items-center">
         @if (removableChipFilters.Count > 0)
         {

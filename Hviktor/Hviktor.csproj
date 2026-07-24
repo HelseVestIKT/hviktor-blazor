@@ -39,15 +39,10 @@
         <InternalsVisibleTo Include="Documentation"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="EPPlus"/>
         <PackageReference Include="Microsoft.AspNetCore.Localization"/>
         <PackageReference Include="Microsoft.Extensions.Localization"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(UseInternalProjectReferences)' != 'true' ">
-        <PackageReference Include="Hviktor.Abstractions"/>
-        <PackageReference Include="Hviktor.Icons.Abstractions"/>
-    </ItemGroup>
-    <ItemGroup Condition=" '$(UseInternalProjectReferences)' == 'true' ">
+    <ItemGroup>
         <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
         <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
     </ItemGroup>
@@ -84,7 +79,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication"/>
     </ItemGroup>
     <ItemGroup>
-      <AdditionalFiles Include="Components\Skeleton\Skeleton.razor" />
-      <AdditionalFiles Include="Components\Spinner\Spinner.razor" />
+        <AdditionalFiles Include="Components\Skeleton\Skeleton.razor"/>
+        <AdditionalFiles Include="Components\Spinner\Spinner.razor"/>
     </ItemGroup>
 </Project>
