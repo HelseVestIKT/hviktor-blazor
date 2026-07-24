@@ -4,23 +4,36 @@
 
 @code {
     private bool open;
-    private void SetOpen(bool value) => open = value;
+
+    private void ToggleOpen()
+    {
+        if (open)
+        {
+            SetClosed();
+            return;
+        }
+
+        SetOpen();
+    }
+
+    private void SetOpen() => open = true;
+    private void SetClosed() => open = false;
 }
 
 <Dropdown.TriggerContext>
-    <Dropdown.Trigger @onclick="@(() => SetOpen(!open))">
+    <Dropdown.Trigger @onclick="@ToggleOpen">
         Dropdown
         <Icon Definition="@(open ? IconSet.ChevronDown : IconSet.ChevronUp)" aria-hidden="true"/>
     </Dropdown.Trigger>
-    <Dropdown open="@open" onClose="@(() => SetOpen(false))">
+    <Dropdown @open="@open" onClose="@(() => SetClosed())">
         <Dropdown.List>
             <Dropdown.Item>
-                <Dropdown.Button @onclick="@(() => SetOpen(false))">
+                <Dropdown.Button @onclick="@SetClosed">
                     Click me to close
                 </Dropdown.Button>
             </Dropdown.Item>
             <Dropdown.Item>
-                <Dropdown.Button @onclick="@(() => SetOpen(false))">
+                <Dropdown.Button @onclick="@SetClosed">
                     I close too
                 </Dropdown.Button>
             </Dropdown.Item>

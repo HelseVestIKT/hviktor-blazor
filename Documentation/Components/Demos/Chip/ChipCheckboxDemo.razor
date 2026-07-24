@@ -27,7 +27,7 @@
 
 <div class="flex flex-col gap-4">
     <Heading level="4">Option</Heading>
-    <div class="flex gap-2 flex-wrap">
+    <div class="flex gap-2 flex-wrap mb-2">
         <Chip.Checkbox value="chip-checkbox-1" name="@checkboxGroupName">
             Option 1
         </Chip.Checkbox>
@@ -38,7 +38,7 @@
             Option 3
         </Chip.Checkbox>
     </div>
-    <Heading level="4" class="mt-4">Multiple</Heading>
+    <Heading level="4">Multiple</Heading>
     <div class="flex gap-2 flex-wrap">
         <Chip.Checkbox value="chip-checkbox-weekday-1" name="@weekdayGroupName"
                        @bind-checked="@(weekdaysState[DayOfWeek.Monday])">

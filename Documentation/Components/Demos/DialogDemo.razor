@@ -10,7 +10,7 @@
     <Icon Definition="@IconSet.ArrowRight"/>
 </Button>
 <Dialog @ref="@DialogRef" Id="@dialogId">
-    <Heading level="2">@Localizer.GetValue("Dialog_ExampleTitle")</Heading>
+    <Heading level="2" class="mb-2!">@Localizer.GetValue("Dialog_ExampleTitle")</Heading>
     <Paragraph>@Localizer.GetValue("Dialog_ExampleContent")</Paragraph>
     <div class="flex gap-2 mt-4">
         <Button @onclick="@(() => DialogRef.Close())" variant="@Variant.Primary" color="@Color.Accent">
