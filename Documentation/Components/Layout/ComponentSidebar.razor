@@ -1,10 +1,17 @@
 ﻿@using Hviktor.Abstractions.Enums.Attributes
-@using Hviktor.Components.Icon
 @using Hviktor.Components.Tag
 @using Hviktor.Components.Typography
-@using Documentation.Components.Services
+@using Hviktor.Components.Input
+@using Hviktor.Components.Search
 
 <nav class="sidebar">
+    <div class="sidebar__search">
+        <Search type="search" id="search-components">
+            <Input value="@filterText" @oninput="@OnSearchInput"
+                   placeholder="Search components..."/>
+            <Search.Clear @onclick="@ClearSearch"/>
+        </Search>
+    </div>
     <ul class="sidebar__list" role="list">
         @{
             var isChangelog = ActiveSlug?.Equals("changelog", StringComparison.OrdinalIgnoreCase) == true;
@@ -21,7 +28,7 @@
                 </li>
             </ul>
         </li>
-        @foreach (var group in Registry.Groups)
+        @foreach (var group in FilteredGroups)
         {
             <li @key="group.Title" class="sidebar__group">
                 <Paragraph class="sidebar__group-title" variant="default" data-weight="semibold">
@@ -38,20 +45,29 @@
                                class="@("ds-link ds-paragraph sidebar__link ds-paragraph" + (isActive ? " active" : ""))"
                                aria-current="@(isActive ? "page" : null)" data-discover="true"
                                @onclick="@(() => SetActive(slug))">
-                                @component.Title
                                 @if (component.IsDeprecated)
                                 {
+                                    <span class="line-through text-(--ds-color-neutral-text-subtle)">
+                                        @component.Title
+                                    </span>
                                     <Tag color="danger" size="sm">Deprecated</Tag>
                                 }
-                                @if (component.IsExperimental)
+                                else
                                 {
-                                    <Tag color="warning" size="sm">Experimental</Tag>
-                                }
-                                @if (component.IsValidated)
-                                {
-                                    <Tag color="success" size="sm">
-                                        <Icon Definition="@DocumentationIconSet.CheckmarkCircle" aria-hidden="true"/>
-                                    </Tag>
+                                    @component.Title
+                                    @if (component.IsExperimental)
+                                    {
+                                        <Tag color="info" size="sm">Experimental</Tag>
+                                    }
+
+                                    @if (component.IsInvalidated)
+                                    {
+                                        <Tag color="warning" size="sm">Invalidated</Tag>
+                                    }
+                                    else if (component.IsValidated)
+                                    {
+                                        <Tag color="success" size="sm">Validated</Tag>
+                                    }
                                 }
                             </a>
                         </li>
@@ -61,10 +77,10 @@
         }
     </ul>
 
-    @if (!Registry.Groups.Any())
+    @if (!FilteredGroups.Any())
     {
         <Paragraph size="@Size.Small" class="sidebar__empty">
-            Ingen komponenter funnet.
+            @(string.IsNullOrWhiteSpace(filterText) ? "Could not find any components." : $"No results for \"{filterText}\".")
         </Paragraph>
     }
 </nav>

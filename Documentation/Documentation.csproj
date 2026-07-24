@@ -23,23 +23,20 @@
         <InternalsVisibleTo Include="Tests.Unit"/>
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
-        <PackageReference Include="Hviktor"/>
-        <PackageReference Include="Hviktor.Extensions"/>
-        <PackageReference Include="Hviktor.Icons"/>
-    </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ItemGroup>
         <ProjectReference Include="..\Hviktor\Hviktor.csproj"/>
         <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
         <ProjectReference Include="..\Hviktor.Extensions\Hviktor.Extensions.csproj"/>
         <ProjectReference Include="..\Hviktor.Icons\Hviktor.Icons.csproj"/>
         <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
-        <!-- Development server for WASM -->
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"/>
         <PackageReference Include="Microsoft.Extensions.Localization"/>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <!-- Development server for WASM -->
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer"/>
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="Resources\DocumentationResources.resx">
@@ -68,31 +65,8 @@
         <None Include="README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
-    <!-- Embed XML doc files from referenced Hviktor (Debug: project references) -->
-    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <EmbeddedResource Include="..\Hviktor\bin\Debug\net10.0\Hviktor.xml"
-                          Link="HviktorXmlDocs\Hviktor.xml"
-                          Condition="Exists('..\Hviktor\bin\Debug\net10.0\Hviktor.xml')"/>
-        <EmbeddedResource Include="..\Hviktor.Abstractions\bin\Debug\net10.0\Hviktor.Abstractions.xml"
-                          Link="HviktorXmlDocs\Hviktor.Abstractions.xml"
-                          Condition="Exists('..\Hviktor.Abstractions\bin\Debug\net10.0\Hviktor.Abstractions.xml')"/>
-        <EmbeddedResource Include="..\Hviktor.Extensions\bin\Debug\net10.0\Hviktor.Extensions.xml"
-                          Link="HviktorXmlDocs\Hviktor.Extensions.xml"
-                          Condition="Exists('..\Hviktor.Extensions\bin\Debug\net10.0\Hviktor.Extensions.xml')"/>
-        <EmbeddedResource Include="..\Hviktor.Icons\bin\Debug\net10.0\Hviktor.Icons.xml"
-                          Link="HviktorXmlDocs\Hviktor.Icons.xml"
-                          Condition="Exists('..\Hviktor.Icons\bin\Debug\net10.0\Hviktor.Icons.xml')"/>
-        <EmbeddedResource Include="..\Hviktor.Icons.Abstractions\bin\Debug\net10.0\Hviktor.Icons.Abstractions.xml"
-                          Link="HviktorXmlDocs\Hviktor.Icons.Abstractions.xml"
-                          Condition="Exists('..\Hviktor.Icons.Abstractions\bin\Debug\net10.0\Hviktor.Icons.Abstractions.xml')"/>
-    </ItemGroup>
-
-    <!--
-        Embed XML doc files from NuGet packages (Release: package references).
-        After references are resolved, find the XML doc file next to each Hviktor DLL.
-    -->
-    <Target Name="EmbedNuGetXmlDocs" BeforeTargets="CoreCompile" AfterTargets="ResolveAssemblyReferences"
-            Condition=" '$(Configuration)' == 'Release' ">
+    <!-- Embed XML doc files from referenced Hviktor projects -->
+    <Target Name="EmbedNuGetXmlDocs" BeforeTargets="CoreCompile" AfterTargets="ResolveAssemblyReferences">
         <ItemGroup>
             <_HviktorRef Include="@(ReferencePath)" Condition="$([System.String]::Copy('%(Filename)').StartsWith('Hviktor'))"/>
             <_HviktorXml Include="@(_HviktorRef->'%(RootDir)%(Directory)%(Filename).xml')"

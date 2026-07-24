@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [ closed ]
     branches: [ main ]
-    paths: [ 'Directory.Packages.props', 'Documentation/Documentation.csproj' ]
+    paths: [ 'Documentation/Documentation.csproj' ]
   workflow_dispatch:
 
 permissions:
@@ -19,14 +19,14 @@ concurrency:
 
 env:
   BASE_PATH: ${{ vars.BASE_PATH }}
-  DOTNET_VERSION: '10.0.x'
-  NODE_VERSION: '24'
+  DOTNET_VERSION: ${{ vars.DOTNET_VERSION }}
+  NODE_VERSION: ${{ vars.NODE_VERSION }}
   NUGET_USER: ${{ github.actor }}
   NUGET_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'docs/v'))
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

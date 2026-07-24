@@ -101,17 +101,6 @@ public sealed partial class Dialog : ComponentBase, IAsyncDisposable
     [Parameter, Required]
     public required string Id { get; set; } = Cryptography.GenerateId();
 
-    private const string CloseButtonFallback = "Close dialog";
-
-    private string CloseButtonDefault
-    {
-        get
-        {
-            var value = Localizer.GetValue("Hviktor.Components.Dialog.Button.Close");
-            return string.IsNullOrWhiteSpace(value) ? CloseButtonFallback : value;
-        }
-    }
-
     /// <summary>
     /// Screen reader label of close button. Set false to hide the close button.
     /// </summary>
@@ -124,7 +113,7 @@ public sealed partial class Dialog : ComponentBase, IAsyncDisposable
     {
         if (string.IsNullOrWhiteSpace(CloseButton))
         {
-            return CloseButtonDefault;
+            return Localizer.GetValue("Hviktor.Components.Dialog.Button.Close");
         }
 
         return CloseButton.Equals("false", StringComparison.OrdinalIgnoreCase) ? string.Empty : CloseButton;

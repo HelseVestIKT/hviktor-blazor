@@ -19,7 +19,8 @@ permissions:
   id-token: write
 
 env:
-  DOTNET_VERSION: '10.0.x'
+  DOTNET_VERSION: ${{ vars.DOTNET_VERSION }}
+  NODE_VERSION: ${{ vars.NODE_VERSION }}
   HVIKTOR_PACKAGES: |-
     Hviktor.Icons.Abstractions
     Hviktor.Abstractions
@@ -65,7 +66,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: 'lts/*'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Build Vite assets for projects with package.json
@@ -99,7 +100,6 @@ jobs:
             dotnet pack "$proj/$proj.csproj" \
               -c Release \
               -p:Version="$VERSION" \
-              -p:UseInternalProjectReferences=true \
               -p:IncludeSymbols=false \
               -o artifacts
             echo "::endgroup::"
@@ -154,15 +154,14 @@ jobs:
           done <<< "$HVIKTOR_PACKAGES"
           echo "::notice::All packages pushed to $NUGET_SOURCE"
 
-  update-docs:
-    name: Trigger documentation version update
+  deploy-docs:
+    name: Trigger documentation deployment
     runs-on: ubuntu-latest
     needs: [ build, publish ]
     steps:
-      - name: Trigger update-docs workflow
+      - name: Trigger deploy-docs workflow
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ needs.build.outputs.version }}
         run: |
-          gh workflow run update-docs.yml --repo "${{ github.repository }}" --field version="$VERSION"
-          echo "::notice::Triggered update-docs for version $VERSION"
+          gh workflow run deploy-docs.yml --repo "${{ github.repository }}"
+          echo "::notice::Triggered deploy-docs"

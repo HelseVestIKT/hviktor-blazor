@@ -13,11 +13,6 @@ on:
         required: false
         default: 'coverage-report'
         type: string
-      dotnet-version:
-        description: '.NET SDK version to use'
-        required: false
-        default: '10.0.x'
-        type: string
       timeout-minutes:
         description: 'Job timeout in minutes'
         required: false
@@ -27,6 +22,10 @@ on:
       SONAR_TOKEN:
         required: true
 
+env:
+  DOTNET_VERSION: ${{ vars.DOTNET_VERSION }}
+  JAVA_VERSION: ${{ vars.JAVA_VERSION }}
+
 jobs:
   analyze:
     name: SonarQube Analysis
@@ -34,10 +33,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654
         with:
-          java-version: 17
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'zulu'
 
       - name: Checkout
@@ -62,7 +61,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2
         with:
-          dotnet-version: ${{ inputs.dotnet-version }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 
