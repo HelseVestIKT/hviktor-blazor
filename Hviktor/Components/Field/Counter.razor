@@ -3,17 +3,17 @@
 @using Hviktor.Components.Typography
 @inherits Hviktor.Models.NestedComponentBase<Hviktor.Components.Field.Field>
 
-<div class="ds-sr-only" aria-live="polite">@GetLabel(HasExceededLimit ? Over : Under, Remainder)</div>
+<div class="ds-sr-only" aria-live="polite">@GetLabel(HasExceededLimit ? EffectiveOver : EffectiveUnder, Remainder)</div>
 @if (HasExceededLimit)
 {
     <Hviktor.Components.Typography.ValidationMessage @attributes="@(ComputeAttributes())">
-        @GetLabel(Over, Remainder)
+        @GetLabel(EffectiveOver, Remainder)
     </Hviktor.Components.Typography.ValidationMessage>
 }
 else
 {
     <Paragraph @attributes="@(ComputeAttributes())" data-variant="default">
-        @GetLabel(Under, Remainder)
+        @GetLabel(EffectiveUnder, Remainder)
     </Paragraph>
 }
 

@@ -15,6 +15,12 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="Hviktor.Components.Field.Counter.Over" xml:space="preserve">
+        <value>{0} characters too many</value>
+    </data>
+    <data name="Hviktor.Components.Field.Counter.Under" xml:space="preserve">
+        <value>{0} characters left</value>
+    </data>
     <data name="Hviktor.Components.Dialog.Button.Close" xml:space="preserve">
         <value>Close dialog</value>
     </data>

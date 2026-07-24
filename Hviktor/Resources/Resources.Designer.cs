@@ -267,6 +267,24 @@ namespace Hviktor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} tegn for mye.
+        /// </summary>
+        public static string Hviktor_Components_Field_Counter_Over {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Field.Counter.Over", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} tegn igjen.
+        /// </summary>
+        public static string Hviktor_Components_Field_Counter_Under {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Field.Counter.Under", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last inn siden på nytt.
         /// </summary>
         public static string Hviktor_Components_Loader_Loader_Button_Refresh {
