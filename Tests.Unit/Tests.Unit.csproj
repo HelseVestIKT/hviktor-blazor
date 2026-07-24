@@ -37,7 +37,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Hviktor\Hviktor.csproj"/>
-        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
         <ProjectReference Include="..\Hviktor.Extensions\Hviktor.Extensions.csproj"/>
+        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
+        <ProjectReference Include="..\Hviktor.Icons\Hviktor.Icons.csproj"/>
+        <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
     </ItemGroup>
 </Project>

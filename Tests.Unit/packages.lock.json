@@ -618,6 +618,12 @@
           "Microsoft.JSInterop": "[10.0.10, )"
         }
       },
+      "hviktor.icons": {
+        "type": "Project",
+        "dependencies": {
+          "Hviktor.Icons.Abstractions": "[1.1.4, )"
+        }
+      },
       "hviktor.icons.abstractions": {
         "type": "Project"
       },

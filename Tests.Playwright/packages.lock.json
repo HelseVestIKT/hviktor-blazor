@@ -607,6 +607,7 @@
         "type": "Project",
         "dependencies": {
           "Hviktor": "[1.1.4, )",
+          "Hviktor.Abstractions": "[1.1.4, )",
           "Hviktor.Extensions": "[1.1.4, )",
           "Hviktor.Icons": "[1.1.4, )",
           "Hviktor.Icons.Abstractions": "[1.1.4, )"

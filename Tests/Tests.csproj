@@ -11,16 +11,12 @@
         <InternalsVisibleTo Include="Tests.Playwright"/>
         <InternalsVisibleTo Include="Tests.Unit"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
-        <PackageReference Include="Hviktor"/>
-        <PackageReference Include="Hviktor.Extensions"/>
-        <PackageReference Include="Hviktor.Icons"/>
-    </ItemGroup>
-    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ItemGroup>
         <ProjectReference Include="..\Hviktor\Hviktor.csproj"/>
-        <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
         <ProjectReference Include="..\Hviktor.Extensions\Hviktor.Extensions.csproj"/>
+        <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
         <ProjectReference Include="..\Hviktor.Icons\Hviktor.Icons.csproj"/>
+        <ProjectReference Include="..\Hviktor.Abstractions\Hviktor.Abstractions.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <_ContentIncludedByDefault Remove="Components\Pages\Components\ButtonComponentTestView.razor"/>
