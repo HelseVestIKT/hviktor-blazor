@@ -12,7 +12,7 @@
  * ```
  */
 
-import { existsSync } from "node:fs";
+import { existsSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -139,6 +139,10 @@ export function build(options = {}) {
 
   if (configuration === "Release") {
     process.env.NODE_ENV = "production";
+    // Remove any stale manifests
+    if (existsSync(manifestPath)) {
+      rmSync(manifestPath);
+    }
   }
 
   const startTime = new Date();
@@ -228,7 +232,10 @@ export function build(options = {}) {
     version: manifestVersion,
   });
 
-  finalizeManifest(manifest, manifestPath, startTime, buildLabel);
+  // Release builds are always clean (CI), so the manifest is not needed for incremental detection
+  finalizeManifest(manifest, manifestPath, startTime, buildLabel, {
+    writeFile: configuration !== "Release",
+  });
 }
 
 // When run directly, build from the current working directory

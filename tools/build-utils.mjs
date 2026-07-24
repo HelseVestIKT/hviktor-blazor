@@ -521,12 +521,17 @@ export function generateManifest({
  * @param {string} manifestPath - Path to write.
  * @param {Date} startTime - Build start time.
  * @param {string} buildLabel - Label for log messages.
+ * @param {object} [options]
+ * @param {boolean} [options.writeFile=true] - Whether to write the manifest to disk.
+ *   Pass `false` for Release builds where the manifest is not needed and must not
+ *   be committed or included in publish output.
  */
 export function finalizeManifest(
   manifest,
   manifestPath,
   startTime,
   buildLabel,
+  { writeFile = true } = {},
 ) {
   const endTime = new Date();
   const duration = (endTime - startTime) / 1000;
@@ -535,7 +540,9 @@ export function finalizeManifest(
   manifest.BuildInfo.EndTime = endTime.toISOString();
   manifest.BuildInfo.DurationSeconds = Number(duration.toFixed(2));
 
-  writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf8");
+  if (writeFile) {
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf8");
+  }
 
   const cssCount = manifest.OutputFiles.filter(
     (f) =>
@@ -559,7 +566,9 @@ export function finalizeManifest(
   log.info(
     `  Total output: ${manifest.OutputFiles.length} files (${totalSizeKB} KB)`,
   );
-  log.success("Manifest saved to: build-manifest.json");
+  if (writeFile) {
+    log.success("Manifest saved to: build-manifest.json");
+  }
   log.success(`${buildLabel} completed in ${duration.toFixed(2)}s`);
   console.log("\n" + "=".repeat(60) + "\n");
 }
