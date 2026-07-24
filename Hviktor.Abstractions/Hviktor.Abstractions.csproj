@@ -18,10 +18,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web"/>
         <PackageReference Include="Microsoft.Extensions.Localization.Abstractions"/>
     </ItemGroup>
-    <ItemGroup Condition=" '$(UseInternalProjectReferences)' != 'true' ">
-        <PackageReference Include="Hviktor.Icons.Abstractions"/>
-    </ItemGroup>
-    <ItemGroup Condition=" '$(UseInternalProjectReferences)' == 'true' ">
+    <ItemGroup>
         <ProjectReference Include="..\Hviktor.Icons.Abstractions\Hviktor.Icons.Abstractions.csproj"/>
     </ItemGroup>
     <ItemGroup>
