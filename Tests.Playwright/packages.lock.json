@@ -593,8 +593,8 @@
         "type": "Project",
         "dependencies": {
           "EPPlus": "[8.5.4, )",
-          "Hviktor.Abstractions": "[1.0.0, )",
-          "Hviktor.Icons.Abstractions": "[1.0.0, )",
+          "Hviktor.Abstractions": "[1.1.4, )",
+          "Hviktor.Icons.Abstractions": "[1.1.4, )",
           "Microsoft.AspNetCore.Components.Authorization": "[10.0.7, )",
           "Microsoft.AspNetCore.Components.Web": "[10.0.7, )",
           "Microsoft.AspNetCore.Localization": "[2.3.9, )",
@@ -604,7 +604,7 @@
       "hviktor.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.0.0, )",
+          "Hviktor.Icons.Abstractions": "[1.1.4, )",
           "Microsoft.AspNetCore.Components": "[10.0.7, )",
           "Microsoft.AspNetCore.Components.Web": "[10.0.7, )",
           "Microsoft.Extensions.Localization.Abstractions": "[10.0.7, )"
@@ -613,7 +613,7 @@
       "hviktor.extensions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Abstractions": "[1.0.0, )",
+          "Hviktor.Abstractions": "[1.1.4, )",
           "Microsoft.AspNetCore.Localization": "[2.3.9, )",
           "Microsoft.Extensions.Localization": "[10.0.7, )",
           "Microsoft.JSInterop": "[10.0.7, )"
@@ -622,7 +622,7 @@
       "hviktor.icons": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+          "Hviktor.Icons.Abstractions": "[1.1.4, )"
         }
       },
       "hviktor.icons.abstractions": {
@@ -631,10 +631,10 @@
       "tests": {
         "type": "Project",
         "dependencies": {
-          "Hviktor": "[1.0.0, )",
-          "Hviktor.Extensions": "[1.0.0, )",
-          "Hviktor.Icons": "[1.0.0, )",
-          "Hviktor.Icons.Abstractions": "[1.0.0, )"
+          "Hviktor": "[1.1.4, )",
+          "Hviktor.Extensions": "[1.1.4, )",
+          "Hviktor.Icons": "[1.1.4, )",
+          "Hviktor.Icons.Abstractions": "[1.1.4, )"
         }
       },
       "EPPlus": {

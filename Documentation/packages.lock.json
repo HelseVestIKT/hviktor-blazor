@@ -4,9 +4,9 @@
     "net10.0": {
       "Microsoft.AspNetCore.App.Internal.Assets": {
         "type": "Direct",
-        "requested": "[10.0.9, )",
-        "resolved": "10.0.9",
-        "contentHash": "E9Wp/LPKAYkGOVBv4lt5U5TnUA/7pov7QZAwF3eI64kK8AAXqkPDwuadEOwpL1WXEfgecYm0fccluvABp32D8g=="
+        "requested": "[10.0.10, )",
+        "resolved": "10.0.10",
+        "contentHash": "8k0KoYKvNrSqP8E3oDJMBVKavlTEE6BacdLGtEDcxv9Hz0XxWFkD6JdLJsxXUlGeAfZ6YfvWmxKenl73qeCTSA=="
       },
       "Microsoft.AspNetCore.Components.WebAssembly": {
         "type": "Direct",
@@ -41,15 +41,15 @@
       },
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
-        "requested": "[10.0.9, )",
-        "resolved": "10.0.9",
-        "contentHash": "4Iw41e2h7I4t70SJcX2GCmbyKJIlA273Cfm9RJMM050/3VBejGAG1KcthP5Z2L6SQcbfbf6BhNWO26+ZG+GzMg=="
+        "requested": "[10.0.10, )",
+        "resolved": "10.0.10",
+        "contentHash": "f5VCIE7AJpd5YvzNTeMGVzQIgyE9tX+AreTYwQF+REbu+DZo/2Ae+jNSwhPEYrVz6RRkd7y8ubXjk6Nn6Ka+Cg=="
       },
       "Microsoft.NET.Sdk.WebAssembly.Pack": {
         "type": "Direct",
-        "requested": "[10.0.9, )",
-        "resolved": "10.0.9",
-        "contentHash": "VZrxevxXB2tmpyRKTbvVCNUt3GsJiOvWokwa7G328bQf7rKap9cNHPWrtPzTAWNphL7b6byHclNu1jc4QXv46w=="
+        "requested": "[10.0.10, )",
+        "resolved": "10.0.10",
+        "contentHash": "gvkxv3MsFo+okExR2N8eo1asV/xnfSSvp8duAGyQARar/V+OStp4QfkFI1Ek6SkT3k7U3+3XLj2nqDFJaEL8Cg=="
       },
       "EPPlus.Interfaces": {
         "type": "Transitive",
@@ -312,8 +312,8 @@
         "type": "Project",
         "dependencies": {
           "EPPlus": "[8.5.4, )",
-          "Hviktor.Abstractions": "[1.1.2, )",
-          "Hviktor.Icons.Abstractions": "[1.1.2, )",
+          "Hviktor.Abstractions": "[1.1.4, )",
+          "Hviktor.Icons.Abstractions": "[1.1.4, )",
           "Microsoft.AspNetCore.Components.Authorization": "[10.0.7, )",
           "Microsoft.AspNetCore.Components.Web": "[10.0.7, )",
           "Microsoft.AspNetCore.Localization": "[2.3.9, )",
@@ -323,7 +323,7 @@
       "hviktor.abstractions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.1.2, )",
+          "Hviktor.Icons.Abstractions": "[1.1.4, )",
           "Microsoft.AspNetCore.Components": "[10.0.7, )",
           "Microsoft.AspNetCore.Components.Web": "[10.0.7, )",
           "Microsoft.Extensions.Localization.Abstractions": "[10.0.7, )"
@@ -332,7 +332,7 @@
       "hviktor.extensions": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Abstractions": "[1.1.2, )",
+          "Hviktor.Abstractions": "[1.1.4, )",
           "Microsoft.AspNetCore.Localization": "[2.3.9, )",
           "Microsoft.Extensions.Localization": "[10.0.7, )",
           "Microsoft.JSInterop": "[10.0.7, )"
@@ -341,7 +341,7 @@
       "hviktor.icons": {
         "type": "Project",
         "dependencies": {
-          "Hviktor.Icons.Abstractions": "[1.1.2, )"
+          "Hviktor.Icons.Abstractions": "[1.1.4, )"
         }
       },
       "hviktor.icons.abstractions": {
