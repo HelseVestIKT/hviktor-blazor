@@ -6,7 +6,7 @@ import { findFiles, normalizeSlashes } from "./fs.mjs";
 
 /**
  * Returns a human-readable file type string for script files based on extension.
- * @param {string} ext - File extension (e.g., `.ts`).
+ * @param {string} ext File extension (e.g., `.ts`).
  * @returns {string} Human-readable file type.
  */
 export function getScriptFileType(ext) {
@@ -26,8 +26,8 @@ export function getScriptFileType(ext) {
 
 /**
  * Scans for source files matching the given patterns, excluding specified paths.
- * @param {Array<{pattern: string[], type: string}>} sourcePatterns - Patterns to match.
- * @param {string[]} [excludePaths] - Paths to exclude.
+ * @param {Array<{pattern: string[], type: string}>} sourcePatterns Patterns to match.
+ * @param {string[]} [excludePaths] Paths to exclude.
  * @returns {Map<string, {path: string, name: string, type: string}>} Source file map keyed by normalized path.
  */
 export function getSourceFiles(sourcePatterns, excludePaths = []) {
@@ -47,9 +47,9 @@ export function getSourceFiles(sourcePatterns, excludePaths = []) {
 
 /**
  * Scans directories for Vite-related source files (TS/JS) and config files.
- * @param {string} projectDir - Project directory (`__dirname` of the calling script).
- * @param {string[]} sourceDirs - Relative directory names to scan for scripts.
- * @param {string[]} configFiles - Config filenames to track.
+ * @param {string} projectDir Project directory (`__dirname` of the calling script).
+ * @param {string[]} sourceDirs Relative directory names to scan for scripts.
+ * @param {string[]} configFiles Config filenames to track.
  * @returns {Map<string, {path: string, name: string, type: string}>} Vite source file map.
  */
 export function getViteSourceFiles(projectDir, sourceDirs, configFiles) {

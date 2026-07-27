@@ -4,7 +4,7 @@ import { log } from "./log.mjs";
 
 /**
  * Parses `--configuration` (or `-c`) from CLI arguments.
- * @param {string[]} argv - Process arguments (typically `process.argv.slice(2)`).
+ * @param {string[]} argv Process arguments (typically `process.argv.slice(2)`).
  * @returns {"Debug"|"Release"} Resolved configuration name.
  */
 export function parseConfiguration(argv) {

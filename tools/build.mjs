@@ -35,7 +35,7 @@ import { generateManifest, finalizeManifest } from "./lib/manifest.mjs";
 
 /**
  * Resolves common path and cache values from raw options.
- * @param {object} options - Raw build options.
+ * @param {object} options Raw build options.
  * @returns {object} Resolved context shared by dev and prod builds.
  */
 function resolveContext(options) {
@@ -97,8 +97,8 @@ function resolveContext(options) {
 
 /**
  * Runs the PostCSS step and pushes the result into `commandResults`.
- * @param {object} ctx - Resolved build context.
- * @param {Array} commandResults - Mutable results array.
+ * @param {object} ctx Resolved build context.
+ * @param {Array} commandResults Mutable results array.
  * @returns {object|null} PostCSS result, or null if skipped.
  */
 function runPostcssBuild(ctx, commandResults) {
@@ -129,8 +129,8 @@ function runPostcssBuild(ctx, commandResults) {
 
 /**
  * Runs the Sass step and pushes the result into `commandResults`.
- * @param {object} ctx - Resolved build context.
- * @param {Array} commandResults - Mutable results array.
+ * @param {object} ctx Resolved build context.
+ * @param {Array} commandResults Mutable results array.
  * @returns {object|null} Sass result, or null if disabled.
  */
 function runSassBuild(ctx, commandResults) {
@@ -146,9 +146,9 @@ function runSassBuild(ctx, commandResults) {
 
 /**
  * Runs the Vite + pnpm steps and pushes results into `commandResults`.
- * @param {object} ctx - Resolved build context.
- * @param {Array} commandResults - Mutable results array.
- * @param {boolean} [clean=false] - When true, always runs a frozen-lockfile install (for production).
+ * @param {object} ctx Resolved build context.
+ * @param {Array} commandResults Mutable results array.
+ * @param {boolean} [clean=false] When true, always runs a frozen-lockfile install (for production).
  */
 function runViteBuild(ctx, commandResults, clean = false) {
   const installResult = clean
@@ -173,7 +173,7 @@ function runViteBuild(ctx, commandResults, clean = false) {
 /**
  * Development build: runs incremental change detection, compiles assets, and writes a manifest.
  *
- * @param {object} options - Build options (see `build` for full parameter docs).
+ * @param {object} options Build options (see `build` for full parameter docs).
  */
 export function buildDev(options = {}) {
   const ctx = resolveContext(options);
@@ -264,7 +264,7 @@ export function buildDev(options = {}) {
  * Production build: compiles all assets without incremental detection or manifest generation.
  * Faster than `buildDev` because it skips all bookkeeping not needed in CI.
  *
- * @param {object} options - Build options (see `build` for full parameter docs).
+ * @param {object} options Build options (see `build` for full parameter docs).
  */
 export function buildProd(options = {}) {
   process.env.NODE_ENV = "production";
@@ -291,18 +291,18 @@ export function buildProd(options = {}) {
  * Runs a CSS (+ optional Vite) build for a project.
  * Delegates to `buildDev` for Debug and `buildProd` for Release.
  *
- * @param {object} options - Build configuration.
- * @param {string} options.projectDir - Absolute path to the project directory.
- * @param {string} [options.rootPath] - Absolute path to the repository root. Defaults to parent of projectDir.
- * @param {string} [options.configuration] - "Debug" or "Release". Defaults to parsing process.argv.
- * @param {string} [options.manifestVersion] - Manifest schema version. Defaults to "2.0" with Vite, "1.5" without.
- * @param {Array<{pattern: string[], type: string}>} [options.sourcePatterns] - Source file glob patterns.
- * @param {string[]} [options.viteSourceDirs] - Directories containing Vite source files.
- * @param {string[]} [options.viteConfigFileNames] - Vite-related config file names to watch.
- * @param {boolean} [options.enableVite] - Whether to run Vite build. Defaults to auto-detect via vite.config.js.
- * @param {boolean} [options.requirePostcss] - If true, fail when no PostCSS input is found. Defaults to false.
- * @param {boolean} [options.enableSass] - Whether to run the Sass build step. Defaults to true.
- * @param {string} [options.postcssInput] - Explicit PostCSS entry file path, bypassing content-based detection.
+ * @param {object} options Build configuration.
+ * @param {string} options.projectDir Absolute path to the project directory.
+ * @param {string} [options.rootPath] Absolute path to the repository root. Defaults to parent of projectDir.
+ * @param {string} [options.configuration] "Debug" or "Release". Defaults to parsing process.argv.
+ * @param {string} [options.manifestVersion] Manifest schema version. Defaults to "2.0" with Vite, "1.5" without.
+ * @param {Array<{pattern: string[], type: string}>} [options.sourcePatterns] Source file glob patterns.
+ * @param {string[]} [options.viteSourceDirs] Directories containing Vite source files.
+ * @param {string[]} [options.viteConfigFileNames] Vite-related config file names to watch.
+ * @param {boolean} [options.enableVite] Whether to run Vite build. Defaults to auto-detect via vite.config.js.
+ * @param {boolean} [options.requirePostcss] If true, fail when no PostCSS input is found. Defaults to false.
+ * @param {boolean} [options.enableSass] Whether to run the Sass build step. Defaults to true.
+ * @param {string} [options.postcssInput] Explicit PostCSS entry file path, bypassing content-based detection.
  */
 export function build(options = {}) {
   const configuration =

@@ -8,8 +8,8 @@ import { getSourceFiles } from "./sources.mjs";
 
 /**
  * Checks whether output files listed in the manifest have changed.
- * @param {object} manifest - Parsed build manifest.
- * @param {object} fileCache - File cache instance.
+ * @param {object} manifest Parsed build manifest.
+ * @param {object} fileCache File cache instance.
  * @returns {{needed: boolean, reason?: string}} Whether a rebuild is needed.
  */
 export function checkOutputFiles(manifest, fileCache) {
@@ -26,10 +26,10 @@ export function checkOutputFiles(manifest, fileCache) {
 
 /**
  * Checks whether source files listed in the manifest have changed or new files appeared.
- * @param {object} manifest - Parsed build manifest.
- * @param {Array<{pattern: string[], type: string}>} sourcePatterns - Source patterns.
- * @param {object} fileCache - File cache instance.
- * @param {Map} [extraSourceFiles] - Additional source files to check (e.g., Vite sources).
+ * @param {object} manifest Parsed build manifest.
+ * @param {Array<{pattern: string[], type: string}>} sourcePatterns Source patterns.
+ * @param {object} fileCache File cache instance.
+ * @param {Map} [extraSourceFiles] Additional source files to check (e.g., Vite sources).
  * @returns {{needed: boolean, reason?: string}} Whether a rebuild is needed.
  */
 export function checkSourceFiles(
@@ -73,12 +73,12 @@ export function checkSourceFiles(
 
 /**
  * Full change detection: checks manifest existence, config, outputs, and sources.
- * @param {object} options - Options.
- * @param {string} options.manifestPath - Path to `build-manifest.json`.
- * @param {string} options.configuration - Current build configuration.
- * @param {Array} options.sourcePatterns - Source file patterns.
- * @param {object} options.fileCache - File cache instance.
- * @param {Map} [options.extraSourceFiles] - Additional source files (e.g., Vite).
+ * @param {object} options Options.
+ * @param {string} options.manifestPath Path to `build-manifest.json`.
+ * @param {string} options.configuration Current build configuration.
+ * @param {Array} options.sourcePatterns Source file patterns.
+ * @param {object} options.fileCache File cache instance.
+ * @param {Map} [options.extraSourceFiles] Additional source files (e.g., Vite).
  * @returns {{needed: boolean, reason?: string}} Whether a rebuild is needed.
  */
 export function checkIfBuildNeeded({

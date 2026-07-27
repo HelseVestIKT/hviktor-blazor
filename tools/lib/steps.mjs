@@ -8,11 +8,11 @@ import { findFiles, findFileWithContent, normalizeSlashes } from "./fs.mjs";
 
 /**
  * Runs a command, restricted to an allow-list of permitted executables.
- * @param {string} cmd - Command name (must be in `allowedCommands`).
- * @param {string[]} cmdArgs - Arguments.
- * @param {string} description - Human-readable description for error messages.
- * @param {string} cwd - Working directory.
- * @param {string[]} [allowedCommands] - Allowed command names.
+ * @param {string} cmd Command name (must be in `allowedCommands`).
+ * @param {string[]} cmdArgs Arguments.
+ * @param {string} description Human-readable description for error messages.
+ * @param {string} cwd Working directory.
+ * @param {string[]} [allowedCommands] Allowed command names.
  * @returns {{success: boolean, exitCode: number}} Result.
  */
 export function runCommand(
@@ -44,14 +44,14 @@ export function runCommand(
 
 /**
  * Runs a CSS build step (PostCSS or Sass) and tracks timing and results.
- * @param {object} options - Build step options.
- * @param {string} options.name - Step name (e.g., "PostCSS (Tailwind)").
- * @param {() => string|null} options.findInput - Function returning the input file path.
- * @param {(input: string, output: string) => string[]} options.getArgs - Function returning npx arguments.
- * @param {(input: string) => string} options.getOutput - Function returning the output file path.
- * @param {string} options.rootPath - Repository root for relative paths.
- * @param {string} options.cwd - Working directory for the command.
- * @param {object} options.fileCache - File cache instance from `createFileCache`.
+ * @param {object} options Build step options.
+ * @param {string} options.name Step name (e.g., "PostCSS (Tailwind)").
+ * @param {() => string|null} options.findInput Function returning the input file path.
+ * @param {(input: string, output: string) => string[]} options.getArgs Function returning npx arguments.
+ * @param {(input: string) => string} options.getOutput Function returning the output file path.
+ * @param {string} options.rootPath Repository root for relative paths.
+ * @param {string} options.cwd Working directory for the command.
+ * @param {object} options.fileCache File cache instance from `createFileCache`.
  * @returns {object} Build step result with timing and paths.
  */
 export function runBuildStep({
@@ -106,11 +106,11 @@ export function runBuildStep({
 
 /**
  * Standard PostCSS build step configuration.
- * @param {string} stylesDir - Styles directory.
- * @param {string} rootPath - Repository root.
- * @param {string} cwd - Working directory.
- * @param {object} fileCache - File cache instance.
- * @param {string} [explicitInput] - Optional explicit input file, bypassing content-based detection.
+ * @param {string} stylesDir Styles directory.
+ * @param {string} rootPath Repository root.
+ * @param {string} cwd Working directory.
+ * @param {object} fileCache File cache instance.
+ * @param {string} [explicitInput] Optional explicit input file, bypassing content-based detection.
  * @returns {object} Options for `runBuildStep`.
  */
 export function postcssStep(
@@ -146,10 +146,10 @@ export function postcssStep(
 
 /**
  * Standard Sass build step configuration.
- * @param {string} stylesDir - Styles directory.
- * @param {string} rootPath - Repository root.
- * @param {string} cwd - Working directory.
- * @param {object} fileCache - File cache instance.
+ * @param {string} stylesDir Styles directory.
+ * @param {string} rootPath Repository root.
+ * @param {string} cwd Working directory.
+ * @param {object} fileCache File cache instance.
  * @returns {object} Options for `runBuildStep`.
  */
 export function sassStep(stylesDir, rootPath, cwd, fileCache) {
@@ -179,7 +179,7 @@ export function sassStep(stylesDir, rootPath, cwd, fileCache) {
 /**
  * Ensures pnpm dependencies are installed. Skips if `node_modules` already exists.
  * Use in development builds only. For production, use `cleanInstallPnpmDependencies`.
- * @param {string} projectDir - Project directory.
+ * @param {string} projectDir Project directory.
  * @returns {object|null} Command result for the manifest, or null if skipped.
  */
 export function ensurePnpmDependencies(projectDir) {
@@ -222,7 +222,7 @@ export function ensurePnpmDependencies(projectDir) {
 /**
  * Runs a clean pnpm install using `--frozen-lockfile` (equivalent to `npm ci`).
  * Always installs fresh, ignoring any existing `node_modules`. Use in production builds.
- * @param {string} projectDir - Project directory.
+ * @param {string} projectDir Project directory.
  * @returns {object} Command result for the manifest.
  */
 export function cleanInstallPnpmDependencies(projectDir) {
@@ -258,9 +258,9 @@ export function cleanInstallPnpmDependencies(projectDir) {
 
 /**
  * Builds Vite assets (JS/TS bundling).
- * @param {string} projectDir - Project directory.
- * @param {string} configuration - "Debug" or "Release".
- * @param {string} distDir - Expected output directory for verification.
+ * @param {string} projectDir Project directory.
+ * @param {string} configuration "Debug" or "Release".
+ * @param {string} distDir Expected output directory for verification.
  * @returns {object|null} Command result for the manifest, or null if no `vite.config.js` found.
  */
 export function buildViteAssets(projectDir, configuration, distDir) {

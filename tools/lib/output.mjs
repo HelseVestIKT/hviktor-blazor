@@ -7,9 +7,9 @@ import { collectDistFiles, normalizeSlashes } from "./fs.mjs";
 
 /**
  * Collects output file metadata for CSS build outputs.
- * @param {string[]} outputPaths - Absolute paths to output files.
- * @param {string} rootPath - Repository root for relative paths.
- * @param {object} fileCache - File cache instance.
+ * @param {string[]} outputPaths Absolute paths to output files.
+ * @param {string} rootPath Repository root for relative paths.
+ * @param {object} fileCache File cache instance.
  * @returns {object[]} Output file metadata array.
  */
 export function collectOutputFiles(outputPaths, rootPath, fileCache) {
@@ -32,9 +32,9 @@ export function collectOutputFiles(outputPaths, rootPath, fileCache) {
 
 /**
  * Collects Vite dist output files with metadata for the manifest.
- * @param {string} distDir - Vite output directory.
- * @param {string} rootPath - Repository root for relative paths.
- * @param {object} fileCache - File cache instance.
+ * @param {string} distDir Vite output directory.
+ * @param {string} rootPath Repository root for relative paths.
+ * @param {object} fileCache File cache instance.
  * @returns {object[]} Output file metadata array.
  */
 export function collectViteOutputFiles(distDir, rootPath, fileCache) {

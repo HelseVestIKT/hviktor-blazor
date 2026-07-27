@@ -39,7 +39,7 @@ export function createFileCache() {
 
 /**
  * Finds files matching a glob pattern.
- * @param {string|string[]} pattern - Glob pattern or path segments.
+ * @param {string|string[]} pattern Glob pattern or path segments.
  * @returns {string[]} Normalized file paths.
  */
 export const findFiles = (pattern) =>
@@ -47,9 +47,9 @@ export const findFiles = (pattern) =>
 
 /**
  * Finds a file in a directory whose content matches a regex.
- * @param {string} dir - Directory to search.
- * @param {string} pattern - Glob pattern for filenames.
- * @param {RegExp} contentMatch - Regex to match file content.
+ * @param {string} dir Directory to search.
+ * @param {string} pattern Glob pattern for filenames.
+ * @param {RegExp} contentMatch Regex to match file content.
  * @returns {string|null} Matched file path, or null.
  */
 export function findFileWithContent(dir, pattern, contentMatch) {
@@ -63,8 +63,8 @@ export function findFileWithContent(dir, pattern, contentMatch) {
 
 /**
  * Recursively collects files from a directory matching specified extensions.
- * @param {string} dir - Directory to scan.
- * @param {string[]} [exts] - File extensions to match.
+ * @param {string} dir Directory to scan.
+ * @param {string[]} [exts] File extensions to match.
  * @returns {string[]} Normalized file paths.
  */
 export function collectDistFiles(dir, exts = [".js", ".css", ".json"]) {

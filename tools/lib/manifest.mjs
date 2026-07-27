@@ -8,18 +8,18 @@ import { getScriptFileType } from "./sources.mjs";
 
 /**
  * Generates the build manifest object.
- * @param {object} options - Manifest options.
- * @param {Map} options.sourceFileMap - Source file map.
- * @param {string} [options.entryFile] - PostCSS entry file path.
- * @param {string} [options.sassFile] - Sass entry file path.
- * @param {object[]} options.commandResults - Build step results.
- * @param {object[]} options.outputFiles - Output file metadata.
- * @param {string} options.configuration - Build configuration.
- * @param {string} options.rootPath - Repository root for relative paths.
- * @param {string} options.scriptPath - Path to the calling script (`__filename`).
- * @param {object} options.fileCache - File cache instance.
- * @param {string} [options.version] - Manifest version string.
- * @param {(file: string, type: string) => string} [options.getFileType] - Custom file type resolver.
+ * @param {object} options Manifest options.
+ * @param {Map} options.sourceFileMap Source file map.
+ * @param {string} [options.entryFile] PostCSS entry file path.
+ * @param {string} [options.sassFile] Sass entry file path.
+ * @param {object[]} options.commandResults Build step results.
+ * @param {object[]} options.outputFiles Output file metadata.
+ * @param {string} options.configuration Build configuration.
+ * @param {string} options.rootPath Repository root for relative paths.
+ * @param {string} options.scriptPath Path to the calling script (`__filename`).
+ * @param {object} options.fileCache File cache instance.
+ * @param {string} [options.version] Manifest version string.
+ * @param {(file: string, type: string) => string} [options.getFileType] Custom file type resolver.
  * @returns {object} Manifest object.
  */
 export function generateManifest({
@@ -114,12 +114,12 @@ export function generateManifest({
 
 /**
  * Writes the manifest to disk and logs a build summary.
- * @param {object} manifest - Manifest object.
- * @param {string} manifestPath - Path to write.
- * @param {Date} startTime - Build start time.
- * @param {string} buildLabel - Label for log messages.
+ * @param {object} manifest Manifest object.
+ * @param {string} manifestPath Path to write.
+ * @param {Date} startTime Build start time.
+ * @param {string} buildLabel Label for log messages.
  * @param {object} [options]
- * @param {boolean} [options.writeFile=true] - Whether to write the manifest to disk.
+ * @param {boolean} [options.writeFile=true] Whether to write the manifest to disk.
  *   Pass `false` for Release builds where the manifest must not be committed or included in publish output.
  */
 export function finalizeManifest(
