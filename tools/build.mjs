@@ -3,7 +3,7 @@
  * Reusable CSS + Vite Build Script
  *
  * Can be invoked directly or imported as a library.
- * When imported, call `build(options)` with project-specific configuration.
+ * When imported, call `build(options)`, `buildDev(options)`, or `buildProd(options)`.
  *
  * @example
  * ```js
@@ -15,95 +15,33 @@
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-
+import { log } from "./lib/log.mjs";
+import { createFileCache, normalizeSlashes } from "./lib/fs.mjs";
+import { parseConfiguration } from "./lib/config.mjs";
+import { getSourceFiles, getViteSourceFiles } from "./lib/sources.mjs";
+import { checkIfBuildNeeded } from "./lib/detection.mjs";
 import {
-  buildViteAssets,
-  checkIfBuildNeeded,
-  collectOutputFiles,
-  collectViteOutputFiles,
-  createFileCache,
-  ensurePnpmDependencies,
-  finalizeManifest,
-  generateManifest,
-  getSourceFiles,
-  getViteSourceFiles,
-  log,
-  normalizeSlashes,
-  parseConfiguration,
-  postcssStep,
   runBuildStep,
+  postcssStep,
   sassStep,
-} from "./build-utils.mjs";
+  ensurePnpmDependencies,
+  cleanInstallPnpmDependencies,
+  buildViteAssets,
+} from "./lib/steps.mjs";
+import { collectOutputFiles, collectViteOutputFiles } from "./lib/output.mjs";
+import { generateManifest, finalizeManifest } from "./lib/manifest.mjs";
+
+// --- Shared helpers ---
 
 /**
- * Runs the PostCSS build step and appends the result to `commandResults`.
- * Returns the postcss result, or `null` if skipped.
- *
- * @param {object} postcssOptions: Options object returned by `postcssStep`.
- * @param {boolean} requirePostcss: Whether to abort when no PostCSS entry file is found.
- * @param {Array} commandResults: Mutable array to push successful step results into.
- * @returns {object|null}: The PostCSS build result, or `null` when skipped.
+ * Resolves common path and cache values from raw options.
+ * @param {object} options Raw build options.
+ * @returns {object} Resolved context shared by dev and prod builds.
  */
-function runPostcssBuild(postcssOptions, requirePostcss, commandResults) {
-  const hasPostcssInput = !!postcssOptions.findInput();
-
-  if (hasPostcssInput) {
-    const result = runBuildStep(postcssOptions);
-    commandResults.push(result);
-    return result;
-  }
-
-  if (requirePostcss) {
-    log.error("No PostCSS entry file found but PostCSS is required");
-    process.exit(1);
-  }
-
-  log.section("PostCSS");
-  log.info("No PostCSS entry file found - skipping PostCSS step");
-  return null;
-}
-
-/**
- * Runs the Vite build step and appends results to `commandResults`.
- *
- * @param {string} projectDir: Absolute path to the project directory.
- * @param {string} configuration: Build configuration ("Debug" or "Release").
- * @param {string} distDir: Output directory for Vite assets.
- * @param {Array} commandResults: Mutable array to push successful step results into.
- */
-function runViteBuild(projectDir, configuration, distDir, commandResults) {
-  const npmResult = ensurePnpmDependencies(projectDir);
-  if (npmResult) {
-    commandResults.push(npmResult);
-  }
-
-  const viteResult = buildViteAssets(projectDir, configuration, distDir);
-  if (viteResult) {
-    commandResults.push(viteResult);
-  }
-}
-
-/**
- * Runs a CSS (+ optional Vite) build for a project.
- *
- * @param {object} options: Build configuration.
- * @param {string} options.projectDir: Absolute path to the project directory.
- * @param {string} [options.rootPath]: Absolute path to the repository root. Defaults to parent of projectDir.
- * @param {string} [options.configuration]: "Debug" or "Release". Defaults to parsing process.argv.
- * @param {string} [options.manifestVersion]: Manifest schema version. Defaults to "2.0" with Vite, "1.5" without.
- * @param {Array<{pattern: string[], type: string}>} [options.sourcePatterns]: Source file glob patterns.
- * @param {string[]} [options.viteSourceDirs]: Directories containing Vite source files.
- * @param {string[]} [options.viteConfigFileNames]: Vite-related config file names to watch.
- * @param {boolean} [options.enableVite]: Whether to run Vite build. Defaults to auto-detect via vite.config.js.
- * @param {boolean} [options.requirePostcss]: If true, fail when no PostCSS input is found. Defaults to false.
- * @param {boolean} [options.enableSass]: Whether to run the Sass build step. Defaults to true.
- * @param {string} [options.postcssInput]: Explicit PostCSS entry file path, bypassing content-based detection.
- */
-export function build(options = {}) {
+function resolveContext(options) {
   const {
     projectDir,
     rootPath = dirname(projectDir),
-    configuration = parseConfiguration(process.argv.slice(2)),
     sourcePatterns: customSourcePatterns,
     viteSourceDirs = [
       "wwwroot/scripts",
@@ -120,6 +58,7 @@ export function build(options = {}) {
     requirePostcss = false,
     enableSass = true,
     postcssInput,
+    configuration,
   } = options;
 
   const manifestVersion =
@@ -137,24 +76,125 @@ export function build(options = {}) {
     },
   ];
 
-  if (configuration === "Release") {
-    process.env.NODE_ENV = "production";
+  return {
+    projectDir,
+    rootPath,
+    configuration,
+    manifestVersion,
+    manifestPath,
+    stylesDir,
+    distDir,
+    fileCache,
+    sourcePatterns,
+    viteSourceDirs,
+    viteConfigFileNames,
+    enableVite,
+    requirePostcss,
+    enableSass,
+    postcssInput,
+  };
+}
+
+/**
+ * Runs the PostCSS step and pushes the result into `commandResults`.
+ * @param {object} ctx Resolved build context.
+ * @param {Array} commandResults Mutable results array.
+ * @returns {object|null} PostCSS result, or null if skipped.
+ */
+function runPostcssBuild(ctx, commandResults) {
+  const options = postcssStep(
+    ctx.stylesDir,
+    ctx.rootPath,
+    ctx.projectDir,
+    ctx.fileCache,
+    ctx.postcssInput,
+  );
+  const hasInput = !!options.findInput();
+
+  if (hasInput) {
+    const result = runBuildStep(options);
+    commandResults.push(result);
+    return result;
   }
 
-  const startTime = new Date();
-  const buildLabel = enableVite ? "CSS + Vite Build" : "CSS Build";
-  log.header(`${buildLabel} - ${configuration} Configuration`);
+  if (ctx.requirePostcss) {
+    log.error("No PostCSS entry file found but PostCSS is required");
+    process.exit(1);
+  }
 
-  log.section("Checking if rebuild is needed");
-  const viteSourceFiles = enableVite
-    ? getViteSourceFiles(projectDir, viteSourceDirs, viteConfigFileNames)
+  log.section("PostCSS");
+  log.info("No PostCSS entry file found - skipping PostCSS step");
+  return null;
+}
+
+/**
+ * Runs the Sass step and pushes the result into `commandResults`.
+ * @param {object} ctx Resolved build context.
+ * @param {Array} commandResults Mutable results array.
+ * @returns {object|null} Sass result, or null if disabled.
+ */
+function runSassBuild(ctx, commandResults) {
+  if (!ctx.enableSass) {
+    return null;
+  }
+  const result = runBuildStep(
+    sassStep(ctx.stylesDir, ctx.rootPath, ctx.projectDir, ctx.fileCache),
+  );
+  commandResults.push(result);
+  return result;
+}
+
+/**
+ * Runs the Vite + pnpm steps and pushes results into `commandResults`.
+ * @param {object} ctx Resolved build context.
+ * @param {Array} commandResults Mutable results array.
+ * @param {boolean} [clean=false] When true, always runs a frozen-lockfile install (for production).
+ */
+function runViteBuild(ctx, commandResults, clean = false) {
+  const installResult = clean
+    ? cleanInstallPnpmDependencies(ctx.projectDir)
+    : ensurePnpmDependencies(ctx.projectDir);
+  if (installResult) {
+    commandResults.push(installResult);
+  }
+
+  const viteResult = buildViteAssets(
+    ctx.projectDir,
+    ctx.configuration,
+    ctx.distDir,
+  );
+  if (viteResult) {
+    commandResults.push(viteResult);
+  }
+}
+
+// --- Public API ---
+
+/**
+ * Development build: runs incremental change detection, compiles assets, and writes a manifest.
+ *
+ * @param {object} options Build options (see `build` for full parameter docs).
+ */
+export function buildDev(options = {}) {
+  const ctx = resolveContext(options);
+  const buildLabel = ctx.enableVite ? "CSS + Vite Build" : "CSS Build";
+
+  log.header(`${buildLabel} - Development`);
+
+  const viteSourceFiles = ctx.enableVite
+    ? getViteSourceFiles(
+        ctx.projectDir,
+        ctx.viteSourceDirs,
+        ctx.viteConfigFileNames,
+      )
     : new Map();
 
+  log.section("Checking if rebuild is needed");
   const buildCheck = checkIfBuildNeeded({
-    manifestPath,
-    configuration,
-    sourcePatterns,
-    fileCache,
+    manifestPath: ctx.manifestPath,
+    configuration: ctx.configuration,
+    sourcePatterns: ctx.sourcePatterns,
+    fileCache: ctx.fileCache,
     extraSourceFiles: viteSourceFiles,
   });
 
@@ -164,48 +204,37 @@ export function build(options = {}) {
   }
 
   log.info(buildCheck.reason);
+
+  const startTime = new Date();
   const commandResults = [];
 
-  // PostCSS
-  const postcss = runPostcssBuild(
-    postcssStep(stylesDir, rootPath, projectDir, fileCache, postcssInput),
-    requirePostcss,
-    commandResults,
-  );
-
-  // Sass
-  let sass = null;
-  if (enableSass) {
-    sass = runBuildStep(sassStep(stylesDir, rootPath, projectDir, fileCache));
-    commandResults.push(sass);
+  const postcss = runPostcssBuild(ctx, commandResults);
+  const sass = runSassBuild(ctx, commandResults);
+  if (ctx.enableVite) {
+    runViteBuild(ctx, commandResults);
   }
 
-  // Vite
-  if (enableVite) {
-    runViteBuild(projectDir, configuration, distDir, commandResults);
-  }
-
-  // Collect output files
   log.section("Collecting output files");
-  const cssOutputPaths = [];
-  if (postcss) {
-    cssOutputPaths.push(postcss.outputPath);
-  }
-  if (sass) {
-    cssOutputPaths.push(sass.outputPath);
-  }
-  const cssOutputs = collectOutputFiles(cssOutputPaths, rootPath, fileCache);
-  const viteOutputs = enableVite
-    ? collectViteOutputFiles(distDir, rootPath, fileCache)
+  const cssOutputPaths = [postcss?.outputPath, sass?.outputPath].filter(
+    Boolean,
+  );
+  const cssOutputs = collectOutputFiles(
+    cssOutputPaths,
+    ctx.rootPath,
+    ctx.fileCache,
+  );
+  const viteOutputs = ctx.enableVite
+    ? collectViteOutputFiles(ctx.distDir, ctx.rootPath, ctx.fileCache)
     : [];
   const outputFiles = [...cssOutputs, ...viteOutputs];
 
-  // Generate manifest
   log.section("Generating manifest");
   const allOutputPaths = outputFiles.map((f) => f.Path);
-  const sourceFileMap = getSourceFiles(sourcePatterns, allOutputPaths);
+  const sourceFileMap = getSourceFiles(ctx.sourcePatterns, allOutputPaths);
   for (const [path, info] of viteSourceFiles) {
-    if (!sourceFileMap.has(path)) sourceFileMap.set(path, info);
+    if (!sourceFileMap.has(path)) {
+      sourceFileMap.set(path, info);
+    }
   }
 
   const entryFile = postcss
@@ -221,14 +250,65 @@ export function build(options = {}) {
     sassFile,
     commandResults,
     outputFiles,
-    configuration,
-    rootPath,
-    scriptPath: join(projectDir, "build.mjs"),
-    fileCache,
-    version: manifestVersion,
+    configuration: ctx.configuration,
+    rootPath: ctx.rootPath,
+    scriptPath: join(ctx.projectDir, "build.mjs"),
+    fileCache: ctx.fileCache,
+    version: ctx.manifestVersion,
   });
 
-  finalizeManifest(manifest, manifestPath, startTime, buildLabel);
+  finalizeManifest(manifest, ctx.manifestPath, startTime, buildLabel);
+}
+
+/**
+ * Production build: compiles all assets without incremental detection or manifest generation.
+ * Faster than `buildDev` because it skips all bookkeeping not needed in CI.
+ *
+ * @param {object} options Build options (see `build` for full parameter docs).
+ */
+export function buildProd(options = {}) {
+  process.env.NODE_ENV = "production";
+  const ctx = resolveContext(options);
+  const buildLabel = ctx.enableVite ? "CSS + Vite Build" : "CSS Build";
+
+  log.header(`${buildLabel} - Production`);
+
+  const startTime = new Date();
+  const commandResults = [];
+
+  runPostcssBuild(ctx, commandResults);
+  runSassBuild(ctx, commandResults);
+  if (ctx.enableVite) {
+    runViteBuild(ctx, commandResults, true);
+  }
+
+  const duration = ((new Date() - startTime) / 1000).toFixed(2);
+  log.success(`${buildLabel} completed in ${duration}s`);
+  console.log("\n" + "=".repeat(60) + "\n");
+}
+
+/**
+ * Runs a CSS (+ optional Vite) build for a project.
+ * Delegates to `buildDev` for Debug and `buildProd` for Release.
+ *
+ * @param {object} options Build configuration.
+ * @param {string} options.projectDir Absolute path to the project directory.
+ * @param {string} [options.rootPath] Absolute path to the repository root. Defaults to parent of projectDir.
+ * @param {string} [options.configuration] "Debug" or "Release". Defaults to parsing process.argv.
+ * @param {string} [options.manifestVersion] Manifest schema version. Defaults to "2.0" with Vite, "1.5" without.
+ * @param {Array<{pattern: string[], type: string}>} [options.sourcePatterns] Source file glob patterns.
+ * @param {string[]} [options.viteSourceDirs] Directories containing Vite source files.
+ * @param {string[]} [options.viteConfigFileNames] Vite-related config file names to watch.
+ * @param {boolean} [options.enableVite] Whether to run Vite build. Defaults to auto-detect via vite.config.js.
+ * @param {boolean} [options.requirePostcss] If true, fail when no PostCSS input is found. Defaults to false.
+ * @param {boolean} [options.enableSass] Whether to run the Sass build step. Defaults to true.
+ * @param {string} [options.postcssInput] Explicit PostCSS entry file path, bypassing content-based detection.
+ */
+export function build(options = {}) {
+  const configuration =
+    options.configuration ?? parseConfiguration(process.argv.slice(2));
+  const resolved = { ...options, configuration };
+  return configuration === "Release" ? buildProd(resolved) : buildDev(resolved);
 }
 
 // When run directly, build from the current working directory
