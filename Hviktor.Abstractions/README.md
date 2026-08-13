@@ -109,7 +109,7 @@ public class ColorService : IParameterService<Color>
 ## Documentation
 
 The documentation for Hviktor is written in English and is available
-at [Website (helsevestikt.github.io)](https://helsevestikt.github.io/hviktor-blazor/), or
+at [Website (blazor.hviktor.no)](https://blazor.hviktor.no/), or
 via [Wiki](https://github.com/HelseVestIKT/hviktor-blazor/wiki).
 
 Wiki documentation shortcuts:

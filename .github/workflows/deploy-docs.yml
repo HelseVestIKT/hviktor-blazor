@@ -92,9 +92,10 @@ jobs:
 
       # Inject BasePath into appsettings.json
       - name: Set BasePath in appsettings.json
+        if: env.BASE_PATH != '/'
         working-directory: Documentation
         run: |
-          BASE_HREF="/${{ env.BASE_PATH }}/"
+          BASE_HREF="${{ env.BASE_PATH }}"
           echo "Setting BasePath to: $BASE_HREF"
           tmp=$(mktemp)
           jq --arg bp "$BASE_HREF" '.BasePath = $bp' appsettings.json > "$tmp" && mv "$tmp" appsettings.json
@@ -137,13 +138,14 @@ jobs:
           grep 'base href' output/wwwroot/index.html || true
 
       - name: Update base href
+        if: env.BASE_PATH != '/'
         run: |
-          sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/entry.template.html
-          sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/index.html
-          sed -i 's|<base href="/" */>|<base href="/${{ env.BASE_PATH }}/"/>|g' output/wwwroot/404.html
-          grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/entry.template.html || (echo "ERROR: entry.template.html base href rewrite failed" && exit 1)
-          grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/index.html || (echo "ERROR: index.html base href rewrite failed" && exit 1)
-          grep -q 'base href="/${{ env.BASE_PATH }}/"' output/wwwroot/404.html  || (echo "ERROR: 404.html base href rewrite failed" && exit 1)
+          sed -i 's|<base href="/" */>|<base href="${{ env.BASE_PATH }}"/>|g' output/wwwroot/entry.template.html
+          sed -i 's|<base href="/" */>|<base href="${{ env.BASE_PATH }}"/>|g' output/wwwroot/index.html
+          sed -i 's|<base href="/" */>|<base href="${{ env.BASE_PATH }}"/>|g' output/wwwroot/404.html
+          grep -q 'base href="${{ env.BASE_PATH }}"' output/wwwroot/entry.template.html || (echo "ERROR: entry.template.html base href rewrite failed" && exit 1)
+          grep -q 'base href="${{ env.BASE_PATH }}"' output/wwwroot/index.html || (echo "ERROR: index.html base href rewrite failed" && exit 1)
+          grep -q 'base href="${{ env.BASE_PATH }}"' output/wwwroot/404.html  || (echo "ERROR: 404.html base href rewrite failed" && exit 1)
           if grep -q 'var segmentCount = 0;' output/wwwroot/404.html; then
             sed -i 's|var segmentCount = 0;|var segmentCount = 1;|g' output/wwwroot/404.html
           fi
