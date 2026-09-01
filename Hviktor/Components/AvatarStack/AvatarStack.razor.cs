@@ -174,8 +174,18 @@ public partial class AvatarStack : ComponentBase
             var isNumeric = int.TryParse(overlapStr, out var overlapInt);
             if (isNumeric)
             {
-                var percentage = overlapInt > 0 ? overlapInt / 100d : 0d;
-                builder.AddStyles($"--dsc-avatar-stack-overlap: calc({percentage} * var(--dsc-avatar-stack-size));");
+                var calcOverlapValue = "0px";
+                if (overlapInt is > 0 and < 100)
+                {
+                    var percentage = overlapInt / 100d;
+                    calcOverlapValue = $"calc({percentage} * var(--dsc-avatar-stack-size))";
+                }
+                else if (overlapInt >= 100)
+                {
+                    calcOverlapValue = "var(--dsc-avatar-stack-size)";
+                }
+
+                builder.AddStyles($"--dsc-avatar-stack-overlap: {calcOverlapValue};");
             }
         }
 
