@@ -1,4 +1,5 @@
-﻿using Hviktor.Rendering;
+﻿using Hviktor.Abstractions.Interfaces.Localization;
+using Hviktor.Rendering;
 using Microsoft.AspNetCore.Components;
 
 namespace Hviktor.Components.RequiredTag;
@@ -48,6 +49,8 @@ namespace Hviktor.Components.RequiredTag;
 /// </parameters>
 public partial class RequiredTag : ComponentBase
 {
+    [Inject] private IStringLocalizerService<Resources.Resources> Localizer { get; set; } = null!;
+
     private bool required;
     private string mode = "default";
 
