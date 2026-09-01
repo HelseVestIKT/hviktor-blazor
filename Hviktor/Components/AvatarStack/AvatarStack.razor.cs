@@ -167,24 +167,17 @@ public partial class AvatarStack : ComponentBase
             builder.AddStyles($"--dsc-avatar-stack-size: {avatarSizeCss};");
         }
 
+        // Calculate the overlap percentage from avatar size and convert it to a pixel value
         var overlapStr = builder.ConsumeAttribute("overlap");
-        var isNumeric = int.TryParse(overlapStr, out var overlapInt);
-        if (!isNumeric)
+        if (overlapStr is not null)
         {
-            overlapInt = 50;
+            var isNumeric = int.TryParse(overlapStr, out var overlapInt);
+            if (isNumeric)
+            {
+                var percentage = overlapInt > 0 ? overlapInt / 100d : 0d;
+                builder.AddStyles($"--dsc-avatar-stack-overlap: calc({percentage} * var(--dsc-avatar-stack-size));");
+            }
         }
-
-        if (overlapInt < 0)
-        {
-            overlapInt = 0;
-        }
-
-        if (overlapInt > 100)
-        {
-            overlapInt = 100;
-        }
-
-        builder.AddStyles($"--dsc-avatar-stack-overlap: {overlapInt};");
 
         // Convert regular suffix to data attribute
         var suffix = builder.ConsumeAttribute("suffix");
