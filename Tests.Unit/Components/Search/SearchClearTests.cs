@@ -1,4 +1,5 @@
-﻿using Bunit;
+﻿using System.Globalization;
+using Bunit;
 using Search;
 
 namespace Tests.Unit.Components.Search;
@@ -10,6 +11,7 @@ public class SearchClearTests : HviktorBunitContext
 {
     public SearchClearTests()
     {
+        CultureInfo.CurrentUICulture = new CultureInfo("en");
         JSInterop.Mode = JSRuntimeMode.Loose;
     }
 
@@ -43,7 +45,18 @@ public class SearchClearTests : HviktorBunitContext
             .AddChildContent<Clear>());
 
         var button = component.Find("button");
-        Assert.Equal("Tøm", button.GetAttribute("aria-label"));
+        Assert.NotNull(button.GetAttribute("aria-label"));
+    }
+
+    [Fact]
+    public void SearchClear_HasLocalizedAriaLabel()
+    {
+        var component = Render<Hviktor.Components.Search.Search>(parameters => parameters
+            .Add(p => p.Id, "test-search")
+            .AddChildContent<Clear>());
+
+        var button = component.Find("button");
+        Assert.Equal("Clear", button.GetAttribute("aria-label"));
     }
 
     [Fact]

@@ -1,4 +1,5 @@
-﻿using Bunit;
+﻿using System.Globalization;
+using Bunit;
 using Hviktor.Abstractions.Enums.Attributes;
 using Search;
 
@@ -11,6 +12,7 @@ public class SearchIntegrationTests : HviktorBunitContext
 {
     public SearchIntegrationTests()
     {
+        CultureInfo.CurrentUICulture = new CultureInfo("en");
         JSInterop.Mode = JSRuntimeMode.Loose;
     }
 
@@ -115,11 +117,11 @@ public class SearchIntegrationTests : HviktorBunitContext
 
         // Check clear button
         var clearButton = component.Find("button[type='reset']");
-        Assert.Equal("Tøm", clearButton.GetAttribute("aria-label"));
+        Assert.Equal("Clear", clearButton.GetAttribute("aria-label"));
 
         // Check submit button  
         var submitButton = component.Find("button[type='submit']");
-        Assert.Equal("Søk", submitButton.GetAttribute("aria-label"));
+        Assert.Equal("Search", submitButton.GetAttribute("aria-label"));
         Assert.Equal("primary", submitButton.GetAttribute("data-variant"));
     }
 }
