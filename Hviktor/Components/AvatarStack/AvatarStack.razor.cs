@@ -153,14 +153,14 @@ public partial class AvatarStack : ComponentBase
             builder.AddDataAttribute("size", SizeService.GetDataAttribute(size));
         }
 
-        CssLength gap = builder.ConsumeAttribute("gap") ?? "2px";
+        CssLength gap = builder.ConsumeAttribute("gap");
         var gapCss = gap.ToCssString();
         if (gapCss is not null)
         {
             builder.AddStyles($"--dsc-avatar-stack-gap: {gapCss};");
         }
 
-        CssLength avatarSize = builder.ConsumeAttribute("avatarSize") ?? builder.ConsumeAttribute("avatar-size") ?? "var(--ds-size-12)";
+        CssLength avatarSize = builder.ConsumeAttribute("avatarSize") ?? builder.ConsumeAttribute("avatar-size");
         var avatarSizeCss = avatarSize.ToCssString();
         if (avatarSizeCss is not null)
         {
