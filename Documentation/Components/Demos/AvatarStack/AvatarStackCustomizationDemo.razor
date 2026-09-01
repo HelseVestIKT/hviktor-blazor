@@ -14,6 +14,8 @@
     private void SetOverlap(ChangeEventArgs args) => overlap = args.Value?.ToString() is null ? overlap : int.Parse(args.Value.ToString()!);
     private int gap = 2;
     private void SetGap(ChangeEventArgs args) => gap = args.Value?.ToString() is null ? gap : int.Parse(args.Value.ToString()!);
+    private int radius = 32;
+    private void SetRadius(ChangeEventArgs args) => radius = args.Value?.ToString() is null ? radius : int.Parse(args.Value.ToString()!);
 
     private const string LabelClasses = "flex flex-col gap-2 accent-(--ds-color-base-default)";
 }
@@ -54,9 +56,20 @@
                 value="@gap"
                 @onchange="@SetGap"/>
         </Label>
+        <Label class="@LabelClasses">
+            radius @(radius)px
+            <input
+                min="0"
+                max="75"
+                step="1"
+                type="range"
+                value="@radius"
+                @onchange="@SetRadius"/>
+        </Label>
     </fieldset>
 
-    <AvatarStack overlap="@overlap" gap="@gap" square="@square" expandable="@expandable" avatarSize="@size">
+    <AvatarStack overlap="@overlap" gap="@gap" square="@square" expandable="@expandable" avatarSize="@size"
+                 radius="@radius">
         <li>
             <Avatar aria-label="" variant="@(square ? "square" : "circle")">
                 <img src="assets/img/cats/cat1.webp" alt=""/>

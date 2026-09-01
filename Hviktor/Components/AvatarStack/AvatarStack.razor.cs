@@ -59,6 +59,16 @@ namespace Hviktor.Components.AvatarStack;
 ///   </item>
 ///   <item>
 ///     <term>
+///       <b>radius</b>: <see cref="int"/> | <see cref="double"/><br/>
+///       <i>(optional)</i>
+///     </term>
+///     <description>
+///       <b>Default</b>: <see langword="600"/>px<br/>
+///       <b>Description</b>: The border radius of the avatars in the stack. Must be a valid css length value (px, em, rem, var(--ds-size-12) etc.)
+///     </description>
+///   </item>
+///   <item>
+///     <term>
 ///       <b>overlap</b>: <see cref="int"/> | <see cref="double"/><br/>
 ///       <i>(optional)</i>
 ///     </term>
@@ -187,6 +197,13 @@ public partial class AvatarStack : ComponentBase
 
                 builder.AddStyles($"--dsc-avatar-stack-overlap: {calcOverlapValue};");
             }
+        }
+
+        CssLength radius = builder.ConsumeAttribute("radius");
+        var radiusCss = radius.ToCssString();
+        if (radiusCss is not null)
+        {
+            builder.AddStyles($"--dsc-avatar-stack-radius: {radiusCss};");
         }
 
         // Convert regular suffix to data attribute
