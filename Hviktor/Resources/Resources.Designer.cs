@@ -303,6 +303,60 @@ namespace Hviktor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Valgfritt.
+        /// </summary>
+        public static string Hviktor_Components_RequiredTag_Optional {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.RequiredTag.Optional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alle felt er valgfrie.
+        /// </summary>
+        public static string Hviktor_Components_RequiredTag_Optional_All {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.RequiredTag.Optional.All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Må fylles ut.
+        /// </summary>
+        public static string Hviktor_Components_RequiredTag_Required {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.RequiredTag.Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alle felt må fylles ut.
+        /// </summary>
+        public static string Hviktor_Components_RequiredTag_Required_All {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.RequiredTag.Required.All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Søk.
+        /// </summary>
+        public static string Hviktor_Components_Search_Button_AriaLabel {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Search.Button.AriaLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tøm.
+        /// </summary>
+        public static string Hviktor_Components_Search_Clear_AriaLabel {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Search.Clear.AriaLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tøm valg.
         /// </summary>
         public static string Hviktor_Components_Suggestion_Clear {

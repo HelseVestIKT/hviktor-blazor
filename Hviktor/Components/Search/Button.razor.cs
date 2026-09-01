@@ -1,4 +1,5 @@
-﻿using Hviktor.Models;
+﻿using Hviktor.Abstractions.Interfaces.Localization;
+using Hviktor.Models;
 using Hviktor.Rendering;
 using Microsoft.AspNetCore.Components;
 
@@ -10,6 +11,8 @@ namespace Search;
 /// </summary>
 public partial class Button : AsyncNestedComponentBase<Hviktor.Components.Search.Search>
 {
+    [Inject] private IStringLocalizerService<Hviktor.Resources.Resources> Localizer { get; set; } = null!;
+
     /// <summary>
     /// Represents the content to be rendered inside the Button component.
     /// This property is typically assigned a render fragment, which defines a section of UI to be rendered.
@@ -30,5 +33,5 @@ public partial class Button : AsyncNestedComponentBase<Hviktor.Components.Search
         => HtmlAttributeBuilder.ToDictionary(base.ComputeAttributes())
             .AddIdentity(() => Parent is not null, $"{Parent?.Id}-submit")
             .AddAttribute("type", "submit")
-            .AddAttribute("aria-label", "Søk");
+            .AddAttribute("aria-label", Localizer.GetValue("Hviktor.Components.Search.Button.AriaLabel"));
 }
