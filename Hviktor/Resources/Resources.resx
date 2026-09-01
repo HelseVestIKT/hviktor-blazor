@@ -53,18 +53,6 @@
     <data name="Hviktor.Components.CodeBlock.AriaLabel" xml:space="preserve">
         <value>Kopier kodeblokk</value>
     </data>
-    <data name="Hviktor.Components.RequiredTag.Required" xml:space="preserve">
-        <value>Må fylles ut</value>
-    </data>
-    <data name="Hviktor.Components.RequiredTag.Required.All" xml:space="preserve">
-        <value>Alle felt må fylles ut</value>
-    </data>
-    <data name="Hviktor.Components.RequiredTag.Optional" xml:space="preserve">
-        <value>Valgfritt</value>
-    </data>
-    <data name="Hviktor.Components.RequiredTag.Optional.All" xml:space="preserve">
-        <value>Alle felt er valgfrie</value>
-    </data>
     <data name="Hviktor.Components.Search.Button.AriaLabel" xml:space="preserve">
         <value>Søk</value>
     </data>
