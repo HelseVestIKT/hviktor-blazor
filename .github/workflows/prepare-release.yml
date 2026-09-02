@@ -46,7 +46,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run changelog action
-        uses: ModKit-org/actions/changelog@351df1ed808c8be5b270438cd616c930740f4cce
+        uses: ModKit-org/actions/changelog@f4191ed3f37585c0d34986a912fc741375abb645
         with:
           tag-name: ${{ inputs.tag_name }}
           prerelease: ${{ inputs.prerelease }}
@@ -54,7 +54,7 @@ jobs:
 
       - name: Commit release metadata
         if: github.event_name == 'workflow_dispatch'
-        uses: ModKit-org/actions/commit@351df1ed808c8be5b270438cd616c930740f4cce
+        uses: ModKit-org/actions/commit@f4191ed3f37585c0d34986a912fc741375abb645
         with:
           commit-message: "chore: update release metadata for ${{ inputs.tag_name }}"
           paths: Directory.Build.props

@@ -72,7 +72,7 @@ jobs:
       - name: Create or update pull request
         id: pr
         if: steps.check-version.outputs.skip != 'true'
-        uses: ModKit-org/actions/create-pr@351df1ed808c8be5b270438cd616c930740f4cce
+        uses: ModKit-org/actions/create-pr@f4191ed3f37585c0d34986a912fc741375abb645
         with:
           delete-branch-on-failure: true
           branch: automated/update-hviktor-icons
