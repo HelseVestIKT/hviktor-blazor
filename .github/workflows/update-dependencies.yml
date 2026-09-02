@@ -70,11 +70,13 @@ jobs:
 
       - name: Create or update pull request
         if: steps.check-outdated.outputs.has_updates == 'true'
-        uses: ModKit-org/actions/create-pr@f4bfd802c50c8c119ebf858dc7f076f339a5557a
+        uses: ModKit-org/actions/create-pr@f4191ed3f37585c0d34986a912fc741375abb645
         with:
           delete-branch-on-failure: true
           branch: automated/update-dependencies
           commit-message: "build: update npm dependencies"
+          signing-method: github
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           pr-body: |
             ## Automated Dependency Update
 
@@ -90,4 +92,3 @@ jobs:
           labels: |
             dependencies
             automated
-          github-token: ${{ secrets.GITHUB_TOKEN }}
