@@ -75,8 +75,8 @@ jobs:
           delete-branch-on-failure: true
           branch: automated/update-dependencies
           commit-message: "build: update npm dependencies"
-          signing-method: github
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          signing-method: ssh
+          ssh-signing-key: ${{ secrets.COMMIT_SSH_SIGNING_KEY }}
           pr-body: |
             ## Automated Dependency Update
 
@@ -92,3 +92,4 @@ jobs:
           labels: |
             dependencies
             automated
+          github-token: ${{ secrets.GITHUB_TOKEN }}
