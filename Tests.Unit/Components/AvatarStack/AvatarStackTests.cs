@@ -7,7 +7,6 @@ namespace Tests.Unit.Components.AvatarStack;
 [Trait(TestCollections.Traits.Component, "AvatarStack")]
 public class AvatarStackTests : HviktorBunitContext
 {
-
     [Fact]
     [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
     public void AvatarStack_RendersWithDefaultValues()
@@ -18,19 +17,19 @@ public class AvatarStackTests : HviktorBunitContext
         var avatarStack = component.Find(".ds-avatar-stack");
 
         var styles = avatarStack.GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 50;", styles);
-        Assert.Contains("--dsc-avatar-stack-size: var(--ds-size-12);", styles);
-        Assert.Contains("--dsc-avatar-stack-gap: 2px;", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-overlap", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-size", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-gap", styles);
     }
 
     [Fact]
     [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
-    public void AvatarStack_RendersSpanElement()
+    public void AvatarStack_RendersUlElement()
     {
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
 
         var element = component.Find(".ds-avatar-stack");
-        Assert.Equal("SPAN", element.TagName);
+        Assert.Equal("UL", element.TagName);
     }
 
     [Fact]
@@ -39,7 +38,7 @@ public class AvatarStackTests : HviktorBunitContext
     {
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
 
-        var element = component.Find("span");
+        var element = component.Find("UL");
         Assert.Contains("ds-avatar-stack", element.ClassList);
     }
 
@@ -56,7 +55,7 @@ public class AvatarStackTests : HviktorBunitContext
 
     [Fact]
     [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
-    public void AvatarStack_WithoutChildContent_RendersEmptySpan()
+    public void AvatarStack_WithoutChildContent_RendersEmptyUl()
     {
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
 
@@ -145,7 +144,7 @@ public class AvatarStackTests : HviktorBunitContext
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-gap: 2px;", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-gap", styles); // Default is 2px, which is explicitly set in the CSS
     }
 
     [Fact]
@@ -181,7 +180,7 @@ public class AvatarStackTests : HviktorBunitContext
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-size: var(--ds-size-12);", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-size", styles); // Default is var(--ds-size-12), which is explicitly set in the CSS
     }
 
     [Fact]
@@ -212,12 +211,12 @@ public class AvatarStackTests : HviktorBunitContext
 
     [Fact]
     [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
-    public void AvatarStack_DefaultOverlap_Is50()
+    public void AvatarStack_DefaultOverlap_IsCssValue()
     {
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 50;", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-overlap", styles); // Default is 50%, which is explicitly set in the CSS
     }
 
     [Fact]
@@ -228,7 +227,7 @@ public class AvatarStackTests : HviktorBunitContext
             .AddUnmatched("overlap", "75"));
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 75;", styles);
+        Assert.Contains("--dsc-avatar-stack-overlap: calc(0.75 * var(--dsc-avatar-stack-size));", styles);
     }
 
     [Fact]
@@ -239,7 +238,7 @@ public class AvatarStackTests : HviktorBunitContext
             .AddUnmatched("overlap", "-10"));
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 0;", styles);
+        Assert.Contains("--dsc-avatar-stack-overlap: 0px;", styles);
     }
 
     [Fact]
@@ -250,18 +249,18 @@ public class AvatarStackTests : HviktorBunitContext
             .AddUnmatched("overlap", "150"));
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 100;", styles);
+        Assert.Contains("--dsc-avatar-stack-overlap: var(--dsc-avatar-stack-size);", styles);
     }
 
     [Fact]
     [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
-    public void AvatarStack_OverlapDefaultsTo50_WhenNonNumeric()
+    public void AvatarStack_OverlapDefaultsToCss_WhenNonNumeric()
     {
         var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
             .AddUnmatched("overlap", "abc"));
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 50;", styles);
+        Assert.DoesNotContain("--dsc-avatar-stack-overlap", styles);
     }
 
     [Fact]
@@ -272,7 +271,7 @@ public class AvatarStackTests : HviktorBunitContext
             .AddUnmatched("overlap", "0"));
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 0;", styles);
+        Assert.Contains("--dsc-avatar-stack-overlap: 0px;", styles);
     }
 
     [Fact]
@@ -283,7 +282,121 @@ public class AvatarStackTests : HviktorBunitContext
             .AddUnmatched("overlap", "100"));
 
         var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
-        Assert.Contains("--dsc-avatar-stack-overlap: 100;", styles);
+        Assert.Contains("--dsc-avatar-stack-overlap: var(--dsc-avatar-stack-size);", styles);
+    }
+
+    #endregion
+
+    #region Radius
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_DefaultRadius_IsCssValue()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>();
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.DoesNotContain("--dsc-avatar-stack-radius", styles); // Default is approximately 600px, which is explicitly set in the CSS
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsAnyValidCss()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "clamp(1rem, 5vw, 3rem)"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: clamp(1rem, 5vw, 3rem);", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsPxValue()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "8px"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: 8px;", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsRemValue()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "0.5rem"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: 0.5rem;", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsEmValue()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "1em"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: 1em;", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsPercentageValue()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "50%"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: 50%;", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsNumericValue_ConvertsToPixels()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "12"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: 12px;", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusZero_EmitsNoStyle()
+    {
+        // CssLength treats bare "0" as empty (no unit needed for zero) — no custom property is emitted.
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "0"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.DoesNotContain("--dsc-avatar-stack-radius", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsCssVariable()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "var(--ds-border-radius-full)"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: var(--ds-border-radius-full);", styles);
+    }
+
+    [Fact]
+    [Trait(TestCollections.Traits.Category, TestCollections.Categories.Rendering)]
+    public void AvatarStack_RadiusAcceptsMultipleValues()
+    {
+        var component = Render<Hviktor.Components.AvatarStack.AvatarStack>(p => p
+            .AddUnmatched("radius", "4px 8px"));
+
+        var styles = component.Find(".ds-avatar-stack").GetAttribute("style");
+        Assert.Contains("--dsc-avatar-stack-radius: 4px 8px;", styles);
     }
 
     #endregion

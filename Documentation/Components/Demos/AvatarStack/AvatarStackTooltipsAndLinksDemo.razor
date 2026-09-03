@@ -1,4 +1,4 @@
-﻿@using Hviktor.Components.Avatar
+@using Hviktor.Components.Avatar
 @using Hviktor.Components.AvatarStack
 @using Hviktor.Components.Icon
 @using Hviktor.Components.Tooltip
@@ -7,68 +7,67 @@
 
 <div class="flex flex-wrap gap-4">
     <fieldset>
-        <legend>Link + Tooltip</legend>
-        <AvatarStack overlap="20" aria-label="contributors">
+        <legend>Tooltip</legend>
+        <AvatarStack overlap="20" aria-label="contributors"
+                     expandable="fixed">
             <Tooltip content="Ola Nordmann">
-                <Avatar aria-label="" asChild>
-                    <a href="#">
+                <li>
+                    <Avatar aria-label="">
                         <img src="assets/img/cats/cat1.webp" alt=""/>
-                    </a>
-                </Avatar>
+                    </Avatar>
+                </li>
             </Tooltip>
             <Tooltip content="Kari Nordmann">
-                <Avatar aria-label="" asChild>
-                    <a href="#">
+                <li>
+                    <Avatar aria-label="">
                         <img src="assets/img/cats/cat6.webp" alt=""/>
-                    </a>
-                </Avatar>
+                    </Avatar>
+                </li>
             </Tooltip>
             <Tooltip content="Person 2">
-                <Avatar aria-label="" asChild>
-                    <a href="#">
+                <li>
+                    <Avatar aria-label="">
                         <img src="assets/img/cats/cat1.webp" alt=""/>
-                    </a>
-                </Avatar>
+                    </Avatar>
+                </li>
             </Tooltip>
             <Tooltip content="Person 3">
-                <Avatar aria-label="" asChild>
-                    <a href="#">BR</a>
-                </Avatar>
+                <li>
+                    <Avatar aria-label="">BR</Avatar>
+                </li>
             </Tooltip>
         </AvatarStack>
     </fieldset>
     <fieldset>
         <legend>Link + Tooltip expandable</legend>
-        <AvatarStack
-            overlap="50"
-            expandable="fixed"
-            aria-label="contributors"
-        >
+        <AvatarStack overlap="50"
+                     aria-label="contributors"
+                     expandable>
             <Tooltip content="Ola Nordmann">
-                <Avatar aria-label="" asChild>
-                    <a href="#">
+                <li>
+                    <Avatar aria-label="">
                         <img src="assets/img/cats/cat6.webp" alt=""/>
-                    </a>
-                </Avatar>
+                    </Avatar>
+                </li>
             </Tooltip>
             <Tooltip content="Kari Nordmann">
-                <Avatar aria-label="" asChild>
-                    <a href="#">
+                <li>
+                    <Avatar aria-label="">
                         <img src="assets/img/cats/cat1.webp" alt=""/>
-                    </a>
-                </Avatar>
+                    </Avatar>
+                </li>
             </Tooltip>
             <Tooltip content="Person 2">
-                <Avatar aria-label="" asChild>
-                    <a href="#">
+                <li>
+                    <Avatar aria-label="">
                         <img src="assets/img/cats/cat6.webp" alt=""/>
-                    </a>
-                </Avatar>
+                    </Avatar>
+                </li>
             </Tooltip>
             <Tooltip content="Person 3">
-                <Avatar aria-label="" asChild>
-                    <a href="#">BR</a>
-                </Avatar>
+                <li>
+                    <Avatar aria-label="">BR</Avatar>
+                </li>
             </Tooltip>
         </AvatarStack>
     </fieldset>

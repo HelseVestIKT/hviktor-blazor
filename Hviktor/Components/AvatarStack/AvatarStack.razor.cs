@@ -59,6 +59,16 @@ namespace Hviktor.Components.AvatarStack;
 ///   </item>
 ///   <item>
 ///     <term>
+///       <b>radius</b>: <see cref="int"/> | <see cref="double"/><br/>
+///       <i>(optional)</i>
+///     </term>
+///     <description>
+///       <b>Default</b>: <see langword="600"/>px<br/>
+///       <b>Description</b>: The border radius of the avatars in the stack. Must be a valid css length value (px, em, rem, var(--ds-size-12) etc.)
+///     </description>
+///   </item>
+///   <item>
+///     <term>
 ///       <b>overlap</b>: <see cref="int"/> | <see cref="double"/><br/>
 ///       <i>(optional)</i>
 ///     </term>
@@ -153,38 +163,48 @@ public partial class AvatarStack : ComponentBase
             builder.AddDataAttribute("size", SizeService.GetDataAttribute(size));
         }
 
-        CssLength gap = builder.ConsumeAttribute("gap") ?? "2px";
+        CssLength gap = builder.ConsumeAttribute("gap");
         var gapCss = gap.ToCssString();
         if (gapCss is not null)
         {
             builder.AddStyles($"--dsc-avatar-stack-gap: {gapCss};");
         }
 
-        CssLength avatarSize = builder.ConsumeAttribute("avatarSize") ?? builder.ConsumeAttribute("avatar-size") ?? "var(--ds-size-12)";
+        CssLength avatarSize = builder.ConsumeAttribute("avatarSize") ?? builder.ConsumeAttribute("avatar-size");
         var avatarSizeCss = avatarSize.ToCssString();
         if (avatarSizeCss is not null)
         {
             builder.AddStyles($"--dsc-avatar-stack-size: {avatarSizeCss};");
         }
 
+        // Calculate the overlap percentage from avatar size and convert it to a pixel value
         var overlapStr = builder.ConsumeAttribute("overlap");
-        var isNumeric = int.TryParse(overlapStr, out var overlapInt);
-        if (!isNumeric)
+        if (overlapStr is not null)
         {
-            overlapInt = 50;
+            var isNumeric = int.TryParse(overlapStr, out var overlapInt);
+            if (isNumeric)
+            {
+                var calcOverlapValue = "0px";
+                if (overlapInt is > 0 and < 100)
+                {
+                    var percentage = overlapInt / 100d;
+                    calcOverlapValue = $"calc({percentage} * var(--dsc-avatar-stack-size))";
+                }
+                else if (overlapInt >= 100)
+                {
+                    calcOverlapValue = "var(--dsc-avatar-stack-size)";
+                }
+
+                builder.AddStyles($"--dsc-avatar-stack-overlap: {calcOverlapValue};");
+            }
         }
 
-        if (overlapInt < 0)
+        CssLength radius = builder.ConsumeAttribute("radius");
+        var radiusCss = radius.ToCssString();
+        if (radiusCss is not null)
         {
-            overlapInt = 0;
+            builder.AddStyles($"--dsc-avatar-stack-radius: {radiusCss};");
         }
-
-        if (overlapInt > 100)
-        {
-            overlapInt = 100;
-        }
-
-        builder.AddStyles($"--dsc-avatar-stack-overlap: {overlapInt};");
 
         // Convert regular suffix to data attribute
         var suffix = builder.ConsumeAttribute("suffix");
