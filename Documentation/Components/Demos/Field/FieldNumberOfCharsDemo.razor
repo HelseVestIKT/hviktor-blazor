@@ -1,9 +1,24 @@
 ﻿@using Hviktor.Components.Field
 @using Hviktor.Components.Textarea
 @using Hviktor.Components.Typography
+@using Hviktor.Security
+
+@code {
+
+    private readonly string id = Cryptography.GenerateId();
+    private string CounterId => "counter-id-" + id;
+    private string LabelId => "label-id-" + id;
+    private string Value { get; set; } = string.Empty;
+    private int Count => Value.Length;
+}
 
 <Field>
-    <Label>Add a description</Label>
-    <Textarea rows="2"></Textarea>
-    <Field.Counter limit="10"/>
+    <Label id="@LabelId">Add a description</Label>
+    <Textarea id="@id" value="@Value" @oninput="@(args =>
+                                       {
+                                           Value = args.Value?.ToString() ?? string.Empty;
+                                           StateHasChanged();
+                                       })" rows="2" aria-describedby="@CounterId"
+              aria-labelledby="@LabelId"></Textarea>
+    <Field.Counter id="@CounterId" limit="10" Count="@Count"/>
 </Field>

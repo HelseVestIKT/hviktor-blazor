@@ -33,6 +33,16 @@ public class SearchInputTests : HviktorBunitContext
     }
 
     [Fact]
+    public void SearchInput_HasTypeSearch()
+    {
+        var component = Render<Hviktor.Components.Search.Search>(parameters => parameters
+            .AddChildContent<global::Search.Input>());
+
+        var input = component.Find("input");
+        Assert.Contains("search", input.GetAttribute("type"));
+    }
+
+    [Fact]
     public void SearchInput_HasGeneratedId()
     {
         var component = Render<Hviktor.Components.Search.Search>(parameters => parameters

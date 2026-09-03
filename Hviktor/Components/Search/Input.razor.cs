@@ -11,6 +11,7 @@ public partial class Input : AsyncNestedComponentBase<Hviktor.Components.Search.
 {
     /// <inheritdoc/>
     protected override Dictionary<string, object?> ComputeAttributes() => HtmlAttributeBuilder.ToDictionary(base.ComputeAttributes())
+        .AddAttribute("type", "search")
         .AddIdentity(() => Parent is not null, $"{Parent?.Id}-input")
         .AddClasses("ds-input");
 }

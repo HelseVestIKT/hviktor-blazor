@@ -133,8 +133,7 @@ public sealed class ComponentRegistry
                 [
                     new DemoInfo(typeof(AlertDemo), Display: "inline-block")
                 ],
-                "https://designsystemet.no/en/components/docs/alert/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/alert/overview"),
             new ComponentInfo("avatar", "Avatar",
                 typeof(Avatar),
                 [
@@ -143,8 +142,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(AvatarColorsDemo), "Colors", "<see cref=\"Avatar\"/> is available in all colours in your theme."),
                     new DemoInfo(typeof(AvatarVariantsDemo), "Variants", "<see cref=\"Avatar\"/> can be round or square. Use them consistently throughout your solution."),
                 ],
-                "https://designsystemet.no/en/components/docs/avatar/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/avatar/overview"),
             new ComponentInfo("avatar-stack", "AvatarStack",
                 typeof(AvatarStack),
                 [
@@ -155,7 +153,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(AvatarStackExpandableDemo), "Expandable", "In some cases, it may be desirable to expand the stack on hover and focus. This functionality is off by default."),
                     new DemoInfo(typeof(AvatarStackVariantsDemo), "Variants", "`AvatarStack` supports both round and square variants, but only one variant per stack."),
                     new DemoInfo(typeof(AvatarStackIndicatingAvatarNotShownDemo), "Indicating avatars not shown", "When there are more avatars than can be displayed in the stack, there are two different ways to indicate this."),
-                    new DemoInfo(typeof(AvatarStackTooltipsAndLinksDemo), "Tooltips and links", "`Avatar`s in `AvatarStack` can have tooltips and be links, but be aware of accessibility considerations.", IsNotSupported: true),
+                    new DemoInfo(typeof(AvatarStackTooltipsAndLinksDemo), "Tooltips", "`Avatar`s in `AvatarStack` can have tooltips, but be aware of accessibility considerations."),
                 ],
                 "https://designsystemet.no/en/components/docs/avatar-stack/overview",
                 IsExperimental: true),
@@ -168,7 +166,6 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(BadgeCustomPlacementDemo), "Custom Placement", "Badges can be placed at custom positions relative to their associated content."),
                 ],
                 "https://designsystemet.no/en/components/docs/badge/overview",
-                IsValidated: true,
                 SubComponents:
                 [
                     new SubComponentInfo("Badge.Position", typeof(Badge.Position))
@@ -181,8 +178,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(BreadcrumbsPathOnlyDemo), "Path only", "If you only put Breadcrumbs.List directly in Breadcrumbs, it will always be displayed as a path. This means that you will get the same display on both mobile and desktop."),
                     new DemoInfo(typeof(BreadcrumbsPathOrBackButtonOnlyDemo), "Path or back button based on screen width", "If you put both a Breadcrumbs.Link and a Breadcrumbs.List directly in Breadcrumbs, the back button will be displayed on screens narrower than 650px, and the path will be displayed on wider screens.")
                 ],
-                "https://designsystemet.no/en/components/docs/breadcrumbs/overview",
-                IsInvalidated: true),
+                "https://designsystemet.no/en/components/docs/breadcrumbs/overview"),
             new ComponentInfo("button", "Button",
                 typeof(Button),
                 [
@@ -194,8 +190,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(ButtonLoadingDemo)),
                     new DemoInfo(typeof(ButtonDisabledDemo))
                 ],
-                "https://designsystemet.no/en/components/docs/button/overview",
-                IsInvalidated: true),
+                "https://designsystemet.no/en/components/docs/button/overview"),
             new ComponentInfo("card", "Card",
                 typeof(Hviktor.Components.Card.Card),
                 [
@@ -206,8 +201,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(CardAsLinkDemo), "Card as a link", "The entire card can become a link by using asChild. This is useful when you want all text and content in the Card to be read by screen readers as one continuous link.\n\nIn this example, Card renders as <a>.", IsNotSupported: true),
                     new DemoInfo(typeof(CardHorizontalDemo), "Horizontal", "You can switch between `display: flex` and `display: grid` to place `Card.Block` next to each other.\n**Note** that if you're using tailwind CSS you should set `grid! (display: grid !important)` for the horizontal to take effect.")
                 ],
-                "https://designsystemet.no/en/components/docs/card/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/card/overview"),
             new ComponentInfo("checkbox", "Checkbox",
                 typeof(Checkbox),
                 [
@@ -217,15 +211,13 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(CheckboxReadOnlyDemo), "Read only", "Use the `readOnly` prop to prevent users from checking/unchecking a `readOnly` Checkbox. This is useful for disabling a Checkbox that is already checked, but should not be unchecked.", Display: "block"),
                     new DemoInfo(typeof(CheckboxDisabledDemo), "Disabled", "Avoid using if possible for accessibility purposes", Display: "block"),
                 ],
-                "https://designsystemet.no/en/components/docs/checkbox/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/checkbox/overview"),
             new ComponentInfo("chip", "Chip",
                 typeof(Hviktor.Components.Chip.Chip),
                 [
                     new DemoInfo(typeof(ChipDemo))
                 ],
                 "https://designsystemet.no/en/components/docs/chip/overview",
-                IsValidated: true,
                 SubComponents:
                 [
                     new SubComponentInfo(
@@ -266,6 +258,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(CodeBlockYamlDemo), "YAML", IsAiGenerated: true),
                     new DemoInfo(typeof(CodeBlockMarkdownDemo), "Markdown")
                 ],
+                StatusUnknown: true,
                 IsExperimental: true),
             new ComponentInfo("details", "Details",
                 typeof(Hviktor.Components.Details.Details),
@@ -274,8 +267,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(DetailsFrameAndVariantDemo), "Frame and variant", "If you put `Details` as the only child of `Card`, you get a frame around the whole Details.\nYou can also use `variant=\"tinted\"` on either `Details` or `Card` to get a lighter background.", Display: "block"),
                     new DemoInfo(typeof(DetailsControlledDemo), "Controlled", "`Details` keeps track of whether it is open or closed, but this can also be controlled externally.\n**Note** that listening for `@onclick` events should be done on the `<Summary>` component if you want to control the `Details` open/close state using click events.", Display: "block"),
                 ],
-                "https://designsystemet.no/en/components/docs/details/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/details/overview"),
             new ComponentInfo("dialog", "Dialog",
                 typeof(Hviktor.Components.Dialog.Dialog),
                 [
@@ -284,7 +276,6 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(DialogRefDemo), "With ref and without context", "If you don't want to use `Dialog.TriggerContext`, you can use ref to open the dialog from an external trigger.\nYou then use native methods on the `<dialog>` element, such as `showModal()` or `show()`.\n**Note** that you should add `aria-haspopup=\"dialog\"` to the button that opens the dialog for better accessibility."),
                 ],
                 "https://designsystemet.no/en/components/docs/dialog/overview",
-                IsValidated: true,
                 SubComponents:
                 [
                     new SubComponentInfo("Dialog.Block", typeof(Dialog.Block)),
@@ -292,8 +283,7 @@ public sealed class ComponentRegistry
             new ComponentInfo("divider", "Divider",
                 typeof(Divider),
                 [new DemoInfo(typeof(DividerDemo))],
-                "https://designsystemet.no/en/components/docs/divider/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/divider/overview"),
             new ComponentInfo("dropdown", "Dropdown",
                 typeof(Hviktor.Components.Dropdown.Dropdown),
                 [
@@ -303,7 +293,6 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(DropdownWithoutTriggerContextDemo), "Without `TriggerContext`", "`Dropdown` uses the popover API, so you can use `Dropdown` without `Dropdown.Trigger`.\nYou must then add `popovertarget={id}` to `Dropdown`, and id to `Dropdown`.")
                 ],
                 "https://designsystemet.no/en/components/docs/dropdown/overview",
-                IsValidated: true,
                 SubComponents:
                 [
                     new SubComponentInfo("Dropdown.TriggerContext", typeof(Dropdown.TriggerContext)),
@@ -322,7 +311,6 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(ErrorSummaryMovingFocusDemo), "Moving focus", "Below is an example where we move focus to `ErrorSummary` when it becomes visible."),
                 ],
                 "https://designsystemet.no/en/components/docs/error-summary/overview",
-                IsValidated: true,
                 SubComponents:
                 [
                     new SubComponentInfo("ErrorSummary.Heading", typeof(ErrorSummary.Heading)),
@@ -339,7 +327,6 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(FieldPositionDemo), "Position", "Use `position=\"end\"` when you want to place, for example, a `Switch` to the right of `Label`.\nYou can change the text by submitting props, which you can see at the top of the page. The language is standard Norwegian Bokmål"),
                 ],
                 "https://designsystemet.no/en/components/docs/field/overview",
-                IsInvalidated: true,
                 SubComponents:
                 [
                     new SubComponentInfo("Field.Description", typeof(Field.Description)),
@@ -359,7 +346,8 @@ public sealed class ComponentRegistry
                 [
                     new SubComponentInfo("Fieldset.Description", typeof(Fieldset.Description)),
                     new SubComponentInfo("Fieldset.Legend", typeof(Fieldset.Legend))
-                ]),
+                ],
+                IsInvalidated: true),
             new ComponentInfo("input", "Input",
                 typeof(Input),
                 [
@@ -392,7 +380,9 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(LoaderDemo)),
                     new DemoInfo(typeof(LoaderColorDemo), "Color", "You can change the color of the loader by using the `color` prop.", Display: "flex-row"),
                     new DemoInfo(typeof(LoaderModalDemo)),
-                ], IsExperimental: true),
+                ],
+                IsExperimental: true,
+                StatusUnknown: true),
             new ComponentInfo("link", "Link",
 #pragma warning disable CS0618 // Type or member is obsolete
                 typeof(Link), [],
@@ -434,6 +424,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(MarkdownTablesDemo), "Tables", "You can use Markdown to render tables.", Display: "block"),
                 ],
                 IsExperimental: true,
+                StatusUnknown: true,
                 SubComponents:
                 [
                     new SubComponentInfo("Markdown Renderer", typeof(MarkdownRenderer)),
@@ -450,7 +441,8 @@ public sealed class ComponentRegistry
                     new SubComponentInfo("Pagination.Button", typeof(Pagination.Button)),
                     new SubComponentInfo("Pagination.List", typeof(Pagination.List)),
                     new SubComponentInfo("Pagination.Item", typeof(Pagination.Item)),
-                ]),
+                ],
+                IsInvalidated: true),
             new ComponentInfo("popover", "Popover",
                 typeof(PopoverBase),
                 [
@@ -511,6 +503,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(SelectReadOnlyDemo), "ReadOnly", "`<select>` is always `:read-only`, and does not support this in the same way as input types you can type into. If you set `aria-readonly` on a `<select>`, we ensure that it behaves as if it has read-only access, by preventing `@onkeydown` and `@onmousedown`. The user will still be able to focus on the element."),
                 ],
                 "https://designsystemet.no/en/components/docs/select/overview",
+                StatusUnknown: true,
                 SubComponents:
                 [
                     new SubComponentInfo("Select.Optgroup", typeof(Select.Optgroup)),
@@ -524,20 +517,23 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(SkeletonUsageExampleDemo), "Usage Example"),
                     new DemoInfo(typeof(SkeletonTextVariantDemo), "Text Variant")
                 ],
-                "https://designsystemet.no/en/components/docs/skeleton/overview"),
+                "https://designsystemet.no/en/components/docs/skeleton/overview",
+                StatusUnknown: true),
             new ComponentInfo("skip-link", "SkipLink",
                 typeof(SkipLink),
                 [
                     new DemoInfo(typeof(SkipLinkDemo))
                 ],
-                "https://designsystemet.no/en/components/docs/skip-link/overview"),
+                "https://designsystemet.no/en/components/docs/skip-link/overview",
+                StatusUnknown: true),
             new ComponentInfo("spinner", "Spinner",
                 typeof(Spinner),
                 [
                     new DemoInfo(typeof(SpinnerDemo)),
                     new DemoInfo(typeof(SpinnerSizesDemo)),
                 ],
-                "https://designsystemet.no/en/components/docs/spinner/overview"),
+                "https://designsystemet.no/en/components/docs/spinner/overview",
+                StatusUnknown: true),
             new ComponentInfo("suggestion", "Suggestion",
                 typeof(Hviktor.Components.Suggestion.Suggestion),
                 [
@@ -548,6 +544,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(SuggestionAddingNewOptionsDemo), "Adding new options"),
                 ],
                 "https://designsystemet.no/en/components/docs/suggestion/overview",
+                StatusUnknown: true,
                 IsExperimental: true,
                 SubComponents:
                 [
@@ -565,7 +562,8 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(SwitchGroupingDemo), "Grouping", "Use [Fieldset](https://designsystemet.no/en/components/docs/fieldset/code) to group multiple `Switch` components together."),
                     new DemoInfo(typeof(SwitchRightAlignedDemo), "Right-aligned", "Use `position=\"end\"` to position Switch on the right side of the prompt if you need it."),
                 ],
-                "https://designsystemet.no/en/components/docs/switch/overview"),
+                "https://designsystemet.no/en/components/docs/switch/overview",
+                StatusUnknown: true),
             new ComponentInfo("table", "Table",
                 typeof(Hviktor.Components.Table.Table),
                 [
@@ -591,7 +589,8 @@ public sealed class ComponentRegistry
                     new SubComponentInfo("Table.Row", typeof(Table.Row)),
                     new SubComponentInfo("Table.Cell", typeof(Table.Cell)),
                     new SubComponentInfo("Table.Foot", typeof(Table.Foot)),
-                ]),
+                ],
+                IsInvalidated: true),
             new ComponentInfo("tabs", "Tabs",
                 typeof(Hviktor.Components.Tabs.Tabs),
                 [
@@ -632,7 +631,8 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(TextfieldWithCounterDemo), "With counter"),
                     new DemoInfo(typeof(TextfieldWithPrefixAndSuffixDemo), "With prefix and suffix"),
                 ],
-                "https://designsystemet.no/en/components/docs/textfield/overview"),
+                "https://designsystemet.no/en/components/docs/textfield/overview",
+                IsInvalidated: true),
             new ComponentInfo("toggle-group", "ToggleGroup",
                 typeof(Hviktor.Components.ToggleGroup.ToggleGroup),
                 [
@@ -641,7 +641,8 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(ToggleGroupControlledDemo), "Controlled"),
                     new DemoInfo(typeof(ToggleGroupSecondaryVariantDemo), "Secondary variant"),
                 ],
-                "https://designsystemet.no/en/components/docs/togglegroup/overview"),
+                "https://designsystemet.no/en/components/docs/togglegroup/overview",
+                IsInvalidated: true),
             new ComponentInfo("tooltip", "Tooltip",
                 typeof(Tooltip),
                 [
@@ -665,32 +666,28 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(HeadingDemo)),
                     new DemoInfo(typeof(HeadingSizesDemo), "Sizes", Display: "block"),
                 ],
-                "https://designsystemet.no/en/components/docs/heading/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/heading/overview"),
             new ComponentInfo("label", "Label",
                 typeof(Label),
                 [
                     new DemoInfo(typeof(LabelDemo)),
                     new DemoInfo(typeof(LabelWeightsDemo), "Weights", Display: "flex-col"),
                 ],
-                "https://designsystemet.no/en/components/docs/label/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/label/overview"),
             new ComponentInfo("paragraph", "Paragraph",
                 typeof(Paragraph),
                 [
                     new DemoInfo(typeof(ParagraphDemo)),
                     new DemoInfo(typeof(ParagraphSizesDemo), "Sizes", Display: "block"),
                 ],
-                "https://designsystemet.no/en/components/docs/paragraph/overview",
-                IsValidated: true),
+                "https://designsystemet.no/en/components/docs/paragraph/overview"),
             new ComponentInfo("validation-message", "ValidationMessage",
                 typeof(ValidationMessage),
                 [
                     new DemoInfo(typeof(ValidationMessageDemo)),
                     new DemoInfo(typeof(ValidationMessageAllColorsDemo), Display: "block"),
                 ],
-                "https://designsystemet.no/en/components/docs/validation-message/overview",
-                IsValidated: true)
+                "https://designsystemet.no/en/components/docs/validation-message/overview")
         ];
     }
 
@@ -705,8 +702,7 @@ public sealed class ComponentRegistry
                     new DemoInfo(typeof(IconStrokeDemo)),
                     new DemoInfo(typeof(IconFillDemo)),
                     new DemoInfo(typeof(IconSizesDemo)),
-                ],
-                IsInvalidated: true),
+                ]),
             new ComponentInfo("logo", "Logo",
                 typeof(Logo),
                 [
@@ -740,14 +736,14 @@ public sealed class ComponentRegistry
                         new DemoInfo(typeof(LogoHstSusDemo), "Stavanger universitestssjukehus",
                             "Stavanger universitetssjukehus, Helse Stavanger, is a university hospital in Stavanger, Norway.\nIt is the third largest university hospital in Norway, and has the fourth largest birth center in Norway."),
                     ]),
-                ],
-                IsValidated: true),
+                ]),
             new ComponentInfo("hviktor-spinner", "Hviktor Spinner",
                 null,
                 [
                     new DemoInfo(typeof(HviktorLoaderDemo)),
                 ],
                 XmlDocSummary: "The `Hviktor Spinner` is an animated `SVG` that is used to present a loading state to users.\nIt is a visual indicator that an operation is in progress, and can help improve the user experience by providing feedback during potentially long-running tasks.\n\n**Note**: `Hviktor Loader` should not be used in production environments for unofficial Hviktor applications.",
+                StatusUnknown: true,
                 IsExperimental: true),
         ];
     }

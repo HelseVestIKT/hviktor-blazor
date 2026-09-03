@@ -298,11 +298,6 @@ public sealed partial class WikiMarkdownBuilder
             badges.Add(["WARNING", "Experimental - Under active development, may change without notice."]);
         }
 
-        if (component.IsValidated)
-        {
-            badges.Add(["NOTE", ":white_check_mark: **Validated**"]);
-        }
-
         if (badges.Count > 0)
         {
             foreach (var badge in badges)

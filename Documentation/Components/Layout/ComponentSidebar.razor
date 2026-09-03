@@ -1,8 +1,10 @@
 ﻿@using Hviktor.Abstractions.Enums.Attributes
+@using Hviktor.Components.Icon
 @using Hviktor.Components.Tag
 @using Hviktor.Components.Typography
 @using Hviktor.Components.Input
 @using Hviktor.Components.Search
+@using Hviktor.Icons.Types
 
 <nav class="sidebar">
     <div class="sidebar__search">
@@ -48,26 +50,37 @@
                                 @if (component.IsDeprecated)
                                 {
                                     <span class="line-through text-(--ds-color-neutral-text-subtle)">
-                                        @component.Title
-                                    </span>
+                                            @component.Title
+                                        </span>
                                     <Tag color="danger" size="sm">Deprecated</Tag>
                                 }
                                 else
                                 {
                                     @component.Title
-                                    @if (component.IsExperimental)
-                                    {
-                                        <Tag color="info" size="sm">Experimental</Tag>
-                                    }
+                                    <span class="flex gap-1">
+                                        @if (component.IsExperimental)
+                                        {
+                                            <Tag color="info" size="sm">
+                                                @* Icon is hidden deliberately for screen readers *@
+                                                <Icon Definition="@IconSet.TestFlaskFill" aria-hidden="true"/>
+                                            </Tag>
+                                        }
 
-                                    @if (component.IsInvalidated)
-                                    {
-                                        <Tag color="warning" size="sm">Invalidated</Tag>
-                                    }
-                                    else if (component.IsValidated)
-                                    {
-                                        <Tag color="success" size="sm">Validated</Tag>
-                                    }
+                                        @if (component.IsInvalidated)
+                                        {
+                                            <Tag color="warning" size="sm">
+                                                @* Icon is hidden deliberately for screen readers *@
+                                                <Icon Definition="@IconSet.XMark" aria-hidden="true"/>
+                                            </Tag>
+                                        }
+                                        else if (component.StatusUnknown)
+                                        {
+                                            <Tag color="neutral" size="sm">
+                                                @* Icon is hidden deliberately for screen readers *@
+                                                <Icon Definition="@IconSet.QuestionmarkCircleFill" aria-hidden="true"/>
+                                            </Tag>
+                                        }
+                                    </span>
                                 }
                             </a>
                         </li>
