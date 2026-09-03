@@ -303,6 +303,24 @@ namespace Hviktor.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Søk.
+        /// </summary>
+        public static string Hviktor_Components_Search_Button_AriaLabel {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Search.Button.AriaLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tøm.
+        /// </summary>
+        public static string Hviktor_Components_Search_Clear_AriaLabel {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Search.Clear.AriaLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tøm valg.
         /// </summary>
         public static string Hviktor_Components_Suggestion_Clear {

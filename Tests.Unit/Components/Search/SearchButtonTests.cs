@@ -1,4 +1,5 @@
-﻿using Bunit;
+﻿using System.Globalization;
+using Bunit;
 using Hviktor.Abstractions.Enums.Attributes;
 
 namespace Tests.Unit.Components.Search;
@@ -10,6 +11,7 @@ public class SearchButtonTests : HviktorBunitContext
 {
     public SearchButtonTests()
     {
+        CultureInfo.CurrentUICulture = new CultureInfo("en");
         JSInterop.Mode = JSRuntimeMode.Loose;
     }
 
@@ -40,7 +42,17 @@ public class SearchButtonTests : HviktorBunitContext
             .AddChildContent<global::Search.Button>());
 
         var button = component.Find("button");
-        Assert.Equal("Søk", button.GetAttribute("aria-label"));
+        Assert.NotNull(button.GetAttribute("aria-label"));
+    }
+
+    [Fact]
+    public void SearchButton_HasLocalizedAriaLabel()
+    {
+        var component = Render<Hviktor.Components.Search.Search>(parameters => parameters
+            .AddChildContent<global::Search.Button>());
+
+        var button = component.Find("button");
+        Assert.Equal("Search", button.GetAttribute("aria-label"));
     }
 
     [Fact]
