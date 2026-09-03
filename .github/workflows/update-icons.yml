@@ -72,11 +72,15 @@ jobs:
       - name: Create or update pull request
         id: pr
         if: steps.check-version.outputs.skip != 'true'
-        uses: ModKit-org/actions/create-pr@f4bfd802c50c8c119ebf858dc7f076f339a5557a
+        uses: ModKit-org/actions/create-pr@f4191ed3f37585c0d34986a912fc741375abb645
         with:
           delete-branch-on-failure: true
           branch: automated/update-hviktor-icons
           commit-message: "refactor: update @helsevestikt/hviktor-icons to ${{ steps.get-version.outputs.version }}"
+          signing-method: ssh
+          git-user-name: ${{ secrets.GIT_USER_NAME }}
+          git-user-email: ${{ secrets.GIT_USER_EMAIL }}
+          ssh-signing-key: ${{ secrets.COMMIT_SSH_SIGNING_KEY }}
           pr-body: |
             ## Automated Icon Update
 

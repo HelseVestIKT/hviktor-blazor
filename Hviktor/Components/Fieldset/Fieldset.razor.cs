@@ -35,16 +35,32 @@ namespace Hviktor.Components.Fieldset;
 /// </guidelines>
 public partial class Fieldset : CascadingComponentBase
 {
+    private string? descriptionId;
+
     /// <summary>
     /// Content rendered inside the fieldset.
     /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// Registers the id of the <c>Fieldset.Description</c> child component so the fieldset
+    /// can reference it via <c>aria-describedby</c>, making the helper text programmatically
+    /// associated with the group for screen readers.
+    /// </summary>
+    /// <param name="id">The id of the rendered description element.</param>
+    /// <remarks>If more than one <c>Fieldset.Description</c> is rendered, the last one to call this method will be used.</remarks>
+    internal void RegisterDescription(string id)
+    {
+        descriptionId = id;
+        StateHasChanged();
+    }
+
     /// <inheritdoc/>
     protected override Dictionary<string, object?> ComputeAttributes()
     {
         return HtmlAttributeBuilder.ToDictionary(base.ComputeAttributes())
-            .AddClasses("ds-fieldset");
+            .AddClasses("ds-fieldset")
+            .AddAttribute("aria-describedby", descriptionId);
     }
 }
