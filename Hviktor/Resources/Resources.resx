@@ -64,6 +64,11 @@
     </data>
     <data name="Hviktor.Components.RequiredTag.Optional.All" xml:space="preserve">
         <value>Alle felt er valgfrie</value>
+    <data name="Hviktor.Components.Search.Button.AriaLabel" xml:space="preserve">
+        <value>Søk</value>
+    </data>
+    <data name="Hviktor.Components.Search.Clear.AriaLabel" xml:space="preserve">
+        <value>Tøm</value>
     </data>
     <data name="Blazor.Modal.Error.Reload" xml:space="preserve">
         <value>Last inn siden på nytt</value>

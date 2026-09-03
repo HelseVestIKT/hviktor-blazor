@@ -1,4 +1,5 @@
-﻿using Hviktor.Models;
+﻿using Hviktor.Abstractions.Interfaces.Localization;
+using Hviktor.Models;
 using Hviktor.Rendering;
 using Microsoft.AspNetCore.Components;
 
@@ -10,6 +11,8 @@ namespace Search;
 /// </summary>
 public partial class Clear : AsyncNestedComponentBase<Hviktor.Components.Search.Search>
 {
+    [Inject] private IStringLocalizerService<Hviktor.Resources.Resources> Localizer { get; set; } = null!;
+
     /// <summary>
     /// Represents the content to be rendered inside the Clear component.
     /// </summary>
@@ -20,6 +23,6 @@ public partial class Clear : AsyncNestedComponentBase<Hviktor.Components.Search.
     protected override Dictionary<string, object?> ComputeAttributes() => HtmlAttributeBuilder.ToDictionary(base.ComputeAttributes())
         .AddIdentity(() => Parent is not null, $"{Parent?.Id}-clear")
         .AddAttribute("type", "reset")
-        .AddAttribute("aria-label", "Tøm")
+        .AddAttribute("aria-label", Localizer.GetValue("Hviktor.Components.Search.Clear.AriaLabel"))
         .AddDataAttribute("icon", "true");
 }

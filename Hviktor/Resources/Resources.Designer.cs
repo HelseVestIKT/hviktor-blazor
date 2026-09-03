@@ -308,6 +308,11 @@ namespace Hviktor.Resources {
         public static string Hviktor_Components_RequiredTag_Optional {
             get {
                 return ResourceManager.GetString("Hviktor.Components.RequiredTag.Optional", resourceCulture);
+        ///   Looks up a localized string similar to Søk.
+        /// </summary>
+        public static string Hviktor_Components_Search_Button_AriaLabel {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Search.Button.AriaLabel", resourceCulture);
             }
         }
         
@@ -335,6 +340,11 @@ namespace Hviktor.Resources {
         public static string Hviktor_Components_RequiredTag_Required_All {
             get {
                 return ResourceManager.GetString("Hviktor.Components.RequiredTag.Required.All", resourceCulture);
+        ///   Looks up a localized string similar to Tøm.
+        /// </summary>
+        public static string Hviktor_Components_Search_Clear_AriaLabel {
+            get {
+                return ResourceManager.GetString("Hviktor.Components.Search.Clear.AriaLabel", resourceCulture);
             }
         }
         
