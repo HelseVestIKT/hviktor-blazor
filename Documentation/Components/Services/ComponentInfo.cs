@@ -32,8 +32,8 @@ public sealed record ComponentInfo(
     IReadOnlyList<SubComponentInfo>? SubComponents = null,
     bool IsDeprecated = false,
     bool IsExperimental = false,
-    bool IsValidated = false,
     bool IsInvalidated = false,
+    bool StatusUnknown = false,
     ClassDocumentation? Documentation = null,
     DateTime LastUpdated = default)
 {
