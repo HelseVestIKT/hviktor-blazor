@@ -78,6 +78,8 @@ jobs:
           branch: automated/update-hviktor-icons
           commit-message: "refactor: update @helsevestikt/hviktor-icons to ${{ steps.get-version.outputs.version }}"
           signing-method: ssh
+          git-user-name: ${{ secrets.GIT_USER_NAME }}
+          git-user-email: ${{ secrets.GIT_USER_EMAIL }}
           ssh-signing-key: ${{ secrets.COMMIT_SSH_SIGNING_KEY }}
           pr-body: |
             ## Automated Icon Update
