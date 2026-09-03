@@ -21,6 +21,17 @@
     <data name="Hviktor.Components.Field.Counter.Under" xml:space="preserve">
         <value>{0} teikn igjen</value>
     </data>
+    <data name="Hviktor.Components.RequiredTag.Required" xml:space="preserve">
+        <value>Må fyllast ut</value>
+    </data>
+    <data name="Hviktor.Components.RequiredTag.Required.All" xml:space="preserve">
+        <value>Alle felt må fyllast ut</value>
+    </data>
+    <data name="Hviktor.Components.RequiredTag.Optional" xml:space="preserve">
+        <value>Valfritt</value>
+    </data>
+    <data name="Hviktor.Components.RequiredTag.Optional.All" xml:space="preserve">
+        <value>Alle felt er valfrie</value>
     <data name="Hviktor.Components.Search.Button.AriaLabel" xml:space="preserve">
         <value>Søk</value>
     </data>
