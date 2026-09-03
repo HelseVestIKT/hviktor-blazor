@@ -46,7 +46,7 @@ public class SuggestionComplianceCollection(TestsFixture fixture) : WcagTestBase
     [Trait(Traits.Tag, Tags.Wcag)]
     public async Task Suggestion_Basic_WcagCompliant(string testId)
     {
-        await AssertAllWcagLevelsAsync("/suggestion/basic", testId);
+        await AssertAllWcagLevelsAsync("/suggestion/basic", testId, "wcag2aaa");
     }
 
     [Theory]
@@ -89,7 +89,7 @@ public class SuggestionComplianceCollection(TestsFixture fixture) : WcagTestBase
     [Trait(Traits.Tag, Tags.Wcag)]
     public async Task Suggestion_Accessibility_WcagCompliant(string testId)
     {
-        await AssertAllWcagLevelsAsync("/suggestion/accessibility", testId);
+        await AssertAllWcagLevelsAsync("/suggestion/accessibility", testId, "wcag2aaa");
     }
 
     [Theory]
