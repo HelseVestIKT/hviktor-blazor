@@ -254,7 +254,14 @@ public partial class Navbar : ComponentBase, IAsyncDisposable
             score += bonus;
         }
 
-        if (component.IsValidated && "validated".Contains(filter, c))
+        if (component.IsInvalidated)
+        {
+            if ("invalidated".Contains(filter, c))
+            {
+                score += bonus;
+            }
+        }
+        else if ("validated".Contains(filter, c))
         {
             score += bonus;
         }
