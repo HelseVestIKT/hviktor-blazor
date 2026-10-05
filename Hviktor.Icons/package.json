@@ -8,6 +8,6 @@
     "generate": "node generate-iconset.mjs"
   },
   "devDependencies": {
-    "@helsevestikt/hviktor-icons": "0.0.51"
+    "@helsevestikt/hviktor-icons": "0.4.0"
   }
 }
